@@ -1,0 +1,263 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-primary: #8a2be2;
+  --color-secondary: #ff1493;
+  --color-accent: #00ffff;
+  --color-background: #0a0514;
+  --color-foreground: #f8f8ff;
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+:root {
+  --background: #0a0514;
+  --foreground: #f8f8ff;
+}
+
+html,
+body {
+  /* height: 100%; */
+  margin: 0;
+  padding: 0;
+  /* overflow: hidden; */
+  /* touch-action: none; */
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), sans-serif;
+}
+
+/* ── Section scroll reveal helper ── */
+.section-reveal {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+/* ── Utilities ── */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  @font-face {
+    font-family: 'Siegra';
+    src: url('/models/SiegraRegular-ALg9A.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .animate-spin-slow {
+    animation: spin 20s linear infinite;
+  }
+
+  .font-siegra {
+    font-family: 'Siegra', sans-serif;
+  }
+
+  .font-cyber {
+    font-family: var(--font-rajdhani), sans-serif;
+  }
+
+  .font-tech {
+    font-family: var(--font-space-grotesk), sans-serif;
+  }
+
+  @keyframes text-glow {
+    0%, 100% {
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    }
+    50% {
+      text-shadow: 0 0 15px rgba(255, 255, 255, 0.4), 0 0 30px rgba(255, 255, 255, 0.2);
+    }
+  }
+
+  @keyframes full-glow {
+    0%, 100% {
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+    }
+    50% {
+      text-shadow: 0 0 15px rgba(255, 255, 255, 0.6), 0 0 30px rgba(255, 255, 255, 0.4);
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.6), 0 0 60px rgba(255, 255, 255, 0.3);
+    }
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-15px);
+    }
+  }
+
+  .animate-glow {
+    animation: text-glow 6s ease-in-out infinite;
+  }
+
+  .animate-full-glow {
+    animation: full-glow 6s ease-in-out infinite;
+  }
+
+  .animate-float {
+    animation: float 4s ease-in-out infinite;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95) translateY(10px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  .animate-fadeIn {
+    animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  /* ── HUD Corner Brackets ─────────────────────── */
+  .hud-corners {
+    position: relative;
+  }
+  .hud-corners::before,
+  .hud-corners::after {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    opacity: 0.6;
+  }
+  .hud-corners::before {
+    top: 0; left: 0;
+    border-top: 1px solid currentColor;
+    border-left: 1px solid currentColor;
+  }
+  .hud-corners::after {
+    bottom: 0; right: 0;
+    border-bottom: 1px solid currentColor;
+    border-right: 1px solid currentColor;
+  }
+
+  /* ── HUD Diagonal Hatch ──────────────────────── */
+  .hatch-bg {
+    background-image: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 3px,
+      rgba(255,255,255,0.04) 3px,
+      rgba(255,255,255,0.04) 4px
+    );
+  }
+
+  /* ── Scan line animation ─────────────────────── */
+  @keyframes scanline {
+    0%   { transform: translateY(-100%); }
+    100% { transform: translateY(100vh); }
+  }
+  .animate-scanline {
+    animation: scanline 8s linear infinite;
+  }
+
+  /* ── Blinking cursor ─────────────────────────── */
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0; }
+  }
+  .animate-blink {
+    animation: blink 1s step-end infinite;
+  }
+
+  /* ── Cyberpunk Glitch Stroke Effect ──────────────────────── */
+  .card-glitch {
+    position: relative;
+    /* Removed animation from the base card so contents don't move */
+  }
+  
+  /* Pseudo-element dedicated solely to the glitching border stroke */
+  .card-glitch::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 50;
+    animation: random-stroke-glitch 4s step-end infinite;
+    animation-delay: var(--glitch-delay, 0s);
+  }
+
+  @keyframes stroke-glitch {
+    0% { transform: translate(0) skewX(0); box-shadow: none; }
+    5% { transform: translate(-2px, 0) skewX(1deg); box-shadow: -2px 0 0 #ff00ff, 2px 0 0 #00ffff, inset -2px 0 0 #ff00ff, inset 2px 0 0 #00ffff; }
+    15% { transform: translate(2px, 0) skewX(-1deg); box-shadow: 2px 0 0 #ff00ff, -2px 0 0 #00ffff, inset 2px 0 0 #ff00ff, inset -2px 0 0 #00ffff; }
+    25% { transform: translate(0, 2px) skewX(0); box-shadow: 0 2px 0 #ff00ff, 0 -2px 0 #00ffff, inset 0 2px 0 #ff00ff, inset 0 -2px 0 #00ffff; }
+    35% { transform: translate(0, -2px) skewX(0); box-shadow: 0 -2px 0 #ff00ff, 0 2px 0 #00ffff, inset 0 -2px 0 #ff00ff, inset 0 2px 0 #00ffff; }
+    45% { transform: translate(0) skewX(0); box-shadow: none; }
+    100% { transform: translate(0) skewX(0); box-shadow: none; }
+  }
+
+  /* The 4s looping random version */
+  @keyframes random-stroke-glitch {
+    0%, 94% { transform: translate(0) skewX(0); box-shadow: none; }
+    95% { transform: translate(-2px, 0) skewX(1deg); box-shadow: -2px 0 0 #ff00ff, 2px 0 0 #00ffff, inset -2px 0 0 #ff00ff, inset 2px 0 0 #00ffff; }
+    96% { transform: translate(2px, 0) skewX(-1deg); box-shadow: 2px 0 0 #ff00ff, -2px 0 0 #00ffff, inset 2px 0 0 #ff00ff, inset -2px 0 0 #00ffff; }
+    97% { transform: translate(0, 2px) skewX(0); box-shadow: 0 2px 0 #ff00ff, 0 -2px 0 #00ffff, inset 0 2px 0 #ff00ff, inset 0 -2px 0 #00ffff; }
+    98% { transform: translate(0, -2px) skewX(0); box-shadow: 0 -2px 0 #ff00ff, 0 2px 0 #00ffff, inset 0 -2px 0 #ff00ff, inset 0 2px 0 #00ffff; }
+    99%, 100% { transform: translate(0) skewX(0); box-shadow: none; }
+  }
+
+  /* Force glitch on hover instantly */
+  .card-glitch:hover::before {
+    animation: stroke-glitch 0.4s step-end forwards !important;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ── View Transitions (PlayStation Style) ── */
+::view-transition-group(*) {
+  animation-duration: 1.4s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+::view-transition-old(*),
+::view-transition-new(*) {
+  animation-duration: 1.4s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Fade out the old screen quickly, fade in the new screen smoothly */
+::view-transition-old(root) {
+  animation: fade-out 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+::view-transition-new(root) {
+  animation: fade-in 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
