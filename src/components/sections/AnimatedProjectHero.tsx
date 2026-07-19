@@ -623,7 +623,7 @@ export default function AnimatedProjectHero({ project, index }: { project: Proje
         >
             {/* Scoreboard HUD (Only for Ball Project) */}
             {index === 0 && (
-                <div ref={scoreBoardRef} className="absolute top-20 md:top-12 left-1/2 transform -translate-x-1/2 z-50 flex space-x-2 md:space-x-6 pointer-events-none opacity-0 items-stretch scale-75 md:scale-100 origin-top">
+                <div ref={scoreBoardRef} className="absolute bottom-12 md:bottom-auto md:top-12 left-1/2 transform -translate-x-1/2 z-50 flex space-x-2 md:space-x-6 pointer-events-none opacity-0 items-stretch scale-75 md:scale-100 origin-bottom md:origin-top">
                     <div className="flex flex-col items-center justify-center bg-[#0a0510]/80 backdrop-blur-md border border-white/10 px-4 md:px-6 py-3 rounded-sm shadow-2xl min-w-[90px] md:min-w-[120px]">
                         <span className="text-white/50 text-[8px] md:text-[10px] font-cyber tracking-widest uppercase mb-1">Juggles</span>
                         <span className="text-2xl md:text-4xl font-tech font-bold text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">
@@ -657,7 +657,7 @@ export default function AnimatedProjectHero({ project, index }: { project: Proje
                 className="absolute inset-0 z-10 pointer-events-none"
             >
                 <div ref={canvasContainerRef} className="w-full h-full pointer-events-auto opacity-0">
-                    <Canvas shadows camera={{ position: [0, isMobile ? 1.5 : 0, isMobile ? 8.5 : 5], fov: 45 }}>
+                    <Canvas shadows camera={{ position: [0, isMobile ? 3.0 : 0, isMobile ? 10.5 : 5], fov: 45 }}>
                         {/* Soft, moody ambient light */}
                         <ambientLight intensity={0.2} />
                         
@@ -724,26 +724,26 @@ export default function AnimatedProjectHero({ project, index }: { project: Proje
             <div ref={gradientRef} className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_20%,_#05020a_100%)] z-20 pointer-events-none opacity-0"></div>
 
             {/* Foreground DOM layer */}
-            <div className="relative z-30 w-full h-full pointer-events-none flex flex-col md:flex-row p-6 md:p-12 lg:p-24 overflow-y-auto md:overflow-hidden">
+            <div className="relative z-30 w-full h-full pointer-events-none flex flex-col md:flex-row p-6 md:p-12 lg:p-24 overflow-hidden">
                 
                 {/* Left Side: Main Typography & Metadata */}
-                <div className="w-full md:w-1/3 flex flex-col justify-center md:justify-between h-auto md:h-full relative z-10 opacity-0 min-h-[50vh] md:min-h-0" ref={textRef}>
+                <div className="w-full md:w-1/3 flex flex-col justify-start md:justify-center h-auto md:h-full relative z-10 opacity-0 min-h-[30vh] md:min-h-0" ref={textRef}>
                     {/* Title block */}
-                    <div className="mt-20 md:mt-20">
-                        <span className="font-cyber text-fuchsia-400 font-bold tracking-[0.5em] text-xs md:text-sm uppercase mb-4 block" style={{ textShadow: "0 2px 10px rgba(0,0,0,0.8)" }}>
+                    <div className="mt-20 md:mt-0">
+                        <span className="font-cyber text-fuchsia-400 font-bold tracking-[0.5em] text-xs md:text-sm uppercase mb-3 block" style={{ textShadow: "0 2px 10px rgba(0,0,0,0.8)" }}>
                             {project.category}
                         </span>
-                        <h1 className="font-tech text-5xl md:text-7xl lg:text-[100px] font-black uppercase leading-[0.85] tracking-tight text-white mb-6 max-w-xl" style={{ textShadow: "0 4px 30px rgba(0,0,0,0.8), 0 0 10px rgba(0,0,0,0.5)" }}>
+                        <h1 className="font-tech text-4xl sm:text-5xl md:text-7xl lg:text-[100px] font-black uppercase leading-[0.9] tracking-tight text-white mb-4 max-w-xl" style={{ textShadow: "0 4px 30px rgba(0,0,0,0.8), 0 0 10px rgba(0,0,0,0.5)" }}>
                             {project.title}
                         </h1>
-                        <p className="font-cyber text-white/90 text-sm md:text-base leading-relaxed max-w-sm font-light mb-8 md:mb-12" style={{ textShadow: "0 2px 10px rgba(0,0,0,1)" }}>
+                        <p className="font-cyber text-white/90 text-[11px] sm:text-sm md:text-base leading-relaxed max-w-sm font-light mb-6 md:mb-12" style={{ textShadow: "0 2px 10px rgba(0,0,0,1)" }}>
                             {project.description}
                         </p>
                     </div>
                 </div>
 
                 {/* Right Side: Tech Stack List */}
-                <div className="relative md:absolute md:right-12 lg:right-24 md:top-1/2 md:-translate-y-1/2 flex flex-row flex-wrap justify-start md:flex-col md:items-start gap-4 md:gap-0 md:space-y-6 opacity-0 pointer-events-auto pb-12 md:pb-0" ref={rightSideRef}>
+                <div className="relative md:absolute md:right-12 lg:right-24 md:top-1/2 md:-translate-y-1/2 flex flex-row flex-wrap justify-start md:flex-col md:items-start gap-3 md:gap-0 md:space-y-6 opacity-0 pointer-events-auto" ref={rightSideRef}>
                     {project.techStack.map((tech, i) => (
                         <div key={tech} className="flex items-center gap-2 md:gap-3 group cursor-pointer bg-[#0a0510]/80 backdrop-blur-md border border-white/10 px-3 py-1.5 md:px-4 md:py-2 rounded-full shadow-2xl">
                             <div className={`w-1.5 h-1.5 md:w-2 md:h-2 rounded-full transition-colors duration-500 shadow-lg ${i === 0 ? 'bg-white shadow-white/50' : 'bg-white/30 group-hover:bg-white/80'}`}></div>
