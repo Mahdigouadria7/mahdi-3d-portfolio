@@ -20,6 +20,16 @@ export default function Home() {
         ref={containerRef}
         className="fixed inset-0 w-full h-full bg-[#0a0514] pointer-events-none"
       >
+        <video 
+          autoPlay 
+          loop 
+          muted 
+          playsInline 
+          className="absolute inset-0 w-full h-full object-cover opacity-80 z-0"
+          style={{ mixBlendMode: 'screen' }}
+        >
+          <source src="/models/Man_with_glowing_eyes_202607151730.mp4" type="video/mp4" />
+        </video>
         <div ref={overlayRef} className="absolute inset-0 bg-black opacity-0 pointer-events-none z-10"></div>
 
         {/* Global Edge Gradients for Typography Contrast */}
