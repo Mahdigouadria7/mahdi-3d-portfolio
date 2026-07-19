@@ -24,7 +24,9 @@ ffmpeg(videoPath)
     })
     .outputOptions([
         '-r 24', // Output at 24fps
-        '-q:v 15', // High JPG compression (lower is better quality in ffmpeg, but 15 is highly compressed yet decent)
-        '-vf scale=1280:-2' // Scale to 720p width
+        '-vcodec libwebp', // Use WebP codec for vastly superior quality-to-size ratio
+        '-lossless 0', // Lossy WebP (lossless is too huge)
+        '-q:v 85', // Very high quality (WebP scale goes up to 100, 85 is excellent)
+        '-vf scale=1920:-2' // Scale to 1080p for crisp high-end monitors
     ])
-    .save(path.join(framesDir, 'frame_%05d.jpg'));
+    .save(path.join(framesDir, 'frame_%05d.webp'));

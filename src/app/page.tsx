@@ -16,7 +16,7 @@ if (typeof window !== "undefined") {
 const FRAME_COUNT = 240;
 
 const currentFrame = (index: number) =>
-  `/models/Man_with_glowing_eyes_frames/frame_${index.toString().padStart(5, '0')}.jpg`;
+  `/models/Man_with_glowing_eyes_frames/frame_${index.toString().padStart(5, '0')}.webp`;
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
