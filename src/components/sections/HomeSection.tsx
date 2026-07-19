@@ -162,7 +162,7 @@ M[10]=1; M[15]=1;`}</pre>
                     </div>
 
                     {/* ── Right: Scroll Indicator (HUD style) ──────────── */}
-                    <div className="absolute right-6 md:right-14 top-[45%] -translate-y-1/2 flex flex-col items-center gap-3 pointer-events-auto text-white">
+                    <div className="hidden md:flex absolute right-6 md:right-14 top-[45%] -translate-y-1/2 flex-col items-center gap-3 pointer-events-auto text-white">
                         <div className="w-px h-12 bg-gradient-to-b from-transparent to-white/40" />
                         <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-white/40" style={{ writingMode: 'vertical-rl' }}>
                             SCROLL
