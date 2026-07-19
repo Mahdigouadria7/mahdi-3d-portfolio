@@ -5,7 +5,9 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 
-gsap.registerPlugin(ScrollTrigger);
+if (typeof window !== "undefined") {
+    gsap.registerPlugin(ScrollTrigger);
+}
 
 interface ScrollRevealProps {
     children: React.ReactNode;
@@ -64,6 +66,12 @@ export default function ScrollReveal({
                 }
             }
         );
+
+        // Force ScrollTrigger to recalculate after DOM paints on navigation
+        setTimeout(() => {
+            ScrollTrigger.refresh();
+        }, 100);
+
     }, { dependencies: [direction, delay, duration, distance, threshold], scope: elementRef });
 
     return (
