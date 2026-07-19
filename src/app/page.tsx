@@ -1,15 +1,62 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import TubesCursor from "@/components/TubesCursor";
 import HomeSection from "@/components/sections/HomeSection";
 import ProjectsSection from "@/components/sections/ProjectsSection";
 import GamesSection from "@/components/sections/GamesSection";
 import ContactSection from "@/components/sections/ContactSection";
 
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
+
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    // Force video to load its metadata so we know the duration
+    video.load();
+    video.pause();
+
+    let scrollTrigger: ScrollTrigger | null = null;
+
+    const initScrollTrigger = () => {
+      // Don't setup until we have video duration
+      if (isNaN(video.duration) || video.duration === 0) return;
+
+      scrollTrigger = ScrollTrigger.create({
+        trigger: document.body,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: 1, // Smooth scrubbing
+        onUpdate: (self) => {
+          if (video && !isNaN(video.duration)) {
+            // Scrub the video time based on scroll progress
+            video.currentTime = self.progress * video.duration;
+          }
+        },
+      });
+    };
+
+    if (video.readyState >= 1) {
+      initScrollTrigger();
+    } else {
+      video.addEventListener('loadedmetadata', initScrollTrigger);
+    }
+
+    return () => {
+      if (scrollTrigger) scrollTrigger.kill();
+      video.removeEventListener('loadedmetadata', initScrollTrigger);
+    };
+  }, []);
 
   return (
     <main className="relative bg-[#0a0514] text-white overflow-x-hidden min-h-screen">
@@ -21,8 +68,7 @@ export default function Home() {
         className="fixed inset-0 w-full h-full bg-[#0a0514] pointer-events-none"
       >
         <video 
-          autoPlay 
-          loop 
+          ref={videoRef}
           muted 
           playsInline 
           className="absolute inset-0 w-full h-full object-cover opacity-80 z-0"
