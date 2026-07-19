@@ -49,15 +49,17 @@ export default function HomeSection({ isDriving, onDriveStart }: HomeSectionProp
                 <div className="h-full w-full" />
             </div>
 
-            {/* ── Crosshair Markers at Grid Intersections ──────────── */}
-            <Crosshair className="top-[25%] left-[25%] -translate-x-1/2 -translate-y-1/2" />
-            <Crosshair className="top-[25%] left-[50%] -translate-x-1/2 -translate-y-1/2" />
-            <Crosshair className="top-[25%] left-[75%] -translate-x-1/2 -translate-y-1/2" />
-            <Crosshair className="top-[75%] left-[25%] -translate-x-1/2 -translate-y-1/2" />
-            <Crosshair className="top-[75%] left-[50%] -translate-x-1/2 -translate-y-1/2" />
-            <Crosshair className="top-[75%] left-[75%] -translate-x-1/2 -translate-y-1/2" />
-            <Crosshair className="top-[50%] left-[75%] -translate-x-1/2 -translate-y-1/2" />
-            <Crosshair className="top-[50%] left-[25%] -translate-x-1/2 -translate-y-1/2" />
+            {/* ── Crosshair Markers at Grid Intersections (desktop only) ── */}
+            <div className="hidden md:block">
+                <Crosshair className="top-[25%] left-[25%] -translate-x-1/2 -translate-y-1/2" />
+                <Crosshair className="top-[25%] left-[50%] -translate-x-1/2 -translate-y-1/2" />
+                <Crosshair className="top-[25%] left-[75%] -translate-x-1/2 -translate-y-1/2" />
+                <Crosshair className="top-[75%] left-[25%] -translate-x-1/2 -translate-y-1/2" />
+                <Crosshair className="top-[75%] left-[50%] -translate-x-1/2 -translate-y-1/2" />
+                <Crosshair className="top-[75%] left-[75%] -translate-x-1/2 -translate-y-1/2" />
+                <Crosshair className="top-[50%] left-[75%] -translate-x-1/2 -translate-y-1/2" />
+                <Crosshair className="top-[50%] left-[25%] -translate-x-1/2 -translate-y-1/2" />
+            </div>
 
             {/* ── Scanline (very subtle moving line) ───────────────── */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
@@ -110,8 +112,8 @@ M[10]=1; M[15]=1;`}</pre>
             <div className="absolute inset-0 z-10 flex flex-col pointer-events-none">
                 <div className="flex-1 relative">
 
-                    {/* Left Typography Block */}
-                    <div className="absolute left-6 md:left-14 top-[15%] md:top-[65%] -translate-y-1/2 max-w-[200px] text-white pointer-events-auto">
+                    {/* Left Typography Block — hidden on mobile to prevent overlap */}
+                    <div className="hidden md:block absolute left-6 md:left-14 top-[65%] -translate-y-1/2 max-w-[200px] text-white pointer-events-auto">
                         <div className="relative border-l-2 border-fuchsia-500/60 pl-3">
                             <p className="text-xs md:text-sm font-cyber leading-relaxed tracking-wide text-white/70">
                                 <span className="text-xl md:text-3xl font-black text-white pr-1 font-siegra">W</span>
@@ -121,22 +123,22 @@ M[10]=1; M[15]=1;`}</pre>
                     </div>
 
                     {/* ── Central Typography ───────────────────────────── */}
-                    <div className="absolute top-[45%] md:top-[50%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex flex-col items-center justify-center text-center pointer-events-none mix-blend-difference px-4">
-                        <h1 className="text-[12vw] md:text-[6vw] font-black tracking-[0.1em] text-white leading-none font-siegra drop-shadow-[0_10px_30px_rgba(0,0,0,0.8)] animate-glow pointer-events-auto cursor-default">
+                    <div className="absolute top-[40%] md:top-[50%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex flex-col items-center justify-center text-center pointer-events-none mix-blend-difference px-4">
+                        <h1 className="text-[11vw] md:text-[6vw] font-black tracking-[0.1em] text-white leading-none font-siegra drop-shadow-[0_10px_30px_rgba(0,0,0,0.8)] animate-glow pointer-events-auto cursor-default">
                             <ScrambleText text="MAHDI" /> <ScrambleText text="GOUADRIA" />
                         </h1>
 
                         {/* HUD-Style Subtitle (SHARP — no pill) */}
-                        <div className="relative mt-4 px-4 md:px-6 py-2 border border-white/20 bg-black/50">
+                        <div className="relative mt-3 md:mt-4 px-3 md:px-6 py-1.5 md:py-2 border border-white/20 bg-black/50">
                             <HUDCorners color="rgba(217,70,239,0.6)" size={6} opacity={1} />
-                            <p className="text-[8px] md:text-xs font-mono tracking-[0.1em] md:tracking-[0.4em] text-white/80 uppercase whitespace-nowrap">
+                            <p className="text-[7px] md:text-xs font-mono tracking-[0.08em] md:tracking-[0.4em] text-white/80 uppercase whitespace-nowrap">
                                 [ Software Engineer &amp; 3D Generalist ]
                             </p>
                         </div>
                     </div>
 
-                    {/* ── EXPLORE Button (keep float animation, make it HUD-style) ── */}
-                    <div className="absolute bottom-[8%] md:bottom-0 left-1/2 -translate-x-1/2 pointer-events-auto pb-8">
+                    {/* ── VIEW CV Button ── */}
+                    <div className="absolute bottom-[18%] md:bottom-0 left-1/2 -translate-x-1/2 pointer-events-auto pb-8">
                         <div className="animate-float">
                             {/* Outer crosshair frame */}
                             <div className="relative">
@@ -148,12 +150,12 @@ M[10]=1; M[15]=1;`}</pre>
 
                                 <button
                                     onClick={() => setIsCVOpen(true)}
-                                    className="relative w-24 h-24 md:w-28 md:h-28 rounded-full bg-white/[0.06] border border-white/20 flex flex-col items-center justify-center group transition-all duration-500 hover:-translate-y-4 hover:scale-110 animate-full-glow hover:border-fuchsia-400/60 hover:bg-fuchsia-900/10 cursor-pointer"
+                                    className="relative w-20 h-20 md:w-28 md:h-28 rounded-full bg-white/[0.06] border border-white/20 flex flex-col items-center justify-center group transition-all duration-500 hover:-translate-y-4 hover:scale-110 animate-full-glow hover:border-fuchsia-400/60 hover:bg-fuchsia-900/10 cursor-pointer"
                                 >
                                     {/* Inner ripples — keep original */}
                                     <div className="absolute inset-0 rounded-full border border-white/30 scale-75 transition-transform duration-500 group-hover:scale-100" />
                                     <div className="absolute inset-0 rounded-full bg-fuchsia-500/5 scale-50 transition-transform duration-500 group-hover:scale-125 opacity-0 group-hover:opacity-100" />
-                                    <span className="text-white font-mono font-bold text-sm md:text-base leading-tight text-center z-10 tracking-widest group-hover:text-fuchsia-300 transition-colors">
+                                    <span className="text-white font-mono font-bold text-xs md:text-base leading-tight text-center z-10 tracking-widest group-hover:text-fuchsia-300 transition-colors">
                                         <ScrambleText text="VIEW CV" />
                                     </span>
                                 </button>
