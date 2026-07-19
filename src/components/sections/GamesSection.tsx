@@ -109,9 +109,17 @@ export default function GamesSection() {
                 <ScrollReveal direction="right" delay={0.1}>
                     <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-6">
                         <div>
-                            <span className="font-mono text-[10px] uppercase tracking-[0.35em] text-fuchsia-400/70 mb-4 block">
-                                &gt; CAPABILITIES_
-                            </span>
+                            <div className="flex items-center gap-4 mb-4">
+                                <span className="font-mono text-[10px] font-bold tracking-widest text-fuchsia-400 border border-fuchsia-500/30 bg-fuchsia-500/10 px-3 py-1">02</span>
+                                <div className="flex items-center gap-0">
+                                    <div className="w-8 h-[2px] bg-fuchsia-500" />
+                                    <div className="w-8 h-[2px] bg-cyan-500" />
+                                    <div className="w-8 h-[2px] bg-violet-500" />
+                                </div>
+                                <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/40">
+                                    Capabilities
+                                </span>
+                            </div>
                             <h2
                                 id="services-heading"
                                 className="text-5xl md:text-8xl font-siegra font-black tracking-widest text-white uppercase leading-none"

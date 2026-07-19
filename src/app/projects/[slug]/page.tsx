@@ -76,13 +76,17 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                 {/* Full Description - Displaced Typography */}
                 <div className="relative z-10 pt-8 md:pt-16 mb-16">
                     <ScrollReveal direction="up" delay={0.2}>
-                        <div className="absolute top-0 left-0 w-32 h-[1px] bg-fuchsia-500"></div>
-                        <div className="absolute top-0 left-0 w-[1px] h-32 bg-fuchsia-500"></div>
-                        
-                        <h2 className="font-tech text-sm font-bold uppercase tracking-[0.5em] text-fuchsia-400 mb-8 pl-8">
-                            // Project Overview
-                        </h2>
-                        <div className="pl-8 md:pl-24 max-w-5xl">
+                        <div className="flex items-center gap-4 mb-8">
+                            <span className="font-mono text-[10px] font-bold tracking-widest text-fuchsia-400 border border-fuchsia-500/30 bg-fuchsia-500/10 px-3 py-1">01</span>
+                            <div className="flex items-center gap-0">
+                                <div className="w-8 h-[2px] bg-fuchsia-500" />
+                                <div className="w-8 h-[2px] bg-fuchsia-500/40" />
+                            </div>
+                            <h2 className="font-tech text-sm font-bold uppercase tracking-[0.3em] text-white/90">
+                                Project Overview
+                            </h2>
+                        </div>
+                        <div className="pl-4 md:pl-24 max-w-5xl border-l-2 border-fuchsia-500/30">
                             <p className="font-cyber text-3xl md:text-5xl lg:text-6xl text-white leading-[1.1] font-light tracking-tight">
                                 {project.fullDescription}
                             </p>
@@ -198,9 +202,16 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                         {/* 3. Behind The Scenes - Displaced Staggered Layout */}
                         <div className="relative z-10 py-16">
                             <ScrollReveal direction="up">
-                                <h3 className="font-tech text-sm font-bold uppercase tracking-[0.5em] text-fuchsia-400 mb-12 pl-8 border-l border-fuchsia-500/50">
-                                    // Behind The Scenes
-                                </h3>
+                                <div className="flex items-center gap-4 mb-12">
+                                    <span className="font-mono text-[10px] font-bold tracking-widest text-cyan-400 border border-cyan-500/30 bg-cyan-500/10 px-3 py-1">03</span>
+                                    <div className="flex items-center gap-0">
+                                        <div className="w-8 h-[2px] bg-cyan-500" />
+                                        <div className="w-8 h-[2px] bg-cyan-500/40" />
+                                    </div>
+                                    <h3 className="font-tech text-sm font-bold uppercase tracking-[0.3em] text-white/90">
+                                        Behind The Scenes
+                                    </h3>
+                                </div>
                             </ScrollReveal>
                             
                             <div className="flex flex-col md:flex-row gap-12 md:gap-8 justify-center items-center">
@@ -242,9 +253,16 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                         {/* 5. Real World Applications - Clean Grid Layout */}
                         <div className="relative z-10 py-16">
                             <ScrollReveal direction="up">
-                                <h3 className="font-tech text-sm font-bold uppercase tracking-[0.5em] text-fuchsia-400 mb-12 pl-8 border-l border-fuchsia-500/50">
-                                    // Applications
-                                </h3>
+                                <div className="flex items-center gap-4 mb-12">
+                                    <span className="font-mono text-[10px] font-bold tracking-widest text-violet-400 border border-violet-500/30 bg-violet-500/10 px-3 py-1">05</span>
+                                    <div className="flex items-center gap-0">
+                                        <div className="w-8 h-[2px] bg-violet-500" />
+                                        <div className="w-8 h-[2px] bg-violet-500/40" />
+                                    </div>
+                                    <h3 className="font-tech text-sm font-bold uppercase tracking-[0.3em] text-white/90">
+                                        Applications
+                                    </h3>
+                                </div>
                             </ScrollReveal>
                             <div className="flex flex-col md:flex-row items-center justify-center gap-12">
                                 <ScrollReveal direction="up" delay={0.1} className="w-full md:w-[50%] aspect-[16/9] bg-[#0a0510] border border-white/10 rounded-sm overflow-hidden group relative shadow-2xl hover:z-50 transition-all duration-500 hover:shadow-[0_0_40px_rgba(217,70,239,0.2)]">
@@ -265,9 +283,16 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                         {/* 6. Action Videos - Displaced Posters */}
                         <div className="relative z-10 pt-8 pb-24">
                             <ScrollReveal direction="up">
-                                <h3 className="font-tech text-sm font-bold uppercase tracking-[0.5em] text-fuchsia-400 mb-12 text-center">
-                                    // Live Physics Showcase
-                                </h3>
+                                <div className="flex items-center justify-center gap-4 mb-12">
+                                    <span className="font-mono text-[10px] font-bold tracking-widest text-amber-400 border border-amber-500/30 bg-amber-500/10 px-3 py-1">06</span>
+                                    <div className="flex items-center gap-0">
+                                        <div className="w-8 h-[2px] bg-amber-500" />
+                                        <div className="w-8 h-[2px] bg-amber-500/40" />
+                                    </div>
+                                    <h3 className="font-tech text-sm font-bold uppercase tracking-[0.3em] text-white/90">
+                                        Live Physics Showcase
+                                    </h3>
+                                </div>
                             </ScrollReveal>
                             
                             <div className="flex flex-col md:flex-row justify-center items-center gap-16 md:gap-24">

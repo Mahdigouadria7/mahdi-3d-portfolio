@@ -296,9 +296,16 @@ export default function ProjectsSection() {
                         ref={textRef}
                         className="flex flex-col w-[85vw] md:w-max flex-shrink-0 pl-6 md:pl-12 z-20 pointer-events-none absolute left-0 transition-none"
                     >
-                        <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.3em] text-fuchsia-400 mb-2 md:mb-4 block">
-                            Selected Work
-                        </span>
+                        <div className="flex items-center gap-3 mb-2 md:mb-4">
+                            <span className="font-mono text-[10px] font-bold tracking-widest text-fuchsia-400 border border-fuchsia-500/30 bg-fuchsia-500/10 px-2.5 py-0.5">01</span>
+                            <div className="flex items-center gap-0">
+                                <div className="w-6 h-[2px] bg-fuchsia-500" />
+                                <div className="w-6 h-[2px] bg-fuchsia-500/40" />
+                            </div>
+                            <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-white/40">
+                                Selected Work
+                            </span>
+                        </div>
                         <h2 className="text-4xl md:text-7xl font-siegra font-black tracking-widest text-white uppercase leading-none drop-shadow-2xl">
                             FEATURED<br/>PROJECTS
                         </h2>
