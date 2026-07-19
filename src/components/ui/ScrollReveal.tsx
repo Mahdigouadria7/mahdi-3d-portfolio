@@ -1,13 +1,6 @@
 "use client";
 
-import { useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useGSAP } from '@gsap/react';
-
-if (typeof window !== "undefined") {
-    gsap.registerPlugin(ScrollTrigger);
-}
+import { useEffect, useRef, useState } from 'react';
 
 interface ScrollRevealProps {
     children: React.ReactNode;
@@ -16,69 +9,71 @@ interface ScrollRevealProps {
     duration?: number;
     distance?: number;
     className?: string;
-    threshold?: string; // e.g. "top 85%"
+    threshold?: string; // e.g. "0.1" for 10%
 }
 
 export default function ScrollReveal({ 
     children, 
     direction = 'up',
     delay = 0,
-    duration = 1.2, // slightly longer for smoothness
+    duration = 1.2,
     distance = 50,
     className = "",
-    threshold = "top 85%"
+    threshold = "0.1"
 }: ScrollRevealProps) {
     const elementRef = useRef<HTMLDivElement>(null);
+    const [isVisible, setIsVisible] = useState(false);
 
-    useGSAP(() => {
-        const el = elementRef.current;
-        if (!el) return;
-
-        let x = 0;
-        let y = 0;
-
-        switch(direction) {
-            case 'up': y = distance; break;
-            case 'down': y = -distance; break;
-            case 'left': x = distance; break;
-            case 'right': x = -distance; break;
-            case 'none': break;
-        }
-
-        gsap.fromTo(el, 
-            { 
-                opacity: 0, 
-                x: x, 
-                y: y 
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setIsVisible(true);
+                    // Stop observing once visible
+                    if (elementRef.current) {
+                        observer.unobserve(elementRef.current);
+                    }
+                }
             },
             {
-                opacity: 1,
-                x: 0,
-                y: 0,
-                duration: duration,
-                delay: delay,
-                ease: "power2.out",
-                force3D: true,
-                scrollTrigger: {
-                    trigger: el,
-                    start: threshold,
-                    toggleActions: "play none none reverse",
-                }
+                root: null,
+                rootMargin: '0px',
+                threshold: parseFloat(threshold) || 0.1,
             }
         );
 
-        // Force ScrollTrigger to recalculate after DOM paints on navigation
-        setTimeout(() => {
-            ScrollTrigger.refresh();
-        }, 100);
+        if (elementRef.current) {
+            observer.observe(elementRef.current);
+        }
 
-    }, { dependencies: [direction, delay, duration, distance, threshold], scope: elementRef });
+        return () => {
+            if (elementRef.current) {
+                observer.unobserve(elementRef.current);
+            }
+        };
+    }, [threshold]);
+
+    let transform = 'none';
+    if (!isVisible) {
+        switch(direction) {
+            case 'up': transform = `translateY(${distance}px)`; break;
+            case 'down': transform = `translateY(-${distance}px)`; break;
+            case 'left': transform = `translateX(${distance}px)`; break;
+            case 'right': transform = `translateX(-${distance}px)`; break;
+            case 'none': transform = 'none'; break;
+        }
+    }
 
     return (
         <div 
             ref={elementRef} 
-            className={`opacity-0 ${className}`} 
-            style={{ willChange: 'transform, opacity' }}
+            className={className} 
+            style={{ 
+                opacity: isVisible ? 1 : 0,
+                transform: transform,
+                transition: `opacity ${duration}s cubic-bezier(0.16, 1, 0.3, 1) ${delay}s, transform ${duration}s cubic-bezier(0.16, 1, 0.3, 1) ${delay}s`,
+                willChange: 'transform, opacity'
+            }}
         >
             {children}
         </div>
