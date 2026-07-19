@@ -623,7 +623,7 @@ export default function AnimatedProjectHero({ project, index }: { project: Proje
         >
             {/* Scoreboard HUD (Only for Ball Project) */}
             {index === 0 && (
-                <div ref={scoreBoardRef} className="absolute bottom-12 md:bottom-auto md:top-12 left-1/2 transform -translate-x-1/2 z-50 flex space-x-2 md:space-x-6 pointer-events-none opacity-0 items-stretch scale-75 md:scale-100 origin-bottom md:origin-top">
+                <div ref={scoreBoardRef} className="absolute top-[80px] md:top-12 left-1/2 transform -translate-x-1/2 z-50 flex space-x-2 md:space-x-6 pointer-events-none opacity-0 items-stretch scale-75 md:scale-100 origin-top">
                     <div className="flex flex-col items-center justify-center bg-[#0a0510]/80 backdrop-blur-md border border-white/10 px-4 md:px-6 py-3 rounded-sm shadow-2xl min-w-[90px] md:min-w-[120px]">
                         <span className="text-white/50 text-[8px] md:text-[10px] font-cyber tracking-widest uppercase mb-1">Juggles</span>
                         <span className="text-2xl md:text-4xl font-tech font-bold text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">
@@ -729,7 +729,7 @@ export default function AnimatedProjectHero({ project, index }: { project: Proje
                 {/* Left Side: Main Typography & Metadata */}
                 <div className="w-full md:w-1/3 flex flex-col justify-start md:justify-center h-auto md:h-full relative z-10 opacity-0 min-h-[30vh] md:min-h-0" ref={textRef}>
                     {/* Title block */}
-                    <div className="mt-20 md:mt-0">
+                    <div className="mt-32 md:mt-0">
                         <span className="font-cyber text-fuchsia-400 font-bold tracking-[0.5em] text-xs md:text-sm uppercase mb-3 block" style={{ textShadow: "0 2px 10px rgba(0,0,0,0.8)" }}>
                             {project.category}
                         </span>
