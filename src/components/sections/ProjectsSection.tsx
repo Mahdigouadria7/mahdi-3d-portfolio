@@ -383,7 +383,9 @@ export default function ProjectsSection() {
                                                 style={{ viewTransitionName: `project-model-${project.slug}` }}
                                                 className={`absolute inset-0 z-10 ${isSelected ? 'opacity-100' : 'opacity-60 transition-opacity duration-500 group-hover:opacity-95'}`}
                                             >
-                                                <ProjectModel index={i} />
+                                                {project.slug === "trionda-ball-wc-2026" && (
+                                                    <ProjectModel index={i} />
+                                                )}
                                             </div>
 
                                             {/* Top label row */}
