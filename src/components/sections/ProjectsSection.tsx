@@ -24,9 +24,10 @@ export default function ProjectsSection() {
         const dy = Math.abs(e.clientY - pointerDownRef.current.y);
         const dt = Date.now() - pointerDownRef.current.time;
 
-        // If the user moved the mouse more than 5 pixels or held it for more than 250ms,
+        // If the user moved the mouse more than 10 pixels or held it for more than 400ms,
         // they are interacting with the 3D model or dragging the track, not clicking the card.
-        if (dx > 5 || dy > 5 || dt > 250) {
+        // Relaxed constraints for mobile taps.
+        if (dx > 10 || dy > 10 || dt > 400) {
             e.preventDefault();
             return;
         }
@@ -35,36 +36,8 @@ export default function ProjectsSection() {
         
         setSelectedSlug(slug);
 
-        // Give it a very short delay to let React update the DOM for the "selected" state
-        // We use 50ms instead of 150ms to prevent capturing elements mid-animation, which causes frame drops.
-        setTimeout(() => {
-            // Fallback for browsers that don't support View Transitions
-            if (!document.startViewTransition) {
-                router.push(`/projects/${slug}`);
-                return;
-            }
-            
-            // Trigger native morphing transition and wait for Next.js to render
-            document.startViewTransition(() => {
-                return new Promise<void>((resolve) => {
-                    router.push(`/projects/${slug}`);
-                    
-                    const checkUrl = setInterval(() => {
-                        if (window.location.pathname === `/projects/${slug}`) {
-                            clearInterval(checkUrl);
-                            // Allow React to commit the new DOM
-                            setTimeout(resolve, 100);
-                        }
-                    }, 50);
-
-                    // Fallback timeout
-                    setTimeout(() => {
-                        clearInterval(checkUrl);
-                        resolve();
-                    }, 3000);
-                });
-            });
-        }, 150);
+        // Standard Next.js client-side navigation
+        router.push(`/projects/${slug}`);
     };
 
     // Smooth scrolling state
