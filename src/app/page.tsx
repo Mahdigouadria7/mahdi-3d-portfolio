@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import TubesCursor from "@/components/TubesCursor";
@@ -13,48 +13,89 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
+const FRAME_COUNT = 240;
+
+const currentFrame = (index: number) =>
+  `/models/Man_with_glowing_eyes_frames/frame_${index.toString().padStart(5, '0')}.jpg`;
+
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const [imagesLoaded, setImagesLoaded] = useState(0);
 
   useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
 
-    // Force video to load its metadata so we know the duration
-    video.load();
-    video.pause();
+    const context = canvas.getContext("2d");
+    if (!context) return;
 
-    let scrollTrigger: ScrollTrigger | null = null;
+    const images: HTMLImageElement[] = [];
+    const imageSeq = { frame: 1 }; // Start at frame 1
+    let loadedCount = 0;
 
-    const initScrollTrigger = () => {
-      // Don't setup until we have video duration
-      if (isNaN(video.duration) || video.duration === 0) return;
+    // Preload images
+    let canvasSized = false;
+    for (let i = 1; i <= FRAME_COUNT; i++) {
+      const img = new Image();
+      img.src = currentFrame(i);
+      img.onload = () => {
+        loadedCount++;
+        setImagesLoaded(loadedCount);
+        
+        // Size canvas from the first successfully loaded image
+        if (!canvasSized && img.naturalWidth > 0) {
+          canvasSized = true;
+          canvas.width = img.naturalWidth;
+          canvas.height = img.naturalHeight;
+          context.drawImage(img, 0, 0, canvas.width, canvas.height);
+        }
+      };
+      images.push(img);
+    }
 
-      scrollTrigger = ScrollTrigger.create({
+    const render = () => {
+      // frame might be a float if we don't snap, so we round it
+      const frameIndex = Math.round(imageSeq.frame) - 1; // 0-indexed array
+      const img = images[frameIndex];
+      if (img && img.complete && img.naturalWidth > 0) {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.drawImage(img, 0, 0, canvas.width, canvas.height);
+      }
+    };
+
+    gsap.to(imageSeq, {
+      frame: FRAME_COUNT,
+      snap: "frame",
+      ease: "none",
+      scrollTrigger: {
         trigger: document.body,
         start: "top top",
         end: "bottom bottom",
-        scrub: 1, // Smooth scrubbing
-        onUpdate: (self) => {
-          if (video && !isNaN(video.duration)) {
-            // Scrub the video time based on scroll progress
-            video.currentTime = self.progress * video.duration;
-          }
-        },
-      });
-    };
+        scrub: 0.5,
+        onUpdate: render, // render on every scroll tick
+      },
+    });
 
-    if (video.readyState >= 1) {
-      initScrollTrigger();
+    // Ensure first frame renders
+    if (images[0] && images[0].complete) {
+      render();
     } else {
-      video.addEventListener('loadedmetadata', initScrollTrigger);
+      const firstImage = new Image();
+      firstImage.src = currentFrame(1);
+      firstImage.onload = () => {
+        if (!canvasSized) {
+          canvasSized = true;
+          canvas.width = firstImage.naturalWidth;
+          canvas.height = firstImage.naturalHeight;
+        }
+        context.drawImage(firstImage, 0, 0, canvas.width, canvas.height);
+      };
     }
 
     return () => {
-      if (scrollTrigger) scrollTrigger.kill();
-      video.removeEventListener('loadedmetadata', initScrollTrigger);
+      ScrollTrigger.getAll().forEach(t => t.kill());
     };
   }, []);
 
@@ -67,15 +108,11 @@ export default function Home() {
         ref={containerRef}
         className="fixed inset-0 w-full h-full bg-[#0a0514] pointer-events-none"
       >
-        <video 
-          ref={videoRef}
-          muted 
-          playsInline 
+        <canvas 
+          ref={canvasRef}
           className="absolute inset-0 w-full h-full object-cover opacity-80 z-0"
           style={{ mixBlendMode: 'screen' }}
-        >
-          <source src="/models/Man_with_glowing_eyes_202607151730.mp4" type="video/mp4" />
-        </video>
+        />
         <div ref={overlayRef} className="absolute inset-0 bg-black opacity-0 pointer-events-none z-10"></div>
 
         {/* Global Edge Gradients for Typography Contrast */}
