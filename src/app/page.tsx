@@ -19,7 +19,8 @@ export default function Home() {
       <div 
         ref={containerRef}
         className="fixed inset-0 w-full h-full bg-[#0a0514] pointer-events-none"
-      ><div ref={overlayRef} className="absolute inset-0 bg-black opacity-0 pointer-events-none z-10"></div>
+      >
+        <div ref={overlayRef} className="absolute inset-0 bg-black opacity-0 pointer-events-none z-10"></div>
 
         {/* Global Edge Gradients for Typography Contrast */}
         <div className="absolute inset-y-0 left-0 w-1/3 md:w-1/4 bg-gradient-to-r from-black/80 to-transparent z-10 pointer-events-none"></div>
@@ -32,13 +33,6 @@ export default function Home() {
             <div className="border-r border-dashed border-white/10 h-full w-full"></div>
             <div className="h-full w-full"></div>
         </div>
-
-        {/* Loading Indicator for images */}
-        {imagesLoaded < FRAME_COUNT && (
-          <div className="absolute bottom-4 left-4 text-white text-xs opacity-50 font-mono z-20">
-            Loading Frames: {imagesLoaded} / {FRAME_COUNT}
-          </div>
-        )}
       </div>
 
 
