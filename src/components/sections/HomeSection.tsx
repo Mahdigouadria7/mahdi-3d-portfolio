@@ -181,14 +181,14 @@ M[10]=1; M[15]=1;`}</pre>
                 <div className="h-28 w-full relative px-4 md:px-14 pointer-events-none">
 
                     {/* Bottom SCROLL label (center) */}
-                    <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex items-center gap-4 pointer-events-none">
+                    <div className="hidden md:flex absolute bottom-5 left-1/2 -translate-x-1/2 items-center gap-4 pointer-events-none">
                         <div className="w-12 h-px bg-white/20" />
                         <span className="font-mono text-[9px] tracking-[0.4em] text-white/30 uppercase">SCROLL</span>
                         <div className="w-12 h-px bg-white/20" />
                     </div>
 
                     {/* Socials — flat square HUD buttons */}
-                    <div className="absolute bottom-5 left-4 md:left-14 flex items-center gap-1 pointer-events-auto">
+                    <div className="absolute bottom-5 left-4 md:left-14 flex flex-wrap items-center gap-1 pointer-events-auto max-w-[70vw] md:max-w-none">
                         {[
                             { label: "BEHANCE", href: "#" },
                             { label: "LINKEDIN", href: "#" },
@@ -206,7 +206,7 @@ M[10]=1; M[15]=1;`}</pre>
                     </div>
 
                     {/* System version tag (bottom right) */}
-                    <div className="absolute bottom-5 right-4 md:right-14 pointer-events-none">
+                    <div className="hidden md:block absolute bottom-5 right-4 md:right-14 pointer-events-none">
                         <span className="font-mono text-[9px] text-white/20 tracking-widest">SYS v2.0.77</span>
                     </div>
                 </div>
