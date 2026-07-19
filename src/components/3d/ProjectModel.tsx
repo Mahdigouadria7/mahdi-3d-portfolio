@@ -139,9 +139,33 @@ export function PlaceholderShape({ index, onPointerDown, onPointerUp, onPointerO
  */
 export default function ProjectModel({ index }: { index: number }) {
     const [isDragging, setIsDragging] = useState(false);
+    const containerRef = useRef<HTMLDivElement>(null);
+    const [isVisible, setIsVisible] = useState(false);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                // Preload slightly before it comes into view (rootMargin)
+                if (entry.isIntersecting) {
+                    setIsVisible(true);
+                } else {
+                    // Optionally unmount when far out of view to save memory
+                    setIsVisible(false);
+                }
+            },
+            { rootMargin: "500px 500px 500px 500px" } // Keep it loaded while nearby
+        );
+
+        if (containerRef.current) {
+            observer.observe(containerRef.current);
+        }
+
+        return () => observer.disconnect();
+    }, []);
 
     return (
         <div 
+            ref={containerRef}
             className="absolute inset-0 flex items-center justify-center w-full h-full pointer-events-auto opacity-70 group-hover:opacity-100 transition-opacity duration-500"
             onClick={(e) => {
                 e.preventDefault();
@@ -149,41 +173,43 @@ export default function ProjectModel({ index }: { index: number }) {
             }}
             onPointerDown={(e) => e.stopPropagation()}
         >
-            <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
-                <ambientLight intensity={0.5} />
-                <directionalLight position={[10, 10, 5]} intensity={1.5} />
+            {isVisible && (
+                <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
+                    <ambientLight intensity={0.5} />
+                    <directionalLight position={[10, 10, 5]} intensity={1.5} />
 
-                <PresentationControls
-                    global={false}
-                    cursor={true}
-                    snap={false}
-                    speed={1.5}
-                    zoom={1}
-                    rotation={[0, 0, 0]}
-                    polar={[-Infinity, Infinity]}
-                    azimuth={[-Infinity, Infinity]}
-                >
-                    <Float speed={isDragging ? 0 : 2} rotationIntensity={0.5} floatIntensity={0.5}>
-                        {index === 0 ? (
-                            <BallModel
-                                onPointerDown={() => setIsDragging(true)}
-                                onPointerUp={() => setIsDragging(false)}
-                                onPointerOut={() => setIsDragging(false)}
-                            />
-                        ) : (
-                            <PlaceholderShape
-                                index={index}
-                                onPointerDown={() => setIsDragging(true)}
-                                onPointerUp={() => setIsDragging(false)}
-                                onPointerOut={() => setIsDragging(false)}
-                            />
-                        )}
-                    </Float>
-                </PresentationControls>
+                    <PresentationControls
+                        global={false}
+                        cursor={true}
+                        snap={false}
+                        speed={1.5}
+                        zoom={1}
+                        rotation={[0, 0, 0]}
+                        polar={[-Infinity, Infinity]}
+                        azimuth={[-Infinity, Infinity]}
+                    >
+                        <Float speed={isDragging ? 0 : 2} rotationIntensity={0.5} floatIntensity={0.5}>
+                            {index === 0 ? (
+                                <BallModel
+                                    onPointerDown={() => setIsDragging(true)}
+                                    onPointerUp={() => setIsDragging(false)}
+                                    onPointerOut={() => setIsDragging(false)}
+                                />
+                            ) : (
+                                <PlaceholderShape
+                                    index={index}
+                                    onPointerDown={() => setIsDragging(true)}
+                                    onPointerUp={() => setIsDragging(false)}
+                                    onPointerOut={() => setIsDragging(false)}
+                                />
+                            )}
+                        </Float>
+                    </PresentationControls>
 
-                {/* Environment light for shiny reflections */}
-                <Environment preset="city" />
-            </Canvas>
+                    {/* Environment light for shiny reflections */}
+                    <Environment preset="city" />
+                </Canvas>
+            )}
         </div>
     );
 }
