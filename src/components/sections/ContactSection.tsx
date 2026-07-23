@@ -72,7 +72,7 @@ export default function ContactSection() {
 
                 {/* Right Side: Form Card */}
                 <ScrollReveal direction="left" delay={0.4}>
-                    <div className="bg-black/60 border border-white/[0.08] p-8 md:p-12 flex flex-col justify-center min-h-[500px] relative group hover:border-fuchsia-400/40 transition-all duration-300">
+                    <div className="bg-black/60 backdrop-blur-xl border border-white/15 shadow-2xl shadow-black/90 p-8 md:p-12 flex flex-col justify-center min-h-[500px] relative group hover:border-fuchsia-400/60 hover:shadow-[0_0_30px_rgba(217,70,239,0.2)] transition-all duration-500 rounded-2xl">
                         {/* HUD corner brackets */}
                         <span className="absolute top-0 left-0 w-4 h-4 border-t border-l border-fuchsia-400/40 pointer-events-none" />
                         <span className="absolute top-0 right-0 w-4 h-4 border-t border-r border-fuchsia-400/40 pointer-events-none" />

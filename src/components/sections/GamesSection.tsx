@@ -220,7 +220,7 @@ export default function GamesSection() {
                                 <TiltCard glowColor={svc.accent.glow} intensity={8} className="h-full">
                                     <article
                                         tabIndex={0}
-                                        className={`group relative flex flex-col justify-between h-full min-h-[160px] p-6 bg-[#0c0a14] border ${svc.accent.border} ${svc.accent.borderHover} overflow-hidden cursor-pointer transition-colors duration-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-fuchsia-400`}
+                                        className={`group relative flex flex-col justify-between h-full min-h-[160px] p-6 bg-black/60 backdrop-blur-xl border ${svc.accent.border} ${svc.accent.borderHover} shadow-xl shadow-black/80 hover:shadow-[0_10px_30px_rgba(217,70,239,0.15)] hover:-translate-y-1 transition-all duration-500 overflow-hidden cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-fuchsia-400`}
                                     >
                                         <Corners color={svc.accent.text.replace("text-", "").replace("400", "")} />
                                         <div className={`absolute top-0 left-0 right-0 h-[2px] ${svc.accent.top} opacity-50`} />
