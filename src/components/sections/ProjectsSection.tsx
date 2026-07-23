@@ -395,11 +395,11 @@ export default function ProjectsSection() {
                                             </div>
                                              {/* Top label row */}
                                             <div className={`relative z-20 pointer-events-none flex flex-col items-center justify-between h-full w-full overflow-hidden ${isSelected ? 'opacity-0' : 'transition-opacity duration-300 opacity-100'}`}>
-                                                <div className="w-full pt-7 md:pt-9 px-7 md:px-9 flex items-center justify-between pointer-events-auto cursor-pointer">
-                                                    <span className={`font-mono text-[9px] font-bold uppercase tracking-[0.3em] ${p.cat} drop-shadow-md`}>
+                                                <div className="w-full pt-8 md:pt-10 px-6 md:px-8 flex items-center justify-between pointer-events-auto cursor-pointer">
+                                                    <span className={`font-mono text-[10px] md:text-xs font-bold uppercase tracking-[0.3em] ${p.cat} drop-shadow-md`}>
                                                         {project.category}
                                                     </span>
-                                                    <span className="font-mono text-[9px] text-white/30 tracking-widest">
+                                                    <span className="font-mono text-[10px] md:text-xs text-white/40 tracking-widest">
                                                         {project.timeline}
                                                     </span>
                                                 </div>
