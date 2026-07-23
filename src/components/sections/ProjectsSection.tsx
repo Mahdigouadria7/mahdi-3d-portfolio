@@ -393,14 +393,13 @@ export default function ProjectsSection() {
                                                     <ProjectModel index={i} />
                                                 )}
                                             </div>
-
-                                            {/* Top label row */}
-                                            <div className={`relative z-20 pointer-events-none flex flex-col items-center justify-between h-full w-full ${isSelected ? 'opacity-0' : 'transition-opacity duration-300 opacity-100'}`}>
-                                                <div className="w-full pt-6 md:pt-8 px-6 md:px-8 flex items-center justify-between pointer-events-auto cursor-pointer">
+                                             {/* Top label row */}
+                                            <div className={`relative z-20 pointer-events-none flex flex-col items-center justify-between h-full w-full overflow-hidden ${isSelected ? 'opacity-0' : 'transition-opacity duration-300 opacity-100'}`}>
+                                                <div className="w-full pt-7 md:pt-9 px-7 md:px-9 flex items-center justify-between pointer-events-auto cursor-pointer">
                                                     <span className={`font-mono text-[9px] font-bold uppercase tracking-[0.3em] ${p.cat} drop-shadow-md`}>
                                                         {project.category}
                                                     </span>
-                                                    <span className="font-mono text-[9px] text-white/25 tracking-widest">
+                                                    <span className="font-mono text-[9px] text-white/30 tracking-widest">
                                                         {project.timeline}
                                                     </span>
                                                 </div>
