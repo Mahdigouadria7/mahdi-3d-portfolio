@@ -349,21 +349,21 @@ export default function ProjectsSection() {
                                             className={`block transition-[opacity,transform] duration-300 select-none focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-fuchsia-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black ${isOtherSelected ? 'opacity-0 scale-90' : ''} ${isSelected ? 'z-50' : ''}`}
                                             draggable={false}
                                             onDragStart={(e) => e.preventDefault()}
-                                        >
-                                        {/* Per-card accent setup */}
+                                        >                                         {/* Per-card accent setup */}
                                         {(() => {
-                                            const acc = project.accent ?? 'fuchsia';                                             const palettes: Record<string, { bar: string; cat: string; activeClasses: string; hoverClasses: string }> = {
-                                                fuchsia: { bar: 'bg-fuchsia-500', cat: 'text-fuchsia-400', activeClasses: 'border-fuchsia-400/80 bg-fuchsia-400/10 shadow-[0_0_30px_rgba(217,70,239,0.3)]', hoverClasses: 'hover:border-fuchsia-400/70 hover:shadow-[0_15px_35px_rgba(217,70,239,0.25)]' },
-                                                cyan:    { bar: 'bg-cyan-500',    cat: 'text-cyan-400',    activeClasses: 'border-cyan-400/80 bg-cyan-400/10 shadow-[0_0_30px_rgba(34,211,238,0.3)]',    hoverClasses: 'hover:border-cyan-400/70 hover:shadow-[0_15px_35px_rgba(34,211,238,0.25)]'    },
-                                                violet:  { bar: 'bg-violet-500',  cat: 'text-violet-400',  activeClasses: 'border-violet-400/80 bg-violet-400/10 shadow-[0_0_30px_rgba(139,92,246,0.3)]',  hoverClasses: 'hover:border-violet-400/70 hover:shadow-[0_15px_35px_rgba(139,92,246,0.25)]'  },
-                                                amber:   { bar: 'bg-amber-500',   cat: 'text-amber-400',   activeClasses: 'border-amber-400/80 bg-amber-400/10 shadow-[0_0_30px_rgba(245,158,11,0.3)]',   hoverClasses: 'hover:border-amber-400/70 hover:shadow-[0_15px_35px_rgba(245,158,11,0.25)]'   },
-                                                rose:    { bar: 'bg-rose-500',    cat: 'text-rose-400',    activeClasses: 'border-rose-400/80 bg-rose-400/10 shadow-[0_0_30px_rgba(251,113,133,0.3)]',    hoverClasses: 'hover:border-rose-400/70 hover:shadow-[0_15px_35px_rgba(251,113,133,0.25)]'    },
-                                                emerald: { bar: 'bg-emerald-500', cat: 'text-emerald-400', activeClasses: 'border-emerald-400/80 bg-emerald-400/10 shadow-[0_0_30px_rgba(52,211,153,0.3)]', hoverClasses: 'hover:border-emerald-400/70 hover:shadow-[0_15px_35px_rgba(52,211,153,0.25)]' },
+                                            const acc = project.accent ?? 'fuchsia';
+                                            const palettes: Record<string, { bar: string; cat: string; activeClasses: string; hoverClasses: string }> = {
+                                                fuchsia: { bar: 'bg-fuchsia-500', cat: 'text-fuchsia-400', activeClasses: 'border-fuchsia-400/80 bg-fuchsia-400/10', hoverClasses: 'hover:border-fuchsia-400/60' },
+                                                cyan:    { bar: 'bg-cyan-500',    cat: 'text-cyan-400',    activeClasses: 'border-cyan-400/80 bg-cyan-400/10',    hoverClasses: 'hover:border-cyan-400/60'    },
+                                                violet:  { bar: 'bg-violet-500',  cat: 'text-violet-400',  activeClasses: 'border-violet-400/80 bg-violet-400/10',  hoverClasses: 'hover:border-violet-400/60'  },
+                                                amber:   { bar: 'bg-amber-500',   cat: 'text-amber-400',   activeClasses: 'border-amber-400/80 bg-amber-400/10',   hoverClasses: 'hover:border-amber-400/60'   },
+                                                rose:    { bar: 'bg-rose-500',    cat: 'text-rose-400',    activeClasses: 'border-rose-400/80 bg-rose-400/10',    hoverClasses: 'hover:border-rose-400/60'    },
+                                                emerald: { bar: 'bg-emerald-500', cat: 'text-emerald-400', activeClasses: 'border-emerald-400/80 bg-emerald-400/10', hoverClasses: 'hover:border-emerald-400/60' },
                                             };
                                             const p = palettes[acc] ?? palettes.fuchsia;
                                             return (
                                         <article
-                                            className={`card-glitch group relative flex flex-col items-center text-center overflow-hidden h-[400px] w-[300px] md:h-[500px] md:w-[400px] bg-black/60 backdrop-blur-xl rounded-2xl border border-white/15 shadow-xl shadow-black/80 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 ${
+                                            className={`card-glitch group relative flex flex-col items-center text-center overflow-hidden h-[400px] w-[300px] md:h-[500px] md:w-[400px] bg-black/60 backdrop-blur-xl rounded-2xl border border-white/15 shadow-xl shadow-black/80 transition-all duration-300 ${
                                                 isSelected
                                                     ? p.activeClasses
                                                     : p.hoverClasses
