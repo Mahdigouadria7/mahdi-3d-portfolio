@@ -112,12 +112,11 @@ M[10]=1; M[15]=1;`}</pre>
             <div className="absolute inset-0 z-10 flex flex-col pointer-events-none">
                 <div className="flex-1 relative">
 
-                    {/* Left Typography Block — hidden on mobile to prevent overlap */}
-                    <div className="hidden md:block absolute left-6 md:left-14 top-[65%] -translate-y-1/2 max-w-[200px] text-white pointer-events-auto">
-                        <div className="relative border-l-2 border-fuchsia-500/60 pl-3">
-                            <p className="text-xs md:text-sm font-cyber leading-relaxed tracking-wide text-white/70">
-                                <span className="text-xl md:text-3xl font-black text-white pr-1 font-siegra">W</span>
-                                here creativity meets engineering and imagination builds reality.
+                    {/* Left Typography Block (Adrian Valera Style Highlighted Bio) — hidden on mobile */}
+                    <div className="hidden md:block absolute left-6 md:left-14 top-[65%] -translate-y-1/2 max-w-[240px] text-white pointer-events-auto">
+                        <div className="relative border-l-2 border-fuchsia-500/80 pl-4 py-2 bg-black/40 backdrop-blur-md rounded-r-xl border-r border-t border-b border-white/10 shadow-xl">
+                            <p className="text-xs font-cyber leading-relaxed tracking-wide text-white/70">
+                                Turning complex ideas into <span className="text-white font-semibold drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]">elegant 3D solutions</span>. Blending <span className="text-fuchsia-400 font-semibold drop-shadow-[0_0_8px_rgba(217,70,239,0.8)]">clean code</span> with <span className="text-cyan-400 font-semibold drop-shadow-[0_0_8px_rgba(34,211,238,0.8)]">intuitive UI design</span>.
                             </p>
                         </div>
                     </div>
