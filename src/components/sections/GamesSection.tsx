@@ -158,7 +158,7 @@ export default function GamesSection() {
                         >
                             <article
                                 tabIndex={0}
-                                className={`group relative flex flex-col justify-between h-full min-h-[340px] p-8 md:p-10 bg-[#0c0a14] border ${featured.accent.border} ${featured.accent.borderHover} overflow-hidden cursor-pointer transition-colors duration-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-fuchsia-400`}
+                                className={`group relative flex flex-col justify-between h-full min-h-[340px] p-8 md:p-10 bg-black/60 backdrop-blur-xl rounded-2xl border ${featured.accent.border} ${featured.accent.borderHover} shadow-xl shadow-black/80 hover:shadow-[0_10px_30px_rgba(217,70,239,0.2)] hover:-translate-y-1.5 hover:scale-[1.01] transition-all duration-500 overflow-hidden cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-fuchsia-400`}
                             >
                                 <Corners color="rgba(217,70,239,0.5)" />
 
@@ -253,7 +253,7 @@ export default function GamesSection() {
                             <TiltCard glowColor={svc.accent.glow} intensity={5} className="h-full">
                                 <article
                                     tabIndex={0}
-                                    className={`group relative flex flex-row items-center gap-6 h-full min-h-[120px] px-8 py-6 bg-[#0c0a14] border ${svc.accent.border} ${svc.accent.borderHover} overflow-hidden cursor-pointer transition-colors duration-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-fuchsia-400`}
+                                    className={`group relative flex flex-row items-center gap-6 h-full min-h-[120px] px-8 py-6 bg-black/60 backdrop-blur-xl rounded-2xl border ${svc.accent.border} ${svc.accent.borderHover} shadow-xl shadow-black/80 hover:shadow-[0_10px_30px_rgba(217,70,239,0.15)] hover:-translate-y-1.5 hover:scale-[1.01] transition-all duration-500 overflow-hidden cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-fuchsia-400`}
                                 >
                                     <Corners color={svc.accent.text.replace("text-", "")} />
                                     <div className={`absolute top-0 left-0 bottom-0 w-[2px] ${svc.accent.top} opacity-50`} />

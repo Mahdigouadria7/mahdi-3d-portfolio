@@ -112,9 +112,9 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                     <div className="flex flex-col md:flex-row items-stretch justify-center gap-8 md:gap-12">
                         {/* Challenge Card */}
                         <ScrollReveal direction="left" delay={0.1} className="w-full md:w-1/2 relative z-20">
-                            <div className="w-full h-full bg-white/[0.03] backdrop-blur-3xl border border-white/10 rounded-sm p-8 md:p-12 shadow-xl card-glitch group transition-all duration-700 hover:z-50 hover:bg-white/[0.08] hover:border-fuchsia-500/50 hover:-translate-y-2 hover:shadow-[0_0_40px_rgba(217,70,239,0.3)]">
+                            <div className="w-full h-full bg-black/60 backdrop-blur-xl border border-white/15 rounded-2xl p-8 md:p-12 shadow-xl group transition-all duration-500 hover:z-50 hover:border-fuchsia-400/70 hover:-translate-y-2 hover:scale-[1.01] hover:shadow-[0_15px_35px_rgba(217,70,239,0.25)]">
                                 <div className="flex items-center gap-4 mb-8">
-                                    <span className="font-cyber text-fuchsia-400 text-xs tracking-widest">01</span>
+                                    <span className="font-cyber text-fuchsia-400 text-xs tracking-widest font-bold border border-fuchsia-500/30 bg-fuchsia-500/10 px-2 py-0.5 rounded">01</span>
                                     <h3 className="font-tech text-2xl md:text-3xl text-white font-bold uppercase tracking-widest">The Challenge</h3>
                                 </div>
                                 <p className="font-cyber text-white/70 text-lg md:text-xl leading-relaxed font-light">
@@ -125,9 +125,9 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                         
                         {/* Solution Card */}
                         <ScrollReveal direction="right" delay={0.3} className="w-full md:w-1/2 relative z-30">
-                            <div className="w-full h-full bg-white/[0.03] backdrop-blur-3xl border border-white/10 rounded-sm p-8 md:p-12 shadow-xl card-glitch group transition-all duration-700 hover:z-50 hover:bg-white/[0.08] hover:border-fuchsia-500/50 hover:-translate-y-2 hover:shadow-[0_0_40px_rgba(217,70,239,0.3)]">
+                            <div className="w-full h-full bg-black/60 backdrop-blur-xl border border-white/15 rounded-2xl p-8 md:p-12 shadow-xl group transition-all duration-500 hover:z-50 hover:border-fuchsia-400/70 hover:-translate-y-2 hover:scale-[1.01] hover:shadow-[0_15px_35px_rgba(217,70,239,0.25)]">
                                 <div className="flex items-center gap-4 mb-8">
-                                    <span className="font-cyber text-fuchsia-400 text-xs tracking-widest">02</span>
+                                    <span className="font-cyber text-fuchsia-400 text-xs tracking-widest font-bold border border-fuchsia-500/30 bg-fuchsia-500/10 px-2 py-0.5 rounded">02</span>
                                     <h3 className="font-tech text-2xl md:text-3xl text-white font-bold uppercase tracking-widest">The Solution</h3>
                                 </div>
                                 <p className="font-cyber text-white/70 text-lg md:text-xl leading-relaxed font-light">
