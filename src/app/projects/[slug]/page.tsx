@@ -355,13 +355,25 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                 </div>
                             </ScrollReveal>
 
-                            <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
-                                <ScrollReveal direction="left" delay={0.1} className="w-full aspect-[9/16] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden group relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)] transition-all">
+                            <div className="grid md:grid-cols-4 gap-6">
+                                <ScrollReveal direction="up" delay={0.1} className="w-full aspect-[9/16] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden group relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)] transition-all">
                                     <LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_800/v1784899943/portfolio/redbull/viewport_darkgold.webp" alt="Viewport Wireframe" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
+
                                 </ScrollReveal>
 
-                                <ScrollReveal direction="right" delay={0.2} className="w-full aspect-[9/16] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden group relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)] transition-all">
+                                <ScrollReveal direction="up" delay={0.2} className="w-full aspect-[9/16] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden group relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)] transition-all">
+                                    <LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/v1784899948/portfolio/redbull/teasing_redbull.gif" alt="Teaser Motion GIF" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
+
+                                </ScrollReveal>
+
+                                <ScrollReveal direction="up" delay={0.3} className="w-full aspect-[9/16] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden group relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)] transition-all">
                                     <LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_800/portfolio/redbull/redbull_environmet_xt.webp" alt="Geometry Test 1" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
+
+                                </ScrollReveal>
+
+                                <ScrollReveal direction="up" delay={0.4} className="w-full aspect-[9/16] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden group relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)] transition-all">
+                                    <LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_800/portfolio/redbull/redbull_environmetsss.webp" alt="Displacement Test 2" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
+
                                 </ScrollReveal>
                             </div>
                         </div>
@@ -381,7 +393,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                 </div>
                             </ScrollReveal>
 
-                            <div className="grid md:grid-cols-3 gap-8">
+                            <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
                                 {/* DarkGold Redbull.mp4 */}
                                 <ScrollReveal direction="up" delay={0.1} className="w-full aspect-[9/16] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)] transition-all">
                                     <LazyVideo 
@@ -400,14 +412,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
                                 </ScrollReveal>
 
-                                {/* Redbull 3Slides.mp4 */}
-                                <ScrollReveal direction="up" delay={0.3} className="w-full aspect-[9/16] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)] transition-all">
-                                    <LazyVideo 
-                                        src="https://res.cloudinary.com/zu63qo7h/video/upload/f_auto,q_auto,w_720/v1784900161/portfolio/redbull/redbull_3slides.mp4" 
-                                        className="w-full h-full object-cover" 
-                                    />
 
-                                </ScrollReveal>
                             </div>
                         </div>
                     </div>
