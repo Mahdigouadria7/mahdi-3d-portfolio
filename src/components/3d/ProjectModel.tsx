@@ -75,6 +75,65 @@ export function BallModel({ onPointerDown, onPointerUp, onPointerOut, onClick }:
     );
 }
 
+interface RedBullGoldCanModelProps extends Omit<PlaceholderShapeProps, 'index'> {
+    scale?: number;
+}
+
+// Component to display loaded 3D Red Bull Gold Concept model with native GLTF materials
+export function RedBullGoldCanModel({ scale = 1.75, onPointerDown, onPointerUp, onPointerOut, onClick }: RedBullGoldCanModelProps) {
+    const { scene } = useGLTF('/models/Redbull Concept/3d Model/3d/redbull 3d model.glb');
+
+    // Clone scene so remounts don't corrupt shared state
+    const clonedScene = useMemo(() => scene.clone(), [scene]);
+
+    useEffect(() => {
+        if (clonedScene) {
+            clonedScene.traverse((child: any) => {
+                if (child.isMesh) {
+                    child.castShadow = true;
+                    child.receiveShadow = true;
+                    if (child.material) {
+                        const prepareMat = (mat: any) => {
+                            if (mat) {
+                                mat.envMapIntensity = 2.5;
+                                mat.depthWrite = true;
+                                const name = (mat.name || "").toLowerCase().trim();
+                                if (name.includes('label')) {
+                                    mat.roughness = 0.2;
+                                }
+                                mat.needsUpdate = true;
+                            }
+                        };
+                        if (Array.isArray(child.material)) {
+                            child.material.forEach(prepareMat);
+                        } else {
+                            prepareMat(child.material);
+                        }
+                    }
+                }
+            });
+        }
+    }, [clonedScene]);
+
+    return (
+        <Center>
+            <pointLight position={[3, 3, 3]} intensity={2.5} color="#ffd700" />
+            <pointLight position={[-3, -2, 2]} intensity={1.5} color="#ffffff" />
+            <primitive
+                object={clonedScene}
+                scale={scale}
+                onClick={(e: any) => {
+                    e.stopPropagation();
+                    if (onClick) onClick(e);
+                }}
+                onPointerDown={(e: any) => { if (onPointerDown) onPointerDown(e); }}
+                onPointerUp={(e: any) => { if (onPointerUp) onPointerUp(e); }}
+                onPointerOut={(e: any) => { if (onPointerOut) onPointerOut(e); }}
+            />
+        </Center>
+    );
+}
+
 export function PlaceholderShape({ index, onPointerDown, onPointerUp, onPointerOut, onClick }: PlaceholderShapeProps) {
     const meshRef = useRef<THREE.Mesh>(null);
 
@@ -191,6 +250,12 @@ export default function ProjectModel({ index }: { index: number }) {
                         <Float speed={isDragging ? 0 : 2} rotationIntensity={0.5} floatIntensity={0.5}>
                             {index === 0 ? (
                                 <BallModel
+                                    onPointerDown={() => setIsDragging(true)}
+                                    onPointerUp={() => setIsDragging(false)}
+                                    onPointerOut={() => setIsDragging(false)}
+                                />
+                            ) : index === 1 ? (
+                                <RedBullGoldCanModel
                                     onPointerDown={() => setIsDragging(true)}
                                     onPointerUp={() => setIsDragging(false)}
                                     onPointerOut={() => setIsDragging(false)}

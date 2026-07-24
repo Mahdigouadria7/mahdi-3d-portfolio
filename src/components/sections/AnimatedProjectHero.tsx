@@ -9,7 +9,7 @@ if (typeof window !== "undefined") {
 }
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Environment, PresentationControls } from "@react-three/drei";
-import { BallModel, PlaceholderShape } from "@/components/3d/ProjectModel";
+import { BallModel, RedBullGoldCanModel, PlaceholderShape } from "@/components/3d/ProjectModel";
 import * as THREE from "three";
 import { Project } from "@/data/projects";
 
@@ -499,6 +499,8 @@ function SceneAnimator({ index, onScoreChange, onScoreReset, resetTrigger, start
                         <group ref={spinRef}>
                             {index === 0 ? (
                                 <BallModel onClick={handleBallClick} />
+                            ) : index === 1 ? (
+                                <RedBullGoldCanModel onClick={handleBallClick} />
                             ) : (
                                 <PlaceholderShape index={index} onClick={handleBallClick} />
                             )}
@@ -701,7 +703,7 @@ export default function AnimatedProjectHero({ project, index }: { project: Proje
 
             {/* Background ambient glow */}
             <div className="absolute inset-0 flex items-center justify-center opacity-30 pointer-events-none z-0">
-                <div className="w-[80vw] h-[80vw] md:w-[40vw] md:h-[40vw] rounded-full bg-fuchsia-500/10 blur-[150px]"></div>
+                <div className={`w-[80vw] h-[80vw] md:w-[40vw] md:h-[40vw] rounded-full blur-[150px] ${index === 1 ? 'bg-amber-500/20' : 'bg-fuchsia-500/10'}`}></div>
             </div>
 
             {/* Intro Sequence Background */}
@@ -730,7 +732,7 @@ export default function AnimatedProjectHero({ project, index }: { project: Proje
                 <div className="w-full md:w-1/3 flex flex-col justify-start md:justify-center h-auto md:h-full relative z-10 opacity-0 min-h-[30vh] md:min-h-0" ref={textRef}>
                     {/* Title block */}
                     <div className="mt-32 md:mt-0">
-                        <span className="font-cyber text-fuchsia-400 font-bold tracking-[0.5em] text-xs md:text-sm uppercase mb-3 block" style={{ textShadow: "0 2px 10px rgba(0,0,0,0.8)" }}>
+                        <span className={`font-cyber font-bold tracking-[0.5em] text-xs md:text-sm uppercase mb-3 block ${index === 1 ? 'text-amber-400' : 'text-fuchsia-400'}`} style={{ textShadow: "0 2px 10px rgba(0,0,0,0.8)" }}>
                             {project.category}
                         </span>
                         <h1 className="font-tech text-4xl sm:text-5xl md:text-7xl lg:text-[100px] font-black uppercase leading-[0.9] tracking-tight text-white mb-4 max-w-xl" style={{ textShadow: "0 4px 30px rgba(0,0,0,0.8), 0 0 10px rgba(0,0,0,0.5)" }}>

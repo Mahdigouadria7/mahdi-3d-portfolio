@@ -389,7 +389,7 @@ export default function ProjectsSection() {
                                                 style={{ viewTransitionName: `project-model-${project.slug}` }}
                                                 className={`absolute inset-0 z-10 ${isSelected ? 'opacity-100' : 'opacity-60 transition-opacity duration-500 group-hover:opacity-95'}`}
                                             >
-                                                {project.slug === "trionda-ball-wc-2026" && (
+                                                {(project.slug === "trionda-ball-wc-2026" || project.slug === "redbull-gold-concept") && (
                                                     <ProjectModel index={i} />
                                                 )}
                                             </div>
