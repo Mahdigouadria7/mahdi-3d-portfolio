@@ -10,6 +10,11 @@
   --font-mono: var(--font-geist-mono);
 }
 
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
 :root {
   --background: #0a0514;
   --foreground: #f8f8ff;

@@ -8,6 +8,7 @@ import PreviousProjectButton from "@/components/ui/PreviousProjectButton";
 import NextProjectButton from "@/components/ui/NextProjectButton";
 import LightboxImage from "@/components/ui/LightboxImage";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import LazyVideo from "@/components/ui/LazyVideo";
 
 // Next.js 15+ requires params to be treated as a Promise
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
@@ -179,12 +180,8 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
                                 {/* Hero Vertical 9:16 Portrait Video */}
                                 <ScrollReveal direction="left" delay={0.1} className="w-full sm:w-[320px] md:w-[35%] aspect-[9/16] max-h-[620px] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden group relative shadow-2xl hover:z-50 transition-all duration-500 hover:border-amber-400/60 hover:shadow-[0_0_50px_rgba(245,158,11,0.3)] order-1 md:order-2 flex items-center justify-center mx-auto">
-                                    <video 
-                                        src="https://res.cloudinary.com/zu63qo7h/video/upload/v1784899265/portfolio/redbull/darkgold_render_video.mp4" 
-                                        autoPlay 
-                                        loop 
-                                        muted 
-                                        playsInline 
+                                    <LazyVideo 
+                                        src="https://res.cloudinary.com/zu63qo7h/video/upload/f_auto,q_auto,w_720/v1784899265/portfolio/redbull/darkgold_render_video.mp4" 
                                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" 
                                     />
                                     <div className="absolute top-4 left-4 flex gap-2 items-center bg-black/70 backdrop-blur-md border border-amber-500/40 px-3 py-1 rounded-full z-10">
@@ -212,7 +209,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
                             <ScrollReveal direction="up" delay={0.2} className="w-full aspect-[4966/2094] max-h-[380px] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden group relative shadow-2xl transition-all duration-500 hover:border-amber-400/60 hover:shadow-[0_0_50px_rgba(245,158,11,0.25)]">
                                 <LightboxImage 
-                                    src="/models/Redbull Concept/Project Content/RedBull Finals/ticket2.png" 
+                                    src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_1000/v1784899273/portfolio/redbull/ticket2.png" 
                                     alt="VIP Launch Event Pass" 
                                     className="w-full h-full object-contain bg-black group-hover:scale-[1.02] transition-transform duration-700" 
                                 />
@@ -238,12 +235,8 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                             </ScrollReveal>
 
                             <ScrollReveal direction="up" delay={0.2} className="w-full aspect-video bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_50px_rgba(245,158,11,0.3)] transition-all">
-                                <video 
-                                    src="/models/Redbull Concept/Project Content/RedBull Finals/Redbull smoke.mp4" 
-                                    autoPlay 
-                                    loop 
-                                    muted 
-                                    playsInline 
+                                <LazyVideo 
+                                    src="https://res.cloudinary.com/zu63qo7h/video/upload/f_auto,q_auto,w_720/v1784899377/portfolio/redbull/redbull_smoke.mp4" 
                                     className="w-full h-full object-cover" 
                                 />
                                 <div className="absolute top-6 left-6 flex gap-3 items-center bg-black/70 backdrop-blur-md border border-amber-500/40 px-4 py-2 rounded-full">
@@ -271,7 +264,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                             <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
                                 <ScrollReveal direction="left" delay={0.1} className="w-full aspect-square bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden group relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.25)] transition-all">
                                     <LightboxImage 
-                                        src="/models/Redbull Concept/Project Content/RedBull Finals/Liwa Redbull 2 .png" 
+                                        src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_1000/v1784899905/portfolio/redbull/liwa_redbull_2.webp" 
                                         alt="Liwa Desert Staging 1" 
                                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" 
                                     />
@@ -282,7 +275,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
                                 <ScrollReveal direction="right" delay={0.3} className="w-full aspect-square bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden group relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.25)] transition-all">
                                     <LightboxImage 
-                                        src="/models/Redbull Concept/Project Content/RedBull Finals/Liwa Redbull 3 .png" 
+                                        src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_1000/v1784899907/portfolio/redbull/liwa_redbull_3.webp" 
                                         alt="Liwa Desert Staging 2" 
                                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" 
                                     />
@@ -310,21 +303,21 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
                             <div className="grid md:grid-cols-3 gap-8">
                                 <ScrollReveal direction="up" delay={0.1} className="w-full aspect-[9/16] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden group relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)] transition-all">
-                                    <LightboxImage src="/models/Redbull Concept/Project Content/RedBull Finals/Redbull Gold darker.png" alt="Deep Gold Specular Pass" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
+                                    <LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_800/v1784899913/portfolio/redbull/redbull_gold_darker.webp" alt="Deep Gold Specular Pass" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
                                     <div className="absolute bottom-4 left-4 bg-black/70 backdrop-blur-md rounded-full px-3 py-1 border border-amber-500/30 pointer-events-none">
                                         <span className="font-cyber text-[10px] text-amber-300 uppercase tracking-widest font-bold">9:16 // DEEP GOLD SPECULAR</span>
                                     </div>
                                 </ScrollReveal>
 
                                 <ScrollReveal direction="up" delay={0.2} className="w-full aspect-[9/16] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden group relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)] transition-all">
-                                    <LightboxImage src="/models/Redbull Concept/Project Content/RedBull Finals/Redbull Gold 2.png" alt="Micro-Embossed Relief" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
+                                    <LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_800/v1784899924/portfolio/redbull/redbull_gold_2.webp" alt="Micro-Embossed Relief" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
                                     <div className="absolute bottom-4 left-4 bg-black/70 backdrop-blur-md rounded-full px-3 py-1 border border-amber-500/30 pointer-events-none">
                                         <span className="font-cyber text-[10px] text-amber-300 uppercase tracking-widest font-bold">9:16 // EMBOSSED RELIEF</span>
                                     </div>
                                 </ScrollReveal>
 
                                 <ScrollReveal direction="up" delay={0.3} className="w-full aspect-[9/16] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden group relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)] transition-all">
-                                    <LightboxImage src="/models/Redbull Concept/Project Content/RedBull Finals/Redbullr.png" alt="Gold Master Render" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
+                                    <LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_800/v1784899929/portfolio/redbull/redbullr.webp" alt="Gold Master Render" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
                                     <div className="absolute bottom-4 left-4 bg-black/70 backdrop-blur-md rounded-full px-3 py-1 border border-amber-500/30 pointer-events-none">
                                         <span className="font-cyber text-[10px] text-amber-300 uppercase tracking-widest font-bold">9:16 // GOLD MASTER RENDER</span>
                                     </div>
@@ -349,21 +342,21 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
                             <div className="grid md:grid-cols-3 gap-8">
                                 <ScrollReveal direction="up" delay={0.1} className="w-full aspect-[9/16] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden group relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)] transition-all">
-                                    <LightboxImage src="/models/Redbull Concept/Project Content/RedBull Finals/Redbull Environmet XT.png" alt="Studio High Key" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
+                                    <LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_800/v1784899935/portfolio/redbull/redbull_environmet_xt.webp" alt="Studio High Key" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
                                     <div className="absolute bottom-4 left-4 bg-black/70 backdrop-blur-md rounded-full px-3 py-1 border border-amber-500/30 pointer-events-none">
                                         <span className="font-cyber text-[10px] text-amber-300 uppercase tracking-widest font-bold">9:16 // HIGH-KEY LIGHTING</span>
                                     </div>
                                 </ScrollReveal>
 
                                 <ScrollReveal direction="up" delay={0.2} className="w-full aspect-[9/16] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden group relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)] transition-all">
-                                    <LightboxImage src="/models/Redbull Concept/Project Content/RedBull Finals/Redbull Environme,t.png" alt="Studio Mid Pass" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
+                                    <LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_800/v1784899938/portfolio/redbull/redbull_environmet.webp" alt="Studio Mid Pass" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
                                     <div className="absolute bottom-4 left-4 bg-black/70 backdrop-blur-md rounded-full px-3 py-1 border border-amber-500/30 pointer-events-none">
                                         <span className="font-cyber text-[10px] text-amber-300 uppercase tracking-widest font-bold">9:16 // MID-PASS REFLECTIONS</span>
                                     </div>
                                 </ScrollReveal>
 
                                 <ScrollReveal direction="up" delay={0.3} className="w-full aspect-[9/16] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden group relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)] transition-all">
-                                    <LightboxImage src="/models/Redbull Concept/Project Content/RedBull Finals/Redbull Environmetsss.png" alt="Studio Subsurface Pass" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
+                                    <LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_800/v1784899941/portfolio/redbull/redbull_environmetsss.webp" alt="Studio Subsurface Pass" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
                                     <div className="absolute bottom-4 left-4 bg-black/70 backdrop-blur-md rounded-full px-3 py-1 border border-amber-500/30 pointer-events-none">
                                         <span className="font-cyber text-[10px] text-amber-300 uppercase tracking-widest font-bold">9:16 // SUBSURFACE VOLUME</span>
                                     </div>
@@ -388,28 +381,28 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
                             <div className="grid md:grid-cols-4 gap-6">
                                 <ScrollReveal direction="up" delay={0.1} className="w-full aspect-[9/16] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden group relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)] transition-all">
-                                    <LightboxImage src="/models/Redbull Concept/Project Content/RedBull Finals/ViewportDarkGold-Redbull.gif" alt="Viewport Wireframe" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
+                                    <LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_800/v1784899943/portfolio/redbull/viewport_darkgold.webp" alt="Viewport Wireframe" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
                                     <div className="absolute bottom-3 left-3 bg-black/70 backdrop-blur-md rounded-full px-2.5 py-1 border border-amber-500/30 pointer-events-none">
                                         <span className="font-cyber text-[9px] text-amber-300 uppercase tracking-widest font-bold">VIEWPORT WIREFRAME</span>
                                     </div>
                                 </ScrollReveal>
 
                                 <ScrollReveal direction="up" delay={0.2} className="w-full aspect-[9/16] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden group relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)] transition-all">
-                                    <LightboxImage src="/models/Redbull Concept/Project Content/RedBull Finals/Teasing-Redbull.gif" alt="Teaser Motion GIF" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
+                                    <LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_800/v1784899948/portfolio/redbull/teasing_redbull.gif" alt="Teaser Motion GIF" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
                                     <div className="absolute bottom-3 left-3 bg-black/70 backdrop-blur-md rounded-full px-2.5 py-1 border border-amber-500/30 pointer-events-none">
                                         <span className="font-cyber text-[9px] text-amber-300 uppercase tracking-widest font-bold">TEASER MOTION GIF</span>
                                     </div>
                                 </ScrollReveal>
 
                                 <ScrollReveal direction="up" delay={0.3} className="w-full aspect-[9/16] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden group relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)] transition-all">
-                                    <LightboxImage src="/models/Redbull Concept/Project Content/RedBull Finals/first try redbull 1111.png" alt="Geometry Test 1" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
+                                    <LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_800/portfolio/redbull/redbull_environmet_xt" alt="Geometry Test 1" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
                                     <div className="absolute bottom-3 left-3 bg-black/70 backdrop-blur-md rounded-full px-2.5 py-1 border border-amber-500/30 pointer-events-none">
                                         <span className="font-cyber text-[9px] text-amber-300 uppercase tracking-widest font-bold">GEOMETRY TEST #1</span>
                                     </div>
                                 </ScrollReveal>
 
                                 <ScrollReveal direction="up" delay={0.4} className="w-full aspect-[9/16] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden group relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)] transition-all">
-                                    <LightboxImage src="/models/Redbull Concept/Project Content/RedBull Finals/first try redbull qezse3.png" alt="Displacement Test 2" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
+                                    <LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_800/portfolio/redbull/redbull_environmetsss" alt="Displacement Test 2" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
                                     <div className="absolute bottom-3 left-3 bg-black/70 backdrop-blur-md rounded-full px-2.5 py-1 border border-amber-500/30 pointer-events-none">
                                         <span className="font-cyber text-[9px] text-amber-300 uppercase tracking-widest font-bold">DISPLACEMENT TEST #2</span>
                                     </div>
@@ -435,12 +428,8 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                             <div className="grid md:grid-cols-3 gap-8">
                                 {/* DarkGold Redbull.mp4 */}
                                 <ScrollReveal direction="up" delay={0.1} className="w-full aspect-[9/16] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)] transition-all">
-                                    <video 
-                                        src="/models/Redbull Concept/Project Content/RedBull Finals/DarkGold Redbull.mp4" 
-                                        autoPlay 
-                                        loop 
-                                        muted 
-                                        playsInline 
+                                    <LazyVideo 
+                                        src="https://res.cloudinary.com/zu63qo7h/video/upload/f_auto,q_auto,w_720/v1784900036/portfolio/redbull/darkgold_redbull.mp4" 
                                         className="w-full h-full object-cover" 
                                     />
                                     <div className="absolute top-4 left-4 flex gap-2 items-center bg-black/70 backdrop-blur-md border border-amber-500/40 px-3 py-1 rounded-full">
@@ -451,12 +440,8 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
                                 {/* Loop Linkedin.mp4 */}
                                 <ScrollReveal direction="up" delay={0.2} className="w-full aspect-[9/16] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)] transition-all">
-                                    <video 
-                                        src="/models/Redbull Concept/Project Content/RedBull Finals/Loop Linkedin.mp4" 
-                                        autoPlay 
-                                        loop 
-                                        muted 
-                                        playsInline 
+                                    <LazyVideo 
+                                        src="https://res.cloudinary.com/zu63qo7h/video/upload/f_auto,q_auto,w_720/v1784900082/portfolio/redbull/loop_linkedin.mp4" 
                                         className="w-full h-full object-cover" 
                                     />
                                     <div className="absolute top-4 left-4 flex gap-2 items-center bg-black/70 backdrop-blur-md border border-amber-500/40 px-3 py-1 rounded-full">
@@ -467,12 +452,8 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
                                 {/* Redbull 3Slides.mp4 */}
                                 <ScrollReveal direction="up" delay={0.3} className="w-full aspect-[9/16] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)] transition-all">
-                                    <video 
-                                        src="/models/Redbull Concept/Project Content/RedBull Finals/Redbull 3Slides.mp4" 
-                                        autoPlay 
-                                        loop 
-                                        muted 
-                                        playsInline 
+                                    <LazyVideo 
+                                        src="https://res.cloudinary.com/zu63qo7h/video/upload/f_auto,q_auto,w_720/v1784900161/portfolio/redbull/redbull_3slides.mp4" 
                                         className="w-full h-full object-cover" 
                                     />
                                     <div className="absolute top-4 left-4 flex gap-2 items-center bg-black/70 backdrop-blur-md border border-amber-500/40 px-3 py-1 rounded-full">
@@ -516,7 +497,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
                                 {/* Bleeding Image */}
                                 <ScrollReveal direction="left" delay={0.1} className="w-full md:w-[55%] aspect-[16/9] bg-[#0a0510] border border-white/10 rounded-sm overflow-hidden group relative shadow-2xl hover:z-50 transition-all duration-500 hover:shadow-[0_0_40px_rgba(217,70,239,0.2)] order-1 md:order-2">
-                                    <LightboxImage src="/models/Trionda Ball Project/render 3D Ballenhanced.webp" alt="Trionda Concept" className="w-full h-full object-contain md:object-cover group-hover:scale-105 transition-transform duration-1000" />
+                                    <LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_1000/portfolio/trionda/render_ball_enhanced" alt="Trionda Concept" className="w-full h-full object-contain md:object-cover group-hover:scale-105 transition-transform duration-1000" />
                                     <div className="absolute inset-0 border border-white/20 rounded-sm scale-[0.95] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
                                 </ScrollReveal>
                             </div>
@@ -525,7 +506,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                         {/* 2. Fluid Dynamics Video - Clean Layout */}
                         <div className="relative z-10 py-16 flex flex-col md:flex-row items-center gap-12">
                             <ScrollReveal direction="left" delay={0.1} className="w-full md:w-[60%] aspect-video bg-[#0a0510] border border-white/10 rounded-sm overflow-hidden relative shadow-2xl hover:shadow-[0_0_40px_rgba(217,70,239,0.2)] transition-shadow duration-700">
-                                <video src="/models/Trionda Ball Project/Transition2.mp4" autoPlay loop muted playsInline className="w-full h-full object-cover" />
+                                <LazyVideo src="https://res.cloudinary.com/zu63qo7h/video/upload/f_auto,q_auto,w_720/portfolio/trionda/transition2" className="w-full h-full object-cover" />
                                 
                                 {/* HUD Element */}
                                 <div className="absolute top-6 left-6 flex gap-3 items-center">
@@ -563,7 +544,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                 {/* Image 1 - Lower */}
                                 <ScrollReveal direction="up" delay={0.1} className="w-full md:w-[45%] md:mt-16 relative group transition-all duration-500 hover:z-50 hover:shadow-[0_0_40px_rgba(217,70,239,0.2)] rounded-sm">
                                     <div className="aspect-[4/3] bg-[#0a0510] border border-white/10 overflow-hidden shadow-2xl rounded-sm">
-                                        <LightboxImage src="/models/Trionda Ball Project/Viewport vs render 3D Ball.webp" alt="Viewport vs Render" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 grayscale hover:grayscale-0" />
+                                        <LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_1000/portfolio/trionda/viewport_vs_render" alt="Viewport vs Render" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 grayscale hover:grayscale-0" />
                                     </div>
                                     <div className="absolute -bottom-6 -right-4 bg-white/[0.03] backdrop-blur-3xl border border-white/10 rounded-full px-6 py-3 shadow-xl z-10 pointer-events-none group-hover:border-fuchsia-500/50 transition-colors">
                                         <span className="font-cyber text-xs md:text-sm tracking-widest text-white/80 uppercase">Viewport / Render</span>
@@ -573,7 +554,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                 {/* Image 2 - Higher */}
                                 <ScrollReveal direction="up" delay={0.3} className="w-full md:w-[45%] md:-mt-8 relative group transition-all duration-500 hover:z-50 hover:shadow-[0_0_40px_rgba(217,70,239,0.2)] rounded-sm">
                                     <div className="aspect-[4/3] bg-[#0a0510] border border-white/10 overflow-hidden shadow-2xl rounded-sm">
-                                        <LightboxImage src="/models/Trionda Ball Project/Viewport  3D Ball.webp" alt="Viewport Geometry" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 grayscale hover:grayscale-0" />
+                                        <LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_1000/portfolio/trionda/viewport_ball" alt="Viewport Geometry" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 grayscale hover:grayscale-0" />
                                     </div>
                                     <div className="absolute -bottom-6 -left-4 bg-white/[0.03] backdrop-blur-3xl border border-white/10 rounded-full px-6 py-3 shadow-xl z-10 pointer-events-none group-hover:border-fuchsia-500/50 transition-colors">
                                         <span className="font-cyber text-xs md:text-sm tracking-widest text-white/80 uppercase">Raw Geometry</span>
@@ -585,13 +566,13 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                         {/* 4. High-Res Renders Cascade */}
                         <div className="relative z-10 py-16 flex flex-col md:flex-row justify-center items-center md:items-start gap-8 md:gap-0">
                             <ScrollReveal direction="up" delay={0.1} className="w-full md:w-1/3 aspect-[4/5] bg-[#0a0510] border border-white/10 rounded-sm overflow-hidden group relative z-10 shadow-2xl hover:z-50 transition-all duration-500 hover:shadow-[0_0_40px_rgba(217,70,239,0.2)] hover:-translate-y-2">
-                                <LightboxImage src="/models/Trionda Ball Project/render 3D Ball.webp" alt="Render 1" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
+                                <LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_1000/portfolio/trionda/render_ball" alt="Render 1" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
                             </ScrollReveal>
                             <ScrollReveal direction="up" delay={0.2} className="w-full md:w-1/3 aspect-[4/5] bg-[#0a0510] border border-white/10 rounded-sm overflow-hidden group md:mt-8 md:-ml-8 relative z-20 shadow-[0_30px_60px_rgba(0,0,0,0.8)] hover:z-50 transition-all duration-500 hover:shadow-[0_0_40px_rgba(217,70,239,0.3)] hover:-translate-y-2">
-                                <LightboxImage src="/models/Trionda Ball Project/render 3D Ball 2.webp" alt="Render 2" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
+                                <LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_1000/portfolio/trionda/render_ball_2" alt="Render 2" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
                             </ScrollReveal>
                             <ScrollReveal direction="up" delay={0.3} className="w-full md:w-1/3 aspect-[4/5] bg-[#0a0510] border border-white/10 rounded-sm overflow-hidden group md:mt-16 md:-ml-8 relative z-30 shadow-[0_30px_60px_rgba(0,0,0,0.8)] hover:z-50 transition-all duration-500 hover:shadow-[0_0_40px_rgba(217,70,239,0.4)] hover:-translate-y-2">
-                                <LightboxImage src="/models/Trionda Ball Project/render 3D Ball3 .webp" alt="Render 3" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
+                                <LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_1000/portfolio/trionda/render_ball_3" alt="Render 3" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
                             </ScrollReveal>
                         </div>
 
@@ -611,13 +592,13 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                             </ScrollReveal>
                             <div className="flex flex-col md:flex-row items-center justify-center gap-12">
                                 <ScrollReveal direction="up" delay={0.1} className="w-full md:w-[50%] aspect-[16/9] bg-[#0a0510] border border-white/10 rounded-sm overflow-hidden group relative shadow-2xl hover:z-50 transition-all duration-500 hover:shadow-[0_0_40px_rgba(217,70,239,0.2)]">
-                                    <LightboxImage src="/models/Trionda Ball Project/Staduim Mockup.webp" alt="Stadium Mockup" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
+                                    <LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_1000/portfolio/trionda/stadium_mockup" alt="Stadium Mockup" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
                                     <div className="absolute top-4 left-4 bg-white/[0.03] backdrop-blur-3xl rounded-full px-4 py-2 border border-white/10 pointer-events-none group-hover:border-fuchsia-500/50 transition-colors">
                                         <span className="font-cyber text-[10px] md:text-xs text-white/50 uppercase tracking-widest">ENV // Stadium_01</span>
                                     </div>
                                 </ScrollReveal>
                                 <ScrollReveal direction="up" delay={0.3} className="w-full md:w-[40%] aspect-[4/3] bg-[#0a0510] border border-white/10 rounded-sm overflow-hidden group relative z-20 shadow-2xl hover:z-50 transition-all duration-500 hover:shadow-[0_0_40px_rgba(217,70,239,0.3)]">
-                                    <LightboxImage src="/models/Trionda Ball Project/Street Billboard_1.webp" alt="Street Billboard" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
+                                    <LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_1000/portfolio/trionda/street_billboard" alt="Street Billboard" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
                                     <div className="absolute bottom-4 right-4 bg-white/[0.03] backdrop-blur-3xl rounded-full px-4 py-2 border border-white/10 pointer-events-none group-hover:border-fuchsia-500/50 transition-colors">
                                         <span className="font-cyber text-[10px] md:text-xs text-white/50 uppercase tracking-widest">ENV // Billboard_Urban</span>
                                     </div>
@@ -643,7 +624,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                             <div className="flex flex-col md:flex-row justify-center items-center gap-16 md:gap-24">
                                 <ScrollReveal direction="up" delay={0.1} className="w-full md:w-[40%] relative">
                                     <div className="aspect-[9/16] bg-[#0a0510] border border-white/10 overflow-hidden shadow-[0_0_50px_rgba(217,70,239,0.15)] rounded-sm hover:shadow-[0_0_50px_rgba(217,70,239,0.3)] transition-shadow duration-500">
-                                        <video src="/models/Trionda Ball Project/balls Rolling.mp4" autoPlay loop muted playsInline className="w-full h-full object-cover" />
+                                        <LazyVideo src="https://res.cloudinary.com/zu63qo7h/video/upload/f_auto,q_auto,w_720/portfolio/trionda/balls_rolling" className="w-full h-full object-cover" />
                                     </div>
                                     <div className="absolute -left-4 md:-left-8 top-8 bg-white/[0.03] backdrop-blur-3xl border border-white/10 rounded-full px-6 py-4 shadow-2xl z-20 hover:border-fuchsia-500/50 transition-colors">
                                         <span className="font-cyber text-xs md:text-sm tracking-widest text-white/80 uppercase">Sim: Rolling</span>
@@ -652,7 +633,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                 
                                 <ScrollReveal direction="up" delay={0.3} className="w-full md:w-[35%] mt-8 md:mt-32 relative">
                                     <div className="aspect-[9/16] bg-[#0a0510] border border-white/10 overflow-hidden shadow-2xl rounded-sm hover:shadow-[0_0_50px_rgba(217,70,239,0.3)] transition-shadow duration-500">
-                                        <video src="/models/Trionda Ball Project/ball Tunisia.mp4" autoPlay loop muted playsInline className="w-full h-full object-cover" />
+                                        <LazyVideo src="https://res.cloudinary.com/zu63qo7h/video/upload/f_auto,q_auto,w_720/portfolio/trionda/ball_tunisia" className="w-full h-full object-cover" />
                                     </div>
                                     <div className="absolute -right-4 md:-right-8 bottom-8 bg-white/[0.03] backdrop-blur-3xl border border-white/10 rounded-full px-6 py-4 shadow-2xl z-20 hover:border-fuchsia-500/50 transition-colors">
                                         <span className="font-cyber text-xs md:text-sm tracking-widest text-white/80 uppercase">Sim: Action</span>

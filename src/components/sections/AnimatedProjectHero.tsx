@@ -123,7 +123,7 @@ function IntroSequence({ onComplete }: { onComplete: () => void }) {
 
         for (let i = 0; i < frameCount; i++) {
             const img = new Image();
-            img.src = `/models/BallHittingnet/BallHitnet_${i.toString().padStart(5, '0')}.webp`;
+            img.src = `https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_1080/portfolio/ballhitnet/ballhitnet_${i.toString().padStart(5, '0')}`;
             img.onload = () => {
                 loaded++;
                 if (loaded > 5 && !isStartedRef.current) {

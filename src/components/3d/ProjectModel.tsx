@@ -15,7 +15,7 @@ interface PlaceholderShapeProps {
 
 // Component to load and display the custom Blender Ball model
 export function BallModel({ onPointerDown, onPointerUp, onPointerOut, onClick }: Omit<PlaceholderShapeProps, 'index'>) {
-    const { scene } = useGLTF('/models/WEB Design Trionda ball/World Cup Trionda Ball.glb?v=2');
+    const { scene } = useGLTF('https://res.cloudinary.com/zu63qo7h/raw/upload/portfolio/models/trionda_ball.glb');
 
     // Clone the scene so remounting (e.g. on reset) doesn't corrupt shared event handlers
     const clonedScene = useMemo(() => scene.clone(), [scene]);

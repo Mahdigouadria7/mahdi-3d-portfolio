@@ -16,7 +16,7 @@ if (typeof window !== "undefined") {
 const FRAME_COUNT = 240;
 
 const currentFrame = (index: number) =>
-  `/models/Man_with_glowing_eyes_frames/frame_${index.toString().padStart(5, '0')}.webp`;
+  `https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_1080/portfolio/hero_frames/frame_${index.toString().padStart(5, '0')}`;
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
