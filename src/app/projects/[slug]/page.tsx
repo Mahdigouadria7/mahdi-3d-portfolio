@@ -229,10 +229,10 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                 </div>
                             </ScrollReveal>
 
-                            <ScrollReveal direction="up" delay={0.2} className="w-full aspect-video bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_50px_rgba(245,158,11,0.3)] transition-all">
+                            <ScrollReveal direction="up" delay={0.2} className="w-full aspect-video bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_50px_rgba(245,158,11,0.3)] transition-all group">
                                 <LazyVideo 
                                     src="https://res.cloudinary.com/zu63qo7h/video/upload/f_auto,q_auto,w_720/v1784899377/portfolio/redbull/redbull_smoke.mp4" 
-                                    className="w-full h-full object-cover" 
+                                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" 
                                 />
 
                             </ScrollReveal>
@@ -395,19 +395,19 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
                             <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
                                 {/* DarkGold Redbull.mp4 */}
-                                <ScrollReveal direction="up" delay={0.1} className="w-full aspect-[9/16] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)] transition-all">
+                                <ScrollReveal direction="up" delay={0.1} className="w-full aspect-[9/16] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)] transition-all group">
                                     <LazyVideo 
                                         src="https://res.cloudinary.com/zu63qo7h/video/upload/f_auto,q_auto,w_720/v1784900036/portfolio/redbull/darkgold_redbull.mp4" 
-                                        className="w-full h-full object-cover" 
+                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" 
                                     />
 
                                 </ScrollReveal>
 
                                 {/* Loop Linkedin.mp4 */}
-                                <ScrollReveal direction="up" delay={0.2} className="w-full aspect-[9/16] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)] transition-all">
+                                <ScrollReveal direction="up" delay={0.2} className="w-full aspect-[9/16] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)] transition-all group">
                                     <LazyVideo 
                                         src="https://res.cloudinary.com/zu63qo7h/video/upload/f_auto,q_auto,w_720/v1784900082/portfolio/redbull/loop_linkedin.mp4" 
-                                        className="w-full h-full object-cover" 
+                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" 
                                     />
 
                                 </ScrollReveal>
@@ -457,8 +457,8 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
                         {/* 2. Fluid Dynamics Video - Clean Layout */}
                         <div className="relative z-10 py-16 flex flex-col md:flex-row items-center gap-12">
-                            <ScrollReveal direction="left" delay={0.1} className="w-full md:w-[60%] aspect-video bg-[#0a0510] border border-white/10 rounded-sm overflow-hidden relative shadow-2xl hover:shadow-[0_0_40px_rgba(217,70,239,0.2)] transition-shadow duration-700">
-                                <LazyVideo src="https://res.cloudinary.com/zu63qo7h/video/upload/f_auto,q_auto,w_720/portfolio/trionda/transition2" className="w-full h-full object-cover" />
+                            <ScrollReveal direction="left" delay={0.1} className="w-full md:w-[60%] aspect-video bg-[#0a0510] border border-white/10 rounded-sm overflow-hidden relative shadow-2xl hover:shadow-[0_0_40px_rgba(217,70,239,0.2)] transition-shadow duration-700 group">
+                                <LazyVideo src="https://res.cloudinary.com/zu63qo7h/video/upload/f_auto,q_auto,w_720/portfolio/trionda/transition2" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
                                 
 
                             </ScrollReveal>
@@ -563,15 +563,15 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                             
                             <div className="flex flex-col md:flex-row justify-center items-center gap-16 md:gap-24">
                                 <ScrollReveal direction="up" delay={0.1} className="w-full md:w-[40%] relative">
-                                    <div className="aspect-[9/16] bg-[#0a0510] border border-white/10 overflow-hidden shadow-[0_0_50px_rgba(217,70,239,0.15)] rounded-sm hover:shadow-[0_0_50px_rgba(217,70,239,0.3)] transition-shadow duration-500">
-                                        <LazyVideo src="https://res.cloudinary.com/zu63qo7h/video/upload/f_auto,q_auto,w_720/portfolio/trionda/balls_rolling" className="w-full h-full object-cover" />
+                                    <div className="aspect-[9/16] bg-[#0a0510] border border-white/10 overflow-hidden shadow-[0_0_50px_rgba(217,70,239,0.15)] rounded-sm hover:shadow-[0_0_50px_rgba(217,70,239,0.3)] transition-shadow duration-500 group">
+                                        <LazyVideo src="https://res.cloudinary.com/zu63qo7h/video/upload/f_auto,q_auto,w_720/portfolio/trionda/balls_rolling" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
                                     </div>
 
                                 </ScrollReveal>
                                 
                                 <ScrollReveal direction="up" delay={0.3} className="w-full md:w-[35%] mt-8 md:mt-32 relative">
-                                    <div className="aspect-[9/16] bg-[#0a0510] border border-white/10 overflow-hidden shadow-2xl rounded-sm hover:shadow-[0_0_50px_rgba(217,70,239,0.3)] transition-shadow duration-500">
-                                        <LazyVideo src="https://res.cloudinary.com/zu63qo7h/video/upload/f_auto,q_auto,w_720/portfolio/trionda/ball_tunisia" className="w-full h-full object-cover" />
+                                    <div className="aspect-[9/16] bg-[#0a0510] border border-white/10 overflow-hidden shadow-2xl rounded-sm hover:shadow-[0_0_50px_rgba(217,70,239,0.3)] transition-shadow duration-500 group">
+                                        <LazyVideo src="https://res.cloudinary.com/zu63qo7h/video/upload/f_auto,q_auto,w_720/portfolio/trionda/ball_tunisia" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
                                     </div>
 
                                 </ScrollReveal>
