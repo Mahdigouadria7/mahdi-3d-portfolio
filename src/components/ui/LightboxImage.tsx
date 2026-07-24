@@ -34,7 +34,7 @@ export default function LightboxImage({ src, alt, className = "" }: LightboxImag
                     observer.disconnect();
                 }
             },
-            { rootMargin: "200px", threshold: 0 }
+            { rootMargin: "1500px", threshold: 0 }
         );
 
         observer.observe(el);

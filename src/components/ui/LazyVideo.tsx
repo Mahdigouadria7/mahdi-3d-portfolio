@@ -26,7 +26,7 @@ export default function LazyVideo({ src, className = "" }: LazyVideoProps) {
         });
       },
       {
-        rootMargin: "300px", // Pre-load well before viewport on mobile
+        rootMargin: "1500px", // Pre-load well before viewport on mobile
         threshold: 0,        // Trigger the moment ANY pixel enters
       }
     );

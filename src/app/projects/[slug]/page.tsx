@@ -179,13 +179,14 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                 </ScrollReveal>
 
                                 {/* Hero Vertical 9:16 Portrait Video */}
-                                <ScrollReveal direction="left" delay={0.1} className="w-full sm:w-[320px] md:w-[35%] aspect-[9/16] max-h-[620px] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden group relative shadow-2xl hover:z-50 transition-all duration-500 hover:border-amber-400/60 hover:shadow-[0_0_50px_rgba(245,158,11,0.3)] order-1 md:order-2 flex items-center justify-center mx-auto">
-                                    <LazyVideo 
+                                <ScrollReveal direction="left" delay={0.1} className="relative h-full w-full">
+<div className="w-full sm:w-[320px] md:w-[35%] aspect-[9/16] max-h-[620px] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden group relative shadow-2xl hover:z-50 transition-all duration-500 hover:border-amber-400/60 hover:shadow-[0_0_50px_rgba(245,158,11,0.3)] order-1 md:order-2 flex items-center justify-center mx-auto">
+<LazyVideo 
                                         src="https://res.cloudinary.com/zu63qo7h/video/upload/f_auto,q_auto,w_720/v1784899265/portfolio/redbull/darkgold_render_video.mp4" 
                                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" 
                                     />
-
-                                </ScrollReveal>
+</div>
+</ScrollReveal>
                             </div>
                         </div>
 
@@ -204,14 +205,15 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                 </div>
                             </ScrollReveal>
 
-                            <ScrollReveal direction="up" delay={0.2} className="w-full aspect-[4966/2094] max-h-[380px] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden group relative shadow-2xl transition-all duration-500 hover:border-amber-400/60 hover:shadow-[0_0_50px_rgba(245,158,11,0.25)]">
-                                <LightboxImage 
+                            <ScrollReveal direction="up" delay={0.2} className="relative h-full w-full">
+<div className="w-full aspect-[4966/2094] max-h-[380px] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden group relative shadow-2xl transition-all duration-500 hover:border-amber-400/60 hover:shadow-[0_0_50px_rgba(245,158,11,0.25)]">
+<LightboxImage 
                                     src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_1000/v1784899273/portfolio/redbull/ticket2.png" 
                                     alt="VIP Launch Event Pass" 
                                     className="w-full h-full object-contain bg-black group-hover:scale-[1.02] transition-transform duration-700" 
                                 />
-
-                            </ScrollReveal>
+</div>
+</ScrollReveal>
                         </div>
 
                         {/* 3. Volumetric Smoke Simulation (Horizontal 16:9 Widescreen) */}
@@ -229,13 +231,14 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                 </div>
                             </ScrollReveal>
 
-                            <ScrollReveal direction="up" delay={0.2} className="w-full aspect-video bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_50px_rgba(245,158,11,0.3)] transition-all group">
-                                <LazyVideo 
+                            <ScrollReveal direction="up" delay={0.2} className="relative h-full w-full">
+<div className="w-full aspect-video bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_50px_rgba(245,158,11,0.3)] transition-all group">
+<LazyVideo 
                                     src="https://res.cloudinary.com/zu63qo7h/video/upload/f_auto,q_auto,w_720/v1784899377/portfolio/redbull/redbull_smoke.mp4" 
                                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" 
                                 />
-
-                            </ScrollReveal>
+</div>
+</ScrollReveal>
                         </div>
 
                         {/* 4. Liwa Desert Staging (1:1 Square Renders) */}
@@ -254,23 +257,25 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                             </ScrollReveal>
 
                             <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                                <ScrollReveal direction="left" delay={0.1} className="w-full aspect-square bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden group relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.25)] transition-all">
-                                    <LightboxImage 
+                                <ScrollReveal direction="left" delay={0.1} className="relative h-full w-full">
+<div className="w-full aspect-square bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden group relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.25)] transition-all">
+<LightboxImage 
                                         src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_1000/v1784899905/portfolio/redbull/liwa_redbull_2.webp" 
                                         alt="Liwa Desert Staging 1" 
                                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" 
                                     />
+</div>
+</ScrollReveal>
 
-                                </ScrollReveal>
-
-                                <ScrollReveal direction="right" delay={0.3} className="w-full aspect-square bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden group relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.25)] transition-all">
-                                    <LightboxImage 
+                                <ScrollReveal direction="right" delay={0.3} className="relative h-full w-full">
+<div className="w-full aspect-square bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden group relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.25)] transition-all">
+<LightboxImage 
                                         src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_1000/v1784899907/portfolio/redbull/liwa_redbull_3.webp" 
                                         alt="Liwa Desert Staging 2" 
                                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" 
                                     />
-
-                                </ScrollReveal>
+</div>
+</ScrollReveal>
                             </div>
                         </div>
 
@@ -290,20 +295,23 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                             </ScrollReveal>
 
                             <div className="grid md:grid-cols-3 gap-8">
-                                <ScrollReveal direction="up" delay={0.1} className="w-full aspect-[9/16] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden group relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)] transition-all">
-                                    <LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_800/v1784899913/portfolio/redbull/redbull_gold_darker.webp" alt="Deep Gold Specular Pass" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
+                                <ScrollReveal direction="up" delay={0.1} className="relative h-full w-full">
+<div className="w-full aspect-[9/16] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden group relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)] transition-all">
+<LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_800/v1784899913/portfolio/redbull/redbull_gold_darker.webp" alt="Deep Gold Specular Pass" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
+</div>
+</ScrollReveal>
 
-                                </ScrollReveal>
+                                <ScrollReveal direction="up" delay={0.2} className="relative h-full w-full">
+<div className="w-full aspect-[9/16] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden group relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)] transition-all">
+<LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_800/v1784899924/portfolio/redbull/redbull_gold_2.webp" alt="Micro-Embossed Relief" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
+</div>
+</ScrollReveal>
 
-                                <ScrollReveal direction="up" delay={0.2} className="w-full aspect-[9/16] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden group relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)] transition-all">
-                                    <LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_800/v1784899924/portfolio/redbull/redbull_gold_2.webp" alt="Micro-Embossed Relief" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
-
-                                </ScrollReveal>
-
-                                <ScrollReveal direction="up" delay={0.3} className="w-full aspect-[9/16] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden group relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)] transition-all">
-                                    <LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_800/v1784899929/portfolio/redbull/redbullr.webp" alt="Gold Master Render" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
-
-                                </ScrollReveal>
+                                <ScrollReveal direction="up" delay={0.3} className="relative h-full w-full">
+<div className="w-full aspect-[9/16] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden group relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)] transition-all">
+<LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_800/v1784899929/portfolio/redbull/redbullr.webp" alt="Gold Master Render" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
+</div>
+</ScrollReveal>
                             </div>
                         </div>
 
@@ -323,20 +331,23 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                             </ScrollReveal>
 
                             <div className="grid md:grid-cols-3 gap-8">
-                                <ScrollReveal direction="up" delay={0.1} className="w-full aspect-[9/16] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden group relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)] transition-all">
-                                    <LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_800/v1784899935/portfolio/redbull/redbull_environmet_xt.webp" alt="Studio High Key" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
+                                <ScrollReveal direction="up" delay={0.1} className="relative h-full w-full">
+<div className="w-full aspect-[9/16] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden group relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)] transition-all">
+<LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_800/v1784899935/portfolio/redbull/redbull_environmet_xt.webp" alt="Studio High Key" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
+</div>
+</ScrollReveal>
 
-                                </ScrollReveal>
+                                <ScrollReveal direction="up" delay={0.2} className="relative h-full w-full">
+<div className="w-full aspect-[9/16] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden group relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)] transition-all">
+<LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_800/v1784899938/portfolio/redbull/redbull_environmet.webp" alt="Studio Mid Pass" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
+</div>
+</ScrollReveal>
 
-                                <ScrollReveal direction="up" delay={0.2} className="w-full aspect-[9/16] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden group relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)] transition-all">
-                                    <LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_800/v1784899938/portfolio/redbull/redbull_environmet.webp" alt="Studio Mid Pass" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
-
-                                </ScrollReveal>
-
-                                <ScrollReveal direction="up" delay={0.3} className="w-full aspect-[9/16] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden group relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)] transition-all">
-                                    <LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_800/v1784899941/portfolio/redbull/redbull_environmetsss.webp" alt="Studio Subsurface Pass" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
-
-                                </ScrollReveal>
+                                <ScrollReveal direction="up" delay={0.3} className="relative h-full w-full">
+<div className="w-full aspect-[9/16] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden group relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)] transition-all">
+<LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_800/v1784899941/portfolio/redbull/redbull_environmetsss.webp" alt="Studio Subsurface Pass" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
+</div>
+</ScrollReveal>
                             </div>
                         </div>
 
@@ -356,25 +367,29 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                             </ScrollReveal>
 
                             <div className="grid md:grid-cols-4 gap-6">
-                                <ScrollReveal direction="up" delay={0.1} className="w-full aspect-[9/16] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden group relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)] transition-all">
-                                    <LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_800/v1784899943/portfolio/redbull/viewport_darkgold.webp" alt="Viewport Wireframe" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
+                                <ScrollReveal direction="up" delay={0.1} className="relative h-full w-full">
+<div className="w-full aspect-[9/16] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden group relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)] transition-all">
+<LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_800/v1784899943/portfolio/redbull/viewport_darkgold.webp" alt="Viewport Wireframe" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
+</div>
+</ScrollReveal>
 
-                                </ScrollReveal>
+                                <ScrollReveal direction="up" delay={0.2} className="relative h-full w-full">
+<div className="w-full aspect-[9/16] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden group relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)] transition-all">
+<LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/v1784899948/portfolio/redbull/teasing_redbull.gif" alt="Teaser Motion GIF" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
+</div>
+</ScrollReveal>
 
-                                <ScrollReveal direction="up" delay={0.2} className="w-full aspect-[9/16] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden group relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)] transition-all">
-                                    <LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/v1784899948/portfolio/redbull/teasing_redbull.gif" alt="Teaser Motion GIF" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
+                                <ScrollReveal direction="up" delay={0.3} className="relative h-full w-full">
+<div className="w-full aspect-[9/16] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden group relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)] transition-all">
+<LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_800/portfolio/redbull/redbull_environmet_xt.webp" alt="Geometry Test 1" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
+</div>
+</ScrollReveal>
 
-                                </ScrollReveal>
-
-                                <ScrollReveal direction="up" delay={0.3} className="w-full aspect-[9/16] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden group relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)] transition-all">
-                                    <LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_800/portfolio/redbull/redbull_environmet_xt.webp" alt="Geometry Test 1" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
-
-                                </ScrollReveal>
-
-                                <ScrollReveal direction="up" delay={0.4} className="w-full aspect-[9/16] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden group relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)] transition-all">
-                                    <LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_800/portfolio/redbull/redbull_environmetsss.webp" alt="Displacement Test 2" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
-
-                                </ScrollReveal>
+                                <ScrollReveal direction="up" delay={0.4} className="relative h-full w-full">
+<div className="w-full aspect-[9/16] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden group relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)] transition-all">
+<LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_800/portfolio/redbull/redbull_environmetsss.webp" alt="Displacement Test 2" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
+</div>
+</ScrollReveal>
                             </div>
                         </div>
 
@@ -395,22 +410,24 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
                             <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
                                 {/* DarkGold Redbull.mp4 */}
-                                <ScrollReveal direction="up" delay={0.1} className="w-full aspect-[9/16] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)] transition-all group">
-                                    <LazyVideo 
+                                <ScrollReveal direction="up" delay={0.1} className="relative h-full w-full">
+<div className="w-full aspect-[9/16] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)] transition-all group">
+<LazyVideo 
                                         src="https://res.cloudinary.com/zu63qo7h/video/upload/f_auto,q_auto,w_720/v1784900036/portfolio/redbull/darkgold_redbull.mp4" 
                                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" 
                                     />
-
-                                </ScrollReveal>
+</div>
+</ScrollReveal>
 
                                 {/* Loop Linkedin.mp4 */}
-                                <ScrollReveal direction="up" delay={0.2} className="w-full aspect-[9/16] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)] transition-all group">
-                                    <LazyVideo 
+                                <ScrollReveal direction="up" delay={0.2} className="relative h-full w-full">
+<div className="w-full aspect-[9/16] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden relative shadow-2xl hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.3)] transition-all group">
+<LazyVideo 
                                         src="https://res.cloudinary.com/zu63qo7h/video/upload/f_auto,q_auto,w_720/v1784900082/portfolio/redbull/loop_linkedin.mp4" 
                                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" 
                                     />
-
-                                </ScrollReveal>
+</div>
+</ScrollReveal>
 
 
                             </div>
@@ -448,20 +465,22 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                 </ScrollReveal>
 
                                 {/* Bleeding Image */}
-                                <ScrollReveal direction="left" delay={0.1} className="w-full md:w-[55%] aspect-[16/9] bg-[#0a0510] border border-white/10 rounded-sm overflow-hidden group relative shadow-2xl hover:z-50 transition-all duration-500 hover:shadow-[0_0_40px_rgba(217,70,239,0.2)] order-1 md:order-2">
-                                    <LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_1000/portfolio/trionda/render_ball_enhanced" alt="Trionda Concept" className="w-full h-full object-contain md:object-cover group-hover:scale-105 transition-transform duration-1000" />
+                                <ScrollReveal direction="left" delay={0.1} className="relative h-full w-full">
+<div className="w-full md:w-[55%] aspect-[16/9] bg-[#0a0510] border border-white/10 rounded-sm overflow-hidden group relative shadow-2xl hover:z-50 transition-all duration-500 hover:shadow-[0_0_40px_rgba(217,70,239,0.2)] order-1 md:order-2">
+<LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_1000/portfolio/trionda/render_ball_enhanced" alt="Trionda Concept" className="w-full h-full object-contain md:object-cover group-hover:scale-105 transition-transform duration-1000" />
                                     <div className="absolute inset-0 border border-white/20 rounded-sm scale-[0.95] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
-                                </ScrollReveal>
+</div>
+</ScrollReveal>
                             </div>
                         </div>
 
                         {/* 2. Fluid Dynamics Video - Clean Layout */}
                         <div className="relative z-10 py-16 flex flex-col md:flex-row items-center gap-12">
-                            <ScrollReveal direction="left" delay={0.1} className="w-full md:w-[60%] aspect-video bg-[#0a0510] border border-white/10 rounded-sm overflow-hidden relative shadow-2xl hover:shadow-[0_0_40px_rgba(217,70,239,0.2)] transition-shadow duration-700 group">
-                                <LazyVideo src="https://res.cloudinary.com/zu63qo7h/video/upload/f_auto,q_auto,w_720/portfolio/trionda/transition2" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
-                                
-
-                            </ScrollReveal>
+                            <ScrollReveal direction="left" delay={0.1} className="relative h-full w-full md:w-[60%]">
+<div className="w-full md:w-[60%] aspect-video bg-[#0a0510] border border-white/10 rounded-sm overflow-hidden relative shadow-2xl hover:shadow-[0_0_40px_rgba(217,70,239,0.2)] transition-shadow duration-700 group">
+<LazyVideo src="https://res.cloudinary.com/zu63qo7h/video/upload/f_auto,q_auto,w_720/portfolio/trionda/transition2" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
+</div>
+</ScrollReveal>
                             
                             <ScrollReveal direction="right" delay={0.3} className="w-full md:w-[40%] relative z-20">
                                 <div className="w-full h-full bg-white/[0.03] backdrop-blur-3xl border border-white/10 rounded-sm p-8 shadow-xl transition-all duration-700 hover:z-50 hover:bg-white/[0.08] hover:-translate-y-2 hover:border-fuchsia-500/50 hover:shadow-[0_0_40px_rgba(217,70,239,0.3)]">
@@ -490,34 +509,42 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                             
                             <div className="flex flex-col md:flex-row gap-12 md:gap-8 justify-center items-center">
                                 {/* Image 1 - Lower */}
-                                <ScrollReveal direction="up" delay={0.1} className="w-full md:w-[45%] md:mt-16 relative group transition-all duration-500 hover:z-50 hover:shadow-[0_0_40px_rgba(217,70,239,0.2)] rounded-sm">
-                                    <div className="aspect-[4/3] bg-[#0a0510] border border-white/10 overflow-hidden shadow-2xl rounded-sm">
+                                <ScrollReveal direction="up" delay={0.1} className="relative h-full w-full md:w-[45%] md:mt-16">
+<div className="w-full md:w-[45%] md:mt-16 relative group transition-all duration-500 hover:z-50 hover:shadow-[0_0_40px_rgba(217,70,239,0.2)] rounded-sm">
+<div className="aspect-[4/3] bg-[#0a0510] border border-white/10 overflow-hidden shadow-2xl rounded-sm">
                                         <LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_1000/portfolio/trionda/viewport_vs_render" alt="Viewport vs Render" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 grayscale hover:grayscale-0" />
                                     </div>
-
-                                </ScrollReveal>
+</div>
+</ScrollReveal>
                                 
                                 {/* Image 2 - Higher */}
-                                <ScrollReveal direction="up" delay={0.3} className="w-full md:w-[45%] md:-mt-8 relative group transition-all duration-500 hover:z-50 hover:shadow-[0_0_40px_rgba(217,70,239,0.2)] rounded-sm">
-                                    <div className="aspect-[4/3] bg-[#0a0510] border border-white/10 overflow-hidden shadow-2xl rounded-sm">
+                                <ScrollReveal direction="up" delay={0.3} className="relative h-full w-full md:w-[45%]">
+<div className="w-full md:w-[45%] md:-mt-8 relative group transition-all duration-500 hover:z-50 hover:shadow-[0_0_40px_rgba(217,70,239,0.2)] rounded-sm">
+<div className="aspect-[4/3] bg-[#0a0510] border border-white/10 overflow-hidden shadow-2xl rounded-sm">
                                         <LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_1000/portfolio/trionda/viewport_ball" alt="Viewport Geometry" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 grayscale hover:grayscale-0" />
                                     </div>
-
-                                </ScrollReveal>
+</div>
+</ScrollReveal>
                             </div>
                         </div>
 
                         {/* 4. High-Res Renders Cascade */}
                         <div className="relative z-10 py-16 flex flex-col md:flex-row justify-center items-center md:items-start gap-8 md:gap-0">
-                            <ScrollReveal direction="up" delay={0.1} className="w-full md:w-1/3 aspect-[4/5] bg-[#0a0510] border border-white/10 rounded-sm overflow-hidden group relative z-10 shadow-2xl hover:z-50 transition-all duration-500 hover:shadow-[0_0_40px_rgba(217,70,239,0.2)] hover:-translate-y-2">
-                                <LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_1000/portfolio/trionda/render_ball" alt="Render 1" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
-                            </ScrollReveal>
-                            <ScrollReveal direction="up" delay={0.2} className="w-full md:w-1/3 aspect-[4/5] bg-[#0a0510] border border-white/10 rounded-sm overflow-hidden group md:mt-8 md:-ml-8 relative z-20 shadow-[0_30px_60px_rgba(0,0,0,0.8)] hover:z-50 transition-all duration-500 hover:shadow-[0_0_40px_rgba(217,70,239,0.3)] hover:-translate-y-2">
-                                <LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_1000/portfolio/trionda/render_ball_2" alt="Render 2" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
-                            </ScrollReveal>
-                            <ScrollReveal direction="up" delay={0.3} className="w-full md:w-1/3 aspect-[4/5] bg-[#0a0510] border border-white/10 rounded-sm overflow-hidden group md:mt-16 md:-ml-8 relative z-30 shadow-[0_30px_60px_rgba(0,0,0,0.8)] hover:z-50 transition-all duration-500 hover:shadow-[0_0_40px_rgba(217,70,239,0.4)] hover:-translate-y-2">
-                                <LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_1000/portfolio/trionda/render_ball_3" alt="Render 3" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
-                            </ScrollReveal>
+                            <ScrollReveal direction="up" delay={0.1} className="relative h-full w-full md:w-1/3 z-10">
+<div className="w-full md:w-1/3 aspect-[4/5] bg-[#0a0510] border border-white/10 rounded-sm overflow-hidden group relative z-10 shadow-2xl hover:z-50 transition-all duration-500 hover:shadow-[0_0_40px_rgba(217,70,239,0.2)] hover:-translate-y-2">
+<LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_1000/portfolio/trionda/render_ball" alt="Render 1" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
+</div>
+</ScrollReveal>
+                            <ScrollReveal direction="up" delay={0.2} className="relative h-full w-full md:w-1/3 md:mt-8 md:-ml-8 z-20">
+<div className="w-full md:w-1/3 aspect-[4/5] bg-[#0a0510] border border-white/10 rounded-sm overflow-hidden group md:mt-8 md:-ml-8 relative z-20 shadow-[0_30px_60px_rgba(0,0,0,0.8)] hover:z-50 transition-all duration-500 hover:shadow-[0_0_40px_rgba(217,70,239,0.3)] hover:-translate-y-2">
+<LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_1000/portfolio/trionda/render_ball_2" alt="Render 2" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
+</div>
+</ScrollReveal>
+                            <ScrollReveal direction="up" delay={0.3} className="relative h-full w-full md:w-1/3 md:mt-16 md:-ml-8 z-30">
+<div className="w-full md:w-1/3 aspect-[4/5] bg-[#0a0510] border border-white/10 rounded-sm overflow-hidden group md:mt-16 md:-ml-8 relative z-30 shadow-[0_30px_60px_rgba(0,0,0,0.8)] hover:z-50 transition-all duration-500 hover:shadow-[0_0_40px_rgba(217,70,239,0.4)] hover:-translate-y-2">
+<LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_1000/portfolio/trionda/render_ball_3" alt="Render 3" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
+</div>
+</ScrollReveal>
                         </div>
 
                         {/* 5. Real World Applications - Clean Grid Layout */}
@@ -535,14 +562,16 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                 </div>
                             </ScrollReveal>
                             <div className="flex flex-col md:flex-row items-center justify-center gap-12">
-                                <ScrollReveal direction="up" delay={0.1} className="w-full md:w-[50%] aspect-[16/9] bg-[#0a0510] border border-white/10 rounded-sm overflow-hidden group relative shadow-2xl hover:z-50 transition-all duration-500 hover:shadow-[0_0_40px_rgba(217,70,239,0.2)]">
-                                    <LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_1000/portfolio/trionda/stadium_mockup" alt="Stadium Mockup" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
-
-                                </ScrollReveal>
-                                <ScrollReveal direction="up" delay={0.3} className="w-full md:w-[40%] aspect-[4/3] bg-[#0a0510] border border-white/10 rounded-sm overflow-hidden group relative z-20 shadow-2xl hover:z-50 transition-all duration-500 hover:shadow-[0_0_40px_rgba(217,70,239,0.3)]">
-                                    <LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_1000/portfolio/trionda/street_billboard" alt="Street Billboard" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
-
-                                </ScrollReveal>
+                                <ScrollReveal direction="up" delay={0.1} className="relative h-full w-full md:w-[50%]">
+<div className="w-full md:w-[50%] aspect-[16/9] bg-[#0a0510] border border-white/10 rounded-sm overflow-hidden group relative shadow-2xl hover:z-50 transition-all duration-500 hover:shadow-[0_0_40px_rgba(217,70,239,0.2)]">
+<LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_1000/portfolio/trionda/stadium_mockup" alt="Stadium Mockup" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
+</div>
+</ScrollReveal>
+                                <ScrollReveal direction="up" delay={0.3} className="relative h-full w-full md:w-[40%] z-20">
+<div className="w-full md:w-[40%] aspect-[4/3] bg-[#0a0510] border border-white/10 rounded-sm overflow-hidden group relative z-20 shadow-2xl hover:z-50 transition-all duration-500 hover:shadow-[0_0_40px_rgba(217,70,239,0.3)]">
+<LightboxImage src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_1000/portfolio/trionda/street_billboard" alt="Street Billboard" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
+</div>
+</ScrollReveal>
                             </div>
                         </div>
 
