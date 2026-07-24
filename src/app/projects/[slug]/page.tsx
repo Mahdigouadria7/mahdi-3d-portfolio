@@ -180,7 +180,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                 {/* Hero Vertical 9:16 Portrait Video */}
                                 <ScrollReveal direction="left" delay={0.1} className="w-full sm:w-[320px] md:w-[35%] aspect-[9/16] max-h-[620px] bg-[#0a0604] border border-amber-500/30 rounded-2xl overflow-hidden group relative shadow-2xl hover:z-50 transition-all duration-500 hover:border-amber-400/60 hover:shadow-[0_0_50px_rgba(245,158,11,0.3)] order-1 md:order-2 flex items-center justify-center mx-auto">
                                     <video 
-                                        src="/models/Redbull Concept/Project Content/RedBull Finals/DarkGold Redbull REnder.mp4" 
+                                        src="https://res.cloudinary.com/zu63qo7h/video/upload/v1784899265/portfolio/redbull/darkgold_render_video.mp4" 
                                         autoPlay 
                                         loop 
                                         muted 

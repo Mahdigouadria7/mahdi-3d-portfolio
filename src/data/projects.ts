@@ -29,10 +29,10 @@ export const projects: Project[] = [
         challenge: "Optimizing a heavily detailed, multi-material Blender model to run flawlessly at 60fps on mobile.",
         solution: "Aggressive texture baking, Draco compression, and dynamic environment mapping in React Three Fiber.",
         media: [
-            { type: 'image', url: '/models/Trionda Ball Project/Image Cover Ball.webp', alt: 'Trionda Ball Material Close Up' },
-            { type: 'image', url: '/models/Trionda Ball Project/render 3D Ball.webp', alt: 'Trionda Ball Wireframe Overlay' },
-            { type: 'image', url: '/models/Trionda Ball Project/Staduim Mockup.webp', alt: 'Interactive Web Player Showcase' },
-            { type: 'image', url: '/models/Trionda Ball Project/Street Billboard_1.webp', alt: 'Street Billboard' }
+            { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/v1784898993/portfolio/trionda/cover_ball.webp', alt: 'Trionda Ball Material Close Up' },
+            { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/v1784898994/portfolio/trionda/render_ball.webp', alt: 'Trionda Ball Wireframe Overlay' },
+            { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/v1784898995/portfolio/trionda/stadium_mockup.webp', alt: 'Interactive Web Player Showcase' },
+            { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/v1784898996/portfolio/trionda/street_billboard.webp', alt: 'Street Billboard' }
         ]
     },
     {
@@ -49,23 +49,23 @@ export const projects: Project[] = [
         challenge: "Capturing photorealistic gold reflections, intricate micro-embossing, and luxury metallic highlights while optimizing real-time 3D assets for fluid web performance.",
         solution: "Custom PBR gold texture maps, physically-based studio HDRI lighting, and Draco-compressed geometry tailored for interactive web display.",
         media: [
-            { type: 'video', url: '/models/Redbull Concept/Project Content/RedBull Finals/DarkGold Redbull REnder.mp4', alt: 'Cinematic Gold Render Video' },
-            { type: 'image', url: '/models/Redbull Concept/Project Content/RedBull Finals/ticket2.png', alt: 'VIP Launch Event Pass' },
-            { type: 'video', url: '/models/Redbull Concept/Project Content/RedBull Finals/Redbull smoke.mp4', alt: 'Red Bull Smoke Simulation' },
-            { type: 'video', url: '/models/Redbull Concept/Project Content/RedBull Finals/REdbull Loop.mp4', alt: 'Red Bull Infinite Physics Loop' },
-            { type: 'image', url: '/models/Redbull Concept/Project Content/RedBull Finals/Liwa Redbull 2 .png', alt: 'Liwa Desert Staging Render 1' },
-            { type: 'image', url: '/models/Redbull Concept/Project Content/RedBull Finals/Liwa Redbull 3 .png', alt: 'Liwa Desert Staging Render 2' },
-            { type: 'image', url: '/models/Redbull Concept/Project Content/RedBull Finals/Redbull Gold darker.png', alt: 'Deep Gold Specular Pass' },
-            { type: 'image', url: '/models/Redbull Concept/Project Content/RedBull Finals/Redbull Gold 2.png', alt: 'Micro-Embossed Gold Can' },
-            { type: 'image', url: '/models/Redbull Concept/Project Content/RedBull Finals/Redbullr.png', alt: 'Gold Master Render' },
-            { type: 'image', url: '/models/Redbull Concept/Project Content/RedBull Finals/Redbull Environmet XT.png', alt: 'Obsidian Studio High-Key' },
-            { type: 'image', url: '/models/Redbull Concept/Project Content/RedBull Finals/Redbull Environme,t.png', alt: 'Obsidian Studio Mid-Pass' },
-            { type: 'image', url: '/models/Redbull Concept/Project Content/RedBull Finals/Redbull Environmetsss.png', alt: 'Obsidian Studio Subsurface' },
-            { type: 'image', url: '/models/Redbull Concept/Project Content/RedBull Finals/ViewportDarkGold-Redbull.gif', alt: 'Viewport Wireframe Pass' },
-            { type: 'image', url: '/models/Redbull Concept/Project Content/RedBull Finals/Teasing-Redbull.gif', alt: 'Teaser Motion GIF' },
-            { type: 'video', url: '/models/Redbull Concept/Project Content/RedBull Finals/DarkGold Redbull.mp4', alt: 'Lighting & Specular Pass' },
-            { type: 'video', url: '/models/Redbull Concept/Project Content/RedBull Finals/Loop Linkedin.mp4', alt: 'LinkedIn Reel' },
-            { type: 'video', url: '/models/Redbull Concept/Project Content/RedBull Finals/Redbull 3Slides.mp4', alt: '3-Slides Motion Presentation' }
+            { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/v1784899265/portfolio/redbull/darkgold_render_video.mp4', alt: 'Cinematic Gold Render Video' },
+            { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/v1784899273/portfolio/redbull/ticket2.png', alt: 'VIP Launch Event Pass' },
+            { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/v1784899377/portfolio/redbull/redbull_smoke.mp4', alt: 'Red Bull Smoke Simulation' },
+            { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/v1784899475/portfolio/redbull/redbull_loop.mp4', alt: 'Red Bull Infinite Physics Loop' },
+            { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/v1784899905/portfolio/redbull/liwa_redbull_2.webp', alt: 'Liwa Desert Staging Render 1' },
+            { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/v1784899907/portfolio/redbull/liwa_redbull_3.webp', alt: 'Liwa Desert Staging Render 2' },
+            { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/v1784899913/portfolio/redbull/redbull_gold_darker.webp', alt: 'Deep Gold Specular Pass' },
+            { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/v1784899924/portfolio/redbull/redbull_gold_2.webp', alt: 'Micro-Embossed Gold Can' },
+            { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/v1784899929/portfolio/redbull/redbullr.webp', alt: 'Gold Master Render' },
+            { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/v1784899935/portfolio/redbull/redbull_environmet_xt.webp', alt: 'Obsidian Studio High-Key' },
+            { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/v1784899938/portfolio/redbull/redbull_environmet.webp', alt: 'Obsidian Studio Mid-Pass' },
+            { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/v1784899941/portfolio/redbull/redbull_environmetsss.webp', alt: 'Obsidian Studio Subsurface' },
+            { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/v1784899943/portfolio/redbull/viewport_darkgold.webp', alt: 'Viewport Wireframe Pass' },
+            { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/v1784899948/portfolio/redbull/teasing_redbull.gif', alt: 'Teaser Motion GIF' },
+            { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/v1784900036/portfolio/redbull/darkgold_redbull.mp4', alt: 'Lighting & Specular Pass' },
+            { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/v1784900082/portfolio/redbull/loop_linkedin.mp4', alt: 'LinkedIn Reel' },
+            { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/v1784900161/portfolio/redbull/redbull_3slides.mp4', alt: '3-Slides Motion Presentation' }
         ]
     },
     {

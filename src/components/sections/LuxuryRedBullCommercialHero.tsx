@@ -103,7 +103,7 @@ function CommercialCanModel({
 }) {
   const groupRef = useRef<THREE.Group>(null);
   const canMeshRef = useRef<THREE.Group>(null);
-  const { scene } = useGLTF("/models/Redbull Concept/3d Model/3d/redbull 3d model.glb");
+  const { scene } = useGLTF("https://res.cloudinary.com/zu63qo7h/raw/upload/v1784898992/portfolio/models/redbull_3d_model.glb");
 
   const clonedScene = useMemo(() => scene.clone(), [scene]);
 

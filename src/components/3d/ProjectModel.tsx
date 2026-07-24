@@ -81,7 +81,7 @@ interface RedBullGoldCanModelProps extends Omit<PlaceholderShapeProps, 'index'> 
 
 // Component to display loaded 3D Red Bull Gold Concept model with native GLTF materials
 export function RedBullGoldCanModel({ scale = 1.75, onPointerDown, onPointerUp, onPointerOut, onClick }: RedBullGoldCanModelProps) {
-    const { scene } = useGLTF('/models/Redbull Concept/3d Model/3d/redbull 3d model.glb');
+    const { scene } = useGLTF('https://res.cloudinary.com/zu63qo7h/raw/upload/v1784898992/portfolio/models/redbull_3d_model.glb');
 
     // Clone scene so remounts don't corrupt shared state
     const clonedScene = useMemo(() => scene.clone(), [scene]);
@@ -223,7 +223,7 @@ export default function ProjectModel({ index }: { index: number }) {
     }, []);
 
     return (
-        <div 
+        <div
             ref={containerRef}
             className="absolute inset-0 flex items-center justify-center w-full h-full pointer-events-auto opacity-70 group-hover:opacity-100 transition-opacity duration-500"
             onClick={(e) => {
