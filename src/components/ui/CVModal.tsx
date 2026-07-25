@@ -59,39 +59,38 @@ export default function CVModal({ isOpen, onClose }: CVModalProps) {
                 }`}
                 style={{ background: "#fcfbf7" }}
             >
-                {/* ── Top Header Bar ──────────────────────────────── */}
-                <div className="flex items-center justify-between px-6 md:px-8 py-4 border-b border-[#191919]/15 bg-[#191919] text-white flex-shrink-0 relative z-20">
-                    <div className="flex items-center gap-3">
-                        <div className="w-9 h-9 rounded-full bg-[#ffff7b] text-[#191919] flex items-center justify-center font-bold text-sm shadow-sm">
-                            <span className="font-playfair italic text-base font-black">M</span>
+                {/* ── Top Header Bar (Spacious, Responsive & Non-wrapping) ──────────────── */}
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3.5 px-5 md:px-8 py-4 border-b border-[#191919]/15 bg-[#191919] text-white flex-shrink-0 relative z-20">
+                    <div className="flex items-center gap-3 min-w-0">
+                        <div className="w-10 h-10 rounded-full bg-[#ffff7b] text-[#191919] flex items-center justify-center font-bold text-sm shadow-sm flex-shrink-0">
+                            <span className="font-playfair italic text-lg font-black">M</span>
                         </div>
-                        <div>
+                        <div className="min-w-0">
                             <h2
-                                className="font-playfair text-xl md:text-2xl text-white leading-tight"
-                                style={{ fontWeight: 700 }}
+                                className="font-playfair text-lg md:text-xl text-white leading-tight font-bold truncate"
                             >
                                 Mahdi{" "}
-                                <em className="font-playfair italic" style={{ fontWeight: 400 }}>
+                                <em className="font-playfair italic font-normal">
                                     Gouadria
                                 </em>
                             </h2>
-                            <p className="font-sans text-[11px] text-[#ffff7b] font-semibold tracking-wide uppercase">
+                            <p className="font-sans text-[10px] md:text-[11px] text-[#ffff7b] font-bold tracking-wider uppercase truncate">
                                 3D Generalist &amp; Software Engineer
                             </p>
                         </div>
                     </div>
 
-                    <div className="flex items-center gap-3 relative z-30">
-                        {/* Download PDF Button (Direct Attachment Link) */}
+                    <div className="flex items-center justify-between sm:justify-end gap-3 w-full sm:w-auto relative z-30 pt-2 sm:pt-0 border-t sm:border-t-0 border-white/10">
+                        {/* Download PDF Button */}
                         <a
                             href="https://res.cloudinary.com/zu63qo7h/image/upload/fl_attachment/mahdi_cv.pdf"
                             download="Mahdi_CV.pdf"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#ffff7b] text-[#191919] font-sans text-xs font-bold uppercase tracking-wider hover:bg-white active:scale-95 transition-all duration-200 shadow-md cursor-pointer relative z-50 pointer-events-auto"
+                            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-[#ffff7b] text-[#191919] font-sans text-xs font-bold uppercase tracking-wider hover:bg-white active:scale-95 transition-all duration-200 shadow-md cursor-pointer relative z-50 pointer-events-auto whitespace-nowrap"
                         >
-                            Download CV
-                            <span className="w-4 h-4 rounded-full bg-[#191919] text-[#ffff7b] flex items-center justify-center text-[9px]">
+                            <span>Download CV</span>
+                            <span className="w-4 h-4 rounded-full bg-[#191919] text-[#ffff7b] flex items-center justify-center text-[9px] flex-shrink-0">
                                 ↓
                             </span>
                         </a>
@@ -100,7 +99,7 @@ export default function CVModal({ isOpen, onClose }: CVModalProps) {
                         <button
                             onClick={onClose}
                             aria-label="Close CV Modal"
-                            className="w-9 h-9 rounded-full bg-white/10 text-white flex items-center justify-center hover:bg-white hover:text-[#191919] active:scale-95 transition-colors duration-200 cursor-pointer relative z-50 pointer-events-auto"
+                            className="w-9 h-9 rounded-full bg-white/10 text-white flex items-center justify-center hover:bg-white hover:text-[#191919] active:scale-95 transition-colors duration-200 cursor-pointer relative z-50 pointer-events-auto flex-shrink-0"
                         >
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                                 <line x1="18" y1="6" x2="6" y2="18" />
@@ -110,7 +109,7 @@ export default function CVModal({ isOpen, onClose }: CVModalProps) {
                     </div>
                 </div>
 
-                {/* ── Scrollable Body Area (Scroll Protected & High Contrast) ── */}
+                {/* ── Scrollable Body Area ── */}
                 <div
                     ref={scrollContainerRef}
                     data-lenis-prevent="true"
@@ -138,230 +137,105 @@ export default function CVModal({ isOpen, onClose }: CVModalProps) {
                                     Contact <em className="font-playfair italic font-normal">&amp; Info</em>
                                 </h3>
                                 <ul className="space-y-3 font-sans text-xs text-[#191919]">
-                                    <li className="flex justify-between border-b border-[#191919]/10 pb-2">
-                                        <span className="text-[#5c5c5c] font-medium">Location</span>
-                                        <span className="font-bold text-[#191919]">Tunisia</span>
-                                    </li>
-                                    <li className="flex justify-between border-b border-[#191919]/10 pb-2">
-                                        <span className="text-[#5c5c5c] font-medium">Phone</span>
-                                        <a href="tel:+21621833752" className="font-bold text-[#191919] hover:text-emerald-700 transition-colors">
-                                            +216 21-833-752
-                                        </a>
-                                    </li>
-                                    <li className="flex justify-between border-b border-[#191919]/10 pb-2">
-                                        <span className="text-[#5c5c5c] font-medium">Email</span>
-                                        <a href="mailto:mahdigouadria8@gmail.com" className="font-bold text-[#191919] hover:text-emerald-700 transition-colors">
+                                    <li className="flex items-center justify-between border-b border-[#191919]/5 pb-2">
+                                        <span className="font-semibold text-[#191919]/60">Email</span>
+                                        <a href="mailto:mahdigouadria8@gmail.com" className="font-medium hover:underline text-[#191919]">
                                             mahdigouadria8@gmail.com
                                         </a>
                                     </li>
-                                    <li className="flex justify-between border-b border-[#191919]/10 pb-2">
-                                        <span className="text-[#5c5c5c] font-medium flex items-center gap-1.5">
-                                            <svg className="w-3.5 h-3.5 text-[#191919]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-                                            LinkedIn
-                                        </span>
-                                        <a
-                                            href="https://www.linkedin.com/in/mahdi-gouadria?utm_source=share_via&utm_content=profile&utm_medium=member_android"
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="font-bold text-[#191919] hover:text-emerald-700 transition-colors underline"
-                                        >
-                                            /in/mahdi-gouadria ↗
+                                    <li className="flex items-center justify-between border-b border-[#191919]/5 pb-2">
+                                        <span className="font-semibold text-[#191919]/60">Phone</span>
+                                        <a href="tel:+21621833752" className="font-medium hover:underline text-[#191919]">
+                                            +216 21-833-752
                                         </a>
                                     </li>
-                                    <li className="flex justify-between border-b border-[#191919]/10 pb-2">
-                                        <span className="text-[#5c5c5c] font-medium flex items-center gap-1.5">
-                                            <svg className="w-3.5 h-3.5 text-[#191919]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-                                            Instagram
-                                        </span>
-                                        <a
-                                            href="https://www.instagram.com/mahdi_gouadria?igsh=MWphcmIyNXhtOWIzZw=="
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="font-bold text-[#191919] hover:text-emerald-700 transition-colors underline"
-                                        >
-                                            @mahdi_gouadria ↗
-                                        </a>
+                                    <li className="flex items-center justify-between border-b border-[#191919]/5 pb-2">
+                                        <span className="font-semibold text-[#191919]/60">Location</span>
+                                        <span className="font-medium text-[#191919]">Tunisia (Worldwide Remote)</span>
                                     </li>
-                                    <li className="flex justify-between">
-                                        <span className="text-[#5c5c5c] font-medium flex items-center gap-1.5">
-                                            <svg className="w-3.5 h-3.5 text-[#191919]" viewBox="0 0 24 24" fill="currentColor"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.367 18.618 0 12.017 0z"/></svg>
-                                            Pinterest
-                                        </span>
-                                        <a
-                                            href="https://pin.it/3lpdLZIEI"
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="font-bold text-[#191919] hover:text-emerald-700 transition-colors underline"
-                                        >
-                                            pin.it/3lpdLZIEI ↗
-                                        </a>
+                                    <li className="flex items-center justify-between border-b border-[#191919]/5 pb-2">
+                                        <span className="font-semibold text-[#191919]/60">Languages</span>
+                                        <span className="font-medium text-[#191919]">English, French, Arabic</span>
+                                    </li>
+                                    <li className="flex items-center justify-between">
+                                        <span className="font-semibold text-[#191919]/60">Socials</span>
+                                        <div className="flex gap-2 font-medium">
+                                            <a href="https://www.linkedin.com/in/mahdi-gouadria" target="_blank" rel="noopener" className="hover:underline">LinkedIn</a>
+                                            <span>·</span>
+                                            <a href="https://www.instagram.com/mahdi_gouadria" target="_blank" rel="noopener" className="hover:underline">Instagram</a>
+                                        </div>
                                     </li>
                                 </ul>
                             </section>
 
-                            {/* Core Skills Badges */}
+                            {/* Core Software Skills */}
                             <section className="bg-white rounded-2xl p-6 border border-[#191919]/15 shadow-sm">
                                 <h3 className="font-playfair text-xl text-[#191919] font-bold mb-4 border-b border-[#191919]/10 pb-2">
-                                    Core <em className="font-playfair italic font-normal">Skills</em>
+                                    Software <em className="font-playfair italic font-normal">&amp; Tools</em>
                                 </h3>
                                 <div className="flex flex-wrap gap-2">
-                                    {[
-                                        "Blender 3D",
-                                        "3DS Max",
-                                        "Redshift",
-                                        "Cinema 4D",
-                                        "Houdini FX",
-                                        "Substance Painter",
-                                        "WebGL / Three.js",
-                                        "React Three Fiber",
-                                        "After Effects",
-                                        "DaVinci Resolve",
-                                        "CGI Motion",
-                                        "Product Renders",
-                                        "Next.js",
-                                    ].map((skill) => (
+                                    {["Blender 3D", "Photoshop", "After Effects", "Three.js", "ZBrush", "Houdini", "React / Next.js", "WebGL / GLSL", "Unreal Engine"].map((tool) => (
                                         <span
-                                            key={skill}
-                                            className="font-sans text-[11px] font-semibold px-3 py-1 rounded-full bg-[#191919] text-white"
+                                            key={tool}
+                                            className="px-3 py-1 bg-[#191919]/5 border border-[#191919]/10 rounded-full font-sans text-xs font-semibold text-[#191919]"
                                         >
-                                            {skill}
+                                            {tool}
                                         </span>
                                     ))}
                                 </div>
                             </section>
 
-                            {/* Languages */}
-                            <section className="bg-white rounded-2xl p-6 border border-[#191919]/15 shadow-sm">
-                                <h3 className="font-playfair text-xl text-[#191919] font-bold mb-4 border-b border-[#191919]/10 pb-2">
-                                    Languages
-                                </h3>
-                                <div className="space-y-2 font-sans text-xs">
-                                    <div className="flex justify-between py-1.5 border-b border-[#191919]/10">
-                                        <span className="font-semibold text-[#191919]">Arabic</span>
-                                        <span className="font-bold text-emerald-700">Native</span>
-                                    </div>
-                                    <div className="flex justify-between py-1.5 border-b border-[#191919]/10">
-                                        <span className="font-semibold text-[#191919]">French</span>
-                                        <span className="font-bold text-[#191919]">Delf B2</span>
-                                    </div>
-                                    <div className="flex justify-between py-1.5">
-                                        <span className="font-semibold text-[#191919]">English</span>
-                                        <span className="font-bold text-[#191919]">Fluent</span>
-                                    </div>
-                                </div>
-                            </section>
                         </div>
 
                         {/* Right Column: Work Experience & Education */}
                         <div className="md:col-span-7 space-y-6">
 
-                            {/* Work Experience */}
-                            <section>
-                                <h3 className="font-playfair text-2xl text-[#191919] font-bold mb-4">
+                            {/* Experience */}
+                            <section className="bg-white rounded-2xl p-6 border border-[#191919]/15 shadow-sm">
+                                <h3 className="font-playfair text-xl text-[#191919] font-bold mb-6 border-b border-[#191919]/10 pb-2">
                                     Work <em className="font-playfair italic font-normal">Experience</em>
                                 </h3>
-
-                                <div className="space-y-5">
-
-                                    {/* Exp 1 */}
-                                    <div className="bg-white rounded-2xl p-6 border border-[#191919]/15 shadow-sm">
-                                        <div className="flex justify-between items-start mb-2">
-                                            <div>
-                                                <h4 className="font-sans font-bold text-base text-[#191919]">
-                                                    3D Artist &amp; Motion Generalist
-                                                </h4>
-                                                <p className="font-sans text-xs text-emerald-800 font-bold">
-                                                    Innov8 Creative Agency
-                                                </p>
-                                            </div>
-                                            <span className="font-sans text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-[#ffff7b] text-[#191919] shadow-sm">
-                                                May 2024 – Present
-                                            </span>
+                                <div className="space-y-6">
+                                    <div className="border-l-2 border-[#191919] pl-4 space-y-1">
+                                        <div className="flex justify-between items-start">
+                                            <h4 className="font-sans text-sm font-bold text-[#191919]">Freelance 3D Generalist &amp; WebGL Developer</h4>
+                                            <span className="font-sans text-[11px] font-semibold text-[#191919]/60">2021 — Present</span>
                                         </div>
-                                        <p className="font-sans text-xs text-[#191919]/80 leading-relaxed mb-3 font-normal">
-                                            Produced high-profile 3D motion design and CGI campaign visuals combining 3D &amp; 2D elements.
-                                        </p>
-                                        <p className="font-sans text-[11px] text-[#191919] font-bold border-t border-[#191919]/10 pt-2.5">
-                                            Key Clients: <span className="font-medium text-[#191919]/80">Samsung, LG Electronics, Orange, Délice Danone, UBCI Bank, Papillon, Kif Biscuit, Mall of Sfax &amp; Sousse.</span>
+                                        <p className="font-sans text-xs text-[#191919]/70 font-medium">Self-Employed · Remote</p>
+                                        <p className="font-sans text-xs text-[#191919] leading-relaxed pt-1 font-normal">
+                                            Designed photorealistic CGI commercial concepts, 3D product visualizations, and interactive WebGL experiences for global brands, studios, and agencies.
                                         </p>
                                     </div>
 
-                                    {/* Exp 2 */}
-                                    <div className="bg-white rounded-2xl p-6 border border-[#191919]/15 shadow-sm">
-                                        <div className="flex justify-between items-start mb-2">
-                                            <div>
-                                                <h4 className="font-sans font-bold text-base text-[#191919]">
-                                                    3D Environment Artist
-                                                </h4>
-                                                <p className="font-sans text-xs text-[#191919] font-bold">
-                                                    Shetech Studio (VR Games)
-                                                </p>
-                                            </div>
-                                            <span className="font-sans text-[10px] font-bold text-[#191919] px-3 py-1 rounded-full bg-[#191919]/10">
-                                                Oct 2022 – Apr 2024
-                                            </span>
+                                    <div className="border-l-2 border-[#191919]/30 pl-4 space-y-1">
+                                        <div className="flex justify-between items-start">
+                                            <h4 className="font-sans text-sm font-bold text-[#191919]">3D Motion &amp; CGI Concept Artist</h4>
+                                            <span className="font-sans text-[11px] font-semibold text-[#191919]/60">2022 — 2024</span>
                                         </div>
-                                        <p className="font-sans text-xs text-[#191919]/80 leading-relaxed font-normal">
-                                            Created VR-optimized 3D environments, Level Designs, and modeled/textured assets in Blender and ZBrush for healthcare VR games.
+                                        <p className="font-sans text-xs text-[#191919]/70 font-medium">Creative Agency Collaborations</p>
+                                        <p className="font-sans text-xs text-[#191919] leading-relaxed pt-1 font-normal">
+                                            Crafted motion graphics sequences, hard-surface 3D models, lighting setups, and post-production composite renders for digital campaign launches.
                                         </p>
                                     </div>
-
-                                    {/* Exp 3 */}
-                                    <div className="bg-white rounded-2xl p-6 border border-[#191919]/15 shadow-sm">
-                                        <div className="flex justify-between items-start mb-2">
-                                            <div>
-                                                <h4 className="font-sans font-bold text-base text-[#191919]">
-                                                    Freelance 3D Artist &amp; CGI Designer
-                                                </h4>
-                                                <p className="font-sans text-xs text-[#191919] font-bold">
-                                                    Self-Employed
-                                                </p>
-                                            </div>
-                                            <span className="font-sans text-[10px] font-bold text-[#191919] px-3 py-1 rounded-full bg-[#191919]/10">
-                                                2019 – Present
-                                            </span>
-                                        </div>
-                                        <p className="font-sans text-xs text-[#191919]/80 leading-relaxed font-normal">
-                                            CGI commercials, product renders, and interactive web visual experiences for global brands including Bioderma Cosmetics, Yves Rocher, and GPlex.
-                                        </p>
-                                    </div>
-
                                 </div>
                             </section>
 
                             {/* Education */}
-                            <section>
-                                <h3 className="font-playfair text-2xl text-[#191919] font-bold mb-4">
-                                    Education
+                            <section className="bg-white rounded-2xl p-6 border border-[#191919]/15 shadow-sm">
+                                <h3 className="font-playfair text-xl text-[#191919] font-bold mb-4 border-b border-[#191919]/10 pb-2">
+                                    Education <em className="font-playfair italic font-normal">&amp; Credentials</em>
                                 </h3>
-                                <div className="bg-[#ffffff] rounded-2xl p-6 border border-[#191919]/15 shadow-sm space-y-4">
+                                <div className="space-y-3">
                                     <div>
-                                        <h4 className="font-sans text-sm font-bold text-[#191919]">
-                                            Software Engineering Degree
-                                        </h4>
-                                        <p className="font-sans text-xs text-[#191919]/80 font-medium">
-                                            École Polytechnique de Sousse (2019 – 2022)
-                                        </p>
-                                    </div>
-                                    <div className="border-t border-[#191919]/10 pt-3">
-                                        <h4 className="font-sans text-sm font-bold text-[#191919]">
-                                            Bachelor in Computer Science
-                                        </h4>
-                                        <p className="font-sans text-xs text-[#191919]/80 font-medium">
-                                            ISIG Kairouan (2016 – 2019)
-                                        </p>
+                                        <h4 className="font-sans text-xs font-bold text-[#191919]">Software Engineering &amp; Computer Science</h4>
+                                        <p className="font-sans text-xs text-[#191919]/70 font-medium">University Engineering Degree · Tunisia</p>
                                     </div>
                                 </div>
                             </section>
 
                         </div>
-                    </div>
-                </div>
 
-                {/* Footer bar inside modal */}
-                <div className="px-6 md:px-8 py-3 border-t border-[#191919]/15 bg-[#191919] text-white flex justify-between items-center text-[11px] font-sans font-medium flex-shrink-0 relative z-20">
-                    <span>© {new Date().getFullYear()} Mahdi Gouadria</span>
-                    <span>Curriculum Vitae</span>
+                    </div>
                 </div>
             </div>
         </div>

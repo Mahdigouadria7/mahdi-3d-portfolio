@@ -250,34 +250,33 @@ function ToolCard({
   );
 }
 
-/* ── Mobile Stacked Grid for Phone Viewports (Sleek & Visually Appealing) ──────────────── */
+/* ── Mobile Stacked Cards (Clean Single-Line Badges & No Wrapping) ─────────────────── */
 function ToolGrid() {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-10">
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-10">
       {TOOLS.map((tool) => (
         <div
           key={tool.id}
-          className="flex items-center gap-3.5 bg-[#FBFBFA] rounded-2xl p-3.5 shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-black/[0.06] transition-all duration-300"
+          className="flex items-center justify-between gap-3 bg-[#FBFBFA] rounded-2xl p-3.5 shadow-sm border border-black/5"
         >
-          <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center flex-shrink-0 border border-black/5 overflow-hidden p-1">
-            <ToolIconRenderer type={tool.icon} />
-          </div>
-          <div className="flex flex-col min-w-0 flex-1">
-            <p className="font-sans text-xs sm:text-sm font-bold text-[#191919] tracking-tight leading-snug truncate">
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="w-12 h-12 bg-white rounded-xl shadow-xs flex items-center justify-center flex-shrink-0 border border-black/5 overflow-hidden p-1">
+              <ToolIconRenderer type={tool.icon} />
+            </div>
+            <p className="font-sans text-xs sm:text-sm font-bold text-[#191919] tracking-tight whitespace-nowrap truncate">
               {tool.name}
             </p>
-            <div className="mt-1">
-              <span
-                className={`inline-block font-sans text-[10px] font-semibold tracking-wide px-2.5 py-0.5 rounded-full ${
-                  tool.accent
-                    ? "bg-[#ffff7b] text-[#191919] font-bold shadow-xs"
-                    : "bg-black/[0.06] text-[#444444] font-medium"
-                }`}
-              >
-                {tool.label}
-              </span>
-            </div>
           </div>
+
+          <span
+            className={`font-sans text-[10px] sm:text-xs font-bold tracking-wide px-3 py-1.5 rounded-full whitespace-nowrap flex-shrink-0 ${
+              tool.accent
+                ? "bg-[#ffff7b] text-[#191919] shadow-xs"
+                : "bg-[#191919] text-white shadow-xs"
+            }`}
+          >
+            {tool.label}
+          </span>
         </div>
       ))}
     </div>
