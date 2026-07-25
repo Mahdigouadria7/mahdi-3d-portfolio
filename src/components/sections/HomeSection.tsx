@@ -116,26 +116,40 @@ export default function HomeSection({ isDriving }: HomeSectionProps) {
                 </p>
             </div>
 
-            {/* ── Client Logos Marquee Row (Optically Balanced & Significantly Enlarged Sams, Orange, Diari, Jouda) ── */}
-            <div className="w-full relative py-4 select-none pointer-events-none z-10">
+            {/* ── TOP Yellow Ticker Bar ── */}
+            <div className="w-full bg-[#ffff7b] text-[#141414] py-3 overflow-hidden select-none pointer-events-none border-t border-b border-black/10 z-10">
+                <div className="animate-marquee-ticker inline-flex items-center whitespace-nowrap">
+                    {/* Exactly 2 copies so translateX(-50%) loops with zero jump */}
+                    {[...SKILLS_BAR, ...SKILLS_BAR].map((skill, i) => (
+                        <span key={i} className="inline-flex items-center font-sans font-bold text-xs md:text-sm tracking-wide text-[#141414] uppercase px-5">
+                            {skill}
+                            <span className="text-[#141414]/40 ml-5">✦</span>
+                        </span>
+                    ))}
+                </div>
+            </div>
+
+            {/* ── Client Logos Marquee Row ── */}
+            <div className="w-full relative py-4 select-none pointer-events-none z-10 bg-[#141414]">
                 <div
                     className="w-full overflow-hidden"
                     style={{
-                        maskImage: "linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%)",
-                        WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%)",
+                        maskImage: "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
+                        WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
                     }}
                 >
-                    <div className="animate-marquee-logos flex flex-row items-center gap-8 sm:gap-12 md:gap-16 whitespace-nowrap">
-                        {[...CLIENT_LOGOS, ...CLIENT_LOGOS, ...CLIENT_LOGOS].map((client, i) => (
+                    <div className="animate-marquee-logos inline-flex items-center gap-8 sm:gap-12 md:gap-16 whitespace-nowrap">
+                        {/* Exactly 2 copies so translateX(-50%) loops with zero jump */}
+                        {[...CLIENT_LOGOS, ...CLIENT_LOGOS].map((client, i) => (
                             <div
                                 key={i}
-                                className="inline-flex items-center justify-center min-w-[80px] sm:min-w-[100px] md:min-w-[130px] h-12 md:h-16 px-2 md:px-3 flex-shrink-0 opacity-90 transition-opacity duration-300"
+                                className="inline-flex items-center justify-center min-w-[80px] sm:min-w-[100px] md:min-w-[130px] h-12 md:h-16 px-2 md:px-3 flex-shrink-0 opacity-90"
                             >
                                 <img
                                     src={client.url}
                                     alt={client.name}
                                     style={client.style}
-                                    className="w-auto h-auto object-contain transition-transform duration-300"
+                                    className="w-auto h-auto object-contain"
                                 />
                             </div>
                         ))}
@@ -143,13 +157,13 @@ export default function HomeSection({ isDriving }: HomeSectionProps) {
                 </div>
             </div>
 
-            {/* ── Bottom Yellow Ticker Bar (Exact match to Reference Image 2) ── */}
+            {/* ── BOTTOM Yellow Ticker Bar (reverse direction for visual depth) ── */}
             <div className="w-full bg-[#ffff7b] text-[#141414] py-3 overflow-hidden select-none pointer-events-none border-t border-b border-black/10 z-10">
-                <div className="animate-marquee-ticker flex flex-row items-center whitespace-nowrap">
-                    {[...SKILLS_BAR, ...SKILLS_BAR, ...SKILLS_BAR, ...SKILLS_BAR].map((skill, i) => (
+                <div className="animate-marquee-ticker-reverse inline-flex items-center whitespace-nowrap">
+                    {[...SKILLS_BAR, ...SKILLS_BAR].map((skill, i) => (
                         <span key={i} className="inline-flex items-center font-sans font-bold text-xs md:text-sm tracking-wide text-[#141414] uppercase px-5">
                             {skill}
-                            <span className="text-[#141414]/40 ml-5">✶</span>
+                            <span className="text-[#141414]/40 ml-5">✦</span>
                         </span>
                     ))}
                 </div>
