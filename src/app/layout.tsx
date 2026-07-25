@@ -5,6 +5,7 @@ import StickyHeader from "@/components/StickyHeader";
 import SecurityWrapper from "@/components/ui/SecurityWrapper";
 import Preloader from "@/components/ui/Preloader";
 import SmoothScrolling from "@/components/ui/SmoothScrolling";
+import InAppBrowserDetector from "@/components/ui/InAppBrowserDetector";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,7 +38,7 @@ export const metadata: Metadata = {
     siteName: "Mahdi 3D Portfolio",
     images: [
       {
-        url: "/og-image.png",
+        url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_1200/portfolio/hero_frames/frame_00150.jpg",
         width: 1200,
         height: 630,
         alt: "Mahdi 3D Portfolio Cover",
@@ -50,7 +51,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Mahdi | Premium 3D Portfolio",
     description: "Explore cinematic 3D renders, CGI projects, and immersive web experiences.",
-    images: ["/og-image.png"],
+    images: ["https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_1200/portfolio/hero_frames/frame_00150.jpg"],
   },
 };
 
@@ -64,14 +65,15 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${rajdhani.variable} ${spaceGrotesk.variable} antialiased`}
     >
-      <body className="flex flex-col">
-        <SmoothScrolling>
-          <Preloader />
-          <SecurityWrapper>
+      <body className="flex flex-col selection:bg-fuchsia-500/30 selection:text-white overflow-x-hidden">
+        <InAppBrowserDetector />
+        <SecurityWrapper>
+          <SmoothScrolling>
+            <Preloader />
             <StickyHeader />
             {children}
-          </SecurityWrapper>
-        </SmoothScrolling>
+          </SmoothScrolling>
+        </SecurityWrapper>
       </body>
     </html>
   );
