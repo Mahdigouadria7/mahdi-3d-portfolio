@@ -184,19 +184,6 @@ export default function ContactSection() {
                     )}
                 </div>
             </div>
-
-            {/* ── Bottom border ──────────────────────────── */}
-            <div className="w-full h-px bg-white/10" />
-
-            {/* ── Footer ─────────────────────────────────── */}
-            <div className="flex items-center justify-between px-6 md:px-16 py-6">
-                <span className="font-mono text-[10px] text-white/30 tracking-widest uppercase">
-                    © {new Date().getFullYear()} Mahdi Gouadria
-                </span>
-                <span className="font-mono text-[10px] text-white/30 tracking-widest uppercase">
-                    3D Designer & Developer
-                </span>
-            </div>
         </section>
     );
 }
