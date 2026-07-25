@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import ScrollReveal from "@/components/ui/ScrollReveal";
 
 export default function ContactSection() {
     const [submitted, setSubmitted] = useState(false);
@@ -9,176 +8,194 @@ export default function ContactSection() {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
-        // Simulate send — replace with real API call
         setTimeout(() => {
             setLoading(false);
             setSubmitted(true);
         }, 1200);
     };
 
+    const links = [
+        { label: "Email", href: "mailto:mahdi@example.com", sub: "mahdi@example.com" },
+        { label: "LinkedIn", href: "https://linkedin.com", sub: "linkedin.com/in/mahdi" },
+        { label: "Instagram", href: "https://instagram.com", sub: "@mahdi.3d" },
+        { label: "Behance", href: "https://behance.net", sub: "behance.net/mahdi" },
+    ];
+
     return (
         <section
+            id="contact"
             aria-labelledby="contact-heading"
-            className="relative w-full min-h-[100dvh] flex-shrink-0 flex items-center justify-center p-6 md:p-12 overflow-hidden pointer-events-none"
+            className="relative w-full"
+            style={{ background: "var(--nico-cream)" }}
         >
-            <div className="max-w-7xl w-full mx-auto relative z-10 pointer-events-auto grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-12 md:gap-24 items-center">
-
-                {/* Left Side: Typography & Vertical List */}
-                <ScrollReveal direction="right" delay={0.2} className="flex flex-col">
+            {/* ── Section Header ─────────────────────────── */}
+            <div className="flex flex-col md:flex-row items-start md:items-end justify-between px-6 md:px-16 pt-20 pb-10 gap-6">
+                <div>
+                    <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-[#5c5c5c] block mb-3">
+                        Contact
+                    </span>
                     <h2
                         id="contact-heading"
-                        className="text-5xl md:text-7xl font-siegra font-black tracking-widest text-white uppercase leading-none drop-shadow-2xl"
+                        className="font-playfair text-6xl md:text-8xl text-[#191919] leading-none"
+                        style={{ fontWeight: 800 }}
                     >
-                        GET IN<br/>TOUCH
+                        Get in
+                        <br />
+                        <em className="font-playfair italic" style={{ fontWeight: 400 }}>
+                            Touch
+                        </em>
                     </h2>
-                    <p className="text-white/60 text-sm mt-4 font-semibold tracking-widest uppercase">
-                        (Contact &amp; Socials)
-                    </p>
+                </div>
+                <p className="font-mono text-xs md:text-sm text-[#5c5c5c] max-w-xs md:pb-3 leading-relaxed">
+                    Available for 3D commissions, CGI projects, web collaborations, and creative direction.
+                </p>
+            </div>
 
-                    {/* Vertical Links List */}
-                    <nav aria-label="Social links" className="mt-12 flex flex-col">
-                        <a
-                            href="mailto:mahdi@example.com"
-                            className="py-4 border-t border-white/10 text-red-500 font-bold tracking-widest uppercase hover:text-red-400 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
-                        >
-                            EMAIL
-                        </a>
-                        <a
-                            href="https://linkedin.com"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="py-4 border-t border-white/10 text-white font-bold tracking-widest uppercase hover:text-white/70 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
-                        >
-                            LINKEDIN
-                        </a>
-                        <a
-                            href="https://twitter.com"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="py-4 border-t border-white/10 text-white font-bold tracking-widest uppercase hover:text-white/70 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
-                        >
-                            X (TWITTER)
-                        </a>
-                        <a
-                            href="https://instagram.com"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="py-4 border-t border-b border-white/10 text-white font-bold tracking-widest uppercase hover:text-white/70 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
-                        >
-                            INSTAGRAM
-                        </a>
-                    </nav>
-                </ScrollReveal>
+            {/* ── Top border ─────────────────────────────── */}
+            <div className="w-full h-px bg-[#191919]/10" />
 
-                {/* Right Side: Form Card */}
-                <ScrollReveal direction="left" delay={0.4}>
-                    <div className="bg-black/60 backdrop-blur-xl border border-white/15 shadow-2xl shadow-black/90 p-8 md:p-12 flex flex-col justify-center min-h-[500px] relative group hover:border-fuchsia-400/60 hover:shadow-[0_0_30px_rgba(217,70,239,0.2)] transition-all duration-500 rounded-2xl">
-                        {/* HUD corner brackets */}
-                        <span className="absolute top-0 left-0 w-4 h-4 border-t border-l border-fuchsia-400/40 pointer-events-none" />
-                        <span className="absolute top-0 right-0 w-4 h-4 border-t border-r border-fuchsia-400/40 pointer-events-none" />
-                        <span className="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-fuchsia-400/40 pointer-events-none" />
-                        <span className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-fuchsia-400/40 pointer-events-none" />
+            {/* ── Two-column layout ──────────────────────── */}
+            <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-[#191919]/10">
 
-                        <h3 className="font-mono text-xs font-bold text-fuchsia-400/70 uppercase tracking-[0.3em] mb-8">
-                        &gt; DROP A MESSAGE_<span className="animate-blink">|</span>
-                        </h3>
-
-                        {/* SUCCESS STATE */}
-                        {submitted ? (
-                            <div className="flex flex-col items-center justify-center h-full gap-6 py-16 animate-fadeIn">
-                                <div className="w-20 h-20 rounded-full bg-fuchsia-500/20 border-2 border-fuchsia-400 flex items-center justify-center">
-                                    <svg className="w-10 h-10 text-fuchsia-400" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                                    </svg>
-                                </div>
-                                <h3 className="text-2xl font-bold text-white uppercase tracking-wider text-center">Message Sent!</h3>
-                                <p className="text-white/60 text-center max-w-xs">Thanks for reaching out. I&apos;ll get back to you within 24 hours.</p>
-                                <button
-                                    onClick={() => setSubmitted(false)}
-                                    className="mt-4 px-8 py-3 border border-fuchsia-400/50 text-fuchsia-400 text-sm font-bold uppercase tracking-widest rounded-full hover:bg-fuchsia-400/10 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-400"
+                {/* Left: social links list */}
+                <div className="divide-y divide-[#191919]/10">
+                    {links.map((link) => (
+                        <a
+                            key={link.label}
+                            href={link.href}
+                            target={link.href.startsWith("http") ? "_blank" : undefined}
+                            rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                            className="group flex items-center justify-between px-6 md:px-16 py-7 hover:bg-[#191919]/[0.03] transition-colors duration-300"
+                        >
+                            <div>
+                                <p
+                                    className="font-playfair text-2xl md:text-3xl text-[#191919] group-hover:italic transition-all duration-300"
+                                    style={{ fontWeight: 600 }}
                                 >
-                                    Send Another
-                                </button>
+                                    {link.label}
+                                </p>
+                                <p className="font-mono text-[10px] text-[#5c5c5c] mt-0.5 tracking-wide">
+                                    {link.sub}
+                                </p>
                             </div>
-                        ) : (
-                            <>
-                                <h3 className="text-2xl font-bold text-white uppercase tracking-wider mb-8 group-hover:text-fuchsia-300 transition-colors duration-500">
-                                    Drop a Message
+                            <span className="w-9 h-9 rounded-full border border-[#191919]/15 flex items-center justify-center text-[#191919]/30 group-hover:text-[#191919] group-hover:border-[#191919]/40 group-hover:bg-[#191919]/5 transition-all duration-300 group-hover:translate-x-1 text-sm flex-shrink-0">
+                                →
+                            </span>
+                        </a>
+                    ))}
+                </div>
+
+                {/* Right: contact form */}
+                <div className="px-6 md:px-16 py-12">
+                    {submitted ? (
+                        <div className="flex flex-col items-start gap-6 py-4 animate-fadeIn">
+                            <div className="w-12 h-12 rounded-full bg-[#191919] flex items-center justify-center">
+                                <svg className="w-6 h-6 text-[#ffff7b]" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 className="font-playfair text-3xl text-[#191919] mb-2" style={{ fontWeight: 700 }}>
+                                    Message sent!
                                 </h3>
-
-                                <form onSubmit={handleSubmit} className="space-y-6" noValidate>
-                                    <div className="grid md:grid-cols-2 gap-6">
-                                        <div className="flex flex-col gap-2">
-                                            <label htmlFor="contact-name" className="text-xs font-semibold tracking-widest uppercase text-white/60">
-                                                Name
-                                            </label>
-                                            <input
-                                                id="contact-name"
-                                                type="text"
-                                                required
-                                                placeholder="Your name"
-                                                className="w-full px-0 py-3 bg-transparent border-b border-white/20 text-white placeholder:text-white/30 focus:outline-none focus:border-fuchsia-400 transition-all rounded-none"
-                                            />
-                                        </div>
-                                        <div className="flex flex-col gap-2">
-                                            <label htmlFor="contact-email" className="text-xs font-semibold tracking-widest uppercase text-white/60">
-                                                Email
-                                            </label>
-                                            <input
-                                                id="contact-email"
-                                                type="email"
-                                                required
-                                                placeholder="you@example.com"
-                                                className="w-full px-0 py-3 bg-transparent border-b border-white/20 text-white placeholder:text-white/30 focus:outline-none focus:border-fuchsia-400 transition-all rounded-none"
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <div className="flex flex-col gap-2">
-                                        <label htmlFor="contact-message" className="text-xs font-semibold tracking-widest uppercase text-white/60">
-                                            Message
-                                        </label>
-                                        <textarea
-                                            id="contact-message"
-                                            rows={4}
-                                            required
-                                            placeholder="Tell me about your project..."
-                                            className="w-full px-0 py-3 bg-transparent border-b border-white/20 text-white placeholder:text-white/30 focus:outline-none focus:border-fuchsia-400 transition-all resize-none rounded-none"
-                                        />
-                                    </div>
-
-                                    <div className="pt-6 flex flex-col sm:flex-row gap-4 items-start">
-                                        <button
-                                            type="submit"
-                                            disabled={loading}
-                                            className="relative px-10 py-3 font-mono text-[11px] font-bold tracking-[0.25em] uppercase text-fuchsia-300 border border-fuchsia-400/40 hover:border-fuchsia-400/80 hover:bg-fuchsia-500/5 hover:text-fuchsia-200 transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-fuchsia-400 flex items-center gap-3"
-                                        >
-                                            {loading ? (
-                                                <>
-                                                    <svg className="animate-spin w-4 h-4" fill="none" viewBox="0 0 24 24">
-                                                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
-                                                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"/>
-                                                    </svg>
-                                                    Sending...
-                                                </>
-                                            ) : "Send Message"}
-                                        </button>
-                                    </div>
-                                </form>
-                            </>
-                        )}
-
-                        <div className="mt-auto pt-8 flex justify-between items-end">
-                            <p className="text-white/20 text-[10px] tracking-widest uppercase">
-                                &copy; {new Date().getFullYear()} Mahdi Gouadria.
-                            </p>
-                            <div className="text-5xl font-black text-white/10 leading-none">
-                                03
+                                <p className="font-mono text-xs text-[#5c5c5c] leading-relaxed max-w-xs">
+                                    Thanks for reaching out. I&apos;ll get back to you within 24 hours.
+                                </p>
                             </div>
+                            <button
+                                onClick={() => setSubmitted(false)}
+                                className="font-mono text-xs text-[#5c5c5c] underline underline-offset-4 hover:text-[#191919] transition-colors"
+                            >
+                                Send another message
+                            </button>
                         </div>
-                    </div>
-                </ScrollReveal>
+                    ) : (
+                        <form onSubmit={handleSubmit} className="flex flex-col gap-8" noValidate>
+                            <h3
+                                className="font-playfair text-2xl text-[#191919]"
+                                style={{ fontWeight: 600 }}
+                            >
+                                Send a message
+                            </h3>
 
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                <div className="flex flex-col gap-1.5">
+                                    <label htmlFor="c-name" className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#5c5c5c]">
+                                        Name
+                                    </label>
+                                    <input
+                                        id="c-name"
+                                        type="text"
+                                        required
+                                        placeholder="Your name"
+                                        className="w-full bg-transparent border-b border-[#191919]/20 text-[#191919] placeholder:text-[#191919]/25 py-2.5 focus:outline-none focus:border-[#191919]/60 transition-colors font-mono text-sm"
+                                    />
+                                </div>
+                                <div className="flex flex-col gap-1.5">
+                                    <label htmlFor="c-email" className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#5c5c5c]">
+                                        Email
+                                    </label>
+                                    <input
+                                        id="c-email"
+                                        type="email"
+                                        required
+                                        placeholder="you@example.com"
+                                        className="w-full bg-transparent border-b border-[#191919]/20 text-[#191919] placeholder:text-[#191919]/25 py-2.5 focus:outline-none focus:border-[#191919]/60 transition-colors font-mono text-sm"
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="flex flex-col gap-1.5">
+                                <label htmlFor="c-message" className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#5c5c5c]">
+                                    Message
+                                </label>
+                                <textarea
+                                    id="c-message"
+                                    rows={4}
+                                    required
+                                    placeholder="Tell me about your project..."
+                                    className="w-full bg-transparent border-b border-[#191919]/20 text-[#191919] placeholder:text-[#191919]/25 py-2.5 focus:outline-none focus:border-[#191919]/60 transition-colors resize-none font-mono text-sm"
+                                />
+                            </div>
+
+                            <button
+                                type="submit"
+                                disabled={loading}
+                                className="self-start inline-flex items-center gap-3 bg-[#191919] text-white font-mono text-xs tracking-[0.2em] uppercase px-8 py-4 rounded-full hover:bg-[#191919]/80 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                            >
+                                {loading ? (
+                                    <>
+                                        <svg className="animate-spin w-3.5 h-3.5" fill="none" viewBox="0 0 24 24">
+                                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+                                        </svg>
+                                        Sending...
+                                    </>
+                                ) : (
+                                    <>
+                                        Send message
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                            <path d="M5 12h14M12 5l7 7-7 7" />
+                                        </svg>
+                                    </>
+                                )}
+                            </button>
+                        </form>
+                    )}
+                </div>
+            </div>
+
+            {/* ── Bottom border ──────────────────────────── */}
+            <div className="w-full h-px bg-[#191919]/10" />
+
+            {/* ── Footer ─────────────────────────────────── */}
+            <div className="flex items-center justify-between px-6 md:px-16 py-6">
+                <span className="font-mono text-[10px] text-[#5c5c5c]/40 tracking-widest uppercase">
+                    © {new Date().getFullYear()} Mahdi Gouadria
+                </span>
+                <span className="font-mono text-[10px] text-[#5c5c5c]/40 tracking-widest uppercase">
+                    3D Designer & Developer
+                </span>
             </div>
         </section>
     );
