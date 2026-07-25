@@ -24,17 +24,18 @@ function CursorArrow({ className = "" }: { className?: string }) {
   );
 }
 
-/* ── Tool data — custom scroll parallax vectors & floating delays ─────── */
+/* ── Tool data with explosion vectors (starting hidden near center, floating out to sides) ── */
 const TOOLS = [
   {
     id: "3dsmax",
     name: "3DS Max",
     label: "3D Modeling",
     accent: false,
-    pos: "top-[8%] left-[4%]",
+    posStyle: { top: "8%", left: "5%" },
     posLabel: "right",
-    parallaxY: -80, // moves UP as scroll down
-    parallaxX: -40, // moves LEFT
+    // Starts 380px right and 200px down (at headline center)
+    startX: 380,
+    startY: 200,
     floatDelay: "0s",
   },
   {
@@ -42,10 +43,11 @@ const TOOLS = [
     name: "Redshift",
     label: "GPU Rendering",
     accent: true,
-    pos: "top-[4%] left-[36%]",
+    posStyle: { top: "4%", left: "37%" },
     posLabel: "right",
-    parallaxY: 60,  // moves DOWN as scroll down
-    parallaxX: 30,
+    // Starts 260px down
+    startX: 0,
+    startY: 260,
     floatDelay: "0.8s",
   },
   {
@@ -53,10 +55,11 @@ const TOOLS = [
     name: "Cinema 4D",
     label: "Motion Design",
     accent: false,
-    pos: "top-[10%] right-[5%]",
+    posStyle: { top: "10%", right: "5%" },
     posLabel: "left",
-    parallaxY: -90,
-    parallaxX: 50,
+    // Starts 380px left and 200px down
+    startX: -380,
+    startY: 200,
     floatDelay: "1.4s",
   },
   {
@@ -64,37 +67,40 @@ const TOOLS = [
     name: "Blender",
     label: "Open Source 3D",
     accent: false,
-    pos: "bottom-[20%] left-[5%]",
+    posStyle: { bottom: "20%", left: "5%" },
     posLabel: "right",
-    parallaxY: 70,
-    parallaxX: -35,
+    // Starts 380px right and 200px up
+    startX: 380,
+    startY: -200,
     floatDelay: "2.1s",
-  },
-  {
-    id: "houdini",
-    name: "Houdini",
-    label: "VFX & Simulation",
-    accent: true,
-    pos: "bottom-[16%] right-[7%]",
-    posLabel: "left",
-    parallaxY: -65,
-    parallaxX: 45,
-    floatDelay: "1.2s",
   },
   {
     id: "zbrush",
     name: "ZBrush",
     label: "Digital Sculpting",
     accent: false,
-    pos: "bottom-[4%] left-[38%]",
+    posStyle: { bottom: "4%", left: "37%" },
     posLabel: "right",
-    parallaxY: 50,
-    parallaxX: -20,
+    // Starts 260px up
+    startX: 0,
+    startY: -260,
     floatDelay: "0.5s",
+  },
+  {
+    id: "houdini",
+    name: "Houdini",
+    label: "VFX & Simulation",
+    accent: true,
+    posStyle: { bottom: "16%", right: "6%" },
+    posLabel: "left",
+    // Starts 380px left and 200px up
+    startX: -380,
+    startY: -200,
+    floatDelay: "1.2s",
   },
 ];
 
-/* ── Single Floating Tool card with Scroll Parallax & Idle Float ─────────── */
+/* ── Single Floating Tool Card with Scroll Explosion & Idle Float ─────── */
 function ToolCard({
   tool,
   scrollProgress,
@@ -104,22 +110,37 @@ function ToolCard({
 }) {
   const [hovered, setHovered] = useState(false);
 
-  // Parallax offset based on scroll progress (centered around 0.5)
-  const factor = (scrollProgress - 0.5) * 2; // -1 to +1
-  const offsetY = factor * tool.parallaxY;
-  const offsetX = factor * tool.parallaxX;
+  // Scroll Entrance Progress: 0 (when section top enters) to 1 (when centered)
+  // Maps scrollProgress [0.05..0.45] -> [0..1]
+  const rawProgress = (scrollProgress - 0.05) / 0.40;
+  const clampedProgress = Math.max(0, Math.min(1, rawProgress));
+  
+  // Smooth cubic ease-out for expanding from center: 1 - (1 - x)^3
+  const easeProgress = 1 - Math.pow(1 - clampedProgress, 3);
+
+  // Offset goes from startX/startY (center) -> 0 (outer resting position)
+  const offsetX = tool.startX * (1 - easeProgress);
+  const offsetY = tool.startY * (1 - easeProgress);
+
+  // Scale goes from 0.3 (small in center) -> 1.0 (full size)
+  const scale = 0.3 + easeProgress * 0.7;
+
+  // Opacity fades in from 0 -> 1 as they float outwards
+  const opacity = easeProgress;
 
   return (
     <div
-      className={`absolute ${tool.pos} z-20 transition-transform duration-500 ease-out`}
+      className="absolute z-20 pointer-events-auto transition-transform duration-300 ease-out"
       style={{
-        transform: `translate3d(${offsetX}px, ${offsetY}px, 0px)`,
+        ...tool.posStyle,
+        transform: `translate3d(${offsetX}px, ${offsetY}px, 0px) scale(${hovered ? scale * 1.1 : scale})`,
+        opacity: opacity,
       }}
     >
       {/* Inner float wrapper for continuous sine-wave idle movement */}
       <div
-        className={`flex items-center gap-2 transition-all duration-300 ${
-          hovered ? "scale-110 -translate-y-1" : "scale-100"
+        className={`flex items-center gap-2.5 transition-all duration-300 ${
+          hovered ? "-translate-y-1" : ""
         }`}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
@@ -147,7 +168,7 @@ function ToolCard({
         {/* Icon card */}
         <div
           className={`w-13 h-13 md:w-16 md:h-16 bg-white rounded-2xl shadow-lg flex items-center justify-center border border-black/5 transition-all duration-300 ${
-            hovered ? "shadow-2xl border-black/15" : "shadow-md"
+            hovered ? "shadow-2xl border-black/20" : "shadow-md"
           }`}
         >
           <span className="font-playfair font-black text-xl md:text-2xl text-[#191919] italic select-none">
@@ -209,10 +230,10 @@ function ToolGrid() {
   );
 }
 
-/* ── Main Section with Scroll Listener ─────────────────────────────────── */
+/* ── Main Section with Scroll Explosion Listener ───────────────────────── */
 export default function FloatingToolsSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const [scrollProgress, setScrollProgress] = useState(0.5);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -220,7 +241,7 @@ export default function FloatingToolsSection() {
       const rect = sectionRef.current.getBoundingClientRect();
       const windowHeight = window.innerHeight;
 
-      // Calculate 0 to 1 progress as section scrolls through window
+      // Calculate 0 to 1 progress as section travels into viewport
       const totalDist = windowHeight + rect.height;
       const currentPos = windowHeight - rect.top;
       const progress = Math.max(0, Math.min(1, currentPos / totalDist));
@@ -238,14 +259,14 @@ export default function FloatingToolsSection() {
       className="relative w-full overflow-hidden"
       style={{ background: "var(--nico-cream, #f5f4ef)" }}
     >
-      {/* Custom Keyframe for idle float */}
+      {/* Keyframes for continuous subtle idle float */}
       <style jsx global>{`
         @keyframes floatingTool {
           0%, 100% {
             transform: translateY(0px) rotate(0deg);
           }
           50% {
-            transform: translateY(-10px) rotate(1deg);
+            transform: translateY(-8px) rotate(0.8deg);
           }
         }
       `}</style>
@@ -255,19 +276,14 @@ export default function FloatingToolsSection() {
         className="hidden md:block relative w-full"
         style={{ minHeight: "85vh" }}
       >
-        {/* Absolute floating tools with scroll parallax */}
+        {/* Floating tools that start hidden at center and expand outwards on scroll */}
         {TOOLS.map((tool) => (
           <ToolCard key={tool.id} tool={tool} scrollProgress={scrollProgress} />
         ))}
 
-        {/* Central headline — centered with subtle parallax zoom */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none px-8">
-          <div
-            className="text-center max-w-2xl transition-transform duration-700 ease-out"
-            style={{
-              transform: `translateY(${(scrollProgress - 0.5) * -20}px)`,
-            }}
-          >
+        {/* Central headline */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none px-8 z-10">
+          <div className="text-center max-w-2xl">
             <p className="font-mono text-[10px] md:text-xs tracking-[0.35em] uppercase text-[#666] mb-6 font-semibold">
               SOFTWARE ARSENAL
             </p>
