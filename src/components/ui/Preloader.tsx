@@ -65,15 +65,14 @@ export default function Preloader() {
         return () => clearInterval(interval);
     }, []);
 
-    // ── 3. Interactive Mouse Image Trail (Always Randomized from Projects) ─────
-    const handleMouseMove = (e: React.MouseEvent) => {
-        const dist = Math.hypot(e.clientX - lastPosRef.current.x, e.clientY - lastPosRef.current.y);
+    // ── 3. Interactive Mouse / Touch Image Trail ───────────────────────────
+    const createTrailItem = (x: number, y: number) => {
+        const dist = Math.hypot(x - lastPosRef.current.x, y - lastPosRef.current.y);
 
         if (dist > 40) {
-            lastPosRef.current = { x: e.clientX, y: e.clientY };
+            lastPosRef.current = { x, y };
             const newId = Date.now() + Math.random();
-            
-            // First image is ALWAYS Mahdi's portrait; ALL subsequent images are randomly picked from project renders
+
             let nextImg: string;
             if (imageCountRef.current === 0) {
                 nextImg = MAHDI_PORTRAIT;
@@ -82,13 +81,23 @@ export default function Preloader() {
                 nextImg = PROJECT_IMAGES[randomIndex];
             }
             imageCountRef.current += 1;
-            
+
             const randomRot = (Math.random() - 0.5) * 26;
 
             setTrail((prev) => [
-                ...prev.slice(-6),
-                { id: newId, x: e.clientX, y: e.clientY, image: nextImg, rotation: randomRot }
+                ...prev.slice(-5),
+                { id: newId, x, y, image: nextImg, rotation: randomRot }
             ]);
+        }
+    };
+
+    const handleMouseMove = (e: React.MouseEvent) => {
+        createTrailItem(e.clientX, e.clientY);
+    };
+
+    const handleTouchMove = (e: React.TouchEvent) => {
+        if (e.touches[0]) {
+            createTrailItem(e.touches[0].clientX, e.touches[0].clientY);
         }
     };
 
@@ -102,24 +111,25 @@ export default function Preloader() {
     return (
         <div
             onMouseMove={handleMouseMove}
-            className={`fixed inset-0 z-[999999] bg-[#070707] text-white flex flex-col justify-between p-6 md:p-12 overflow-hidden transition-all duration-900 ease-[cubic-bezier(0.16,1,0.3,1)] select-none ${
+            onTouchMove={handleTouchMove}
+            className={`fixed inset-0 z-[999999] bg-[#070707] text-white flex flex-col justify-between p-4 sm:p-8 md:p-12 overflow-hidden transition-all duration-900 ease-[cubic-bezier(0.16,1,0.3,1)] select-none ${
                 isLoading ? "opacity-100 pointer-events-auto scale-100" : "opacity-0 pointer-events-none scale-105"
             }`}
         >
             {/* ── Corner Precision Crosshairs (+) ────────────────────────────── */}
-            <span className={`absolute top-6 left-6 text-white/30 font-mono text-xs z-20 transition-opacity duration-700 ${animateIn ? "opacity-100" : "opacity-0"}`}>+</span>
-            <span className={`absolute top-6 right-6 text-white/30 font-mono text-xs z-20 transition-opacity duration-700 ${animateIn ? "opacity-100" : "opacity-0"}`}>+</span>
-            <span className={`absolute bottom-6 left-6 text-white/30 font-mono text-xs z-20 transition-opacity duration-700 ${animateIn ? "opacity-100" : "opacity-0"}`}>+</span>
-            <span className={`absolute bottom-6 right-6 text-white/30 font-mono text-xs z-20 transition-opacity duration-700 ${animateIn ? "opacity-100" : "opacity-0"}`}>+</span>
+            <span className={`absolute top-4 left-4 sm:top-6 sm:left-6 text-white/30 font-mono text-xs z-20 transition-opacity duration-700 ${animateIn ? "opacity-100" : "opacity-0"}`}>+</span>
+            <span className={`absolute top-4 right-4 sm:top-6 sm:right-6 text-white/30 font-mono text-xs z-20 transition-opacity duration-700 ${animateIn ? "opacity-100" : "opacity-0"}`}>+</span>
+            <span className={`absolute bottom-4 left-4 sm:bottom-6 sm:left-6 text-white/30 font-mono text-xs z-20 transition-opacity duration-700 ${animateIn ? "opacity-100" : "opacity-0"}`}>+</span>
+            <span className={`absolute bottom-4 right-4 sm:bottom-6 sm:right-6 text-white/30 font-mono text-xs z-20 transition-opacity duration-700 ${animateIn ? "opacity-100" : "opacity-0"}`}>+</span>
 
-            {/* ── Mouse Follow Image Trail (Fades out automatically) ────────── */}
+            {/* ── Mouse / Touch Follow Image Trail ────────────────────────── */}
             {trail.map((item, index) => (
                 <div
                     key={item.id}
-                    className="fixed z-30 pointer-events-none w-28 h-36 sm:w-36 sm:h-48 md:w-40 md:h-52 rounded-2xl overflow-hidden shadow-[0_25px_60px_rgba(0,0,0,0.9)] border border-white/20 bg-black transition-all duration-650 ease-out"
+                    className="fixed z-30 pointer-events-none w-24 h-32 sm:w-36 sm:h-48 md:w-40 md:h-52 rounded-2xl overflow-hidden shadow-[0_25px_60px_rgba(0,0,0,0.9)] border border-white/20 bg-black transition-all duration-650 ease-out"
                     style={{
-                        left: item.x - 70,
-                        top: item.y - 90,
+                        left: item.x - 50,
+                        top: item.y - 65,
                         transform: `rotate(${item.rotation}deg) scale(${1 - (trail.length - 1 - index) * 0.08})`,
                         opacity: (index + 1) / trail.length,
                     }}
@@ -131,7 +141,7 @@ export default function Preloader() {
 
             {/* ── Left Vertical Guideline & Meta Labels ─────────────────────── */}
             <div
-                className={`absolute left-6 md:left-12 top-0 bottom-0 w-px bg-white/10 flex flex-col justify-between items-center py-10 z-10 pointer-events-none transition-all duration-900 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                className={`absolute left-3 sm:left-6 md:left-12 top-0 bottom-0 w-px bg-white/10 hidden sm:flex flex-col justify-between items-center py-10 z-10 pointer-events-none transition-all duration-900 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                     !animateIn
                         ? "-translate-x-6 opacity-0"
                         : isLoading
@@ -148,7 +158,7 @@ export default function Preloader() {
 
             {/* ── Top-Right Rotating Circular Badge ────────────────────────── */}
             <div
-                className={`absolute top-6 right-6 md:top-12 md:right-12 z-10 transition-all duration-900 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                className={`absolute top-4 right-4 sm:top-6 sm:right-6 md:top-12 md:right-12 z-10 scale-90 sm:scale-100 transition-all duration-900 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                     !animateIn
                         ? "-translate-y-6 opacity-0 scale-90"
                         : isLoading
@@ -156,7 +166,7 @@ export default function Preloader() {
                         : "-translate-y-6 opacity-0 scale-90"
                 }`}
             >
-                <div className="relative w-16 h-16 md:w-20 md:h-20 flex items-center justify-center">
+                <div className="relative w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 flex items-center justify-center">
                     <svg className="w-full h-full animate-[spin_11s_linear_infinite]" viewBox="0 0 100 100">
                         <path
                             id="badge-path"
@@ -169,32 +179,32 @@ export default function Preloader() {
                             </textPath>
                         </text>
                     </svg>
-                    <span className="absolute font-mono text-[11px] font-bold text-[#ffff7b]">
+                    <span className="absolute font-mono text-[10px] sm:text-[11px] font-bold text-[#ffff7b]">
                         {progress}%
                     </span>
                 </div>
             </div>
 
-            {/* ── Main Multi-Motion Typography Section ──────────────────────── */}
-            <div className="my-auto max-w-5xl mx-auto w-full flex flex-col items-center justify-center text-center relative z-10 py-6 gap-2 md:gap-3 [perspective:1000px]">
+            {/* ── Main Multi-Motion Typography Section (Fully Responsive Mobile Layout) ── */}
+            <div className="my-auto max-w-5xl mx-auto w-full flex flex-col items-center justify-center text-center relative z-10 py-4 sm:py-6 gap-1.5 sm:gap-2.5 [perspective:1000px] px-2">
 
-                {/* LINE 1: CREATING — Tracking Expansion + Blur Dissolve Reveal */}
+                {/* LINE 1: CREATING — Responsive Font Scale & Blur Dissolve */}
                 <h1
-                    className={`font-playfair text-4xl sm:text-6xl md:text-8xl text-white font-medium uppercase leading-tight transition-all duration-900 ease-out ${
+                    className={`font-playfair text-2xl sm:text-5xl md:text-7xl lg:text-8xl text-white font-medium uppercase leading-tight transition-all duration-900 ease-out ${
                         !animateIn
-                            ? "tracking-[-0.2em] blur-md opacity-0 -translate-y-6"
+                            ? "tracking-[-0.1em] blur-md opacity-0 -translate-y-4"
                             : isLoading
                             ? "tracking-wider blur-0 opacity-100 translate-y-0"
-                            : "tracking-[-0.2em] blur-md opacity-0 -translate-y-6"
+                            : "tracking-[-0.1em] blur-md opacity-0 -translate-y-4"
                     }`}
                 >
                     CREATING
                 </h1>
 
-                {/* LINE 2: EXPERIENCES* — Staggered Character Mask Rise + Spinning Asterisk */}
-                <h2 className="font-playfair text-4xl sm:text-6xl md:text-8xl tracking-tight text-white font-medium uppercase leading-tight flex items-center justify-center gap-2">
+                {/* LINE 2: EXPERIENCES* — Responsive Mobile Inline Character Stack */}
+                <h2 className="font-playfair text-2xl sm:text-5xl md:text-7xl lg:text-8xl tracking-tight text-white font-medium uppercase leading-tight flex items-center justify-center gap-0.5 sm:gap-1.5 flex-nowrap">
                     {"EXPERIENCES".split("").map((char, index) => (
-                        <span key={index} className="inline-block overflow-hidden py-1">
+                        <span key={index} className="inline-block overflow-hidden py-0.5">
                             <span
                                 className={`inline-block transition-all duration-900 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${
                                     !animateIn
@@ -203,14 +213,14 @@ export default function Preloader() {
                                         ? "translate-y-0 rotate-0 opacity-100"
                                         : "-translate-y-[130%] -rotate-6 opacity-0"
                                 }`}
-                                style={{ transitionDelay: `${150 + index * 30}ms` }}
+                                style={{ transitionDelay: `${150 + index * 25}ms` }}
                             >
                                 {char}
                             </span>
                         </span>
                     ))}
                     <span
-                        className={`inline-block font-mono text-2xl md:text-4xl text-[#ffff7b] animate-[spin_5.5s_linear_infinite] transition-all duration-700 delay-300 ${
+                        className={`inline-block font-mono text-lg sm:text-2xl md:text-4xl text-[#ffff7b] animate-[spin_5.5s_linear_infinite] transition-all duration-700 delay-300 ml-0.5 ${
                             !animateIn
                                 ? "scale-0 opacity-0"
                                 : isLoading
@@ -222,30 +232,30 @@ export default function Preloader() {
                     </span>
                 </h2>
 
-                {/* LINE 3: IMPOSSIBLE — 3D Perspective Slam & Scale Impact */}
-                <div className="my-1 sm:my-2 overflow-hidden">
+                {/* LINE 3: IMPOSSIBLE — Responsive 3D Perspective Slam & Scale Impact */}
+                <div className="my-0.5 sm:my-1.5 overflow-hidden w-full">
                     <h3
-                        className={`font-sans text-5xl sm:text-7xl md:text-[130px] font-black text-[#d1c7b7] uppercase tracking-tighter leading-none transition-all duration-900 ease-[cubic-bezier(0.16,1,0.3,1)] delay-350 ${
+                        className={`font-sans text-3xl sm:text-6xl md:text-[100px] lg:text-[125px] font-black text-[#d1c7b7] uppercase tracking-tighter leading-none transition-all duration-900 ease-[cubic-bezier(0.16,1,0.3,1)] delay-350 ${
                             !animateIn
-                                ? "scale-[1.6] opacity-0 [transform:rotateX(45deg)]"
+                                ? "scale-[1.5] opacity-0 [transform:rotateX(45deg)]"
                                 : isLoading
                                 ? "scale-100 opacity-100 [transform:rotateX(0deg)]"
-                                : "scale-[0.8] opacity-0 [transform:rotateX(-45deg)]"
+                                : "scale-[0.85] opacity-0 [transform:rotateX(-45deg)]"
                         }`}
                     >
                         IMPOSSIBLE
                     </h3>
                 </div>
 
-                {/* LINE 4: TO IGNORE — Outline Stroke to Solid Fill + Horizontal Slide */}
-                <div className="overflow-hidden py-1">
+                {/* LINE 4: TO IGNORE — Responsive Fill & Slide */}
+                <div className="overflow-hidden py-0.5">
                     <h4
-                        className={`font-playfair text-4xl sm:text-6xl md:text-8xl tracking-tight uppercase leading-tight transition-all duration-900 ease-out delay-500 ${
+                        className={`font-playfair text-2xl sm:text-5xl md:text-7xl lg:text-8xl tracking-tight uppercase leading-tight transition-all duration-900 ease-out delay-500 ${
                             !animateIn
-                                ? "translate-x-20 opacity-0 text-transparent [stroke:1px_rgba(255,255,255,0.4)]"
+                                ? "translate-x-12 opacity-0 text-transparent [stroke:1px_rgba(255,255,255,0.4)]"
                                 : isLoading
                                 ? "translate-x-0 opacity-100 text-white"
-                                : "-translate-x-20 opacity-0 text-transparent"
+                                : "-translate-x-12 opacity-0 text-transparent"
                         }`}
                     >
                         TO IGNORE
@@ -253,30 +263,25 @@ export default function Preloader() {
                 </div>
             </div>
 
-            {/* ── Bottom Bar: Metadata & Line Progress ─────────────────────── */}
+            {/* ── Bottom Meta Bar ────────────────────────────────────────────── */}
             <div
-                className={`w-full max-w-4xl mx-auto flex flex-col gap-4 z-10 transition-all duration-900 ease-[cubic-bezier(0.16,1,0.3,1)] delay-500 ${
+                className={`flex flex-col sm:flex-row items-center justify-between gap-2 font-mono text-[9px] sm:text-[10px] text-white/40 tracking-[0.2em] uppercase z-10 transition-all duration-900 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                     !animateIn
-                        ? "translate-y-8 opacity-0"
+                        ? "translate-y-6 opacity-0"
                         : isLoading
                         ? "translate-y-0 opacity-100"
-                        : "translate-y-8 opacity-0"
+                        : "translate-y-6 opacity-0"
                 }`}
             >
-                {/* Meta details */}
-                <div className="w-full flex items-center justify-between font-mono text-[10px] sm:text-xs text-white/40 uppercase tracking-widest px-2">
+                <div className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#ffff7b]" />
                     <span>3D &amp; CGI STUDIO</span>
-                    <span className="text-[#ffff7b] animate-pulse">✦ LAT 36.8° N / LON 10.1° E</span>
-                    <span>TUNISIA · WORLDWIDE</span>
                 </div>
-
-                {/* Progress bar line */}
-                <div className="w-full h-px bg-white/10 relative overflow-hidden">
-                    <div
-                        className="h-full bg-[#ffff7b] transition-all duration-100 ease-out shadow-[0_0_8px_#ffff7b]"
-                        style={{ width: `${progress}%` }}
-                    />
+                <div className="hidden md:flex items-center gap-2 text-white/30">
+                    <span>✦</span>
+                    <span>LAT 36.8° N / LON 10.1° E</span>
                 </div>
+                <div>TUNISIA · WORLDWIDE</div>
             </div>
         </div>
     );
