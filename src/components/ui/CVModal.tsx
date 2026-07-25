@@ -109,7 +109,7 @@ export default function CVModal({ isOpen, onClose }: CVModalProps) {
                             
                             {/* Download Button */}
                             <a 
-                                href="https://res.cloudinary.com/zu63qo7h/image/upload/fl_attachment/mahdi_cv.pdf"
+                                href="/cv.pdf"
                                 download="Mahdi_CV.pdf"
                                 target="_blank"
                                 rel="noopener noreferrer"
