@@ -47,11 +47,11 @@ export default function FooterSection() {
     return (
         <footer className="relative w-full bg-[#191919] text-white pt-16 md:pt-24 pb-8 overflow-hidden border-t border-white/10">
 
-            {/* ── Top Row Grid: Callout + Networks + Contact Info ── */}
-            <div className="max-w-7xl mx-auto px-6 md:px-16 grid grid-cols-1 md:grid-cols-12 gap-10 pb-16">
+            {/* ── Top Row Grid: Horizontally Even 3-Column Layout ── */}
+            <div className="max-w-7xl mx-auto px-6 md:px-16 grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12 pb-16 items-start">
 
-                {/* Left: Have a project in mind? */}
-                <div className="md:col-span-5 flex flex-col items-start gap-4">
+                {/* Column 1: Left Callout */}
+                <div className="flex flex-col items-start gap-4">
                     <h3 className="font-sans text-2xl md:text-3xl font-medium text-white leading-tight">
                         Have a <em className="font-playfair italic font-normal">project</em> in mind?
                     </h3>
@@ -66,37 +66,39 @@ export default function FooterSection() {
                     </a>
                 </div>
 
-                {/* Middle: NETWORKS with Social Media Vector Icons */}
-                <div className="md:col-span-3 flex flex-col gap-3">
-                    <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-white/40 font-bold mb-1">
-                        NETWORKS
-                    </span>
-                    <ul className="flex flex-col gap-2.5 font-sans text-xs text-white/80">
-                        {SOCIAL_NETWORKS.map((net) => {
-                            const IconComponent = net.icon;
-                            return (
-                                <li key={net.label}>
-                                    <a
-                                        href={net.href}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="inline-flex items-center gap-2.5 hover:text-white hover:translate-x-1 transition-all duration-200 group"
-                                    >
-                                        <span className="p-1.5 rounded-full bg-white/5 border border-white/10 group-hover:bg-[#ffff7b] group-hover:text-[#191919] group-hover:border-[#ffff7b] transition-all">
-                                            <IconComponent className="w-3.5 h-3.5" />
-                                        </span>
-                                        <span className="font-medium group-hover:underline">
-                                            {net.label}
-                                        </span>
-                                    </a>
-                                </li>
-                            );
-                        })}
-                    </ul>
+                {/* Column 2: Center NETWORKS */}
+                <div className="flex flex-col items-start md:items-center gap-3">
+                    <div className="flex flex-col gap-3">
+                        <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-white/40 font-bold mb-1">
+                            NETWORKS
+                        </span>
+                        <ul className="flex flex-col gap-2.5 font-sans text-xs text-white/80">
+                            {SOCIAL_NETWORKS.map((net) => {
+                                const IconComponent = net.icon;
+                                return (
+                                    <li key={net.label}>
+                                        <a
+                                            href={net.href}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="inline-flex items-center gap-2.5 hover:text-white hover:translate-x-1 transition-all duration-200 group"
+                                        >
+                                            <span className="p-1.5 rounded-full bg-white/5 border border-white/10 group-hover:bg-[#ffff7b] group-hover:text-[#191919] group-hover:border-[#ffff7b] transition-all">
+                                                <IconComponent className="w-3.5 h-3.5" />
+                                            </span>
+                                            <span className="font-medium group-hover:underline">
+                                                {net.label}
+                                            </span>
+                                        </a>
+                                    </li>
+                                );
+                            })}
+                        </ul>
+                    </div>
                 </div>
 
-                {/* Right: INFOS & CONTACT */}
-                <div className="md:col-span-4 flex flex-col gap-2">
+                {/* Column 3: Right INFOS & CONTACT */}
+                <div className="flex flex-col items-start md:items-end md:text-right gap-2">
                     <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-white/40 font-bold mb-1">
                         INFOS &amp; CONTACT
                     </span>
