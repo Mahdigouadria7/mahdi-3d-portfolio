@@ -274,40 +274,40 @@ img {
   100% { transform: translateX(0); }
 }
 
-/* — Logos row: fast on mobile, comfortable on desktop — */
+/* — Logos row: relaxed glide — */
 .animate-marquee-logos {
-  animation: marquee 8s linear infinite;
+  animation: marquee 25s linear infinite;
   will-change: transform;
 }
 @media (min-width: 768px) {
-  .animate-marquee-logos { animation-duration: 22s; }
+  .animate-marquee-logos { animation-duration: 38s; }
 }
 
-/* — Forward ticker: snappier — */
+/* — Forward ticker: calm drift — */
 .animate-marquee-ticker {
-  animation: marquee 5s linear infinite;
+  animation: marquee 18s linear infinite;
   will-change: transform;
 }
 @media (min-width: 768px) {
-  .animate-marquee-ticker { animation-duration: 14s; }
+  .animate-marquee-ticker { animation-duration: 28s; }
 }
 
-/* — Reverse ticker (bottom bar goes right-to-left opposite) — */
+/* — Reverse ticker (bottom bar, opposite direction, slightly different pace) — */
 .animate-marquee-ticker-reverse {
-  animation: marquee-rtl 5s linear infinite;
+  animation: marquee-rtl 22s linear infinite;
   will-change: transform;
 }
 @media (min-width: 768px) {
-  .animate-marquee-ticker-reverse { animation-duration: 14s; }
+  .animate-marquee-ticker-reverse { animation-duration: 32s; }
 }
 
 /* — Legacy class for FooterSection / ToolsMarquee — */
 .animate-marquee {
-  animation: marquee 20s linear infinite;
+  animation: marquee 28s linear infinite;
   will-change: transform;
 }
 @media (min-width: 768px) {
-  .animate-marquee { animation-duration: 28s; }
+  .animate-marquee { animation-duration: 40s; }
 }
 
 /* Pause on hover */
