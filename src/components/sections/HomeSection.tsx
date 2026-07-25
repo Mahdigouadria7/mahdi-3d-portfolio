@@ -9,21 +9,21 @@ interface HomeSectionProps {
 }
 
 const CLIENT_LOGOS = [
-    { name: "Samsung", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_80/v1784994634/portfolio/clients/samsung.png" },
-    { name: "Orange", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_80/v1784994632/portfolio/clients/orange.png" },
-    { name: "Danone", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_80/v1784994624/portfolio/clients/danone.png" },
-    { name: "Yves Rocher", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_80/v1784994636/portfolio/clients/yves_rocher.png" },
-    { name: "Délice Holding", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_80/v1784994627/portfolio/clients/delice.png" },
-    { name: "DanUp", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_80/v1784994625/portfolio/clients/danup.png" },
-    { name: "UBCI", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_80/v1784994635/portfolio/clients/ubci.png" },
-    { name: "Diari Express", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_80/v1784994628/portfolio/clients/diari_express.png" },
-    { name: "Jouda", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_80/v1784994630/portfolio/clients/jouda.png" },
-    { name: "Fourré", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_80/v1784994629/portfolio/clients/fourre.png" },
-    { name: "Papillon", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_80/v1784994632/portfolio/clients/papillon.png" },
-    { name: "DCroc", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_80/v1784994626/portfolio/clients/dcroc.png" },
-    { name: "Kif", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_80/v1784994631/portfolio/clients/kif.png" },
-    { name: "Kairna", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_80/v1784994630/portfolio/clients/kairna.png" },
-    { name: "Smile", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_80/v1784994635/portfolio/clients/smile.png" },
+    { name: "Samsung", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_100/v1784994634/portfolio/clients/samsung.png" },
+    { name: "Orange", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_100/v1784994632/portfolio/clients/orange.png" },
+    { name: "Danone", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_100/v1784994624/portfolio/clients/danone.png" },
+    { name: "Yves Rocher", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_100/v1784994636/portfolio/clients/yves_rocher.png" },
+    { name: "Délice Holding", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_100/v1784994627/portfolio/clients/delice.png" },
+    { name: "DanUp", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_100/v1784994625/portfolio/clients/danup.png" },
+    { name: "UBCI", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_100/v1784994635/portfolio/clients/ubci.png" },
+    { name: "Diari Express", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_100/v1784994628/portfolio/clients/diari_express.png" },
+    { name: "Jouda", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_100/v1784994630/portfolio/clients/jouda.png" },
+    { name: "Fourré", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_100/v1784994629/portfolio/clients/fourre.png" },
+    { name: "Papillon", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_100/v1784994632/portfolio/clients/papillon.png" },
+    { name: "DCroc", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_100/v1784994626/portfolio/clients/dcroc.png" },
+    { name: "Kif", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_100/v1784994631/portfolio/clients/kif.png" },
+    { name: "Kairna", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_100/v1784994630/portfolio/clients/kairna.png" },
+    { name: "Smile", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_100/v1784994635/portfolio/clients/smile.png" },
 ];
 
 function Stars({ count = 5 }: { count?: number }) {
@@ -115,23 +115,20 @@ export default function HomeSection({ isDriving }: HomeSectionProps) {
             </div>
 
             {/* ── Bottom Client Brands Marquee Row (Uploaded Cloudinary Logos) ───────── */}
-            <div className="w-full pt-6 border-t border-white/10 z-10">
-                <div className="overflow-hidden py-2 select-none pointer-events-none">
-                    <div className="animate-marquee inline-flex whitespace-nowrap gap-12 md:gap-16 items-center">
-                        {Array(3).fill(0).map((_, groupIdx) => (
-                            <div key={groupIdx} className="flex items-center gap-12 md:gap-16">
-                                {CLIENT_LOGOS.map((client, i) => (
-                                    <div
-                                        key={i}
-                                        className="flex items-center justify-center h-8 md:h-10 px-2 opacity-50 hover:opacity-100 transition-opacity duration-300"
-                                    >
-                                        <img
-                                            src={client.url}
-                                            alt={client.name}
-                                            className="h-full w-auto max-h-8 md:max-h-10 object-contain filter brightness-0 invert opacity-80 hover:opacity-100 transition-all duration-300"
-                                        />
-                                    </div>
-                                ))}
+            <div className="w-full pt-6 pb-2 border-t border-white/10 z-10">
+                <div className="overflow-hidden py-3 select-none pointer-events-none">
+                    <div className="animate-marquee flex flex-row items-center gap-12 md:gap-16 whitespace-nowrap">
+                        {[...CLIENT_LOGOS, ...CLIENT_LOGOS, ...CLIENT_LOGOS].map((client, i) => (
+                            <div
+                                key={i}
+                                className="inline-flex items-center justify-center h-10 md:h-12 px-3 flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-300"
+                            >
+                                <img
+                                    src={client.url}
+                                    alt={client.name}
+                                    style={{ height: "36px", width: "auto", objectFit: "contain" }}
+                                    className="h-8 md:h-10 w-auto object-contain filter brightness-0 invert opacity-80"
+                                />
                             </div>
                         ))}
                     </div>
