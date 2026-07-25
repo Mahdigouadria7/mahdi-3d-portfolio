@@ -41,7 +41,9 @@ export default function StickyHeader() {
     return (
         <>
             <header
-                className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+                className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
+                    isCVOpen ? "opacity-0 pointer-events-none" : ""
+                } ${
                     scrolled
                         ? "bg-[#191919]/95 backdrop-blur-xl py-3 border-b border-white/10 shadow-lg"
                         : "bg-transparent py-5"

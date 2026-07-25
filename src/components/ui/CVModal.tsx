@@ -43,10 +43,10 @@ export default function CVModal({ isOpen, onClose }: CVModalProps) {
     if (!renderModal) return null;
 
     return (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-3 md:p-6 pointer-events-auto">
-            {/* Dark Backdrop */}
+        <div className="fixed inset-0 z-[99999] flex items-center justify-center p-3 md:p-6 pointer-events-auto">
+            {/* Solid High-Z Backdrop — Completely covers StickyHeader */}
             <div
-                className={`absolute inset-0 bg-[#191919]/85 backdrop-blur-md transition-opacity duration-300 ${
+                className={`absolute inset-0 bg-[#191919]/90 backdrop-blur-lg transition-opacity duration-300 ${
                     isAnimating ? "opacity-100" : "opacity-0"
                 }`}
                 onClick={onClose}
@@ -54,13 +54,13 @@ export default function CVModal({ isOpen, onClose }: CVModalProps) {
 
             {/* Modal Card — High Contrast Surface */}
             <div
-                className={`relative w-full max-w-5xl h-full max-h-[92vh] rounded-3xl overflow-hidden shadow-2xl flex flex-col transition-all duration-300 ${
+                className={`relative z-10 w-full max-w-5xl h-full max-h-[92vh] rounded-3xl overflow-hidden shadow-2xl flex flex-col transition-all duration-300 ${
                     isAnimating ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-95 translate-y-4"
                 }`}
                 style={{ background: "#fcfbf7" }}
             >
                 {/* ── Top Header Bar ──────────────────────────────── */}
-                <div className="flex items-center justify-between px-6 md:px-8 py-4 border-b border-[#191919]/15 bg-[#191919] text-white flex-shrink-0">
+                <div className="flex items-center justify-between px-6 md:px-8 py-4 border-b border-[#191919]/15 bg-[#191919] text-white flex-shrink-0 relative z-20">
                     <div className="flex items-center gap-3">
                         <div className="w-9 h-9 rounded-full bg-[#ffff7b] text-[#191919] flex items-center justify-center font-bold text-sm shadow-sm">
                             <span className="font-playfair italic text-base font-black">M</span>
@@ -81,14 +81,14 @@ export default function CVModal({ isOpen, onClose }: CVModalProps) {
                         </div>
                     </div>
 
-                    <div className="flex items-center gap-3">
-                        {/* Download PDF Button */}
+                    <div className="flex items-center gap-3 relative z-30">
+                        {/* Download PDF Button (Direct Attachment Link) */}
                         <a
-                            href="/cv.pdf"
+                            href="https://res.cloudinary.com/zu63qo7h/image/upload/fl_attachment/mahdi_cv.pdf"
                             download="Mahdi_CV.pdf"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#ffff7b] text-[#191919] font-sans text-xs font-bold uppercase tracking-wider hover:bg-white transition-all duration-200 shadow-sm"
+                            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#ffff7b] text-[#191919] font-sans text-xs font-bold uppercase tracking-wider hover:bg-white active:scale-95 transition-all duration-200 shadow-md cursor-pointer relative z-50 pointer-events-auto"
                         >
                             Download CV
                             <span className="w-4 h-4 rounded-full bg-[#191919] text-[#ffff7b] flex items-center justify-center text-[9px]">
@@ -100,7 +100,7 @@ export default function CVModal({ isOpen, onClose }: CVModalProps) {
                         <button
                             onClick={onClose}
                             aria-label="Close CV Modal"
-                            className="w-9 h-9 rounded-full bg-white/10 text-white flex items-center justify-center hover:bg-white hover:text-[#191919] transition-colors duration-200 cursor-pointer"
+                            className="w-9 h-9 rounded-full bg-white/10 text-white flex items-center justify-center hover:bg-white hover:text-[#191919] active:scale-95 transition-colors duration-200 cursor-pointer relative z-50 pointer-events-auto"
                         >
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                                 <line x1="18" y1="6" x2="6" y2="18" />
@@ -292,7 +292,7 @@ export default function CVModal({ isOpen, onClose }: CVModalProps) {
                                 <h3 className="font-playfair text-2xl text-[#191919] font-bold mb-4">
                                     Education
                                 </h3>
-                                <div className="bg-white rounded-2xl p-6 border border-[#191919]/15 shadow-sm space-y-4">
+                                <div className="bg-[#ffffff] rounded-2xl p-6 border border-[#191919]/15 shadow-sm space-y-4">
                                     <div>
                                         <h4 className="font-sans text-sm font-bold text-[#191919]">
                                             Software Engineering Degree
@@ -317,7 +317,7 @@ export default function CVModal({ isOpen, onClose }: CVModalProps) {
                 </div>
 
                 {/* Footer bar inside modal */}
-                <div className="px-6 md:px-8 py-3 border-t border-[#191919]/15 bg-[#191919] text-white flex justify-between items-center text-[11px] font-sans font-medium flex-shrink-0">
+                <div className="px-6 md:px-8 py-3 border-t border-[#191919]/15 bg-[#191919] text-white flex justify-between items-center text-[11px] font-sans font-medium flex-shrink-0 relative z-20">
                     <span>© {new Date().getFullYear()} Mahdi Gouadria</span>
                     <span>Curriculum Vitae</span>
                 </div>

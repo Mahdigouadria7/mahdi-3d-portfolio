@@ -9,8 +9,7 @@ cloudinary.config({
   secure: true
 });
 
-// The script assumes you place 'cv.pdf' in the root directory of the project
-const localFilePath = path.join(process.cwd(), 'cv.pdf');
+const localFilePath = path.join(process.cwd(), 'public', 'cv.pdf');
 
 async function uploadCV() {
   console.log("Uploading CV to Cloudinary...");
