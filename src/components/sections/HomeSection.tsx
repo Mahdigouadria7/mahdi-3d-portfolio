@@ -114,20 +114,20 @@ export default function HomeSection({ isDriving }: HomeSectionProps) {
                 </div>
             </div>
 
-            {/* ── Bottom Client Brands Marquee Row (Uploaded Cloudinary Logos) ───────── */}
+            {/* ── Bottom Client Brands Marquee Row (Original Full-Color Logos with Uniform Box Sizing) ───────── */}
             <div className="w-full pt-6 pb-2 border-t border-white/10 z-10">
                 <div className="overflow-hidden py-3 select-none pointer-events-none">
-                    <div className="animate-marquee flex flex-row items-center gap-12 md:gap-16 whitespace-nowrap">
+                    <div className="animate-marquee flex flex-row items-center gap-8 md:gap-12 whitespace-nowrap">
                         {[...CLIENT_LOGOS, ...CLIENT_LOGOS, ...CLIENT_LOGOS].map((client, i) => (
                             <div
                                 key={i}
-                                className="inline-flex items-center justify-center h-10 md:h-12 px-3 flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-300"
+                                className="inline-flex items-center justify-center w-28 h-10 md:w-32 md:h-12 px-2 flex-shrink-0"
                             >
                                 <img
                                     src={client.url}
                                     alt={client.name}
-                                    style={{ height: "36px", width: "auto", objectFit: "contain" }}
-                                    className="h-8 md:h-10 w-auto object-contain filter brightness-0 invert opacity-80"
+                                    style={{ maxHeight: "36px", maxWidth: "110px", objectFit: "contain" }}
+                                    className="max-h-full max-w-full h-auto w-auto object-contain opacity-90 transition-transform duration-300"
                                 />
                             </div>
                         ))}
