@@ -100,14 +100,31 @@ export default function CVModal({ isOpen, onClose }: CVModalProps) {
                             <h1 className="font-siegra text-4xl md:text-6xl text-white tracking-wider mb-3">GOUADRIA <span className="text-white/60">Mahdi</span></h1>
                             <p className="font-mono text-xs md:text-sm text-fuchsia-400 tracking-[0.2em] uppercase">3D Generalist & Software Engineer</p>
                         </div>
-                        <div className="flex gap-4 hidden md:flex">
+                        <div className="flex flex-col items-start md:items-end gap-4 mt-4 md:mt-0">
                             {/* Scanning Animation */}
-                            <div className="flex flex-col items-end justify-center">
-                                <div className="font-mono text-[10px] text-white/40 uppercase tracking-widest mb-2 flex items-center gap-2">
-                                    <span className="w-1.5 h-1.5 rounded-full bg-fuchsia-500 animate-pulse" />
-                                    Status: Active
-                                </div>
+                            <div className="font-mono text-[10px] text-white/40 uppercase tracking-widest flex items-center gap-2">
+                                <span className="w-1.5 h-1.5 rounded-full bg-fuchsia-500 animate-pulse" />
+                                Status: Active
                             </div>
+                            
+                            {/* Download Button */}
+                            <a 
+                                href="https://res.cloudinary.com/zu63qo7h/image/upload/fl_attachment/mahdi_cv.pdf"
+                                download="Mahdi_CV.pdf"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="group relative flex items-center justify-center gap-3 px-6 py-2.5 bg-white/5 border border-white/10 rounded-sm overflow-hidden transition-all duration-300 hover:bg-white/10 hover:border-amber-500/50 w-full md:w-auto"
+                            >
+                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-500/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out" />
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-white group-hover:text-amber-400 transition-colors duration-300 z-10">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                    <polyline points="7 10 12 15 17 10" />
+                                    <line x1="12" y1="15" x2="12" y2="3" />
+                                </svg>
+                                <span className="font-mono text-[11px] tracking-[0.2em] uppercase text-white group-hover:text-amber-100 transition-colors duration-300 relative z-10">
+                                    Download PDF
+                                </span>
+                            </a>
                         </div>
                     </div>
 
