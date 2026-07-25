@@ -83,7 +83,7 @@ export default function CVModal({ isOpen, onClose }: CVModalProps) {
                     <div className="flex items-center justify-between sm:justify-end gap-3 w-full sm:w-auto relative z-30 pt-2 sm:pt-0 border-t sm:border-t-0 border-white/10">
                         {/* Download PDF Button */}
                         <a
-                            href="/cv.pdf"
+                            href="https://res.cloudinary.com/zu63qo7h/image/upload/fl_attachment/v1784996139/portfolio/mahdi_cv_public.pdf"
                             download="Mahdi_Gouadria_CV.pdf"
                             target="_blank"
                             rel="noopener noreferrer"
