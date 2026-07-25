@@ -269,12 +269,48 @@ img {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
 }
-.animate-marquee {
-  animation: marquee 28s linear infinite;
+@keyframes marquee-reverse {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+
+/* Logos row — moderate pace on mobile, slightly faster on desktop */
+.animate-marquee-logos {
+  animation: marquee 20s linear infinite;
   will-change: transform;
 }
+@media (min-width: 768px) {
+  .animate-marquee-logos {
+    animation-duration: 28s;
+  }
+}
+
+/* Ticker row — noticeably faster + opposite rhythm to logos */
+.animate-marquee-ticker {
+  animation: marquee 12s linear infinite;
+  will-change: transform;
+}
+@media (min-width: 768px) {
+  .animate-marquee-ticker {
+    animation-duration: 18s;
+  }
+}
+
+/* Legacy class — keep for FooterSection / ToolsMarquee */
+.animate-marquee {
+  animation: marquee 22s linear infinite;
+  will-change: transform;
+}
+@media (min-width: 768px) {
+  .animate-marquee {
+    animation-duration: 30s;
+  }
+}
+
 /* Pause on hover */
-.marquee-track:hover .animate-marquee {
+.marquee-track:hover .animate-marquee,
+.marquee-track:hover .animate-marquee-logos,
+.marquee-track:hover .animate-marquee-ticker {
   animation-play-state: paused;
 }
 
@@ -337,14 +373,7 @@ img, video {
   animation: spin-slow 20s linear infinite;
 }
 
-/* ── Nico Studio: marquee ticker ── */
-@keyframes marquee-scroll {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-.animate-marquee {
-  animation: marquee-scroll 28s linear infinite;
-}
+/* ── Nico Studio: marquee ticker (alias, uses global .animate-marquee) ── */
 
 /* ── Hide scrollbar but keep scroll ── */
 .hide-scrollbar {
