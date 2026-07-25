@@ -1,18 +1,17 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-
-const PRELOADER_VIDEO_URL = "https://res.cloudinary.com/zu63qo7h/video/upload/f_auto,q_auto/portfolio/preloader_animation.mp4";
-const FALLBACK_VIDEO_URL = "/models/65c10d4f965fc573342449.mp4";
+import * as THREE from "three";
 
 export default function Preloader() {
     const [isLoading, setIsLoading] = useState(true);
     const [progress, setProgress] = useState(0);
-    const videoRef = useRef<HTMLVideoElement>(null);
+    const [statusText, setStatusText] = useState("Initializing WebGL Engine...");
+    const canvasRef = useRef<HTMLCanvasElement>(null);
 
+    // ── 1. Percentage Counter & Status Logic ─────────────────────────────
     useEffect(() => {
-        // Animate percentage counter smooth 0 -> 100
-        const duration = 2500; // 2.5s total preloader duration
+        const duration = 2400; // 2.4s total preload animation
         const startTime = Date.now();
 
         const interval = setInterval(() => {
@@ -20,24 +19,156 @@ export default function Preloader() {
             const currentProgress = Math.min(100, Math.floor((elapsedTime / duration) * 100));
             setProgress(currentProgress);
 
+            if (currentProgress < 30) {
+                setStatusText("Initializing 3D WebGL Engine...");
+            } else if (currentProgress < 65) {
+                setStatusText("Synthesizing Render Assets & Textures...");
+            } else if (currentProgress < 90) {
+                setStatusText("Optimizing Scene Lighting & Shaders...");
+            } else {
+                setStatusText("Preparing Interactive Experience...");
+            }
+
             if (currentProgress >= 100) {
                 clearInterval(interval);
                 setTimeout(() => {
                     setIsLoading(false);
-                }, 300);
+                }, 400);
             }
-        }, 30);
+        }, 25);
 
         return () => clearInterval(interval);
     }, []);
 
-    // Ensure video plays on mobile and desktop
+    // ── 2. Pure Three.js Procedural 3D Preloader Animation ────────────────
     useEffect(() => {
-        if (videoRef.current) {
-            videoRef.current.play().catch((err) => {
-                console.log("Autoplay notice in preloader video:", err);
-            });
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 1000);
+        camera.position.z = 5;
+
+        const renderer = new THREE.WebGLRenderer({
+            canvas,
+            alpha: true,
+            antialias: true,
+        });
+        renderer.setSize(340, 340);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        // Group container
+        const group = new THREE.Group();
+        scene.add(group);
+
+        // Core 1: Outer Torus Knot Wireframe (Gold)
+        const knotGeo = new THREE.TorusKnotGeometry(0.9, 0.28, 120, 16, 2, 3);
+        const knotMat = new THREE.MeshStandardMaterial({
+            color: 0xffff7b,
+            wireframe: true,
+            metalness: 0.8,
+            roughness: 0.2,
+            emissive: 0x333300,
+        });
+        const knotMesh = new THREE.Mesh(knotGeo, knotMat);
+        group.add(knotMesh);
+
+        // Core 2: Inner Glowing Icosahedron
+        const icoGeo = new THREE.IcosahedronGeometry(0.5, 1);
+        const icoMat = new THREE.MeshStandardMaterial({
+            color: 0xffffff,
+            wireframe: false,
+            metalness: 0.9,
+            roughness: 0.1,
+            emissive: 0x222222,
+        });
+        const icoMesh = new THREE.Mesh(icoGeo, icoMat);
+        group.add(icoMesh);
+
+        // Core 3: Outer Rotating Ring
+        const ringGeo = new THREE.RingGeometry(1.4, 1.42, 64);
+        const ringMat = new THREE.MeshBasicMaterial({
+            color: 0xffffff,
+            side: THREE.DoubleSide,
+            transparent: true,
+            opacity: 0.4,
+        });
+        const ringMesh = new THREE.Mesh(ringGeo, ringMat);
+        ringMesh.rotation.x = Math.PI / 3;
+        group.add(ringMesh);
+
+        // Core 4: Floating Star Particles
+        const particleCount = 200;
+        const particleGeo = new THREE.BufferGeometry();
+        const positions = new Float32Array(particleCount * 3);
+
+        for (let i = 0; i < particleCount * 3; i += 3) {
+            positions[i] = (Math.random() - 0.5) * 6;
+            positions[i + 1] = (Math.random() - 0.5) * 6;
+            positions[i + 2] = (Math.random() - 0.5) * 6;
         }
+
+        particleGeo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+        const particleMat = new THREE.PointsMaterial({
+            color: 0xffff7b,
+            size: 0.03,
+            transparent: true,
+            opacity: 0.6,
+        });
+        const particles = new THREE.Points(particleGeo, particleMat);
+        scene.add(particles);
+
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
+        scene.add(ambientLight);
+
+        const pointLight1 = new THREE.PointLight(0xffff7b, 3, 10);
+        pointLight1.position.set(3, 3, 3);
+        scene.add(pointLight1);
+
+        const pointLight2 = new THREE.PointLight(0xffffff, 2, 10);
+        pointLight2.position.set(-3, -3, 2);
+        scene.add(pointLight2);
+
+        // Animation Loop
+        let animationFrameId: number;
+        let clock = new THREE.Clock();
+
+        const animate = () => {
+            const time = clock.getElapsedTime();
+
+            // Rotate group
+            group.rotation.x = time * 0.5;
+            group.rotation.y = time * 0.7;
+
+            // Counter rotate inner sphere
+            icoMesh.rotation.y = -time * 1.2;
+            icoMesh.rotation.z = time * 0.5;
+
+            // Rotate ring
+            ringMesh.rotation.z = time * 0.8;
+
+            // Pulse particles
+            particles.rotation.y = time * 0.1;
+
+            renderer.render(scene, camera);
+            animationFrameId = requestAnimationFrame(animate);
+        };
+
+        animate();
+
+        return () => {
+            cancelAnimationFrame(animationFrameId);
+            renderer.dispose();
+            knotGeo.dispose();
+            knotMat.dispose();
+            icoGeo.dispose();
+            icoMat.dispose();
+            ringGeo.dispose();
+            ringMat.dispose();
+            particleGeo.dispose();
+            particleMat.dispose();
+        };
     }, []);
 
     return (
@@ -52,31 +183,22 @@ export default function Preloader() {
                 <span>3D &amp; CGI Studio</span>
             </div>
 
-            {/* Center Exact Preloader Video Animation */}
+            {/* Center Pure 3D WebGL Canvas Animation */}
             <div className="relative flex flex-col items-center justify-center my-auto">
-                <div className="relative w-[280px] h-[280px] sm:w-[380px] sm:h-[380px] md:w-[460px] md:h-[460px] rounded-3xl overflow-hidden shadow-[0_0_80px_rgba(0,0,0,0.9)] border border-white/10 bg-black flex items-center justify-center">
-                    <video
-                        ref={videoRef}
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        preload="auto"
-                        className="w-full h-full object-cover"
-                    >
-                        <source src={PRELOADER_VIDEO_URL} type="video/mp4" />
-                        <source src={FALLBACK_VIDEO_URL} type="video/mp4" />
-                    </video>
+                <div className="relative w-[300px] h-[300px] sm:w-[360px] sm:h-[360px] md:w-[400px] md:h-[400px] rounded-3xl overflow-hidden shadow-[0_0_80px_rgba(0,0,0,0.9)] border border-white/10 bg-[#0d0d0d] flex items-center justify-center">
+                    
+                    {/* Three.js Canvas */}
+                    <canvas ref={canvasRef} className="w-[340px] h-[340px] pointer-events-none" />
 
-                    {/* Glass border sheen overlay */}
-                    <div className="absolute inset-0 pointer-events-none border border-white/10 rounded-3xl" />
+                    {/* Subtle Overlay Glow & Vignette */}
+                    <div className="absolute inset-0 pointer-events-none border border-white/10 rounded-3xl bg-radial from-transparent via-transparent to-black/60" />
                 </div>
             </div>
 
-            {/* Bottom Progress Bar & Percentage Counter */}
+            {/* Bottom Progress Bar & Status Text */}
             <div className="w-full max-w-md mx-auto flex flex-col items-center gap-4">
                 <div className="w-full flex items-center justify-between font-mono text-xs text-white/60">
-                    <span className="tracking-widest uppercase text-[10px]">Loading Experience</span>
+                    <span className="tracking-widest uppercase text-[10px] text-white/50">{statusText}</span>
                     <span className="font-bold text-[#ffff7b] text-sm">{progress}%</span>
                 </div>
 
