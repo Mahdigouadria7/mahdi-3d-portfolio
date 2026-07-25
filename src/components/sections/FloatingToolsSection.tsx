@@ -6,8 +6,8 @@ import { useState, useEffect, useRef } from "react";
 function CursorArrow({ className = "" }: { className?: string }) {
   return (
     <svg
-      width="18"
-      height="18"
+      width="16"
+      height="16"
       viewBox="0 0 18 18"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -59,7 +59,7 @@ function ToolIconRenderer({ type }: { type: string }) {
       <img
         src={imageUrl}
         alt={type}
-        className="w-10 h-10 md:w-12 md:h-12 object-contain rounded-lg p-0.5 pointer-events-none select-none"
+        className="w-9 h-9 md:w-11 md:h-11 object-contain rounded-lg pointer-events-none select-none"
       />
     );
   }
@@ -67,17 +67,21 @@ function ToolIconRenderer({ type }: { type: string }) {
   return null;
 }
 
-/* ── Tool data with explosion vectors ─────────────────────────── */
+/* ── Tool Data — Tight orbital ring positioning around headline (exact match to reference Image 1) ── */
 const TOOLS = [
   {
     id: "blender",
     name: "Blender 3D",
     label: "3D Modeling",
     accent: false,
-    posStyle: { top: "8%", left: "5%" },
+    posStyle: { top: "16%", left: "14%" },
     posLabel: "right",
-    startX: 380,
-    startY: 200,
+    tagTilt: "rotate-[-1.5deg]",
+    // Center entrance explosion offsets
+    startX: 280,
+    startY: 140,
+    magneticFactorX: -18,
+    magneticFactorY: -12,
     floatDelay: "0s",
     icon: "blender",
   },
@@ -86,10 +90,13 @@ const TOOLS = [
     name: "Photoshop",
     label: "Graphic Design",
     accent: true,
-    posStyle: { top: "4%", left: "37%" },
+    posStyle: { top: "8%", left: "42%" },
     posLabel: "right",
+    tagTilt: "rotate-[1deg]",
     startX: 0,
-    startY: 260,
+    startY: 220,
+    magneticFactorX: 0,
+    magneticFactorY: -20,
     floatDelay: "0.8s",
     icon: "photoshop",
   },
@@ -98,10 +105,13 @@ const TOOLS = [
     name: "After Effects",
     label: "Motion Design",
     accent: false,
-    posStyle: { top: "10%", right: "5%" },
+    posStyle: { top: "15%", right: "14%" },
     posLabel: "left",
-    startX: -380,
-    startY: 200,
+    tagTilt: "rotate-[2deg]",
+    startX: -280,
+    startY: 140,
+    magneticFactorX: 18,
+    magneticFactorY: -12,
     floatDelay: "1.4s",
     icon: "aftereffects",
   },
@@ -110,10 +120,13 @@ const TOOLS = [
     name: "Three.js",
     label: "Web Development",
     accent: false,
-    posStyle: { bottom: "20%", left: "5%" },
+    posStyle: { bottom: "22%", left: "16%" },
     posLabel: "right",
-    startX: 380,
-    startY: -200,
+    tagTilt: "rotate-[1.5deg]",
+    startX: 280,
+    startY: -140,
+    magneticFactorX: -18,
+    magneticFactorY: 12,
     floatDelay: "2.1s",
     icon: "threejs",
   },
@@ -122,10 +135,13 @@ const TOOLS = [
     name: "ZBrush",
     label: "Digital Sculpting",
     accent: false,
-    posStyle: { bottom: "4%", left: "37%" },
+    posStyle: { bottom: "10%", left: "43%" },
     posLabel: "right",
+    tagTilt: "rotate-[-2deg]",
     startX: 0,
-    startY: -260,
+    startY: -220,
+    magneticFactorX: 0,
+    magneticFactorY: 20,
     floatDelay: "0.5s",
     icon: "zbrush",
   },
@@ -134,56 +150,64 @@ const TOOLS = [
     name: "Houdini",
     label: "VFX & Simulation",
     accent: true,
-    posStyle: { bottom: "16%", right: "6%" },
+    posStyle: { bottom: "18%", right: "15%" },
     posLabel: "left",
-    startX: -380,
-    startY: -200,
+    tagTilt: "rotate-[-1deg]",
+    startX: -280,
+    startY: -140,
+    magneticFactorX: 18,
+    magneticFactorY: 12,
     floatDelay: "1.2s",
     icon: "houdini",
   },
 ];
 
-/* ── Single Floating Tool Card with Smooth Scroll Explosion & Idle Float ─── */
+/* ── Single Tool Card Component with Magnetic Mouse & Scroll Explosion ───────── */
 function ToolCard({
   tool,
   scrollProgress,
+  mousePos,
 }: {
   tool: (typeof TOOLS)[number];
   scrollProgress: number;
+  mousePos: { x: number; y: number };
 }) {
   const [hovered, setHovered] = useState(false);
 
-  // Smooth Scroll Entrance Progress over a wider track: 0 (top of section) -> 1 (centered)
-  const rawProgress = (scrollProgress - 0.02) / 0.50;
+  // Scroll Entrance Progress: 0 (top of section) -> 1 (centered)
+  const rawProgress = (scrollProgress - 0.02) / 0.48;
   const clampedProgress = Math.max(0, Math.min(1, rawProgress));
 
-  // Ultra-smooth quintic ease-out for organic explosion: 1 - (1 - x)^4
+  // Ultra-smooth quintic ease-out curve
   const easeProgress = 1 - Math.pow(1 - clampedProgress, 4);
 
   // Offset goes from center (startX, startY) -> 0 (outer resting position)
-  const offsetX = tool.startX * (1 - easeProgress);
-  const offsetY = tool.startY * (1 - easeProgress);
+  const scrollOffsetX = tool.startX * (1 - easeProgress);
+  const scrollOffsetY = tool.startY * (1 - easeProgress);
+
+  // Magnetic mouse offset
+  const magX = mousePos.x * tool.magneticFactorX;
+  const magY = mousePos.y * tool.magneticFactorY;
+
+  const totalX = scrollOffsetX + magX;
+  const totalY = scrollOffsetY + magY;
 
   // Scale smoothly expands from 0.35 -> 1.0
   const scale = 0.35 + easeProgress * 0.65;
-
-  // Opacity smoothly fades in from 0 -> 1
   const opacity = easeProgress;
 
   return (
     <div
-      className="absolute z-20 pointer-events-auto transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform"
+      className="absolute z-20 pointer-events-auto transition-transform duration-500 ease-out will-change-transform"
       style={{
         ...tool.posStyle,
-        transform: `translate3d(${offsetX}px, ${offsetY}px, 0px) scale(${hovered ? scale * 1.1 : scale})`,
+        transform: `translate3d(${totalX}px, ${totalY}px, 0px) scale(${hovered ? scale * 1.12 : scale})`,
         opacity: opacity,
       }}
     >
-      {/* Inner float wrapper for continuous sine-wave idle movement */}
+      {/* Inner continuous idle float container */}
       <div
-        className={`flex items-center gap-2.5 transition-all duration-300 ${
-          hovered ? "-translate-y-1" : ""
-        }`}
+        className="flex items-center gap-2 transition-all duration-300"
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         style={{
@@ -195,22 +219,22 @@ function ToolCard({
         {tool.posLabel === "left" && (
           <>
             <span
-              className={`font-mono text-[11px] md:text-xs tracking-wide px-3.5 py-1.5 rounded-full shadow-md transition-all duration-300 whitespace-nowrap ${
+              className={`font-mono text-[11px] md:text-xs tracking-wide px-3.5 py-1.5 rounded-full shadow-md transition-all duration-300 whitespace-nowrap ${tool.tagTilt} ${
                 tool.accent
-                  ? "bg-[#ffff7b] text-[#191919] font-bold"
-                  : "bg-[#191919] text-white font-medium"
+                  ? "bg-[#ffff7b] text-[#191919] font-bold shadow-[0_4px_12px_rgba(255,255,123,0.3)]"
+                  : "bg-[#191919] text-white font-medium shadow-[0_4px_12px_rgba(0,0,0,0.15)]"
               } ${hovered ? "opacity-100 scale-105 shadow-xl" : "opacity-95 scale-100"}`}
             >
               {tool.label}
             </span>
-            <CursorArrow className="flex-shrink-0 -scale-x-100 drop-shadow-sm" />
+            <CursorArrow className="flex-shrink-0 -scale-x-100 drop-shadow-sm transition-transform duration-300" />
           </>
         )}
 
-        {/* Icon card */}
+        {/* Icon card box (Soft off-white background with warm shadow matching reference Image 1) */}
         <div
-          className={`w-13 h-13 md:w-16 md:h-16 bg-white rounded-2xl shadow-lg flex items-center justify-center border border-black/5 transition-all duration-300 overflow-hidden ${
-            hovered ? "shadow-2xl border-black/20" : "shadow-md"
+          className={`w-14 h-14 md:w-16 md:h-16 bg-[#FBFBFA] rounded-[22px] shadow-[0_10px_30px_rgba(0,0,0,0.06)] flex items-center justify-center border border-black/[0.04] transition-all duration-300 overflow-hidden ${
+            hovered ? "shadow-[0_18px_40px_rgba(0,0,0,0.14)] border-black/10 -translate-y-1" : ""
           }`}
         >
           <ToolIconRenderer type={tool.icon} />
@@ -219,12 +243,12 @@ function ToolCard({
         {/* Label on the right side */}
         {tool.posLabel === "right" && (
           <>
-            <CursorArrow className="flex-shrink-0 drop-shadow-sm" />
+            <CursorArrow className="flex-shrink-0 drop-shadow-sm transition-transform duration-300" />
             <span
-              className={`font-mono text-[11px] md:text-xs tracking-wide px-3.5 py-1.5 rounded-full shadow-md transition-all duration-300 whitespace-nowrap ${
+              className={`font-mono text-[11px] md:text-xs tracking-wide px-3.5 py-1.5 rounded-full shadow-md transition-all duration-300 whitespace-nowrap ${tool.tagTilt} ${
                 tool.accent
-                  ? "bg-[#ffff7b] text-[#191919] font-bold"
-                  : "bg-[#191919] text-white font-medium"
+                  ? "bg-[#ffff7b] text-[#191919] font-bold shadow-[0_4px_12px_rgba(255,255,123,0.3)]"
+                  : "bg-[#191919] text-white font-medium shadow-[0_4px_12px_rgba(0,0,0,0.15)]"
               } ${hovered ? "opacity-100 scale-105 shadow-xl" : "opacity-95 scale-100"}`}
             >
               {tool.label}
@@ -236,16 +260,16 @@ function ToolCard({
   );
 }
 
-/* ── Mobile stacked grid for responsive phones ───────────────────────── */
+/* ── Mobile Stacked Grid for Phone Viewports ──────────────────────────── */
 function ToolGrid() {
   return (
     <div className="grid grid-cols-2 gap-3 mb-10">
       {TOOLS.map((tool) => (
         <div
           key={tool.id}
-          className="flex items-center gap-2.5 bg-white/80 rounded-xl p-3 shadow-sm border border-black/5"
+          className="flex items-center gap-2.5 bg-[#FBFBFA] rounded-2xl p-3 shadow-sm border border-black/5"
         >
-          <div className="w-10 h-10 bg-white rounded-xl shadow flex items-center justify-center flex-shrink-0 border border-black/5 overflow-hidden">
+          <div className="w-11 h-11 bg-white rounded-xl shadow flex items-center justify-center flex-shrink-0 border border-black/5 overflow-hidden">
             <ToolIconRenderer type={tool.icon} />
           </div>
           <div className="overflow-hidden">
@@ -253,7 +277,7 @@ function ToolGrid() {
               {tool.name}
             </p>
             <span
-              className={`inline-block font-mono text-[9px] tracking-wide px-2 py-0.5 rounded-full mt-0.5 ${
+              className={`inline-block font-mono text-[9px] tracking-wide px-2.5 py-0.5 rounded-full mt-0.5 ${
                 tool.accent
                   ? "bg-[#ffff7b] text-[#191919] font-bold"
                   : "bg-[#191919] text-white font-medium"
@@ -268,18 +292,19 @@ function ToolGrid() {
   );
 }
 
-/* ── Main Section with Smooth Scroll Explosion Listener ───────────────── */
+/* ── Main Section with Mouse Magnetic & Scroll Explosion Listener ──────── */
 export default function FloatingToolsSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
+  // Scroll Progress Listener
   useEffect(() => {
     const handleScroll = () => {
       if (!sectionRef.current) return;
       const rect = sectionRef.current.getBoundingClientRect();
       const windowHeight = window.innerHeight;
 
-      // Calculate 0 to 1 progress as section travels into viewport
       const totalDist = windowHeight + rect.height;
       const currentPos = windowHeight - rect.top;
       const progress = Math.max(0, Math.min(1, currentPos / totalDist));
@@ -291,20 +316,35 @@ export default function FloatingToolsSection() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Mouse Move Magnetic Listener
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!sectionRef.current) return;
+    const rect = sectionRef.current.getBoundingClientRect();
+    const relX = ((e.clientX - rect.left) / rect.width - 0.5) * 2; // -1 to +1
+    const relY = ((e.clientY - rect.top) / rect.height - 0.5) * 2; // -1 to +1
+    setMousePos({ x: relX, y: relY });
+  };
+
+  const handleMouseLeave = () => {
+    setMousePos({ x: 0, y: 0 });
+  };
+
   return (
     <section
       ref={sectionRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
       className="relative w-full overflow-hidden"
       style={{ background: "var(--nico-cream, #f5f4ef)" }}
     >
-      {/* Keyframes for continuous subtle idle float */}
+      {/* Idle Float Keyframes */}
       <style jsx global>{`
         @keyframes floatingTool {
           0%, 100% {
             transform: translateY(0px) rotate(0deg);
           }
           50% {
-            transform: translateY(-8px) rotate(0.8deg);
+            transform: translateY(-9px) rotate(0.8deg);
           }
         }
       `}</style>
@@ -314,12 +354,17 @@ export default function FloatingToolsSection() {
         className="hidden md:block relative w-full"
         style={{ minHeight: "85vh" }}
       >
-        {/* Floating tools that start hidden at center and expand outwards on scroll */}
+        {/* Floating tools clustered in an intimate orbital ring matching reference Image 1 */}
         {TOOLS.map((tool) => (
-          <ToolCard key={tool.id} tool={tool} scrollProgress={scrollProgress} />
+          <ToolCard
+            key={tool.id}
+            tool={tool}
+            scrollProgress={scrollProgress}
+            mousePos={mousePos}
+          />
         ))}
 
-        {/* Central headline */}
+        {/* Central Headline */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none px-8 z-10">
           <div className="text-center max-w-2xl">
             <p className="font-mono text-[10px] md:text-xs tracking-[0.35em] uppercase text-[#666] mb-6 font-semibold">
@@ -330,9 +375,7 @@ export default function FloatingToolsSection() {
               style={{ fontWeight: 700 }}
             >
               The best tools for{" "}
-              <em
-                className="font-playfair italic font-normal text-[#191919]"
-              >
+              <em className="font-playfair italic font-normal text-[#191919]">
                 cinematic
               </em>{" "}
               3D production.
