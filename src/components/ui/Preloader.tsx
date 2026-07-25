@@ -20,14 +20,23 @@ interface TrailItem {
 export default function Preloader() {
     const [isLoading, setIsLoading] = useState(true);
     const [progress, setProgress] = useState(0);
+    const [textEntered, setTextEntered] = useState(false);
     const [trail, setTrail] = useState<TrailItem[]>([]);
     
     const lastPosRef = useRef({ x: 0, y: 0 });
     const imageIndexRef = useRef(0);
 
-    // ── 1. Progress Counter & Staggered Timing ────────────────────────────
+    // ── 1. Staggered Text Entrance Trigger ─────────────────────────────────
     useEffect(() => {
-        const duration = 2800; // 2.8s preloader lifetime
+        const timer = setTimeout(() => {
+            setTextEntered(true);
+        }, 120);
+        return () => clearTimeout(timer);
+    }, []);
+
+    // ── 2. Progress Counter & Exit Lifetime ──────────────────────────────
+    useEffect(() => {
+        const duration = 3200; // 3.2s total preloader lifecycle
         const startTime = Date.now();
 
         const interval = setInterval(() => {
@@ -39,18 +48,17 @@ export default function Preloader() {
                 clearInterval(interval);
                 setTimeout(() => {
                     setIsLoading(false);
-                }, 600);
+                }, 700);
             }
         }, 25);
 
         return () => clearInterval(interval);
     }, []);
 
-    // ── 2. Interactive Image Trail on Mouse Move ───────────────────────────
+    // ── 3. Interactive Image Trail on Mouse Move ───────────────────────────
     const handleMouseMove = (e: React.MouseEvent) => {
         const dist = Math.hypot(e.clientX - lastPosRef.current.x, e.clientY - lastPosRef.current.y);
         
-        // Spawn image card whenever cursor moves > 45px
         if (dist > 45) {
             lastPosRef.current = { x: e.clientX, y: e.clientY };
             const newId = Date.now() + Math.random();
@@ -59,7 +67,7 @@ export default function Preloader() {
             const randomRot = (Math.random() - 0.5) * 24; // -12deg to +12deg
 
             setTrail((prev) => [
-                ...prev.slice(-6), // keep last 7 trail items
+                ...prev.slice(-6),
                 { id: newId, x: e.clientX, y: e.clientY, image: nextImg, rotation: randomRot }
             ]);
         }
@@ -99,8 +107,12 @@ export default function Preloader() {
 
             {/* ── Left Vertical Guideline & Meta Labels ─────────────────────── */}
             <div
-                className={`absolute left-6 md:left-12 top-0 bottom-0 w-px bg-white/10 flex flex-col justify-between items-center py-10 z-10 pointer-events-none transition-all duration-700 ${
-                    isLoading ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-4"
+                className={`absolute left-6 md:left-12 top-0 bottom-0 w-px bg-white/10 flex flex-col justify-between items-center py-10 z-10 pointer-events-none transition-all duration-1000 ease-out ${
+                    !textEntered
+                        ? "-translate-x-6 opacity-0"
+                        : isLoading
+                        ? "translate-x-0 opacity-100"
+                        : "-translate-x-6 opacity-0"
                 }`}
             >
                 <span className="w-2 h-2 rounded-full bg-[#ffff7b] animate-ping" />
@@ -112,8 +124,12 @@ export default function Preloader() {
 
             {/* ── Top-Right Rotating Circular Badge ────────────────────────── */}
             <div
-                className={`absolute top-6 right-6 md:top-12 md:right-12 z-10 transition-all duration-700 ${
-                    isLoading ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
+                className={`absolute top-6 right-6 md:top-12 md:right-12 z-10 transition-all duration-1000 ease-out delay-150 ${
+                    !textEntered
+                        ? "-translate-y-6 opacity-0 scale-90"
+                        : isLoading
+                        ? "translate-y-0 opacity-100 scale-100"
+                        : "-translate-y-6 opacity-0 scale-90"
                 }`}
             >
                 <div className="relative w-16 h-16 md:w-20 md:h-20 flex items-center justify-center">
@@ -135,14 +151,18 @@ export default function Preloader() {
                 </div>
             </div>
 
-            {/* ── Main Editorial Motion Typography (Unobscured & Clean) ────── */}
+            {/* ── Main Editorial Motion Typography (Staggered Entrance & Exit) ── */}
             <div className="my-auto max-w-5xl mx-auto w-full flex flex-col items-center justify-center text-center relative z-10 py-8 gap-1 md:gap-2">
                 
                 {/* Line 1: CREATING */}
-                <div className="overflow-hidden">
+                <div className="overflow-hidden py-1">
                     <h1
-                        className={`font-playfair text-4xl sm:text-6xl md:text-8xl tracking-tight text-white font-medium uppercase leading-tight transition-all duration-700 delay-100 ${
-                            isLoading ? "translate-y-0 opacity-100" : "-translate-y-8 opacity-0"
+                        className={`font-playfair text-4xl sm:text-6xl md:text-8xl tracking-tight text-white font-medium uppercase leading-tight transition-all duration-1000 ease-out delay-100 ${
+                            !textEntered
+                                ? "translate-y-24 opacity-0"
+                                : isLoading
+                                ? "translate-y-0 opacity-100"
+                                : "-translate-y-12 opacity-0"
                         }`}
                     >
                         CREATING
@@ -150,10 +170,14 @@ export default function Preloader() {
                 </div>
 
                 {/* Line 2: EXPERIENCES* */}
-                <div className="overflow-hidden">
+                <div className="overflow-hidden py-1">
                     <h2
-                        className={`font-playfair text-4xl sm:text-6xl md:text-8xl tracking-tight text-white font-medium uppercase leading-tight flex items-center justify-center gap-2 transition-all duration-700 delay-200 ${
-                            isLoading ? "translate-y-0 opacity-100" : "-translate-y-8 opacity-0"
+                        className={`font-playfair text-4xl sm:text-6xl md:text-8xl tracking-tight text-white font-medium uppercase leading-tight flex items-center justify-center gap-2 transition-all duration-1000 ease-out delay-300 ${
+                            !textEntered
+                                ? "translate-y-24 opacity-0"
+                                : isLoading
+                                ? "translate-y-0 opacity-100"
+                                : "-translate-y-12 opacity-0"
                         }`}
                     >
                         EXPERIENCES<span className="text-[#ffff7b] font-mono text-2xl md:text-4xl animate-pulse">*</span>
@@ -161,10 +185,14 @@ export default function Preloader() {
                 </div>
 
                 {/* Line 3: IMPOSSIBLE (Clean Unblocked Editorial Serif) */}
-                <div className="overflow-hidden my-1 sm:my-2">
+                <div className="overflow-hidden my-1 sm:my-2 py-1">
                     <h3
-                        className={`font-sans text-5xl sm:text-7xl md:text-[130px] font-black text-[#d1c7b7] uppercase tracking-tighter leading-none transition-all duration-700 delay-300 ${
-                            isLoading ? "translate-y-0 opacity-100 scale-100" : "-translate-y-8 opacity-0 scale-95"
+                        className={`font-sans text-5xl sm:text-7xl md:text-[130px] font-black text-[#d1c7b7] uppercase tracking-tighter leading-none transition-all duration-1000 ease-out delay-500 ${
+                            !textEntered
+                                ? "translate-y-28 opacity-0 scale-95"
+                                : isLoading
+                                ? "translate-y-0 opacity-100 scale-100"
+                                : "-translate-y-12 opacity-0 scale-95"
                         }`}
                     >
                         IMPOSSIBLE
@@ -172,10 +200,14 @@ export default function Preloader() {
                 </div>
 
                 {/* Line 4: TO IGNORE */}
-                <div className="overflow-hidden">
+                <div className="overflow-hidden py-1">
                     <h4
-                        className={`font-playfair text-4xl sm:text-6xl md:text-8xl tracking-tight text-white font-medium uppercase leading-tight transition-all duration-700 delay-400 ${
-                            isLoading ? "translate-y-0 opacity-100" : "-translate-y-8 opacity-0"
+                        className={`font-playfair text-4xl sm:text-6xl md:text-8xl tracking-tight text-white font-medium uppercase leading-tight transition-all duration-1000 ease-out delay-700 ${
+                            !textEntered
+                                ? "translate-y-24 opacity-0"
+                                : isLoading
+                                ? "translate-y-0 opacity-100"
+                                : "-translate-y-12 opacity-0"
                         }`}
                     >
                         TO IGNORE
@@ -185,8 +217,12 @@ export default function Preloader() {
 
             {/* ── Bottom Bar: Metadata & Line Progress ─────────────────────── */}
             <div
-                className={`w-full max-w-4xl mx-auto flex flex-col gap-4 z-10 transition-all duration-700 delay-500 ${
-                    isLoading ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+                className={`w-full max-w-4xl mx-auto flex flex-col gap-4 z-10 transition-all duration-1000 ease-out delay-500 ${
+                    !textEntered
+                        ? "translate-y-8 opacity-0"
+                        : isLoading
+                        ? "translate-y-0 opacity-100"
+                        : "translate-y-8 opacity-0"
                 }`}
             >
                 {/* Meta details */}
