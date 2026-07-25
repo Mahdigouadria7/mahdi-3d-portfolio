@@ -24,11 +24,87 @@ function CursorArrow({ className = "" }: { className?: string }) {
   );
 }
 
-/* ── Tool data with explosion vectors (starting hidden near center, floating out to sides) ── */
+/* ── Custom Software Vector Icons ────────────────────────── */
+function BlenderIcon({ className = "w-8 h-8" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 256 208" fill="none">
+      <path fill="#EA7600" d="M110 50.8L165.7 0l18.4 20.3-51 46.5L110 50.8z" />
+      <path fill="#EA7600" d="M149.3 75.3l106.7-36.2 6.5 26.6-96.6 32.8-16.6-23.2z" />
+      <path fill="#EA7600" d="M128 64c44.2 0 80 35.8 80 80s-35.8 80-80 80-80-35.8-80-80 35.8-80 80-80z" />
+      <circle fill="#224775" cx="128" cy="144" r="44" />
+      <circle fill="#FFF" cx="128" cy="144" r="20" />
+    </svg>
+  );
+}
+
+function PhotoshopIcon({ className = "w-8 h-8" }: { className?: string }) {
+  return (
+    <div className={`${className} bg-[#001E36] border border-[#31A8FF]/40 rounded-xl flex items-center justify-center font-sans font-bold text-[#31A8FF] text-base leading-none select-none shadow-sm`}>
+      Ps
+    </div>
+  );
+}
+
+function AfterEffectsIcon({ className = "w-8 h-8" }: { className?: string }) {
+  return (
+    <div className={`${className} bg-[#00005B] border border-[#9999FF]/40 rounded-xl flex items-center justify-center font-sans font-bold text-[#9999FF] text-base leading-none select-none shadow-sm`}>
+      Ae
+    </div>
+  );
+}
+
+function ThreeJsIcon({ className = "w-8 h-8" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="#191919" strokeWidth="1.8" strokeLinejoin="round">
+      <path d="M12 2L2 19h20L12 2z" />
+      <path d="M12 2v17" />
+      <path d="M7 11.5h10" />
+    </svg>
+  );
+}
+
+function HoudiniIcon({ className = "w-8 h-8" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none">
+      <path d="M12 2L3 7v10l9 5 9-5V7l-9-5z" fill="#FF5500" />
+      <path d="M8 8v8M16 8v8M8 12h8" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function ZBrushIcon({ className = "w-8 h-8" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none">
+      <rect width="24" height="24" rx="6" fill="#1e1e1e" />
+      <path d="M6 7h12L7 17h11" stroke="#E63946" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function ToolIconRenderer({ type }: { type: string }) {
+  switch (type) {
+    case "blender":
+      return <BlenderIcon />;
+    case "photoshop":
+      return <PhotoshopIcon />;
+    case "aftereffects":
+      return <AfterEffectsIcon />;
+    case "threejs":
+      return <ThreeJsIcon />;
+    case "houdini":
+      return <HoudiniIcon />;
+    case "zbrush":
+      return <ZBrushIcon />;
+    default:
+      return null;
+  }
+}
+
+/* ── Tool data with explosion vectors ─────────────────────────── */
 const TOOLS = [
   {
-    id: "3dsmax",
-    name: "3DS Max",
+    id: "blender",
+    name: "Blender 3D",
     label: "3D Modeling",
     accent: false,
     posStyle: { top: "8%", left: "5%" },
@@ -36,21 +112,23 @@ const TOOLS = [
     startX: 380,
     startY: 200,
     floatDelay: "0s",
+    icon: "blender",
   },
   {
-    id: "redshift",
-    name: "Redshift",
-    label: "GPU Rendering",
+    id: "photoshop",
+    name: "Photoshop",
+    label: "Graphic Design",
     accent: true,
     posStyle: { top: "4%", left: "37%" },
     posLabel: "right",
     startX: 0,
     startY: 260,
     floatDelay: "0.8s",
+    icon: "photoshop",
   },
   {
-    id: "cinema4d",
-    name: "Cinema 4D",
+    id: "aftereffects",
+    name: "After Effects",
     label: "Motion Design",
     accent: false,
     posStyle: { top: "10%", right: "5%" },
@@ -58,17 +136,19 @@ const TOOLS = [
     startX: -380,
     startY: 200,
     floatDelay: "1.4s",
+    icon: "aftereffects",
   },
   {
-    id: "blender",
-    name: "Blender",
-    label: "Open Source 3D",
+    id: "threejs",
+    name: "Three.js",
+    label: "Web Development",
     accent: false,
     posStyle: { bottom: "20%", left: "5%" },
     posLabel: "right",
     startX: 380,
     startY: -200,
     floatDelay: "2.1s",
+    icon: "threejs",
   },
   {
     id: "zbrush",
@@ -80,6 +160,7 @@ const TOOLS = [
     startX: 0,
     startY: -260,
     floatDelay: "0.5s",
+    icon: "zbrush",
   },
   {
     id: "houdini",
@@ -91,6 +172,7 @@ const TOOLS = [
     startX: -380,
     startY: -200,
     floatDelay: "1.2s",
+    icon: "houdini",
   },
 ];
 
@@ -164,9 +246,7 @@ function ToolCard({
             hovered ? "shadow-2xl border-black/20" : "shadow-md"
           }`}
         >
-          <span className="font-playfair font-black text-xl md:text-2xl text-[#191919] italic select-none">
-            {tool.name.charAt(0)}
-          </span>
+          <ToolIconRenderer type={tool.icon} />
         </div>
 
         {/* Label on the right side */}
@@ -199,9 +279,7 @@ function ToolGrid() {
           className="flex items-center gap-2.5 bg-white/80 rounded-xl p-3 shadow-sm border border-black/5"
         >
           <div className="w-10 h-10 bg-white rounded-xl shadow flex items-center justify-center flex-shrink-0 border border-black/5">
-            <span className="font-playfair font-black text-lg text-[#191919] italic">
-              {tool.name.charAt(0)}
-            </span>
+            <ToolIconRenderer type={tool.icon} />
           </div>
           <div className="overflow-hidden">
             <p className="font-mono text-[11px] font-bold text-[#191919] tracking-wide truncate">
