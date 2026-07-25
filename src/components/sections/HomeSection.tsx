@@ -10,7 +10,7 @@ interface HomeSectionProps {
 
 const CLIENT_LOGOS = [
     { name: "Samsung", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_180/v1784994634/portfolio/clients/samsung.png", height: "h-7 md:h-8" },
-    { name: "Orange", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_180/v1784994632/portfolio/clients/orange.png", height: "h-9 md:h-10" },
+    { name: "Orange", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_180/v1784994632/portfolio/clients/orange.png", height: "h-8 md:h-10" },
     { name: "Danone", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_180/v1784994624/portfolio/clients/danone.png", height: "h-8 md:h-9" },
     { name: "Yves Rocher", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_180/v1784994636/portfolio/clients/yves_rocher.png", height: "h-7 md:h-8" },
     { name: "Délice Holding", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_180/v1784994627/portfolio/clients/delice.png", height: "h-8 md:h-9" },
@@ -53,18 +53,18 @@ export default function HomeSection({ isDriving }: HomeSectionProps) {
     const [isCVOpen, setIsCVOpen] = useState(false);
 
     return (
-        <section className={`relative w-full min-h-[100dvh] bg-[#141414] flex flex-col justify-between pt-24 md:pt-28 pb-0 transition-opacity duration-1000 ${isDriving ? 'opacity-0' : 'opacity-100'}`}>
+        <section className={`relative w-full min-h-[100dvh] bg-[#141414] flex flex-col justify-between pt-16 md:pt-20 pb-0 transition-opacity duration-1000 ${isDriving ? 'opacity-0' : 'opacity-100'}`}>
 
             {/* Background subtle grid pattern */}
             <div className="absolute inset-0 pointer-events-none z-0 opacity-10">
                 <div className="w-full h-full border-b border-dashed border-white/20" />
             </div>
 
-            {/* ── Main Hero Content Box (Exact match to Reference Image 2) ── */}
-            <div className="max-w-5xl mx-auto w-full flex flex-col items-center text-center z-10 my-auto px-6 py-6">
+            {/* ── Main Hero Content Box (Elevated higher, matching Reference Image 2) ── */}
+            <div className="max-w-5xl mx-auto w-full flex flex-col items-center text-center z-10 my-auto px-6 pt-4 pb-2">
 
                 {/* Top Social Proof Badge (Real Human Portrait Avatars + 5 Stars) */}
-                <div className="inline-flex items-center gap-3 mb-6 bg-white/5 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/10 shadow-sm">
+                <div className="inline-flex items-center gap-3 mb-5 bg-white/5 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/10 shadow-sm">
                     <div className="flex -space-x-2.5 overflow-hidden">
                         <img
                             src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_100/v1784987967/portfolio/mahdi_portrait.jpg"
@@ -95,7 +95,7 @@ export default function HomeSection({ isDriving }: HomeSectionProps) {
 
                 {/* Main Headline (Sans-serif base + Playfair italic accents) */}
                 <h1
-                    className="font-sans text-4xl sm:text-5xl md:text-6xl lg:text-[64px] text-white leading-[1.16] tracking-tight max-w-4xl mb-6 font-medium"
+                    className="font-sans text-4xl sm:text-5xl md:text-6xl lg:text-[64px] text-white leading-[1.15] tracking-tight max-w-4xl mb-5 font-medium"
                 >
                     Custom{" "}
                     <em className="font-playfair italic font-normal">
@@ -111,43 +111,30 @@ export default function HomeSection({ isDriving }: HomeSectionProps) {
                 </h1>
 
                 {/* Subtitle Paragraph */}
-                <p className="font-sans text-xs sm:text-sm md:text-base text-white/60 max-w-[560px] leading-relaxed mb-8 font-normal">
+                <p className="font-sans text-xs sm:text-sm md:text-base text-white/60 max-w-[560px] leading-relaxed mb-4 font-normal">
                     I assist brands, agencies, and creators to translate their vision into photorealistic 3D renders and interactive web experiences.
                 </p>
-
-                {/* Action CTA Buttons */}
-                <div className="flex items-center gap-3.5 mb-2">
-                    <a
-                        href="#contact"
-                        className="inline-flex items-center gap-2 bg-[#ffff7b] text-[#141414] font-sans text-xs tracking-wider uppercase px-7 py-3.5 rounded-full hover:bg-white transition-all duration-200 font-bold shadow-lg group"
-                    >
-                        Start a project
-                        <span className="w-4.5 h-4.5 rounded-full bg-[#141414] text-[#ffff7b] flex items-center justify-center text-[10px] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform">
-                            ↗
-                        </span>
-                    </a>
-                    <button
-                        onClick={() => setIsCVOpen(true)}
-                        className="inline-flex items-center gap-2 border border-white/30 text-white font-sans text-xs tracking-wider uppercase px-7 py-3.5 rounded-full hover:border-white/70 hover:bg-white/10 transition-all duration-200 font-medium cursor-pointer"
-                    >
-                        View CV
-                    </button>
-                </div>
             </div>
 
-            {/* ── Client Logos Marquee Row (Subtle Monochrome White Logos as in Ref Image 2) ── */}
-            <div className="w-full py-5 border-t border-white/10 z-10 bg-[#141414]">
-                <div className="overflow-hidden py-1 select-none pointer-events-none">
+            {/* ── Client Logos Marquee Row directly under text with Gradient Edge Fade ── */}
+            <div className="w-full relative py-4 select-none pointer-events-none z-10">
+                <div
+                    className="w-full overflow-hidden"
+                    style={{
+                        maskImage: "linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%)",
+                        WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%)",
+                    }}
+                >
                     <div className="animate-marquee flex flex-row items-center gap-12 md:gap-16 whitespace-nowrap">
                         {[...CLIENT_LOGOS, ...CLIENT_LOGOS, ...CLIENT_LOGOS].map((client, i) => (
                             <div
                                 key={i}
-                                className="inline-flex items-center justify-center min-w-[90px] md:min-w-[120px] h-9 md:h-11 px-2 flex-shrink-0 opacity-40 hover:opacity-100 transition-opacity duration-300"
+                                className="inline-flex items-center justify-center min-w-[90px] md:min-w-[120px] h-8 md:h-10 px-2 flex-shrink-0 opacity-35 hover:opacity-100 transition-opacity duration-300"
                             >
                                 <img
                                     src={client.url}
                                     alt={client.name}
-                                    className={`${client.height} w-auto max-w-[130px] object-contain filter brightness-0 invert opacity-75`}
+                                    className={`${client.height} w-auto max-w-[120px] object-contain filter brightness-0 invert opacity-75`}
                                 />
                             </div>
                         ))}
@@ -155,7 +142,7 @@ export default function HomeSection({ isDriving }: HomeSectionProps) {
                 </div>
             </div>
 
-            {/* ── Bottom Yellow Ticker Bar (Exact match to bottom bar in Reference Image 2) ── */}
+            {/* ── Bottom Yellow Ticker Bar (Exact match to Reference Image 2) ── */}
             <div className="w-full bg-[#ffff7b] text-[#141414] py-3 overflow-hidden select-none pointer-events-none border-t border-b border-black/10 z-10">
                 <div className="animate-marquee flex flex-row items-center whitespace-nowrap">
                     {[...SKILLS_BAR, ...SKILLS_BAR, ...SKILLS_BAR, ...SKILLS_BAR].map((skill, i) => (
