@@ -9,21 +9,21 @@ interface HomeSectionProps {
 }
 
 const CLIENT_LOGOS = [
-    { name: "Samsung", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_100/v1784994634/portfolio/clients/samsung.png" },
-    { name: "Orange", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_100/v1784994632/portfolio/clients/orange.png" },
-    { name: "Danone", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_100/v1784994624/portfolio/clients/danone.png" },
-    { name: "Yves Rocher", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_100/v1784994636/portfolio/clients/yves_rocher.png" },
-    { name: "Délice Holding", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_100/v1784994627/portfolio/clients/delice.png" },
-    { name: "DanUp", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_100/v1784994625/portfolio/clients/danup.png" },
-    { name: "UBCI", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_100/v1784994635/portfolio/clients/ubci.png" },
-    { name: "Diari Express", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_100/v1784994628/portfolio/clients/diari_express.png" },
-    { name: "Jouda", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_100/v1784994630/portfolio/clients/jouda.png" },
-    { name: "Fourré", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_100/v1784994629/portfolio/clients/fourre.png" },
-    { name: "Papillon", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_100/v1784994632/portfolio/clients/papillon.png" },
-    { name: "DCroc", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_100/v1784994626/portfolio/clients/dcroc.png" },
-    { name: "Kif", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_100/v1784994631/portfolio/clients/kif.png" },
-    { name: "Kairna", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_100/v1784994630/portfolio/clients/kairna.png" },
-    { name: "Smile", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_100/v1784994635/portfolio/clients/smile.png" },
+    { name: "Samsung", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_120/v1784994634/portfolio/clients/samsung.png", height: "h-7 md:h-8" },
+    { name: "Orange", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_120/v1784994632/portfolio/clients/orange.png", height: "h-11 md:h-12" }, // Square -> enlarged
+    { name: "Danone", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_120/v1784994624/portfolio/clients/danone.png", height: "h-9 md:h-10" },
+    { name: "Yves Rocher", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_120/v1784994636/portfolio/clients/yves_rocher.png", height: "h-8 md:h-9" },
+    { name: "Délice Holding", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_120/v1784994627/portfolio/clients/delice.png", height: "h-9 md:h-10" },
+    { name: "DanUp", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_120/v1784994625/portfolio/clients/danup.png", height: "h-9 md:h-10" },
+    { name: "UBCI", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_120/v1784994635/portfolio/clients/ubci.png", height: "h-9 md:h-10" },
+    { name: "Diari Express", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_120/v1784994628/portfolio/clients/diari_express.png", height: "h-12 md:h-14" }, // Small icon -> enlarged
+    { name: "Jouda", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_120/v1784994630/portfolio/clients/jouda.png", height: "h-10 md:h-11" },
+    { name: "Fourré", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_120/v1784994629/portfolio/clients/fourre.png", height: "h-8 md:h-9" },
+    { name: "Papillon", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_120/v1784994632/portfolio/clients/papillon.png", height: "h-10 md:h-11" },
+    { name: "DCroc", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_120/v1784994626/portfolio/clients/dcroc.png", height: "h-11 md:h-12" },
+    { name: "Kif", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_120/v1784994631/portfolio/clients/kif.png", height: "h-10 md:h-11" },
+    { name: "Kairna", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_120/v1784994630/portfolio/clients/kairna.png", height: "h-11 md:h-12" },
+    { name: "Smile", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_120/v1784994635/portfolio/clients/smile.png", height: "h-10 md:h-11" },
 ];
 
 function Stars({ count = 5 }: { count?: number }) {
@@ -114,20 +114,19 @@ export default function HomeSection({ isDriving }: HomeSectionProps) {
                 </div>
             </div>
 
-            {/* ── Bottom Client Brands Marquee Row (Original Full-Color Logos with Uniform Box Sizing) ───────── */}
+            {/* ── Bottom Client Brands Marquee Row (Optically Balanced Original Full-Color Logos) ───────── */}
             <div className="w-full pt-6 pb-2 border-t border-white/10 z-10">
                 <div className="overflow-hidden py-3 select-none pointer-events-none">
-                    <div className="animate-marquee flex flex-row items-center gap-8 md:gap-12 whitespace-nowrap">
+                    <div className="animate-marquee flex flex-row items-center gap-10 md:gap-14 whitespace-nowrap">
                         {[...CLIENT_LOGOS, ...CLIENT_LOGOS, ...CLIENT_LOGOS].map((client, i) => (
                             <div
                                 key={i}
-                                className="inline-flex items-center justify-center w-28 h-10 md:w-32 md:h-12 px-2 flex-shrink-0"
+                                className="inline-flex items-center justify-center min-w-[90px] md:min-w-[110px] h-12 md:h-14 px-3 flex-shrink-0"
                             >
                                 <img
                                     src={client.url}
                                     alt={client.name}
-                                    style={{ maxHeight: "36px", maxWidth: "110px", objectFit: "contain" }}
-                                    className="max-h-full max-w-full h-auto w-auto object-contain opacity-90 transition-transform duration-300"
+                                    className={`${client.height} w-auto max-w-[130px] object-contain opacity-90 transition-transform duration-300`}
                                 />
                             </div>
                         ))}
