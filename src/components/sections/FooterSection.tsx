@@ -66,13 +66,13 @@ export default function FooterSection() {
                     </a>
                 </div>
 
-                {/* Column 2: Center NETWORKS */}
+                {/* Column 2: Center NETWORKS (Horizontal) */}
                 <div className="flex flex-col items-start md:items-center gap-3">
-                    <div className="flex flex-col gap-3">
+                    <div className="flex flex-col items-start md:items-center gap-3">
                         <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-white/40 font-bold mb-1">
                             NETWORKS
                         </span>
-                        <ul className="flex flex-col gap-2.5 font-sans text-xs text-white/80">
+                        <ul className="flex flex-row flex-wrap gap-4 md:gap-5 items-center font-sans text-xs text-white/80">
                             {SOCIAL_NETWORKS.map((net) => {
                                 const IconComponent = net.icon;
                                 return (
@@ -81,12 +81,10 @@ export default function FooterSection() {
                                             href={net.href}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="inline-flex items-center gap-2.5 hover:text-white hover:translate-x-1 transition-all duration-200 group"
+                                            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 hover:bg-[#ffff7b] hover:text-[#191919] hover:border-[#ffff7b] transition-all duration-200 group shadow-sm"
                                         >
-                                            <span className="p-1.5 rounded-full bg-white/5 border border-white/10 group-hover:bg-[#ffff7b] group-hover:text-[#191919] group-hover:border-[#ffff7b] transition-all">
-                                                <IconComponent className="w-3.5 h-3.5" />
-                                            </span>
-                                            <span className="font-medium group-hover:underline">
+                                            <IconComponent className="w-3.5 h-3.5" />
+                                            <span className="font-semibold text-xs">
                                                 {net.label}
                                             </span>
                                         </a>
