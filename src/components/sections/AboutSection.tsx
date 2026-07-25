@@ -40,19 +40,16 @@ export default function AboutSection() {
                         <span className="font-mono text-[10px] text-[#191919] tracking-wide">Available</span>
                     </div>
 
-                    {/* Photo placeholder — replace src with your actual photo */}
+                    {/* Photo */}
                     <div
-                        className="relative w-full rounded-2xl overflow-hidden bg-[#191919]/8"
+                        className="relative w-full rounded-2xl overflow-hidden bg-[#191919]/8 shadow-xl"
                         style={{ aspectRatio: "3/4", maxWidth: 320 }}
                     >
-                        {/* Replace this div with: <img src="/your-photo.jpg" alt="Mahdi Gouadria" className="w-full h-full object-cover" /> */}
-                        <div className="absolute inset-0 flex flex-col items-center justify-center gap-4"
-                            style={{ background: "linear-gradient(135deg, #1a0a2e 0%, #0a0514 50%, #1a0a2e 100%)" }}>
-                            <div className="w-24 h-24 rounded-full bg-white/10 border border-white/20 flex items-center justify-center">
-                                <span className="font-playfair text-3xl text-white/60 italic font-bold">MG</span>
-                            </div>
-                            <span className="font-mono text-[10px] text-white/30 tracking-widest uppercase">Photo coming soon</span>
-                        </div>
+                        <img
+                            src="https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_800/v1784987967/portfolio/mahdi_portrait.jpg"
+                            alt="Mahdi Gouadria"
+                            className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700"
+                        />
                     </div>
                 </div>
 
