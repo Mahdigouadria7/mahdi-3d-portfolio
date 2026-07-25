@@ -85,6 +85,7 @@ export default function CVModal({ isOpen, onClose }: CVModalProps) {
 
                 {/* Content Area - Scrollable */}
                 <div 
+                    data-lenis-prevent="true"
                     className="flex-1 overflow-y-auto p-8 md:p-14 z-10 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
                     style={{
                         opacity: isAnimating ? 1 : 0,
