@@ -98,7 +98,7 @@ export default function GamesSection() {
     return (
         <section
             aria-labelledby="services-heading"
-            className="relative w-full min-h-screen flex-shrink-0 flex items-center justify-center p-6 md:p-16 overflow-hidden pointer-events-none"
+            className="relative w-full min-h-[100dvh] flex-shrink-0 flex items-center justify-center p-6 md:p-16 overflow-hidden pointer-events-none"
         >
             {/* Subtle hatch pattern bg */}
             <div className="absolute inset-0 hatch-bg opacity-30 pointer-events-none" />

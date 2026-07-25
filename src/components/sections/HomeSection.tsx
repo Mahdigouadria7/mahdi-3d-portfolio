@@ -39,7 +39,7 @@ export default function HomeSection({ isDriving, onDriveStart }: HomeSectionProp
     const [isCVOpen, setIsCVOpen] = useState(false);
 
     return (
-        <section className={`relative w-full h-screen pointer-events-none transition-opacity duration-1000 ${isDriving ? 'opacity-0' : 'opacity-100'}`}>
+        <section className={`relative w-full h-[100dvh] pointer-events-none transition-opacity duration-1000 ${isDriving ? 'opacity-0' : 'opacity-100'}`}>
 
             {/* ── Background: Dashed Grid Columns ─────────────────── */}
             <div className="absolute inset-0 grid grid-cols-4 pointer-events-none z-0">

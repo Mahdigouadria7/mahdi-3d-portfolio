@@ -19,7 +19,7 @@ export default function ContactSection() {
     return (
         <section
             aria-labelledby="contact-heading"
-            className="relative w-full min-h-screen flex-shrink-0 flex items-center justify-center p-6 md:p-12 overflow-hidden pointer-events-none"
+            className="relative w-full min-h-[100dvh] flex-shrink-0 flex items-center justify-center p-6 md:p-12 overflow-hidden pointer-events-none"
         >
             <div className="max-w-7xl w-full mx-auto relative z-10 pointer-events-auto grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-12 md:gap-24 items-center">
 

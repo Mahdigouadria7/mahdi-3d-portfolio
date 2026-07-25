@@ -281,7 +281,7 @@ export default function ProjectsSection() {
     }, []);
 
     return (
-        <section className="relative w-full h-screen flex-shrink-0 flex items-center justify-center p-0 md:p-12 overflow-hidden pointer-events-none">
+        <section className="relative w-full h-[100dvh] flex-shrink-0 flex items-center justify-center p-0 md:p-12 overflow-hidden pointer-events-none">
             
             <div className="max-w-[1400px] w-full mx-auto relative z-10 pointer-events-auto flex flex-col h-full justify-center">
                 

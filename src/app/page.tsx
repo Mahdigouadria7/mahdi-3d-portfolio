@@ -100,7 +100,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="relative bg-[#0a0514] text-white overflow-x-hidden min-h-screen">
+    <main className="relative bg-[#0a0514] text-white overflow-x-hidden min-h-[100dvh]">
       <TubesCursor />
 
       {/* Fixed Background Container */}
@@ -132,16 +132,16 @@ export default function Home() {
 
       {/* Vertical Content Stacking */}
       <div className="flex flex-col w-full relative z-20">
-        <div className="w-full relative min-h-screen">
+        <div className="w-full relative min-h-[100dvh]">
            <HomeSection isDriving={false} onDriveStart={() => {}} />
         </div>
-        <div className="w-full relative min-h-screen">
+        <div className="w-full relative min-h-[100dvh]">
            <ProjectsSection />
         </div>
-        <div className="w-full relative min-h-screen">
+        <div className="w-full relative min-h-[100dvh]">
            <GamesSection />
         </div>
-        <div className="w-full relative min-h-screen">
+        <div className="w-full relative min-h-[100dvh]">
            <ContactSection />
         </div>
       </div>
