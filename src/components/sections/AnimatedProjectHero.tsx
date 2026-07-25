@@ -723,33 +723,39 @@ export default function AnimatedProjectHero({ project, index }: { project: Proje
             ></div>
 
             {/* Subtle Vignette Overlay for Text Readability */}
-            <div ref={gradientRef} className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_20%,_#05020a_100%)] z-20 pointer-events-none opacity-0"></div>
+            <div ref={gradientRef} className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_20%,_#141414_100%)] z-20 pointer-events-none opacity-0"></div>
 
             {/* Foreground DOM layer */}
             <div className="relative z-30 w-full h-full pointer-events-none flex flex-col md:flex-row p-6 md:p-12 lg:p-24 overflow-hidden">
                 
                 {/* Left Side: Main Typography & Metadata */}
-                <div className="w-full md:w-1/3 flex flex-col justify-start md:justify-center h-auto md:h-full relative z-10 opacity-0 min-h-[30vh] md:min-h-0" ref={textRef}>
+                <div className="w-full md:w-1/2 flex flex-col justify-start md:justify-center h-auto md:h-full relative z-10 opacity-0 min-h-[30vh] md:min-h-0" ref={textRef}>
                     {/* Title block */}
-                    <div className="mt-32 md:mt-0">
-                        <span className={`font-cyber font-bold tracking-[0.5em] text-xs md:text-sm uppercase mb-3 block ${index === 1 ? 'text-amber-400' : 'text-fuchsia-400'}`} style={{ textShadow: "0 2px 10px rgba(0,0,0,0.8)" }}>
-                            {project.category}
-                        </span>
-                        <h1 className="font-tech text-4xl sm:text-5xl md:text-7xl lg:text-[100px] font-black uppercase leading-[0.9] tracking-tight text-white mb-4 max-w-xl" style={{ textShadow: "0 4px 30px rgba(0,0,0,0.8), 0 0 10px rgba(0,0,0,0.5)" }}>
-                            {project.title}
+                    <div className="mt-32 md:mt-0 space-y-4">
+                        <div className="inline-flex items-center gap-2 bg-[#ffff7b] text-[#141414] font-mono text-xs font-bold px-4 py-1.5 rounded-full shadow-sm pointer-events-auto">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#141414] animate-ping" />
+                            <span className="uppercase tracking-widest">{project.category}</span>
+                        </div>
+
+                        <h1 className="font-playfair text-4xl sm:text-6xl md:text-7xl lg:text-[84px] font-bold uppercase leading-[1.05] tracking-tight text-white mb-4 max-w-2xl" style={{ textShadow: "0 4px 30px rgba(0,0,0,0.9)" }}>
+                            {project.title.split(" ")[0]}{" "}
+                            <em className="font-playfair italic font-normal text-[#ffff7b]">
+                                {project.title.split(" ").slice(1).join(" ")}
+                            </em>
                         </h1>
-                        <p className="font-cyber text-white/90 text-[11px] sm:text-sm md:text-base leading-relaxed max-w-sm font-light mb-6 md:mb-12" style={{ textShadow: "0 2px 10px rgba(0,0,0,1)" }}>
+
+                        <p className="font-sans text-white/80 text-sm sm:text-base md:text-lg leading-relaxed max-w-lg font-normal mb-6 md:mb-12 pointer-events-auto" style={{ textShadow: "0 2px 10px rgba(0,0,0,1)" }}>
                             {project.description}
                         </p>
                     </div>
                 </div>
 
                 {/* Right Side: Tech Stack List */}
-                <div className="relative md:absolute md:right-12 lg:right-24 md:top-1/2 md:-translate-y-1/2 flex flex-row flex-wrap justify-start md:flex-col md:items-start gap-3 md:gap-0 md:space-y-6 opacity-0 pointer-events-auto" ref={rightSideRef}>
+                <div className="relative md:absolute md:right-12 lg:right-24 md:top-1/2 md:-translate-y-1/2 flex flex-row flex-wrap justify-start md:flex-col md:items-start gap-3 opacity-0 pointer-events-auto" ref={rightSideRef}>
                     {project.techStack.map((tech, i) => (
-                        <div key={tech} className="flex items-center gap-2 md:gap-3 group cursor-pointer bg-[#0a0510]/80 backdrop-blur-md border border-white/10 px-3 py-1.5 md:px-4 md:py-2 rounded-full shadow-2xl">
-                            <div className={`w-1.5 h-1.5 md:w-2 md:h-2 rounded-full transition-colors duration-500 shadow-lg ${i === 0 ? 'bg-white shadow-white/50' : 'bg-white/30 group-hover:bg-white/80'}`}></div>
-                            <span className={`font-tech text-[9px] md:text-xs tracking-widest uppercase transition-colors duration-500 ${i === 0 ? 'text-white font-bold' : 'text-white/70 group-hover:text-white'}`}>{tech}</span>
+                        <div key={tech} className="flex items-center gap-3 bg-[#191919]/90 backdrop-blur-xl border border-white/10 px-4 py-2 rounded-full shadow-xl">
+                            <div className={`w-2 h-2 rounded-full ${i === 0 ? 'bg-[#ffff7b]' : 'bg-white/40'}`}></div>
+                            <span className="font-mono text-xs font-bold tracking-wider uppercase text-white">{tech}</span>
                         </div>
                     ))}
                 </div>
