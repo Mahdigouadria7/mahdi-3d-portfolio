@@ -74,12 +74,12 @@ const TOOLS = [
     name: "Blender 3D",
     label: "3D Modeling",
     accent: false,
-    posStyle: { top: "18%", left: "18%" }, // Closer to text
+    posStyle: { top: "18%", left: "18%" },
     posLabel: "right",
     tagTilt: "rotate-[-1.5deg]",
     startX: 240,
     startY: 120,
-    magneticFactorX: -8, // Repulses outward left, away from text
+    magneticFactorX: -8,
     magneticFactorY: -6,
     floatDelay: "0s",
     icon: "blender",
@@ -89,13 +89,13 @@ const TOOLS = [
     name: "Photoshop",
     label: "Graphic Design",
     accent: true,
-    posStyle: { top: "2%", left: "42%" }, // Safely elevated above SOFTWARE ARSENAL text
+    posStyle: { top: "2%", left: "42%" },
     posLabel: "right",
     tagTilt: "rotate-[1deg]",
     startX: 0,
     startY: 220,
     magneticFactorX: 0,
-    magneticFactorY: -8, // Repulses UP away from text
+    magneticFactorY: -8,
     floatDelay: "0.8s",
     icon: "photoshop",
   },
@@ -104,12 +104,12 @@ const TOOLS = [
     name: "After Effects",
     label: "Motion Design",
     accent: false,
-    posStyle: { top: "17%", right: "18%" }, // Closer to text
+    posStyle: { top: "17%", right: "18%" },
     posLabel: "left",
     tagTilt: "rotate-[2deg]",
     startX: -240,
     startY: 120,
-    magneticFactorX: 8, // Repulses outward right, away from text
+    magneticFactorX: 8,
     magneticFactorY: -6,
     floatDelay: "1.4s",
     icon: "aftereffects",
@@ -119,12 +119,12 @@ const TOOLS = [
     name: "Three.js",
     label: "Web Development",
     accent: false,
-    posStyle: { bottom: "24%", left: "20%" }, // Closer to text
+    posStyle: { bottom: "24%", left: "20%" },
     posLabel: "right",
     tagTilt: "rotate-[1.5deg]",
     startX: 240,
     startY: -120,
-    magneticFactorX: -8, // Repulses outward left
+    magneticFactorX: -8,
     magneticFactorY: 6,
     floatDelay: "2.1s",
     icon: "threejs",
@@ -134,13 +134,13 @@ const TOOLS = [
     name: "ZBrush",
     label: "Digital Sculpting",
     accent: false,
-    posStyle: { bottom: "2%", left: "43%" }, // Safely lowered below description text
+    posStyle: { bottom: "2%", left: "43%" },
     posLabel: "right",
     tagTilt: "rotate-[-2deg]",
     startX: 0,
     startY: -220,
     magneticFactorX: 0,
-    magneticFactorY: 8, // Repulses DOWN away from text
+    magneticFactorY: 8,
     floatDelay: "0.5s",
     icon: "zbrush",
   },
@@ -149,12 +149,12 @@ const TOOLS = [
     name: "Houdini",
     label: "VFX & Simulation",
     accent: true,
-    posStyle: { bottom: "20%", right: "20%" }, // Closer to text
+    posStyle: { bottom: "20%", right: "20%" },
     posLabel: "left",
     tagTilt: "rotate-[-1deg]",
     startX: -240,
     startY: -120,
-    magneticFactorX: 8, // Repulses outward right
+    magneticFactorX: 8,
     magneticFactorY: 6,
     floatDelay: "1.2s",
     icon: "houdini",
@@ -173,25 +173,20 @@ function ToolCard({
 }) {
   const [hovered, setHovered] = useState(false);
 
-  // Scroll Entrance Progress: 0 (top of section) -> 1 (centered)
   const rawProgress = (scrollProgress - 0.02) / 0.48;
   const clampedProgress = Math.max(0, Math.min(1, rawProgress));
 
-  // Ultra-smooth quintic ease-out curve
   const easeProgress = 1 - Math.pow(1 - clampedProgress, 4);
 
-  // Offset goes from center (startX, startY) -> 0 (outer resting position)
   const scrollOffsetX = tool.startX * (1 - easeProgress);
   const scrollOffsetY = tool.startY * (1 - easeProgress);
 
-  // Magnetic mouse offset (bounded away from center text)
   const magX = mousePos.x * tool.magneticFactorX;
   const magY = mousePos.y * tool.magneticFactorY;
 
   const totalX = scrollOffsetX + magX;
   const totalY = scrollOffsetY + magY;
 
-  // Scale smoothly expands from 0.35 -> 1.0
   const scale = 0.35 + easeProgress * 0.65;
   const opacity = easeProgress;
 
@@ -204,7 +199,6 @@ function ToolCard({
         opacity: opacity,
       }}
     >
-      {/* Inner continuous idle float container */}
       <div
         className="flex items-center gap-2 transition-all duration-300"
         onMouseEnter={() => setHovered(true)}
@@ -214,7 +208,6 @@ function ToolCard({
           animationDelay: tool.floatDelay,
         }}
       >
-        {/* Label on the left side */}
         {tool.posLabel === "left" && (
           <>
             <span
@@ -230,7 +223,6 @@ function ToolCard({
           </>
         )}
 
-        {/* Icon card box */}
         <div
           className={`w-14 h-14 md:w-16 md:h-16 bg-[#FBFBFA] rounded-[22px] shadow-[0_10px_30px_rgba(0,0,0,0.06)] flex items-center justify-center border border-black/[0.04] transition-all duration-300 overflow-hidden ${
             hovered ? "shadow-[0_18px_40px_rgba(0,0,0,0.14)] border-black/10 -translate-y-1" : ""
@@ -239,7 +231,6 @@ function ToolCard({
           <ToolIconRenderer type={tool.icon} />
         </div>
 
-        {/* Label on the right side */}
         {tool.posLabel === "right" && (
           <>
             <CursorArrow className="flex-shrink-0 drop-shadow-sm transition-transform duration-300" />
@@ -259,31 +250,33 @@ function ToolCard({
   );
 }
 
-/* ── Mobile Stacked Grid for Phone Viewports ──────────────────────────── */
+/* ── Mobile Stacked Grid for Phone Viewports (Sleek & Visually Appealing) ──────────────── */
 function ToolGrid() {
   return (
-    <div className="grid grid-cols-2 gap-3 mb-10">
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-10">
       {TOOLS.map((tool) => (
         <div
           key={tool.id}
-          className="flex items-center gap-2.5 bg-[#FBFBFA] rounded-2xl p-3 shadow-sm border border-black/5"
+          className="flex items-center gap-3.5 bg-[#FBFBFA] rounded-2xl p-3.5 shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-black/[0.06] transition-all duration-300"
         >
-          <div className="w-11 h-11 bg-white rounded-xl shadow flex items-center justify-center flex-shrink-0 border border-black/5 overflow-hidden">
+          <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center flex-shrink-0 border border-black/5 overflow-hidden p-1">
             <ToolIconRenderer type={tool.icon} />
           </div>
-          <div className="overflow-hidden">
-            <p className="font-mono text-[11px] font-bold text-[#191919] tracking-wide truncate">
+          <div className="flex flex-col min-w-0 flex-1">
+            <p className="font-sans text-xs sm:text-sm font-bold text-[#191919] tracking-tight leading-snug truncate">
               {tool.name}
             </p>
-            <span
-              className={`inline-block font-mono text-[9px] tracking-wide px-2.5 py-0.5 rounded-full mt-0.5 ${
-                tool.accent
-                  ? "bg-[#ffff7b] text-[#191919] font-bold"
-                  : "bg-[#191919] text-white font-medium"
-              }`}
-            >
-              {tool.label}
-            </span>
+            <div className="mt-1">
+              <span
+                className={`inline-block font-sans text-[10px] font-semibold tracking-wide px-2.5 py-0.5 rounded-full ${
+                  tool.accent
+                    ? "bg-[#ffff7b] text-[#191919] font-bold shadow-xs"
+                    : "bg-black/[0.06] text-[#444444] font-medium"
+                }`}
+              >
+                {tool.label}
+              </span>
+            </div>
           </div>
         </div>
       ))}
@@ -297,7 +290,6 @@ export default function FloatingToolsSection() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
-  // Scroll Progress Listener
   useEffect(() => {
     const handleScroll = () => {
       if (!sectionRef.current) return;
@@ -315,12 +307,11 @@ export default function FloatingToolsSection() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Mouse Move Magnetic Listener
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!sectionRef.current) return;
     const rect = sectionRef.current.getBoundingClientRect();
-    const relX = ((e.clientX - rect.left) / rect.width - 0.5) * 2; // -1 to +1
-    const relY = ((e.clientY - rect.top) / rect.height - 0.5) * 2; // -1 to +1
+    const relX = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+    const relY = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
     setMousePos({ x: relX, y: relY });
   };
 
@@ -336,7 +327,6 @@ export default function FloatingToolsSection() {
       className="relative w-full overflow-hidden"
       style={{ background: "var(--nico-cream, #f5f4ef)" }}
     >
-      {/* Idle Float Keyframes */}
       <style jsx global>{`
         @keyframes floatingTool {
           0%, 100% {
@@ -353,7 +343,6 @@ export default function FloatingToolsSection() {
         className="hidden md:block relative w-full"
         style={{ minHeight: "85vh" }}
       >
-        {/* Floating tools clustered in an intimate orbital ring matching reference Image 1 */}
         {TOOLS.map((tool) => (
           <ToolCard
             key={tool.id}
@@ -363,7 +352,6 @@ export default function FloatingToolsSection() {
           />
         ))}
 
-        {/* Central Headline */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none px-8 z-10">
           <div className="text-center max-w-2xl">
             <p className="font-mono text-[10px] md:text-xs tracking-[0.35em] uppercase text-[#666] mb-6 font-semibold">
@@ -410,7 +398,6 @@ export default function FloatingToolsSection() {
         </p>
       </div>
 
-      {/* Bottom separator line */}
       <div className="absolute bottom-0 left-0 right-0 h-px bg-[#191919]/10" />
     </section>
   );
