@@ -26,15 +26,15 @@ export default function Preloader() {
     const lastPosRef = useRef({ x: 0, y: 0 });
     const imageIndexRef = useRef(0);
 
-    // ── 1. Kinetic Stagger Trigger ─────────────────────────────────────────
+    // ── 1. Sequence Timing Trigger ─────────────────────────────────────────
     useEffect(() => {
-        const timer = setTimeout(() => setAnimateIn(true), 80);
+        const timer = setTimeout(() => setAnimateIn(true), 100);
         return () => clearTimeout(timer);
     }, []);
 
-    // ── 2. Smooth Progress Counter ─────────────────────────────────────────
+    // ── 2. Progress Counter ────────────────────────────────────────────────
     useEffect(() => {
-        const duration = 3400; // 3.4s full kinetic motion sequence
+        const duration = 3500; // 3.5s multi-stage motion sequence
         const startTime = Date.now();
 
         const interval = setInterval(() => {
@@ -44,7 +44,7 @@ export default function Preloader() {
 
             if (currentProgress >= 100) {
                 clearInterval(interval);
-                setTimeout(() => setIsLoading(false), 700);
+                setTimeout(() => setIsLoading(false), 750);
             }
         }, 20);
 
@@ -75,29 +75,6 @@ export default function Preloader() {
         }, 320);
         return () => clearInterval(timer);
     }, []);
-
-    // Helper for character-by-character kinetic spring reveal
-    const renderKineticText = (text: string, baseDelay: number, extraClasses = "") => {
-        return text.split("").map((char, index) => (
-            <span
-                key={index}
-                className="inline-block overflow-hidden py-1"
-            >
-                <span
-                    className={`inline-block transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${extraClasses} ${
-                        !animateIn
-                            ? "translate-y-[130%] rotate-6 opacity-0"
-                            : isLoading
-                            ? "translate-y-0 rotate-0 opacity-100"
-                            : "-translate-y-[130%] -rotate-6 opacity-0"
-                    }`}
-                    style={{ transitionDelay: `${baseDelay + index * 45}ms` }}
-                >
-                    {char === " " ? "\u00A0" : char}
-                </span>
-            </span>
-        ));
-    };
 
     return (
         <div
@@ -175,17 +152,40 @@ export default function Preloader() {
                 </div>
             </div>
 
-            {/* ── Main Kinetic Editorial Motion Typography ───────────────────── */}
-            <div className="my-auto max-w-5xl mx-auto w-full flex flex-col items-center justify-center text-center relative z-10 py-6 gap-0.5 md:gap-1">
+            {/* ── Main Multi-Motion Typography Section ──────────────────────── */}
+            <div className="my-auto max-w-5xl mx-auto w-full flex flex-col items-center justify-center text-center relative z-10 py-6 gap-2 md:gap-3 [perspective:1000px]">
                 
-                {/* Line 1: CREATING (Kinetic Character Wave) */}
-                <h1 className="font-playfair text-4xl sm:text-6xl md:text-8xl tracking-tight text-white font-medium uppercase leading-tight">
-                    {renderKineticText("CREATING", 100)}
+                {/* LINE 1: CREATING — Tracking Expansion + Blur Dissolve Reveal */}
+                <h1
+                    className={`font-playfair text-4xl sm:text-6xl md:text-8xl text-white font-medium uppercase leading-tight transition-all duration-1000 ease-out ${
+                        !animateIn
+                            ? "tracking-[-0.2em] blur-md opacity-0 -translate-y-6"
+                            : isLoading
+                            ? "tracking-wider blur-0 opacity-100 translate-y-0"
+                            : "tracking-[-0.2em] blur-md opacity-0 -translate-y-6"
+                    }`}
+                >
+                    CREATING
                 </h1>
 
-                {/* Line 2: EXPERIENCES* (Kinetic Character Wave + Spinning Asterisk) */}
+                {/* LINE 2: EXPERIENCES* — Staggered Character Mask Rise + Spinning Asterisk */}
                 <h2 className="font-playfair text-4xl sm:text-6xl md:text-8xl tracking-tight text-white font-medium uppercase leading-tight flex items-center justify-center gap-2">
-                    {renderKineticText("EXPERIENCES", 350)}
+                    {"EXPERIENCES".split("").map((char, index) => (
+                        <span key={index} className="inline-block overflow-hidden py-1">
+                            <span
+                                className={`inline-block transition-all duration-1000 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${
+                                    !animateIn
+                                        ? "translate-y-[130%] rotate-6 opacity-0"
+                                        : isLoading
+                                        ? "translate-y-0 rotate-0 opacity-100"
+                                        : "-translate-y-[130%] -rotate-6 opacity-0"
+                                }`}
+                                style={{ transitionDelay: `${250 + index * 40}ms` }}
+                            >
+                                {char}
+                            </span>
+                        </span>
+                    ))}
                     <span
                         className={`inline-block font-mono text-2xl md:text-4xl text-[#ffff7b] animate-[spin_6s_linear_infinite] transition-all duration-700 delay-500 ${
                             !animateIn
@@ -199,17 +199,35 @@ export default function Preloader() {
                     </span>
                 </h2>
 
-                {/* Line 3: IMPOSSIBLE (Kinetic Character Wave + Warm Tone Serif) */}
+                {/* LINE 3: IMPOSSIBLE — 3D Perspective Slam & Scale Impact */}
                 <div className="my-1 sm:my-2 overflow-hidden">
-                    <h3 className="font-sans text-5xl sm:text-7xl md:text-[130px] font-black text-[#d1c7b7] uppercase tracking-tighter leading-none">
-                        {renderKineticText("IMPOSSIBLE", 600, "text-[#d1c7b7]")}
+                    <h3
+                        className={`font-sans text-5xl sm:text-7xl md:text-[130px] font-black text-[#d1c7b7] uppercase tracking-tighter leading-none transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] delay-500 ${
+                            !animateIn
+                                ? "scale-[1.6] opacity-0 [transform:rotateX(45deg)]"
+                                : isLoading
+                                ? "scale-100 opacity-100 [transform:rotateX(0deg)]"
+                                : "scale-[0.8] opacity-0 [transform:rotateX(-45deg)]"
+                        }`}
+                    >
+                        IMPOSSIBLE
                     </h3>
                 </div>
 
-                {/* Line 4: TO IGNORE (Kinetic Character Wave) */}
-                <h4 className="font-playfair text-4xl sm:text-6xl md:text-8xl tracking-tight text-white font-medium uppercase leading-tight">
-                    {renderKineticText("TO IGNORE", 950)}
-                </h4>
+                {/* LINE 4: TO IGNORE — Outline Stroke to Solid Fill + Horizontal Slide */}
+                <div className="overflow-hidden py-1">
+                    <h4
+                        className={`font-playfair text-4xl sm:text-6xl md:text-8xl tracking-tight uppercase leading-tight transition-all duration-1000 ease-out delay-700 ${
+                            !animateIn
+                                ? "translate-x-20 opacity-0 text-transparent [stroke:1px_rgba(255,255,255,0.4)]"
+                                : isLoading
+                                ? "translate-x-0 opacity-100 text-white"
+                                : "-translate-x-20 opacity-0 text-transparent"
+                        }`}
+                    >
+                        TO IGNORE
+                    </h4>
+                </div>
             </div>
 
             {/* ── Bottom Bar: Metadata & Line Progress ─────────────────────── */}
