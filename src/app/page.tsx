@@ -147,10 +147,15 @@ export default function Home() {
 
         {/* 2. YELLOW TICKER — Nico Studio signature */}
         <div className="relative z-10" style={{ background: '#ffff7b' }}>
-          <div className="overflow-hidden py-3.5">
+          <div className="overflow-hidden py-3">
             <div className="animate-marquee inline-flex whitespace-nowrap">
-              {Array(16).fill('MAHDI GOUADRIA · 3D DESIGN · CGI · INTERACTIVE · ').map((t, i) => (
-                <span key={i} className="font-mono text-[11px] font-bold tracking-[0.2em] uppercase text-[#191919] px-4">{t}</span>
+              {Array(6).fill([
+                "3D Design", "CGI Renders", "WebGL & Three.js", "Motion Graphics", "UI/UX Engineering", "Brand Identity"
+              ]).flat().map((t, i) => (
+                <span key={i} className="inline-flex items-center gap-4 font-sans text-xs md:text-[13px] font-semibold text-[#191919] px-4">
+                  {t}
+                  <span className="text-[10px] text-[#191919]">✦</span>
+                </span>
               ))}
             </div>
           </div>
