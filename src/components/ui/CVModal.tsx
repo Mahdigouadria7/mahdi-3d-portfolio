@@ -144,15 +144,37 @@ export default function CVModal({ isOpen, onClose }: CVModalProps) {
                                     </li>
                                     <li className="flex justify-between border-b border-[#191919]/10 pb-2">
                                         <span className="text-[#5c5c5c] font-medium">Phone</span>
-                                        <span className="font-bold text-[#191919]">+216 21-833-752</span>
+                                        <a href="tel:+21621833752" className="font-bold text-[#191919] hover:text-emerald-700 transition-colors">
+                                            +216 21-833-752
+                                        </a>
                                     </li>
                                     <li className="flex justify-between border-b border-[#191919]/10 pb-2">
                                         <span className="text-[#5c5c5c] font-medium">Email</span>
-                                        <span className="font-bold text-[#191919] select-all">mahdigouadria8@gmail.com</span>
+                                        <a href="mailto:mahdigouadria8@gmail.com" className="font-bold text-[#191919] hover:text-emerald-700 transition-colors">
+                                            mahdigouadria8@gmail.com
+                                        </a>
+                                    </li>
+                                    <li className="flex justify-between border-b border-[#191919]/10 pb-2">
+                                        <span className="text-[#5c5c5c] font-medium">LinkedIn</span>
+                                        <a
+                                            href="https://www.linkedin.com/in/mahdi-gouadria?utm_source=share_via&utm_content=profile&utm_medium=member_android"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="font-bold text-[#191919] hover:text-emerald-700 transition-colors underline"
+                                        >
+                                            /in/mahdi-gouadria ↗
+                                        </a>
                                     </li>
                                     <li className="flex justify-between">
-                                        <span className="text-[#5c5c5c] font-medium">LinkedIn</span>
-                                        <span className="font-bold text-[#191919]">/in/mahdi-gouadria</span>
+                                        <span className="text-[#5c5c5c] font-medium">Instagram</span>
+                                        <a
+                                            href="https://www.instagram.com/mahdi_gouadria?igsh=MWphcmIyNXhtOWIzZw=="
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="font-bold text-[#191919] hover:text-emerald-700 transition-colors underline"
+                                        >
+                                            @mahdi_gouadria ↗
+                                        </a>
                                     </li>
                                 </ul>
                             </section>

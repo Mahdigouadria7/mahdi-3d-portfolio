@@ -15,10 +15,10 @@ export default function ContactSection() {
     };
 
     const links = [
-        { label: "Email", href: "mailto:mahdi@example.com", sub: "mahdi@example.com" },
-        { label: "LinkedIn", href: "https://linkedin.com", sub: "linkedin.com/in/mahdi" },
-        { label: "Instagram", href: "https://instagram.com", sub: "@mahdi.3d" },
-        { label: "Behance", href: "https://behance.net", sub: "behance.net/mahdi" },
+        { label: "Email", href: "mailto:mahdigouadria8@gmail.com", sub: "mahdigouadria8@gmail.com" },
+        { label: "LinkedIn", href: "https://www.linkedin.com/in/mahdi-gouadria?utm_source=share_via&utm_content=profile&utm_medium=member_android", sub: "linkedin.com/in/mahdi-gouadria" },
+        { label: "Instagram", href: "https://www.instagram.com/mahdi_gouadria?igsh=MWphcmIyNXhtOWIzZw==", sub: "@mahdi_gouadria" },
+        { label: "Behance", href: "https://www.behance.net/mahdigouadria", sub: "behance.net/mahdigouadria" },
     ];
 
     return (
