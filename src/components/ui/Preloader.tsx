@@ -6,12 +6,18 @@ const MAHDI_PORTRAIT = "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,
 
 const PROJECT_IMAGES = [
     "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_600/v1784898993/portfolio/trionda/cover_ball.webp",
+    "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_600/v1784898994/portfolio/trionda/render_ball.webp",
     "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_600/v1784898995/portfolio/trionda/stadium_mockup.webp",
     "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_600/v1784898996/portfolio/trionda/street_billboard.webp",
+    "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_600/v1784899273/portfolio/redbull/ticket2.png",
     "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_600/v1784899905/portfolio/redbull/liwa_redbull_2.webp",
+    "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_600/v1784899907/portfolio/redbull/liwa_redbull_3.webp",
     "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_600/v1784899913/portfolio/redbull/redbull_gold_darker.webp",
+    "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_600/v1784899924/portfolio/redbull/redbull_gold_2.webp",
     "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_600/v1784899929/portfolio/redbull/redbullr.webp",
     "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_600/v1784899935/portfolio/redbull/redbull_environmet_xt.webp",
+    "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_600/v1784899938/portfolio/redbull/redbull_environmet.webp",
+    "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_600/v1784899943/portfolio/redbull/viewport_darkgold.webp",
     "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_600/portfolio/hero_frames/frame_00150.jpg",
     "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_600/portfolio/hero_frames/frame_00200.jpg",
     "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_600/portfolio/hero_frames/frame_00080.jpg",
@@ -32,7 +38,7 @@ export default function Preloader() {
     const [trail, setTrail] = useState<TrailItem[]>([]);
 
     const lastPosRef = useRef({ x: 0, y: 0 });
-    const imageIndexRef = useRef(0);
+    const imageCountRef = useRef(0);
 
     // ── 1. Sequence Timing Trigger ─────────────────────────────────────────
     useEffect(() => {
@@ -59,7 +65,7 @@ export default function Preloader() {
         return () => clearInterval(interval);
     }, []);
 
-    // ── 3. Interactive Mouse Image Trail ───────────────────────────────────
+    // ── 3. Interactive Mouse Image Trail (Always Randomized from Projects) ─────
     const handleMouseMove = (e: React.MouseEvent) => {
         const dist = Math.hypot(e.clientX - lastPosRef.current.x, e.clientY - lastPosRef.current.y);
 
@@ -67,15 +73,15 @@ export default function Preloader() {
             lastPosRef.current = { x: e.clientX, y: e.clientY };
             const newId = Date.now() + Math.random();
             
-            // First image is ALWAYS Mahdi's portrait; subsequent images are randomized from project pool
+            // First image is ALWAYS Mahdi's portrait; ALL subsequent images are randomly picked from project renders
             let nextImg: string;
-            if (imageIndexRef.current === 0) {
+            if (imageCountRef.current === 0) {
                 nextImg = MAHDI_PORTRAIT;
             } else {
                 const randomIndex = Math.floor(Math.random() * PROJECT_IMAGES.length);
                 nextImg = PROJECT_IMAGES[randomIndex];
             }
-            imageIndexRef.current += 1;
+            imageCountRef.current += 1;
             
             const randomRot = (Math.random() - 0.5) * 26;
 
