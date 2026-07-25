@@ -100,7 +100,7 @@ function BehanceIcon({ className = "w-4 h-4" }: { className?: string }) {
             <div className="w-full h-px bg-white/10" />
 
             {/* ── Two-column layout ──────────────────────── */}
-            <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-white/10">
+            <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-white/10 items-stretch">
 
                 {/* Left: social links list */}
                 <div className="divide-y divide-white/10">
@@ -138,8 +138,8 @@ function BehanceIcon({ className = "w-4 h-4" }: { className?: string }) {
                     })}
                 </div>
 
-                {/* Right: contact form */}
-                <div className="px-6 md:px-16 py-12">
+                {/* Right: contact form (Centralized vertically) */}
+                <div className="px-6 md:px-16 py-12 flex flex-col justify-center items-stretch h-full">
                     {submitted ? (
                         <div className="flex flex-col items-start gap-6 py-4 animate-fadeIn">
                             <div className="w-12 h-12 rounded-full bg-[#191919] flex items-center justify-center">
