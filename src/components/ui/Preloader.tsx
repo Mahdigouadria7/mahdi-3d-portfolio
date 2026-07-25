@@ -20,23 +20,21 @@ interface TrailItem {
 export default function Preloader() {
     const [isLoading, setIsLoading] = useState(true);
     const [progress, setProgress] = useState(0);
-    const [textEntered, setTextEntered] = useState(false);
+    const [animateIn, setAnimateIn] = useState(false);
     const [trail, setTrail] = useState<TrailItem[]>([]);
     
     const lastPosRef = useRef({ x: 0, y: 0 });
     const imageIndexRef = useRef(0);
 
-    // ── 1. Staggered Text Entrance Trigger ─────────────────────────────────
+    // ── 1. Kinetic Stagger Trigger ─────────────────────────────────────────
     useEffect(() => {
-        const timer = setTimeout(() => {
-            setTextEntered(true);
-        }, 120);
+        const timer = setTimeout(() => setAnimateIn(true), 80);
         return () => clearTimeout(timer);
     }, []);
 
-    // ── 2. Progress Counter & Exit Lifetime ──────────────────────────────
+    // ── 2. Smooth Progress Counter ─────────────────────────────────────────
     useEffect(() => {
-        const duration = 3200; // 3.2s total preloader lifecycle
+        const duration = 3400; // 3.4s full kinetic motion sequence
         const startTime = Date.now();
 
         const interval = setInterval(() => {
@@ -46,25 +44,23 @@ export default function Preloader() {
 
             if (currentProgress >= 100) {
                 clearInterval(interval);
-                setTimeout(() => {
-                    setIsLoading(false);
-                }, 700);
+                setTimeout(() => setIsLoading(false), 700);
             }
-        }, 25);
+        }, 20);
 
         return () => clearInterval(interval);
     }, []);
 
-    // ── 3. Interactive Image Trail on Mouse Move ───────────────────────────
+    // ── 3. Interactive Mouse Image Trail ───────────────────────────────────
     const handleMouseMove = (e: React.MouseEvent) => {
         const dist = Math.hypot(e.clientX - lastPosRef.current.x, e.clientY - lastPosRef.current.y);
         
-        if (dist > 45) {
+        if (dist > 40) {
             lastPosRef.current = { x: e.clientX, y: e.clientY };
             const newId = Date.now() + Math.random();
             const nextImg = PRELOAD_IMAGES[imageIndexRef.current % PRELOAD_IMAGES.length];
             imageIndexRef.current += 1;
-            const randomRot = (Math.random() - 0.5) * 24; // -12deg to +12deg
+            const randomRot = (Math.random() - 0.5) * 26;
 
             setTrail((prev) => [
                 ...prev.slice(-6),
@@ -73,26 +69,54 @@ export default function Preloader() {
         }
     };
 
-    // Auto fade tail items over time
     useEffect(() => {
         const timer = setInterval(() => {
             setTrail((prev) => (prev.length > 0 ? prev.slice(1) : prev));
-        }, 350);
+        }, 320);
         return () => clearInterval(timer);
     }, []);
+
+    // Helper for character-by-character kinetic spring reveal
+    const renderKineticText = (text: string, baseDelay: number, extraClasses = "") => {
+        return text.split("").map((char, index) => (
+            <span
+                key={index}
+                className="inline-block overflow-hidden py-1"
+            >
+                <span
+                    className={`inline-block transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${extraClasses} ${
+                        !animateIn
+                            ? "translate-y-[130%] rotate-6 opacity-0"
+                            : isLoading
+                            ? "translate-y-0 rotate-0 opacity-100"
+                            : "-translate-y-[130%] -rotate-6 opacity-0"
+                    }`}
+                    style={{ transitionDelay: `${baseDelay + index * 45}ms` }}
+                >
+                    {char === " " ? "\u00A0" : char}
+                </span>
+            </span>
+        ));
+    };
 
     return (
         <div
             onMouseMove={handleMouseMove}
-            className={`fixed inset-0 z-[999999] bg-[#070707] text-white flex flex-col justify-between p-6 md:p-12 overflow-hidden transition-all duration-1000 ease-in-out select-none ${
+            className={`fixed inset-0 z-[999999] bg-[#070707] text-white flex flex-col justify-between p-6 md:p-12 overflow-hidden transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] select-none ${
                 isLoading ? "opacity-100 pointer-events-auto scale-100" : "opacity-0 pointer-events-none scale-105"
             }`}
         >
+            {/* ── Corner Precision Crosshairs (+) ────────────────────────────── */}
+            <span className={`absolute top-6 left-6 text-white/30 font-mono text-xs z-20 transition-opacity duration-700 ${animateIn ? "opacity-100" : "opacity-0"}`}>+</span>
+            <span className={`absolute top-6 right-6 text-white/30 font-mono text-xs z-20 transition-opacity duration-700 ${animateIn ? "opacity-100" : "opacity-0"}`}>+</span>
+            <span className={`absolute bottom-6 left-6 text-white/30 font-mono text-xs z-20 transition-opacity duration-700 ${animateIn ? "opacity-100" : "opacity-0"}`}>+</span>
+            <span className={`absolute bottom-6 right-6 text-white/30 font-mono text-xs z-20 transition-opacity duration-700 ${animateIn ? "opacity-100" : "opacity-0"}`}>+</span>
+
             {/* ── Mouse Follow Image Trail (Fades out automatically) ────────── */}
             {trail.map((item, index) => (
                 <div
                     key={item.id}
-                    className="fixed z-20 pointer-events-none w-28 h-36 sm:w-36 sm:h-48 md:w-40 md:h-52 rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.9)] border border-white/20 bg-black transition-all duration-700 ease-out"
+                    className="fixed z-30 pointer-events-none w-28 h-36 sm:w-36 sm:h-48 md:w-40 md:h-52 rounded-2xl overflow-hidden shadow-[0_25px_60px_rgba(0,0,0,0.9)] border border-white/20 bg-black transition-all duration-700 ease-out"
                     style={{
                         left: item.x - 70,
                         top: item.y - 90,
@@ -107,8 +131,8 @@ export default function Preloader() {
 
             {/* ── Left Vertical Guideline & Meta Labels ─────────────────────── */}
             <div
-                className={`absolute left-6 md:left-12 top-0 bottom-0 w-px bg-white/10 flex flex-col justify-between items-center py-10 z-10 pointer-events-none transition-all duration-1000 ease-out ${
-                    !textEntered
+                className={`absolute left-6 md:left-12 top-0 bottom-0 w-px bg-white/10 flex flex-col justify-between items-center py-10 z-10 pointer-events-none transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                    !animateIn
                         ? "-translate-x-6 opacity-0"
                         : isLoading
                         ? "translate-x-0 opacity-100"
@@ -124,8 +148,8 @@ export default function Preloader() {
 
             {/* ── Top-Right Rotating Circular Badge ────────────────────────── */}
             <div
-                className={`absolute top-6 right-6 md:top-12 md:right-12 z-10 transition-all duration-1000 ease-out delay-150 ${
-                    !textEntered
+                className={`absolute top-6 right-6 md:top-12 md:right-12 z-10 transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                    !animateIn
                         ? "-translate-y-6 opacity-0 scale-90"
                         : isLoading
                         ? "translate-y-0 opacity-100 scale-100"
@@ -151,74 +175,47 @@ export default function Preloader() {
                 </div>
             </div>
 
-            {/* ── Main Editorial Motion Typography (Staggered Entrance & Exit) ── */}
-            <div className="my-auto max-w-5xl mx-auto w-full flex flex-col items-center justify-center text-center relative z-10 py-8 gap-1 md:gap-2">
+            {/* ── Main Kinetic Editorial Motion Typography ───────────────────── */}
+            <div className="my-auto max-w-5xl mx-auto w-full flex flex-col items-center justify-center text-center relative z-10 py-6 gap-0.5 md:gap-1">
                 
-                {/* Line 1: CREATING */}
-                <div className="overflow-hidden py-1">
-                    <h1
-                        className={`font-playfair text-4xl sm:text-6xl md:text-8xl tracking-tight text-white font-medium uppercase leading-tight transition-all duration-1000 ease-out delay-100 ${
-                            !textEntered
-                                ? "translate-y-24 opacity-0"
-                                : isLoading
-                                ? "translate-y-0 opacity-100"
-                                : "-translate-y-12 opacity-0"
-                        }`}
-                    >
-                        CREATING
-                    </h1>
-                </div>
+                {/* Line 1: CREATING (Kinetic Character Wave) */}
+                <h1 className="font-playfair text-4xl sm:text-6xl md:text-8xl tracking-tight text-white font-medium uppercase leading-tight">
+                    {renderKineticText("CREATING", 100)}
+                </h1>
 
-                {/* Line 2: EXPERIENCES* */}
-                <div className="overflow-hidden py-1">
-                    <h2
-                        className={`font-playfair text-4xl sm:text-6xl md:text-8xl tracking-tight text-white font-medium uppercase leading-tight flex items-center justify-center gap-2 transition-all duration-1000 ease-out delay-300 ${
-                            !textEntered
-                                ? "translate-y-24 opacity-0"
+                {/* Line 2: EXPERIENCES* (Kinetic Character Wave + Spinning Asterisk) */}
+                <h2 className="font-playfair text-4xl sm:text-6xl md:text-8xl tracking-tight text-white font-medium uppercase leading-tight flex items-center justify-center gap-2">
+                    {renderKineticText("EXPERIENCES", 350)}
+                    <span
+                        className={`inline-block font-mono text-2xl md:text-4xl text-[#ffff7b] animate-[spin_6s_linear_infinite] transition-all duration-700 delay-500 ${
+                            !animateIn
+                                ? "scale-0 opacity-0"
                                 : isLoading
-                                ? "translate-y-0 opacity-100"
-                                : "-translate-y-12 opacity-0"
+                                ? "scale-100 opacity-100"
+                                : "scale-0 opacity-0"
                         }`}
                     >
-                        EXPERIENCES<span className="text-[#ffff7b] font-mono text-2xl md:text-4xl animate-pulse">*</span>
-                    </h2>
-                </div>
+                        *
+                    </span>
+                </h2>
 
-                {/* Line 3: IMPOSSIBLE (Clean Unblocked Editorial Serif) */}
-                <div className="overflow-hidden my-1 sm:my-2 py-1">
-                    <h3
-                        className={`font-sans text-5xl sm:text-7xl md:text-[130px] font-black text-[#d1c7b7] uppercase tracking-tighter leading-none transition-all duration-1000 ease-out delay-500 ${
-                            !textEntered
-                                ? "translate-y-28 opacity-0 scale-95"
-                                : isLoading
-                                ? "translate-y-0 opacity-100 scale-100"
-                                : "-translate-y-12 opacity-0 scale-95"
-                        }`}
-                    >
-                        IMPOSSIBLE
+                {/* Line 3: IMPOSSIBLE (Kinetic Character Wave + Warm Tone Serif) */}
+                <div className="my-1 sm:my-2 overflow-hidden">
+                    <h3 className="font-sans text-5xl sm:text-7xl md:text-[130px] font-black text-[#d1c7b7] uppercase tracking-tighter leading-none">
+                        {renderKineticText("IMPOSSIBLE", 600, "text-[#d1c7b7]")}
                     </h3>
                 </div>
 
-                {/* Line 4: TO IGNORE */}
-                <div className="overflow-hidden py-1">
-                    <h4
-                        className={`font-playfair text-4xl sm:text-6xl md:text-8xl tracking-tight text-white font-medium uppercase leading-tight transition-all duration-1000 ease-out delay-700 ${
-                            !textEntered
-                                ? "translate-y-24 opacity-0"
-                                : isLoading
-                                ? "translate-y-0 opacity-100"
-                                : "-translate-y-12 opacity-0"
-                        }`}
-                    >
-                        TO IGNORE
-                    </h4>
-                </div>
+                {/* Line 4: TO IGNORE (Kinetic Character Wave) */}
+                <h4 className="font-playfair text-4xl sm:text-6xl md:text-8xl tracking-tight text-white font-medium uppercase leading-tight">
+                    {renderKineticText("TO IGNORE", 950)}
+                </h4>
             </div>
 
             {/* ── Bottom Bar: Metadata & Line Progress ─────────────────────── */}
             <div
-                className={`w-full max-w-4xl mx-auto flex flex-col gap-4 z-10 transition-all duration-1000 ease-out delay-500 ${
-                    !textEntered
+                className={`w-full max-w-4xl mx-auto flex flex-col gap-4 z-10 transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] delay-700 ${
+                    !animateIn
                         ? "translate-y-8 opacity-0"
                         : isLoading
                         ? "translate-y-0 opacity-100"
@@ -228,7 +225,7 @@ export default function Preloader() {
                 {/* Meta details */}
                 <div className="w-full flex items-center justify-between font-mono text-[10px] sm:text-xs text-white/40 uppercase tracking-widest px-2">
                     <span>3D &amp; CGI STUDIO</span>
-                    <span className="text-[#ffff7b] animate-bounce">✦</span>
+                    <span className="text-[#ffff7b] animate-pulse">✦ LAT 36.8° N / LON 10.1° E</span>
                     <span>TUNISIA · WORLDWIDE</span>
                 </div>
 
