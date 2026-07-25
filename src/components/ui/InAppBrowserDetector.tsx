@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 export default function InAppBrowserDetector() {
   const [isInApp, setIsInApp] = useState(false);
+  const [redirectAttempted, setRedirectAttempted] = useState(false);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -25,12 +26,44 @@ export default function InAppBrowserDetector() {
     const isMatch = rules.some((rule) => ua.includes(rule));
 
     if (isMatch) {
-      setIsInApp(true);
+      const isAndroid = /android/i.test(ua);
+      const hostPath = window.location.host + window.location.pathname + window.location.search;
+      
+      if (isAndroid) {
+        // Highly effective Android Chrome forced redirect
+        window.location.href = `intent://${hostPath}#Intent;scheme=https;package=com.android.chrome;end;`;
+      } else {
+        // iOS Safari workaround attempt (opening a new blank tab sometimes triggers the external browser)
+        setTimeout(() => {
+          window.location.assign(`googlechrome://${hostPath}`);
+        }, 100);
+      }
+
+      setRedirectAttempted(true);
+
+      // If the redirect fails (meaning the user is still on this page after 2 seconds),
+      // we must show the warning because iOS Apple strictly blocks automatic breakouts.
+      const timer = setTimeout(() => {
+        setIsInApp(true);
+      }, 2000);
+
+      return () => clearTimeout(timer);
     }
   }, []);
 
-  if (!isInApp) return null;
+  if (!isInApp && !redirectAttempted) return null;
 
+  // If redirecting, show a sleek loading state instead of a warning initially
+  if (redirectAttempted && !isInApp) {
+      return (
+        <div className="fixed inset-0 z-[9999] bg-[#0a0514] flex flex-col items-center justify-center p-8 text-center text-white">
+          <div className="w-12 h-12 rounded-full bg-fuchsia-500/20 border-2 border-fuchsia-500 animate-spin border-t-transparent mb-6"></div>
+          <h2 className="font-mono text-sm tracking-[0.2em] text-fuchsia-400 animate-pulse">REDIRECTING TO SYSTEM BROWSER...</h2>
+        </div>
+      );
+  }
+
+  // If the automatic redirect was blocked by Apple (iOS), we fallback to the manual instruction.
   return (
     <div className="fixed inset-0 z-[9999] bg-[#0a0514]/95 backdrop-blur-3xl flex flex-col items-center justify-center p-8 text-center text-white">
       <div className="w-16 h-16 mb-6 rounded-full bg-fuchsia-500/20 border border-fuchsia-500/50 flex items-center justify-center animate-pulse">
@@ -40,13 +73,13 @@ export default function InAppBrowserDetector() {
       </div>
       
       <h2 className="font-siegra text-3xl md:text-5xl mb-4 text-transparent bg-clip-text bg-gradient-to-r from-white to-white/50 tracking-wider">
-        RESTRICTED BROWSER
+        REDIRECT BLOCKED
       </h2>
       
       <p className="font-mono text-xs md:text-sm text-white/70 mb-8 max-w-md leading-relaxed">
-        This high-performance 3D portfolio cannot run inside social media apps. 
+        Your social media app blocked the automatic redirect.
         <br /><br />
-        Please tap the <strong className="text-fuchsia-400">three dots (...)</strong> in the top corner of your screen and select <strong className="text-white">Open in Browser</strong> (Safari or Chrome) to initiate the experience.
+        Please tap the <strong className="text-fuchsia-400">three dots (...)</strong> in the top corner and select <strong className="text-white">Open in Browser</strong> to view the 3D portfolio.
       </p>
 
       <div className="flex gap-2 items-center text-[10px] uppercase font-mono tracking-widest text-fuchsia-500/50">
