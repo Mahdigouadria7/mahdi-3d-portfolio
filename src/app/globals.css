@@ -292,3 +292,12 @@ img {
   from { opacity: 0; }
   to { opacity: 1; }
 }
+
+/* Anti-Theft CSS Rules */
+img, video {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+}

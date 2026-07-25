@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Rajdhani, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import StickyHeader from "@/components/StickyHeader";
+import SecurityWrapper from "@/components/ui/SecurityWrapper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -62,8 +63,10 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${rajdhani.variable} ${spaceGrotesk.variable} antialiased`}
     >
       <body className="flex flex-col">
-        <StickyHeader />
-        {children}
+        <SecurityWrapper>
+          <StickyHeader />
+          {children}
+        </SecurityWrapper>
       </body>
     </html>
   );
