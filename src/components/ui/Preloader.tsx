@@ -2,8 +2,16 @@
 
 import { useEffect, useState, useRef } from "react";
 
-const PRELOAD_IMAGES = [
-    "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_600/portfolio/mahdi_portrait.jpg",
+const MAHDI_PORTRAIT = "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_600/portfolio/mahdi_portrait.jpg";
+
+const PROJECT_IMAGES = [
+    "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_600/v1784898993/portfolio/trionda/cover_ball.webp",
+    "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_600/v1784898995/portfolio/trionda/stadium_mockup.webp",
+    "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_600/v1784898996/portfolio/trionda/street_billboard.webp",
+    "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_600/v1784899905/portfolio/redbull/liwa_redbull_2.webp",
+    "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_600/v1784899913/portfolio/redbull/redbull_gold_darker.webp",
+    "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_600/v1784899929/portfolio/redbull/redbullr.webp",
+    "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_600/v1784899935/portfolio/redbull/redbull_environmet_xt.webp",
     "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_600/portfolio/hero_frames/frame_00150.jpg",
     "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_600/portfolio/hero_frames/frame_00200.jpg",
     "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_600/portfolio/hero_frames/frame_00080.jpg",
@@ -58,8 +66,17 @@ export default function Preloader() {
         if (dist > 40) {
             lastPosRef.current = { x: e.clientX, y: e.clientY };
             const newId = Date.now() + Math.random();
-            const nextImg = PRELOAD_IMAGES[imageIndexRef.current % PRELOAD_IMAGES.length];
+            
+            // First image is ALWAYS Mahdi's portrait; subsequent images are randomized from project pool
+            let nextImg: string;
+            if (imageIndexRef.current === 0) {
+                nextImg = MAHDI_PORTRAIT;
+            } else {
+                const randomIndex = Math.floor(Math.random() * PROJECT_IMAGES.length);
+                nextImg = PROJECT_IMAGES[randomIndex];
+            }
             imageIndexRef.current += 1;
+            
             const randomRot = (Math.random() - 0.5) * 26;
 
             setTrail((prev) => [
