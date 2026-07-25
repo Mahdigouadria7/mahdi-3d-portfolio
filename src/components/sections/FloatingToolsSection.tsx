@@ -67,21 +67,20 @@ function ToolIconRenderer({ type }: { type: string }) {
   return null;
 }
 
-/* ── Tool Data — Tight orbital ring positioning around headline (exact match to reference Image 1) ── */
+/* ── Tool Data — Calibrated tight positions & text-repelling magnetic bounds ────── */
 const TOOLS = [
   {
     id: "blender",
     name: "Blender 3D",
     label: "3D Modeling",
     accent: false,
-    posStyle: { top: "16%", left: "14%" },
+    posStyle: { top: "18%", left: "18%" }, // Closer to text
     posLabel: "right",
     tagTilt: "rotate-[-1.5deg]",
-    // Center entrance explosion offsets
-    startX: 280,
-    startY: 140,
-    magneticFactorX: -18,
-    magneticFactorY: -12,
+    startX: 240,
+    startY: 120,
+    magneticFactorX: -8, // Repulses outward left, away from text
+    magneticFactorY: -6,
     floatDelay: "0s",
     icon: "blender",
   },
@@ -90,13 +89,13 @@ const TOOLS = [
     name: "Photoshop",
     label: "Graphic Design",
     accent: true,
-    posStyle: { top: "8%", left: "42%" },
+    posStyle: { top: "2%", left: "42%" }, // Safely elevated above SOFTWARE ARSENAL text
     posLabel: "right",
     tagTilt: "rotate-[1deg]",
     startX: 0,
     startY: 220,
     magneticFactorX: 0,
-    magneticFactorY: -20,
+    magneticFactorY: -8, // Repulses UP away from text
     floatDelay: "0.8s",
     icon: "photoshop",
   },
@@ -105,13 +104,13 @@ const TOOLS = [
     name: "After Effects",
     label: "Motion Design",
     accent: false,
-    posStyle: { top: "15%", right: "14%" },
+    posStyle: { top: "17%", right: "18%" }, // Closer to text
     posLabel: "left",
     tagTilt: "rotate-[2deg]",
-    startX: -280,
-    startY: 140,
-    magneticFactorX: 18,
-    magneticFactorY: -12,
+    startX: -240,
+    startY: 120,
+    magneticFactorX: 8, // Repulses outward right, away from text
+    magneticFactorY: -6,
     floatDelay: "1.4s",
     icon: "aftereffects",
   },
@@ -120,13 +119,13 @@ const TOOLS = [
     name: "Three.js",
     label: "Web Development",
     accent: false,
-    posStyle: { bottom: "22%", left: "16%" },
+    posStyle: { bottom: "24%", left: "20%" }, // Closer to text
     posLabel: "right",
     tagTilt: "rotate-[1.5deg]",
-    startX: 280,
-    startY: -140,
-    magneticFactorX: -18,
-    magneticFactorY: 12,
+    startX: 240,
+    startY: -120,
+    magneticFactorX: -8, // Repulses outward left
+    magneticFactorY: 6,
     floatDelay: "2.1s",
     icon: "threejs",
   },
@@ -135,13 +134,13 @@ const TOOLS = [
     name: "ZBrush",
     label: "Digital Sculpting",
     accent: false,
-    posStyle: { bottom: "10%", left: "43%" },
+    posStyle: { bottom: "2%", left: "43%" }, // Safely lowered below description text
     posLabel: "right",
     tagTilt: "rotate-[-2deg]",
     startX: 0,
     startY: -220,
     magneticFactorX: 0,
-    magneticFactorY: 20,
+    magneticFactorY: 8, // Repulses DOWN away from text
     floatDelay: "0.5s",
     icon: "zbrush",
   },
@@ -150,13 +149,13 @@ const TOOLS = [
     name: "Houdini",
     label: "VFX & Simulation",
     accent: true,
-    posStyle: { bottom: "18%", right: "15%" },
+    posStyle: { bottom: "20%", right: "20%" }, // Closer to text
     posLabel: "left",
     tagTilt: "rotate-[-1deg]",
-    startX: -280,
-    startY: -140,
-    magneticFactorX: 18,
-    magneticFactorY: 12,
+    startX: -240,
+    startY: -120,
+    magneticFactorX: 8, // Repulses outward right
+    magneticFactorY: 6,
     floatDelay: "1.2s",
     icon: "houdini",
   },
@@ -185,7 +184,7 @@ function ToolCard({
   const scrollOffsetX = tool.startX * (1 - easeProgress);
   const scrollOffsetY = tool.startY * (1 - easeProgress);
 
-  // Magnetic mouse offset
+  // Magnetic mouse offset (bounded away from center text)
   const magX = mousePos.x * tool.magneticFactorX;
   const magY = mousePos.y * tool.magneticFactorY;
 
@@ -231,7 +230,7 @@ function ToolCard({
           </>
         )}
 
-        {/* Icon card box (Soft off-white background with warm shadow matching reference Image 1) */}
+        {/* Icon card box */}
         <div
           className={`w-14 h-14 md:w-16 md:h-16 bg-[#FBFBFA] rounded-[22px] shadow-[0_10px_30px_rgba(0,0,0,0.06)] flex items-center justify-center border border-black/[0.04] transition-all duration-300 overflow-hidden ${
             hovered ? "shadow-[0_18px_40px_rgba(0,0,0,0.14)] border-black/10 -translate-y-1" : ""
