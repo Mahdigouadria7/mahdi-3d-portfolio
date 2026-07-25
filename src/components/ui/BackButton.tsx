@@ -2,7 +2,6 @@
 
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import ScrambleText from "./ScrambleText";
 
 export default function BackButton() {
     const router = useRouter();
@@ -38,23 +37,12 @@ export default function BackButton() {
         <Link 
             href="/" 
             onClick={handleBack}
-            className="pointer-events-auto relative flex items-center justify-center w-24 h-24 group cursor-pointer"
+            className="pointer-events-auto inline-flex items-center gap-2.5 bg-[#ffff7b] text-[#141414] font-sans text-xs font-bold uppercase tracking-wider px-6 py-3 rounded-full hover:bg-white active:scale-95 transition-all duration-200 shadow-2xl group cursor-pointer"
         >
-            {/* Outer Faded Circle */}
-            <div className="absolute inset-0 rounded-full border border-white/20 group-hover:border-red-500/50 group-hover:scale-110 transition-all duration-500"></div>
-            
-            {/* Inner Solid Circle */}
-            <div className="absolute inset-2 rounded-full border border-white/40 group-hover:border-red-500 transition-colors duration-500"></div>
-            
-            {/* Vertical Dashed Line (Crosshair) */}
-            <div className="absolute top-[-20px] bottom-[-20px] left-1/2 w-[1px] border-l border-dashed border-white/40 group-hover:border-red-500 transition-colors duration-500 transform -translate-x-1/2"></div>
-            
-            {/* Text on transparent background */}
-            <div className="relative z-10 px-3 py-1">
-                <span className="font-tech text-sm font-bold tracking-[0.2em] uppercase text-white group-hover:text-red-500 transition-colors">
-                    <ScrambleText text="BACK" />
-                </span>
-            </div>
+            <span className="w-5 h-5 rounded-full bg-[#141414] text-[#ffff7b] flex items-center justify-center text-xs group-hover:-translate-x-0.5 transition-transform flex-shrink-0">
+                ←
+            </span>
+            <span>ALL PROJECTS</span>
         </Link>
     );
 }

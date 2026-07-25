@@ -2,7 +2,6 @@
 
 import { useRouter } from "next/navigation";
 import { projects } from "@/data/projects";
-import ScrambleText from "./ScrambleText";
 
 export default function NextProjectButton({ currentSlug }: { currentSlug: string }) {
     const router = useRouter();
@@ -41,10 +40,17 @@ export default function NextProjectButton({ currentSlug }: { currentSlug: string
         <a 
             href={`/projects/${nextProject.slug}`} 
             onClick={handleNext}
-            className="pointer-events-auto font-cyber text-[9px] md:text-sm font-bold tracking-wide md:tracking-[0.2em] uppercase text-white/70 hover:text-fuchsia-500 transition-colors flex flex-col items-end gap-2 group cursor-pointer max-w-full w-full md:w-auto text-right"
+            className="pointer-events-auto flex items-center gap-3.5 bg-[#141414]/80 backdrop-blur-xl border border-white/10 hover:border-[#ffff7b]/60 px-5 py-2.5 rounded-full transition-all duration-300 group shadow-lg"
         >
-            <ScrambleText text={nextProject.title} />
-            <span className="w-8 h-[2px] bg-white/70 group-hover:bg-fuchsia-500 group-hover:w-full transition-all duration-300"></span>
+            <div className="flex flex-col items-end min-w-0">
+                <span className="font-mono text-[9px] text-[#ffff7b] uppercase tracking-widest font-semibold">NEXT</span>
+                <span className="font-sans text-xs md:text-sm font-bold tracking-tight text-white group-hover:text-[#ffff7b] transition-colors truncate max-w-[140px] md:max-w-[200px]">
+                    {nextProject.title}
+                </span>
+            </div>
+            <span className="w-6 h-6 rounded-full bg-white/10 text-white group-hover:bg-[#ffff7b] group-hover:text-[#141414] flex items-center justify-center text-xs transition-colors font-bold flex-shrink-0">
+                →
+            </span>
         </a>
     );
 }
