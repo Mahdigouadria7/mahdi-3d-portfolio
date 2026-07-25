@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
-/* ── Cursor SVG (exact style from Nico Studio) ─────────── */
+/* ── Cursor SVG (exact style from reference video) ─────────── */
 function CursorArrow({ className = "" }: { className?: string }) {
   return (
     <svg
@@ -24,145 +24,180 @@ function CursorArrow({ className = "" }: { className?: string }) {
   );
 }
 
-/* ── Tool data — icons to be replaced by user later ─────── */
+/* ── Tool data — custom scroll parallax vectors & floating delays ─────── */
 const TOOLS = [
   {
     id: "3dsmax",
     name: "3DS Max",
     label: "3D Modeling",
     accent: false,
-    // desktop: positioned like Nico Studio scattered layout
-    pos: "top-[5%] left-[4%]",
+    pos: "top-[8%] left-[4%]",
     posLabel: "right",
+    parallaxY: -80, // moves UP as scroll down
+    parallaxX: -40, // moves LEFT
+    floatDelay: "0s",
   },
   {
     id: "redshift",
     name: "Redshift",
     label: "GPU Rendering",
     accent: true,
-    pos: "top-[2%] left-[37%]",
+    pos: "top-[4%] left-[36%]",
     posLabel: "right",
+    parallaxY: 60,  // moves DOWN as scroll down
+    parallaxX: 30,
+    floatDelay: "0.8s",
   },
   {
     id: "cinema4d",
     name: "Cinema 4D",
     label: "Motion Design",
     accent: false,
-    pos: "top-[8%] right-[5%]",
+    pos: "top-[10%] right-[5%]",
     posLabel: "left",
+    parallaxY: -90,
+    parallaxX: 50,
+    floatDelay: "1.4s",
   },
   {
     id: "blender",
     name: "Blender",
     label: "Open Source 3D",
     accent: false,
-    pos: "bottom-[22%] left-[5%]",
+    pos: "bottom-[20%] left-[5%]",
     posLabel: "right",
+    parallaxY: 70,
+    parallaxX: -35,
+    floatDelay: "2.1s",
   },
   {
     id: "houdini",
     name: "Houdini",
     label: "VFX & Simulation",
     accent: true,
-    pos: "bottom-[18%] right-[8%]",
+    pos: "bottom-[16%] right-[7%]",
     posLabel: "left",
+    parallaxY: -65,
+    parallaxX: 45,
+    floatDelay: "1.2s",
   },
   {
     id: "zbrush",
     name: "ZBrush",
     label: "Digital Sculpting",
     accent: false,
-    pos: "bottom-[5%] left-[38%]",
+    pos: "bottom-[4%] left-[38%]",
     posLabel: "right",
+    parallaxY: 50,
+    parallaxX: -20,
+    floatDelay: "0.5s",
   },
 ];
 
-/* ── Single Floating Tool card ─────────────────────────── */
+/* ── Single Floating Tool card with Scroll Parallax & Idle Float ─────────── */
 function ToolCard({
   tool,
+  scrollProgress,
 }: {
   tool: (typeof TOOLS)[number];
+  scrollProgress: number;
 }) {
   const [hovered, setHovered] = useState(false);
 
+  // Parallax offset based on scroll progress (centered around 0.5)
+  const factor = (scrollProgress - 0.5) * 2; // -1 to +1
+  const offsetY = factor * tool.parallaxY;
+  const offsetX = factor * tool.parallaxX;
+
   return (
     <div
-      className={`absolute ${tool.pos} flex items-center gap-2 transition-all duration-300 ${
-        hovered ? "scale-105 -translate-y-1" : ""
-      }`}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      className={`absolute ${tool.pos} z-20 transition-transform duration-500 ease-out`}
+      style={{
+        transform: `translate3d(${offsetX}px, ${offsetY}px, 0px)`,
+      }}
     >
-      {/* Label on the left side */}
-      {tool.posLabel === "left" && (
-        <>
-          <span
-            className={`font-mono text-[11px] md:text-xs tracking-wide px-3 py-1.5 rounded-full shadow-md transition-all duration-300 whitespace-nowrap ${
-              tool.accent
-                ? "bg-[#ffff7b] text-[#191919]"
-                : "bg-[#191919] text-white"
-            } ${hovered ? "opacity-100 scale-100" : "opacity-90 scale-95"}`}
-          >
-            {tool.label}
-          </span>
-          <CursorArrow className="flex-shrink-0 -scale-x-100" />
-        </>
-      )}
-
-      {/* Icon card */}
+      {/* Inner float wrapper for continuous sine-wave idle movement */}
       <div
-        className={`w-12 h-12 md:w-16 md:h-16 bg-white rounded-2xl shadow-lg flex items-center justify-center transition-all duration-300 ${
-          hovered ? "shadow-2xl" : "shadow-md"
+        className={`flex items-center gap-2 transition-all duration-300 ${
+          hovered ? "scale-110 -translate-y-1" : "scale-100"
         }`}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        style={{
+          animation: `floatingTool 5s ease-in-out infinite`,
+          animationDelay: tool.floatDelay,
+        }}
       >
-        {/* Placeholder — user will replace with actual icons */}
-        <span className="font-playfair font-black text-lg md:text-xl text-[#191919] italic select-none">
-          {tool.name.charAt(0)}
-        </span>
-      </div>
+        {/* Label on the left side */}
+        {tool.posLabel === "left" && (
+          <>
+            <span
+              className={`font-mono text-[11px] md:text-xs tracking-wide px-3.5 py-1.5 rounded-full shadow-md transition-all duration-300 whitespace-nowrap ${
+                tool.accent
+                  ? "bg-[#ffff7b] text-[#191919] font-bold"
+                  : "bg-[#191919] text-white font-medium"
+              } ${hovered ? "opacity-100 scale-105 shadow-xl" : "opacity-95 scale-100"}`}
+            >
+              {tool.label}
+            </span>
+            <CursorArrow className="flex-shrink-0 -scale-x-100 drop-shadow-sm" />
+          </>
+        )}
 
-      {/* Label on the right side */}
-      {tool.posLabel === "right" && (
-        <>
-          <CursorArrow className="flex-shrink-0" />
-          <span
-            className={`font-mono text-[11px] md:text-xs tracking-wide px-3 py-1.5 rounded-full shadow-md transition-all duration-300 whitespace-nowrap ${
-              tool.accent
-                ? "bg-[#ffff7b] text-[#191919]"
-                : "bg-[#191919] text-white"
-            } ${hovered ? "opacity-100 scale-100" : "opacity-90 scale-95"}`}
-          >
-            {tool.label}
+        {/* Icon card */}
+        <div
+          className={`w-13 h-13 md:w-16 md:h-16 bg-white rounded-2xl shadow-lg flex items-center justify-center border border-black/5 transition-all duration-300 ${
+            hovered ? "shadow-2xl border-black/15" : "shadow-md"
+          }`}
+        >
+          <span className="font-playfair font-black text-xl md:text-2xl text-[#191919] italic select-none">
+            {tool.name.charAt(0)}
           </span>
-        </>
-      )}
+        </div>
+
+        {/* Label on the right side */}
+        {tool.posLabel === "right" && (
+          <>
+            <CursorArrow className="flex-shrink-0 drop-shadow-sm" />
+            <span
+              className={`font-mono text-[11px] md:text-xs tracking-wide px-3.5 py-1.5 rounded-full shadow-md transition-all duration-300 whitespace-nowrap ${
+                tool.accent
+                  ? "bg-[#ffff7b] text-[#191919] font-bold"
+                  : "bg-[#191919] text-white font-medium"
+              } ${hovered ? "opacity-100 scale-105 shadow-xl" : "opacity-95 scale-100"}`}
+            >
+              {tool.label}
+            </span>
+          </>
+        )}
+      </div>
     </div>
   );
 }
 
-/* ── Mobile stacked grid (phones can't do absolute layout) */
+/* ── Mobile stacked grid for responsive phones ───────────────────────── */
 function ToolGrid() {
   return (
     <div className="grid grid-cols-2 gap-3 mb-10">
       {TOOLS.map((tool) => (
         <div
           key={tool.id}
-          className="flex items-center gap-2 bg-white/70 rounded-xl p-3 shadow-sm"
+          className="flex items-center gap-2.5 bg-white/80 rounded-xl p-3 shadow-sm border border-black/5"
         >
-          <div className="w-9 h-9 bg-white rounded-xl shadow flex items-center justify-center flex-shrink-0">
-            <span className="font-playfair font-black text-base text-[#191919] italic">
+          <div className="w-10 h-10 bg-white rounded-xl shadow flex items-center justify-center flex-shrink-0 border border-black/5">
+            <span className="font-playfair font-black text-lg text-[#191919] italic">
               {tool.name.charAt(0)}
             </span>
           </div>
-          <div>
-            <p className="font-mono text-[10px] font-bold text-[#191919] tracking-wide">
+          <div className="overflow-hidden">
+            <p className="font-mono text-[11px] font-bold text-[#191919] tracking-wide truncate">
               {tool.name}
             </p>
             <span
               className={`inline-block font-mono text-[9px] tracking-wide px-2 py-0.5 rounded-full mt-0.5 ${
                 tool.accent
-                  ? "bg-[#ffff7b] text-[#191919]"
-                  : "bg-[#191919] text-white"
+                  ? "bg-[#ffff7b] text-[#191919] font-bold"
+                  : "bg-[#191919] text-white font-medium"
               }`}
             >
               {tool.label}
@@ -174,28 +209,67 @@ function ToolGrid() {
   );
 }
 
-/* ── Main Section ───────────────────────────────────────── */
+/* ── Main Section with Scroll Listener ─────────────────────────────────── */
 export default function FloatingToolsSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [scrollProgress, setScrollProgress] = useState(0.5);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!sectionRef.current) return;
+      const rect = sectionRef.current.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+
+      // Calculate 0 to 1 progress as section scrolls through window
+      const totalDist = windowHeight + rect.height;
+      const currentPos = windowHeight - rect.top;
+      const progress = Math.max(0, Math.min(1, currentPos / totalDist));
+      setScrollProgress(progress);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <section
+      ref={sectionRef}
       className="relative w-full overflow-hidden"
-      style={{ background: "var(--nico-cream)" }}
+      style={{ background: "var(--nico-cream, #f5f4ef)" }}
     >
+      {/* Custom Keyframe for idle float */}
+      <style jsx global>{`
+        @keyframes floatingTool {
+          0%, 100% {
+            transform: translateY(0px) rotate(0deg);
+          }
+          50% {
+            transform: translateY(-10px) rotate(1deg);
+          }
+        }
+      `}</style>
+
       {/* ── Desktop Layout ───────────────────────────────── */}
       <div
         className="hidden md:block relative w-full"
-        style={{ minHeight: "80vh" }}
+        style={{ minHeight: "85vh" }}
       >
-        {/* Absolute floating tools */}
+        {/* Absolute floating tools with scroll parallax */}
         {TOOLS.map((tool) => (
-          <ToolCard key={tool.id} tool={tool} />
+          <ToolCard key={tool.id} tool={tool} scrollProgress={scrollProgress} />
         ))}
 
-        {/* Central headline — absolutely centered */}
+        {/* Central headline — centered with subtle parallax zoom */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none px-8">
-          <div className="text-center max-w-2xl">
-            <p className="font-mono text-[10px] tracking-[0.3em] uppercase text-[#5c5c5c] mb-6">
-              Software Arsenal
+          <div
+            className="text-center max-w-2xl transition-transform duration-700 ease-out"
+            style={{
+              transform: `translateY(${(scrollProgress - 0.5) * -20}px)`,
+            }}
+          >
+            <p className="font-mono text-[10px] md:text-xs tracking-[0.35em] uppercase text-[#666] mb-6 font-semibold">
+              SOFTWARE ARSENAL
             </p>
             <h2
               className="font-playfair text-5xl md:text-6xl lg:text-7xl leading-tight text-[#191919]"
@@ -203,16 +277,15 @@ export default function FloatingToolsSection() {
             >
               The best tools for{" "}
               <em
-                className="font-playfair italic"
-                style={{ fontWeight: 400 }}
+                className="font-playfair italic font-normal text-[#191919]"
               >
                 cinematic
               </em>{" "}
               3D production.
             </h2>
             <p
-              className="mt-6 font-mono text-xs md:text-sm text-[#5c5c5c] tracking-wide"
-              style={{ maxWidth: 420, margin: "1.5rem auto 0" }}
+              className="mt-6 font-mono text-xs md:text-sm text-[#5c5c5c] tracking-wide leading-relaxed"
+              style={{ maxWidth: 460, margin: "1.5rem auto 0" }}
             >
               Industry-standard tools from concept to final render — every project crafted with the right software for the job.
             </p>
@@ -222,15 +295,15 @@ export default function FloatingToolsSection() {
 
       {/* ── Mobile Layout ────────────────────────────────── */}
       <div className="md:hidden px-6 py-16">
-        <p className="font-mono text-[10px] tracking-[0.3em] uppercase text-[#5c5c5c] mb-4 text-center">
-          Software Arsenal
+        <p className="font-mono text-[10px] tracking-[0.3em] uppercase text-[#666] mb-4 text-center font-semibold">
+          SOFTWARE ARSENAL
         </p>
         <h2
           className="font-playfair text-4xl leading-tight text-[#191919] mb-8 text-center"
           style={{ fontWeight: 700 }}
         >
           The best tools for{" "}
-          <em className="font-playfair italic" style={{ fontWeight: 400 }}>
+          <em className="font-playfair italic font-normal">
             cinematic
           </em>{" "}
           3D production.
@@ -241,7 +314,7 @@ export default function FloatingToolsSection() {
         </p>
       </div>
 
-      {/* Bottom separator */}
+      {/* Bottom separator line */}
       <div className="absolute bottom-0 left-0 right-0 h-px bg-[#191919]/10" />
     </section>
   );
