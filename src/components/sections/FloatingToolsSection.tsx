@@ -33,7 +33,6 @@ const TOOLS = [
     accent: false,
     posStyle: { top: "8%", left: "5%" },
     posLabel: "right",
-    // Starts 380px right and 200px down (at headline center)
     startX: 380,
     startY: 200,
     floatDelay: "0s",
@@ -45,7 +44,6 @@ const TOOLS = [
     accent: true,
     posStyle: { top: "4%", left: "37%" },
     posLabel: "right",
-    // Starts 260px down
     startX: 0,
     startY: 260,
     floatDelay: "0.8s",
@@ -57,7 +55,6 @@ const TOOLS = [
     accent: false,
     posStyle: { top: "10%", right: "5%" },
     posLabel: "left",
-    // Starts 380px left and 200px down
     startX: -380,
     startY: 200,
     floatDelay: "1.4s",
@@ -69,7 +66,6 @@ const TOOLS = [
     accent: false,
     posStyle: { bottom: "20%", left: "5%" },
     posLabel: "right",
-    // Starts 380px right and 200px up
     startX: 380,
     startY: -200,
     floatDelay: "2.1s",
@@ -81,7 +77,6 @@ const TOOLS = [
     accent: false,
     posStyle: { bottom: "4%", left: "37%" },
     posLabel: "right",
-    // Starts 260px up
     startX: 0,
     startY: -260,
     floatDelay: "0.5s",
@@ -93,14 +88,13 @@ const TOOLS = [
     accent: true,
     posStyle: { bottom: "16%", right: "6%" },
     posLabel: "left",
-    // Starts 380px left and 200px up
     startX: -380,
     startY: -200,
     floatDelay: "1.2s",
   },
 ];
 
-/* ── Single Floating Tool Card with Scroll Explosion & Idle Float ─────── */
+/* ── Single Floating Tool Card with Smooth Scroll Explosion & Idle Float ─── */
 function ToolCard({
   tool,
   scrollProgress,
@@ -110,27 +104,26 @@ function ToolCard({
 }) {
   const [hovered, setHovered] = useState(false);
 
-  // Scroll Entrance Progress: 0 (when section top enters) to 1 (when centered)
-  // Maps scrollProgress [0.05..0.45] -> [0..1]
-  const rawProgress = (scrollProgress - 0.05) / 0.40;
+  // Smooth Scroll Entrance Progress over a wider track: 0 (top of section) -> 1 (centered)
+  const rawProgress = (scrollProgress - 0.02) / 0.50;
   const clampedProgress = Math.max(0, Math.min(1, rawProgress));
-  
-  // Smooth cubic ease-out for expanding from center: 1 - (1 - x)^3
-  const easeProgress = 1 - Math.pow(1 - clampedProgress, 3);
 
-  // Offset goes from startX/startY (center) -> 0 (outer resting position)
+  // Ultra-smooth quintic ease-out for organic explosion: 1 - (1 - x)^4
+  const easeProgress = 1 - Math.pow(1 - clampedProgress, 4);
+
+  // Offset goes from center (startX, startY) -> 0 (outer resting position)
   const offsetX = tool.startX * (1 - easeProgress);
   const offsetY = tool.startY * (1 - easeProgress);
 
-  // Scale goes from 0.3 (small in center) -> 1.0 (full size)
-  const scale = 0.3 + easeProgress * 0.7;
+  // Scale smoothly expands from 0.35 -> 1.0
+  const scale = 0.35 + easeProgress * 0.65;
 
-  // Opacity fades in from 0 -> 1 as they float outwards
+  // Opacity smoothly fades in from 0 -> 1
   const opacity = easeProgress;
 
   return (
     <div
-      className="absolute z-20 pointer-events-auto transition-transform duration-300 ease-out"
+      className="absolute z-20 pointer-events-auto transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform"
       style={{
         ...tool.posStyle,
         transform: `translate3d(${offsetX}px, ${offsetY}px, 0px) scale(${hovered ? scale * 1.1 : scale})`,
@@ -145,7 +138,7 @@ function ToolCard({
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         style={{
-          animation: `floatingTool 5s ease-in-out infinite`,
+          animation: `floatingTool 5.5s ease-in-out infinite`,
           animationDelay: tool.floatDelay,
         }}
       >
@@ -230,7 +223,7 @@ function ToolGrid() {
   );
 }
 
-/* ── Main Section with Scroll Explosion Listener ───────────────────────── */
+/* ── Main Section with Smooth Scroll Explosion Listener ───────────────── */
 export default function FloatingToolsSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
