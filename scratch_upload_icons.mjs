@@ -10,19 +10,19 @@ cloudinary.config({
 const filesToUpload = [
   {
     name: 'houdini',
-    path: 'C:\\Users\\Mega Pc\\.gemini\\antigravity-ide\\brain\\46902c93-f377-4855-8830-70d339ccc030\\.tempmediaStorage\\media_46902c93-f377-4855-8830-70d339ccc030_1784991116582.jpg'
+    path: 'C:\\Users\\Mega Pc\\.gemini\\antigravity-ide\\brain\\46902c93-f377-4855-8830-70d339ccc030\\media__1784992420643.jpg'
   },
   {
     name: 'blender',
-    path: 'C:\\Users\\Mega Pc\\.gemini\\antigravity-ide\\brain\\46902c93-f377-4855-8830-70d339ccc030\\.tempmediaStorage\\media_46902c93-f377-4855-8830-70d339ccc030_1784991131193.jpg'
+    path: 'C:\\Users\\Mega Pc\\.gemini\\antigravity-ide\\brain\\46902c93-f377-4855-8830-70d339ccc030\\media__1784992420692.png'
   },
   {
     name: 'zbrush',
-    path: 'C:\\Users\\Mega Pc\\.gemini\\antigravity-ide\\brain\\46902c93-f377-4855-8830-70d339ccc030\\.tempmediaStorage\\media_46902c93-f377-4855-8830-70d339ccc030_1784991135041.jpg'
+    path: 'C:\\Users\\Mega Pc\\.gemini\\antigravity-ide\\brain\\46902c93-f377-4855-8830-70d339ccc030\\media__1784992420727.png'
   },
   {
     name: 'threejs',
-    path: 'C:\\Users\\Mega Pc\\.gemini\\antigravity-ide\\brain\\46902c93-f377-4855-8830-70d339ccc030\\.tempmediaStorage\\media_46902c93-f377-4855-8830-70d339ccc030_1784991139197.jpg'
+    path: 'C:\\Users\\Mega Pc\\.gemini\\antigravity-ide\\brain\\46902c93-f377-4855-8830-70d339ccc030\\media__1784992420731.png'
   }
 ];
 
@@ -33,8 +33,9 @@ async function run() {
         folder: 'portfolio/software_icons',
         public_id: item.name,
         overwrite: true,
+        invalidate: true,
       });
-      console.log(`Uploaded ${item.name}: ${res.secure_url}`);
+      console.log(`✅ Uploaded ${item.name}: ${res.secure_url}`);
     } catch (err) {
       console.error(`Failed ${item.name}:`, err);
     }

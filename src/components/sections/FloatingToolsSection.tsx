@@ -41,12 +41,12 @@ function AfterEffectsIcon({ className = "w-8 h-8 md:w-9 md:h-9" }: { className?:
   );
 }
 
-/* ── Cloudinary Image URLs for Blender, Houdini, ZBrush, Three.js ──── */
+/* ── Cloudinary Image URLs for User Attached Logos (Blender, Houdini, ZBrush, Three.js) ──── */
 const CLOUDINARY_ICONS: Record<string, string> = {
-  blender: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_200/v1784992519/portfolio/software_icons/blender.jpg",
-  houdini: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_200/v1784992519/portfolio/software_icons/houdini.jpg",
-  zbrush: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_200/v1784992520/portfolio/software_icons/zbrush.jpg",
-  threejs: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_200/v1784992520/portfolio/software_icons/threejs.jpg",
+  blender: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_200/v1784992610/portfolio/software_icons/blender.png",
+  houdini: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_200/v1784992609/portfolio/software_icons/houdini.jpg",
+  zbrush: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_200/v1784992611/portfolio/software_icons/zbrush.png",
+  threejs: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_200/v1784992612/portfolio/software_icons/threejs.png",
 };
 
 function ToolIconRenderer({ type }: { type: string }) {
@@ -59,7 +59,7 @@ function ToolIconRenderer({ type }: { type: string }) {
       <img
         src={imageUrl}
         alt={type}
-        className="w-9 h-9 md:w-11 md:h-11 object-contain rounded-xl pointer-events-none select-none"
+        className="w-10 h-10 md:w-12 md:h-12 object-contain rounded-lg p-0.5 pointer-events-none select-none"
       />
     );
   }
