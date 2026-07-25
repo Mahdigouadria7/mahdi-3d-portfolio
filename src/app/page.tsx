@@ -106,11 +106,11 @@ export default function Home() {
       {/* Fixed Background Container */}
       <div 
         ref={containerRef}
-        className="fixed inset-0 w-full h-full bg-[#0a0514] pointer-events-none"
+        className="fixed inset-0 w-full h-[100dvh] bg-[#0a0514] pointer-events-none"
       >
         <canvas 
           ref={canvasRef}
-          className="absolute inset-0 w-full h-full object-cover opacity-80 z-0"
+          className="absolute inset-0 w-full h-[100dvh] object-cover opacity-80 z-0"
           style={{ mixBlendMode: 'screen' }}
         />
         <div ref={overlayRef} className="absolute inset-0 bg-black opacity-0 pointer-events-none z-10"></div>

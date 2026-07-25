@@ -37,6 +37,7 @@ export default function StickyHeader() {
     }
 
     return (
+        <>
         <header
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
                 scrolled
@@ -118,6 +119,7 @@ export default function StickyHeader() {
                 </div>
 
             </div>
+        </header>
 
             {/* Mobile Menu Overlay */}
             <div 
@@ -167,6 +169,6 @@ export default function StickyHeader() {
                     <span className="font-mono text-[10px] tracking-widest text-white/40 uppercase">SYS ONLINE</span>
                 </div>
             </div>
-        </header>
+        </>
     );
 }
