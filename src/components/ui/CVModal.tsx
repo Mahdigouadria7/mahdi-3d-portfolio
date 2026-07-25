@@ -165,7 +165,7 @@ export default function CVModal({ isOpen, onClose }: CVModalProps) {
                                             /in/mahdi-gouadria ↗
                                         </a>
                                     </li>
-                                    <li className="flex justify-between">
+                                    <li className="flex justify-between border-b border-[#191919]/10 pb-2">
                                         <span className="text-[#5c5c5c] font-medium">Instagram</span>
                                         <a
                                             href="https://www.instagram.com/mahdi_gouadria?igsh=MWphcmIyNXhtOWIzZw=="
@@ -174,6 +174,17 @@ export default function CVModal({ isOpen, onClose }: CVModalProps) {
                                             className="font-bold text-[#191919] hover:text-emerald-700 transition-colors underline"
                                         >
                                             @mahdi_gouadria ↗
+                                        </a>
+                                    </li>
+                                    <li className="flex justify-between">
+                                        <span className="text-[#5c5c5c] font-medium">Pinterest</span>
+                                        <a
+                                            href="https://pin.it/3lpdLZIEI"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="font-bold text-[#191919] hover:text-emerald-700 transition-colors underline"
+                                        >
+                                            pin.it/3lpdLZIEI ↗
                                         </a>
                                     </li>
                                 </ul>

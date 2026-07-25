@@ -18,6 +18,7 @@ export default function ContactSection() {
         { label: "Email", href: "mailto:mahdigouadria8@gmail.com", sub: "mahdigouadria8@gmail.com" },
         { label: "LinkedIn", href: "https://www.linkedin.com/in/mahdi-gouadria?utm_source=share_via&utm_content=profile&utm_medium=member_android", sub: "linkedin.com/in/mahdi-gouadria" },
         { label: "Instagram", href: "https://www.instagram.com/mahdi_gouadria?igsh=MWphcmIyNXhtOWIzZw==", sub: "@mahdi_gouadria" },
+        { label: "Pinterest", href: "https://pin.it/3lpdLZIEI", sub: "pin.it/3lpdLZIEI" },
         { label: "Behance", href: "https://www.behance.net/mahdigouadria", sub: "behance.net/mahdigouadria" },
     ];
 
