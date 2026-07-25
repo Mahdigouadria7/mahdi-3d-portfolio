@@ -15,6 +15,7 @@ import ProcessSection from "@/components/sections/ProcessSection";
 import CTABannerSection from "@/components/sections/CTABannerSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import FAQSection from "@/components/sections/FAQSection";
+import FooterSection from "@/components/sections/FooterSection";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -190,6 +191,9 @@ export default function Home() {
 
         {/* 12. CONTACT — form + social links */}
         <ContactSection />
+
+        {/* 13. FOOTER — Nico Studio trademark footer */}
+        <FooterSection />
 
       </div>
     </main>
