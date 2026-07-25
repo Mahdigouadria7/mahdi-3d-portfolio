@@ -10,6 +10,11 @@ import GamesSection from "@/components/sections/GamesSection";
 import ContactSection from "@/components/sections/ContactSection";
 import ToolsMarquee from "@/components/ui/ToolsMarquee";
 import FloatingToolsSection from "@/components/sections/FloatingToolsSection";
+import AboutSection from "@/components/sections/AboutSection";
+import ProcessSection from "@/components/sections/ProcessSection";
+import CTABannerSection from "@/components/sections/CTABannerSection";
+import TestimonialsSection from "@/components/sections/TestimonialsSection";
+import FAQSection from "@/components/sections/FAQSection";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -134,12 +139,13 @@ export default function Home() {
 
       {/* Vertical Content Stacking */}
       <div className="flex flex-col w-full relative z-20">
-        {/* HERO: dark with 3D model */}
+
+        {/* 1. HERO — dark, 3D scroll animation */}
         <div className="w-full relative min-h-[100dvh]">
-           <HomeSection isDriving={false} onDriveStart={() => {}} />
+          <HomeSection isDriving={false} onDriveStart={() => {}} />
         </div>
 
-        {/* YELLOW MARQUEE ACCENT BAR — Nico Studio signature */}
+        {/* 2. YELLOW TICKER — Nico Studio signature */}
         <div className="relative z-10" style={{ background: '#ffff7b' }}>
           <div className="overflow-hidden py-3.5">
             <div className="animate-marquee inline-flex whitespace-nowrap">
@@ -150,24 +156,36 @@ export default function Home() {
           </div>
         </div>
 
-        {/* TOOLS MARQUEE STRIP */}
+        {/* 3. ABOUT — who I am, photo, stats */}
+        <AboutSection />
+
+        {/* 4. TOOLS MARQUEE STRIP */}
         <ToolsMarquee />
 
-        {/* PROJECTS: cream background, sticky stacking */}
+        {/* 5. PROJECTS — horizontal scroll cards */}
         <ProjectsSection />
 
-        {/* FLOATING TOOLS: cream background, scattered icons */}
+        {/* 6. SERVICES & SKILLS — numbered editorial list */}
+        <GamesSection />
+
+        {/* 7. PROCESS — how we work together */}
+        <ProcessSection />
+
+        {/* 8. FLOATING TOOLS — scattered icons */}
         <FloatingToolsSection />
 
-        {/* GAMES / SHOWREEL */}
-        <div className="w-full relative min-h-[100dvh]">
-           <GamesSection />
-        </div>
+        {/* 9. TESTIMONIALS — client reviews */}
+        <TestimonialsSection />
 
-        {/* CONTACT */}
-        <div className="w-full relative min-h-[100dvh]">
-           <ContactSection />
-        </div>
+        {/* 10. CTA BANNER — yellow full-width call to action */}
+        <CTABannerSection />
+
+        {/* 11. FAQ — accordion */}
+        <FAQSection />
+
+        {/* 12. CONTACT — form + social links */}
+        <ContactSection />
+
       </div>
     </main>
   );
