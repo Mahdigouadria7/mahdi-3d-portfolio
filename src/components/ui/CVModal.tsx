@@ -13,16 +13,13 @@ export default function CVModal({ isOpen, onClose }: CVModalProps) {
 
     useEffect(() => {
         if (isOpen) {
-            // eslint-disable-next-line react-hooks/set-state-in-effect
             setRenderModal(true);
             document.body.style.overflow = "hidden";
-            // Slight delay to allow DOM to render before triggering CSS transition
-            setTimeout(() => setIsAnimating(true), 50);
+            setTimeout(() => setIsAnimating(true), 30);
         } else {
             setIsAnimating(false);
             document.body.style.overflow = "auto";
-            // Wait for animation to finish before unmounting
-            const timer = setTimeout(() => setRenderModal(false), 1500);
+            const timer = setTimeout(() => setRenderModal(false), 300);
             return () => clearTimeout(timer);
         }
     }, [isOpen]);
@@ -31,275 +28,280 @@ export default function CVModal({ isOpen, onClose }: CVModalProps) {
 
     return (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8 pointer-events-auto">
-            {/* Background Overlay */}
-            <div 
-                className={`absolute inset-0 bg-[#0a0514]/80 backdrop-blur-xl transition-opacity duration-700 ${isAnimating ? 'opacity-100' : 'opacity-0'}`}
+            {/* Dark Backdrop */}
+            <div
+                className={`absolute inset-0 bg-[#191919]/80 backdrop-blur-md transition-opacity duration-300 ${
+                    isAnimating ? "opacity-100" : "opacity-0"
+                }`}
                 onClick={onClose}
-            ></div>
+            />
 
-            {/* Main CV Container */}
-            <div 
-                className="relative w-full max-w-6xl h-full max-h-[90vh] bg-[#0a0514]/80 backdrop-blur-2xl border border-white/10 overflow-hidden shadow-2xl rounded-sm flex flex-col"
-                style={{
-                    clipPath: isAnimating ? 'inset(0 0 0 0)' : 'inset(0 50% 0 50%)',
-                    transition: isAnimating 
-                        ? 'clip-path 1s cubic-bezier(0.22, 1, 0.36, 1) 0.5s' 
-                        : 'clip-path 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0s'
-                }}
+            {/* Modal Card — Nico Studio Cream Surface */}
+            <div
+                className={`relative w-full max-w-5xl h-full max-h-[88vh] rounded-3xl overflow-hidden shadow-2xl flex flex-col transition-all duration-300 ${
+                    isAnimating ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-95 translate-y-4"
+                }`}
+                style={{ background: "var(--nico-cream)" }}
             >
-                
-                {/* HUD Decorative Elements - Toned down */}
-                <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
-                
-                {/* Corner Crosshairs - Minimal */}
-                <div className="absolute top-4 left-4 w-3 h-3 border-t border-l border-white/20"></div>
-                <div className="absolute top-4 right-4 w-3 h-3 border-t border-r border-white/20"></div>
-                <div className="absolute bottom-4 left-4 w-3 h-3 border-b border-l border-white/20"></div>
-                <div className="absolute bottom-4 right-4 w-3 h-3 border-b border-r border-white/20"></div>
-
-                {/* Close Button */}
-                <button 
-                    onClick={onClose}
-                    className="absolute top-6 right-6 z-50 text-white/40 hover:text-white transition-colors flex items-center gap-2 group cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/40 bg-white/5 hover:bg-white/10 p-2 rounded-full"
-                >
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" className="w-5 h-5">
-                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                    </svg>
-                </button>
-
-                {/* Center Split Line (visible during opening/closing) */}
-                <div 
-                    className="absolute left-1/2 w-[1px] bg-white/20 pointer-events-none z-50"
-                    style={{
-                        top: 0,
-                        bottom: 0,
-                        transformOrigin: 'center',
-                        transform: isAnimating ? 'translateX(-50%) scaleY(1)' : 'translateX(-50%) scaleY(0)',
-                        opacity: isAnimating ? 0 : 1,
-                        transition: isAnimating
-                            ? 'transform 0.4s cubic-bezier(0.22, 1, 0.36, 1) 0s, opacity 0.3s ease 0.6s'
-                            : 'opacity 0.1s ease 0.7s, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1) 0.8s'
-                    }}
-                ></div>
-
-                {/* Content Area - Scrollable */}
-                <div 
-                    data-lenis-prevent="true"
-                    className="flex-1 overflow-y-auto p-8 md:p-14 z-10 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
-                    style={{
-                        opacity: isAnimating ? 1 : 0,
-                        transition: isAnimating
-                            ? 'opacity 1s ease 0.8s'
-                            : 'opacity 0.3s ease 0s'
-                    }}
-                >
-                    
-                    {/* Header */}
-                    <div className="border-b border-white/10 pb-8 mb-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-6 relative">
-                        <div>
-                            <h1 className="font-siegra text-4xl md:text-6xl text-white tracking-wider mb-3">GOUADRIA <span className="text-white/60">Mahdi</span></h1>
-                            <p className="font-mono text-xs md:text-sm text-fuchsia-400 tracking-[0.2em] uppercase">3D Generalist & Software Engineer</p>
+                {/* ── Top Header Bar ──────────────────────────────── */}
+                <div className="flex items-center justify-between px-6 md:px-10 py-5 border-b border-[#191919]/10 bg-white/50 backdrop-blur-sm flex-shrink-0">
+                    <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-full bg-[#191919] text-[#ffff7b] flex items-center justify-center font-bold text-xs">
+                            <span className="font-playfair italic">M</span>
                         </div>
-                        <div className="flex flex-col items-start md:items-end gap-4 mt-4 md:mt-0">
-                            {/* Scanning Animation */}
-                            <div className="font-mono text-[10px] text-white/40 uppercase tracking-widest flex items-center gap-2">
-                                <span className="w-1.5 h-1.5 rounded-full bg-fuchsia-500 animate-pulse" />
-                                Status: Active
-                            </div>
-                            
-                            {/* Download Button */}
-                            <a 
-                                href="/cv.pdf"
-                                download="Mahdi_CV.pdf"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="group relative flex items-center justify-center gap-3 px-6 py-2.5 bg-white/5 border border-white/10 rounded-sm overflow-hidden transition-all duration-300 hover:bg-white/10 hover:border-amber-500/50 w-full md:w-auto"
+                        <div>
+                            <h2
+                                className="font-playfair text-xl md:text-2xl text-[#191919] leading-tight"
+                                style={{ fontWeight: 700 }}
                             >
-                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-500/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out" />
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-white group-hover:text-amber-400 transition-colors duration-300 z-10">
-                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                                    <polyline points="7 10 12 15 17 10" />
-                                    <line x1="12" y1="15" x2="12" y2="3" />
-                                </svg>
-                                <span className="font-mono text-[11px] tracking-[0.2em] uppercase text-white group-hover:text-amber-100 transition-colors duration-300 relative z-10">
-                                    Download PDF
-                                </span>
-                            </a>
+                                Mahdi{" "}
+                                <em className="font-playfair italic" style={{ fontWeight: 400 }}>
+                                    Gouadria
+                                </em>
+                            </h2>
+                            <p className="font-sans text-[10px] text-[#5c5c5c] font-medium tracking-wide uppercase">
+                                3D Generalist &amp; Software Engineer
+                            </p>
                         </div>
                     </div>
 
-                    <div className="grid md:grid-cols-12 gap-16 pb-16">
-                        {/* Left Column */}
-                        <div className="md:col-span-4 space-y-12">
-                            
-                            {/* Contact */}
-                            <section>
-                                <h2 className="font-mono text-xs text-white/40 tracking-[0.2em] uppercase mb-6 flex items-center gap-3">
-                                    <span className="w-3 h-[1px] bg-fuchsia-500/50"></span> Contact
-                                </h2>
-                                <ul className="space-y-4 font-mono text-xs text-white/70">
-                                    <li className="flex items-center gap-4 group hover:text-white transition-colors">
-                                        <span className="text-white/30 tracking-widest group-hover:text-fuchsia-400 transition-colors">LOC</span> Tunisia
+                    <div className="flex items-center gap-3">
+                        {/* Download PDF Button */}
+                        <a
+                            href="/cv.pdf"
+                            download="Mahdi_CV.pdf"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#ffff7b] text-[#191919] font-sans text-xs font-bold uppercase tracking-wider hover:bg-[#191919] hover:text-white transition-all duration-200 shadow-sm"
+                        >
+                            Download CV
+                            <span className="w-4 h-4 rounded-full bg-[#191919] text-[#ffff7b] flex items-center justify-center text-[9px]">
+                                ↓
+                            </span>
+                        </a>
+
+                        {/* Close Button */}
+                        <button
+                            onClick={onClose}
+                            aria-label="Close CV Modal"
+                            className="w-9 h-9 rounded-full bg-[#191919] text-white flex items-center justify-center hover:bg-[#ffff7b] hover:text-[#191919] transition-colors duration-200 cursor-pointer"
+                        >
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                                <line x1="18" y1="6" x2="6" y2="18" />
+                                <line x1="6" y1="6" x2="18" y2="18" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                {/* ── Scrollable Body Area ───────────────────────── */}
+                <div className="flex-1 overflow-y-auto px-6 md:px-10 py-8 space-y-10 hide-scrollbar">
+
+                    {/* Bio Banner Card */}
+                    <div className="bg-white rounded-2xl p-6 border border-[#191919]/5 shadow-sm">
+                        <span className="font-sans text-[10px] font-bold tracking-[0.2em] uppercase text-emerald-600 block mb-2">
+                            ● Available for Commissions &amp; Full-time Roles
+                        </span>
+                        <p className="font-sans text-sm text-[#191919]/80 leading-relaxed font-normal">
+                            Driven Tunisian 3D Artist with a strong software engineering background, blending technical precision with creative vision to produce high-quality CGI, motion design, and product visualizations.
+                        </p>
+                    </div>
+
+                    {/* 2-Column Content Grid */}
+                    <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
+
+                        {/* Left Column: Sidebar details */}
+                        <div className="md:col-span-5 space-y-8">
+
+                            {/* Contact Info */}
+                            <section className="bg-white rounded-2xl p-6 border border-[#191919]/5 shadow-sm">
+                                <h3 className="font-playfair text-lg text-[#191919] font-bold mb-4">
+                                    Contact <em className="font-playfair italic font-normal">&amp; Info</em>
+                                </h3>
+                                <ul className="space-y-3 font-sans text-xs text-[#191919]/80">
+                                    <li className="flex justify-between border-b border-[#191919]/5 pb-2">
+                                        <span className="text-[#5c5c5c]">Location</span>
+                                        <span className="font-semibold text-[#191919]">Tunisia</span>
                                     </li>
-                                    <li className="flex items-center gap-4 group hover:text-white transition-colors">
-                                        <span className="text-white/30 tracking-widest group-hover:text-fuchsia-400 transition-colors">TEL</span> +216 21-833-752
+                                    <li className="flex justify-between border-b border-[#191919]/5 pb-2">
+                                        <span className="text-[#5c5c5c]">Phone</span>
+                                        <span className="font-semibold text-[#191919]">+216 21-833-752</span>
                                     </li>
-                                    <li className="flex items-center gap-4 group hover:text-white transition-colors">
-                                        <span className="text-white/30 tracking-widest group-hover:text-fuchsia-400 transition-colors">EML</span> mahdigouadria8@gmail.com
+                                    <li className="flex justify-between border-b border-[#191919]/5 pb-2">
+                                        <span className="text-[#5c5c5c]">Email</span>
+                                        <span className="font-semibold text-[#191919]">mahdigouadria8@gmail.com</span>
                                     </li>
-                                    <li className="flex items-center gap-4 group hover:text-white transition-colors">
-                                        <span className="text-white/30 tracking-widest group-hover:text-fuchsia-400 transition-colors">LNK</span> /in/mahdi-gouadria
+                                    <li className="flex justify-between">
+                                        <span className="text-[#5c5c5c]">LinkedIn</span>
+                                        <span className="font-semibold text-[#191919]">/in/mahdi-gouadria</span>
                                     </li>
                                 </ul>
                             </section>
 
-                            {/* Skills */}
+                            {/* Core Skills Badges */}
+                            <section className="bg-white rounded-2xl p-6 border border-[#191919]/5 shadow-sm">
+                                <h3 className="font-playfair text-lg text-[#191919] font-bold mb-4">
+                                    Core <em className="font-playfair italic font-normal">Skills</em>
+                                </h3>
+                                <div className="flex flex-wrap gap-2">
+                                    {[
+                                        "Blender 3D",
+                                        "3DS Max",
+                                        "Redshift",
+                                        "Cinema 4D",
+                                        "Houdini FX",
+                                        "Substance Painter",
+                                        "WebGL / Three.js",
+                                        "React Three Fiber",
+                                        "After Effects",
+                                        "DaVinci Resolve",
+                                        "CGI Motion",
+                                        "Product Renders",
+                                        "Next.js",
+                                    ].map((skill) => (
+                                        <span
+                                            key={skill}
+                                            className="font-sans text-[11px] font-medium px-3 py-1 rounded-full bg-[#191919]/5 border border-[#191919]/10 text-[#191919]"
+                                        >
+                                            {skill}
+                                        </span>
+                                    ))}
+                                </div>
+                            </section>
+
+                            {/* Languages */}
+                            <section className="bg-white rounded-2xl p-6 border border-[#191919]/5 shadow-sm">
+                                <h3 className="font-playfair text-lg text-[#191919] font-bold mb-4">
+                                    Languages
+                                </h3>
+                                <div className="space-y-2 font-sans text-xs">
+                                    <div className="flex justify-between py-1 border-b border-[#191919]/5">
+                                        <span className="text-[#191919]">Arabic</span>
+                                        <span className="font-semibold text-emerald-700">Native</span>
+                                    </div>
+                                    <div className="flex justify-between py-1 border-b border-[#191919]/5">
+                                        <span className="text-[#191919]">French</span>
+                                        <span className="text-[#5c5c5c]">Delf B2</span>
+                                    </div>
+                                    <div className="flex justify-between py-1 border-b border-[#191919]/5">
+                                        <span className="text-[#191919]">English</span>
+                                        <span className="text-[#5c5c5c]">Fluent</span>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+
+                        {/* Right Column: Work Experience & Education */}
+                        <div className="md:col-span-7 space-y-8">
+
+                            {/* Work Experience */}
                             <section>
-                                <h2 className="font-mono text-xs text-white/40 tracking-[0.2em] uppercase mb-6 flex items-center gap-3">
-                                    <span className="w-3 h-[1px] bg-fuchsia-500/50"></span> Core Skills
-                                </h2>
-                                <div className="space-y-4 font-sans text-sm text-white/60">
-                                    <div className="bg-white/[0.02] border border-white/[0.05] p-5 rounded-sm hover:bg-white/[0.04] transition-colors">
-                                        <h3 className="font-mono text-white/80 mb-2 tracking-widest uppercase text-[10px]">3D & VFX</h3>
-                                        <p className="leading-relaxed">Blender 3D, HoudiniFX (learning), Embergen, Substance Painter, Acquirig.</p>
+                                <h3 className="font-playfair text-2xl text-[#191919] font-bold mb-6">
+                                    Work <em className="font-playfair italic font-normal">Experience</em>
+                                </h3>
+
+                                <div className="space-y-6">
+
+                                    {/* Exp 1 */}
+                                    <div className="bg-white rounded-2xl p-6 border border-[#191919]/5 shadow-sm">
+                                        <div className="flex justify-between items-start mb-2">
+                                            <div>
+                                                <h4 className="font-sans font-bold text-base text-[#191919]">
+                                                    3D Artist &amp; Motion Generalist
+                                                </h4>
+                                                <p className="font-sans text-xs text-emerald-700 font-semibold">
+                                                    Innov8 Creative Agency
+                                                </p>
+                                            </div>
+                                            <span className="font-sans text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-[#ffff7b] text-[#191919]">
+                                                May 2024 – Present
+                                            </span>
+                                        </div>
+                                        <p className="font-sans text-xs text-[#5c5c5c] leading-relaxed mb-3">
+                                            Produced high-profile 3D motion design and CGI campaign visuals combining 3D &amp; 2D elements.
+                                        </p>
+                                        <p className="font-sans text-[11px] text-[#191919] font-semibold">
+                                            Key Clients: <span className="font-normal text-[#5c5c5c]">Samsung, LG Electronics, Orange, Délice Danone, UBCI Bank, Papillon, Kif Biscuit, Mall of Sfax &amp; Sousse.</span>
+                                        </p>
                                     </div>
-                                    <div className="bg-white/[0.02] border border-white/[0.05] p-5 rounded-sm hover:bg-white/[0.04] transition-colors">
-                                        <h3 className="font-mono text-white/80 mb-2 tracking-widest uppercase text-[10px]">Motion & Post</h3>
-                                        <p className="leading-relaxed">After Effects, DaVinci Resolve, Photoshop, Illustrator.</p>
+
+                                    {/* Exp 2 */}
+                                    <div className="bg-white rounded-2xl p-6 border border-[#191919]/5 shadow-sm">
+                                        <div className="flex justify-between items-start mb-2">
+                                            <div>
+                                                <h4 className="font-sans font-bold text-base text-[#191919]">
+                                                    3D Environment Artist
+                                                </h4>
+                                                <p className="font-sans text-xs text-[#5c5c5c] font-semibold">
+                                                    Shetech Studio (VR Games)
+                                                </p>
+                                            </div>
+                                            <span className="font-sans text-[10px] font-medium text-[#5c5c5c] px-2.5 py-1 rounded-full bg-[#191919]/5">
+                                                Oct 2022 – Apr 2024
+                                            </span>
+                                        </div>
+                                        <p className="font-sans text-xs text-[#5c5c5c] leading-relaxed">
+                                            Created VR-optimized 3D environments, Level Designs, and modeled/textured assets in Blender and ZBrush for healthcare VR games.
+                                        </p>
                                     </div>
-                                    <div className="bg-white/[0.02] border border-white/[0.05] p-5 rounded-sm hover:bg-white/[0.04] transition-colors">
-                                        <h3 className="font-mono text-white/80 mb-2 tracking-widest uppercase text-[10px]">Specialties</h3>
-                                        <p className="leading-relaxed">Product Visualization, CGI Commercials, Motion Graphics, VR-Ready Assets.</p>
+
+                                    {/* Exp 3 */}
+                                    <div className="bg-white rounded-2xl p-6 border border-[#191919]/5 shadow-sm">
+                                        <div className="flex justify-between items-start mb-2">
+                                            <div>
+                                                <h4 className="font-sans font-bold text-base text-[#191919]">
+                                                    Freelance 3D Artist &amp; CGI Designer
+                                                </h4>
+                                                <p className="font-sans text-xs text-[#5c5c5c] font-semibold">
+                                                    Self-Employed
+                                                </p>
+                                            </div>
+                                            <span className="font-sans text-[10px] font-medium text-[#5c5c5c] px-2.5 py-1 rounded-full bg-[#191919]/5">
+                                                2019 – Present
+                                            </span>
+                                        </div>
+                                        <p className="font-sans text-xs text-[#5c5c5c] leading-relaxed">
+                                            CGI commercials, product renders, and interactive web visual experiences for global brands including Bioderma Cosmetics, Yves Rocher, and GPlex.
+                                        </p>
                                     </div>
-                                    <div className="bg-white/[0.02] border border-white/[0.05] p-5 rounded-sm hover:bg-white/[0.04] transition-colors">
-                                        <h3 className="font-mono text-white/80 mb-2 tracking-widest uppercase text-[10px]">Technical</h3>
-                                        <p className="leading-relaxed">Software Engineering, Pipeline Optimization, Asset Optimization for VR/AR.</p>
-                                    </div>
+
                                 </div>
                             </section>
 
                             {/* Education */}
                             <section>
-                                <h2 className="font-mono text-xs text-white/40 tracking-[0.2em] uppercase mb-6 flex items-center gap-3">
-                                    <span className="w-3 h-[1px] bg-fuchsia-500/50"></span> Education
-                                </h2>
-                                <div className="space-y-6">
-                                    <div className="relative pl-6 border-l border-white/10 group">
-                                        <div className="absolute top-1.5 -left-[4px] w-2 h-2 bg-fuchsia-500 rounded-full group-hover:bg-fuchsia-400 transition-colors"></div>
-                                        <h3 className="font-mono text-white/90 uppercase tracking-wider text-xs mb-1">Software Engineering</h3>
-                                        <p className="font-mono text-[10px] text-white/50 mb-2 tracking-widest">École Polytechnique de Sousse (2019 – 2022)</p>
-                                        <p className="font-sans text-xs text-white/50 leading-relaxed group-hover:text-white/70 transition-colors">Final Project: Designed and developed an HR management software for ETC Tunisie, combining UX/UI design, 3D elements, and software development skills.</p>
+                                <h3 className="font-playfair text-2xl text-[#191919] font-bold mb-4">
+                                    Education
+                                </h3>
+                                <div className="bg-white rounded-2xl p-6 border border-[#191919]/5 shadow-sm space-y-4">
+                                    <div>
+                                        <h4 className="font-sans text-sm font-bold text-[#191919]">
+                                            Software Engineering Degree
+                                        </h4>
+                                        <p className="font-sans text-xs text-[#5c5c5c]">
+                                            École Polytechnique de Sousse (2019 – 2022)
+                                        </p>
                                     </div>
-                                    <div className="relative pl-6 border-l border-white/10 group">
-                                        <div className="absolute top-1.5 -left-[3px] w-1.5 h-1.5 bg-white/20 rounded-full group-hover:bg-white/50 transition-colors"></div>
-                                        <h3 className="font-mono text-white/90 uppercase tracking-wider text-xs mb-1">Computer Science</h3>
-                                        <p className="font-mono text-[10px] text-white/50 tracking-widest">ISIG Kairouan (2016 – 2019)</p>
-                                    </div>
-                                    <div className="relative pl-6 border-l border-white/10 group">
-                                        <div className="absolute top-1.5 -left-[3px] w-1.5 h-1.5 bg-white/20 rounded-full group-hover:bg-white/50 transition-colors"></div>
-                                        <h3 className="font-mono text-white/90 uppercase tracking-wider text-xs mb-1">Bac Math</h3>
-                                        <p className="font-mono text-[10px] text-white/50 tracking-widest">Dar Lamen High School (2015 – 2016)</p>
+                                    <div className="border-t border-[#191919]/5 pt-3">
+                                        <h4 className="font-sans text-sm font-bold text-[#191919]">
+                                            Bachelor in Computer Science
+                                        </h4>
+                                        <p className="font-sans text-xs text-[#5c5c5c]">
+                                            ISIG Kairouan (2016 – 2019)
+                                        </p>
                                     </div>
                                 </div>
-                            </section>
-
-                            {/* Languages */}
-                            <section>
-                                <h2 className="font-mono text-xs text-white/40 tracking-[0.2em] uppercase mb-6 flex items-center gap-3">
-                                    <span className="w-3 h-[1px] bg-fuchsia-500/50"></span> Languages
-                                </h2>
-                                <ul className="space-y-3 font-mono text-xs text-white/70">
-                                    <li className="flex justify-between border-b border-white/5 pb-2">
-                                        <span className="text-white/90">Arabic</span> <span className="text-fuchsia-400">Native</span>
-                                    </li>
-                                    <li className="flex justify-between border-b border-white/5 pb-2">
-                                        <span className="text-white/90">French</span> <span className="text-white/50">Delf B2</span>
-                                    </li>
-                                    <li className="flex justify-between border-b border-white/5 pb-2">
-                                        <span className="text-white/90">English</span> <span className="text-white/50">Fluent</span>
-                                    </li>
-                                    <li className="flex justify-between border-b border-white/5 pb-2">
-                                        <span className="text-white/90">Deutch</span> <span className="text-white/50">Beginner</span>
-                                    </li>
-                                </ul>
-                            </section>
-                        </div>
-
-                        {/* Right Column */}
-                        <div className="md:col-span-8 space-y-12">
-                            
-                            {/* Profil */}
-                            <section className="bg-white/[0.02] border border-white/[0.05] p-8 rounded-sm">
-                                <h2 className="font-mono text-xs text-white/40 tracking-[0.2em] uppercase mb-4 flex items-center gap-3">
-                                    <span className="w-3 h-[1px] bg-fuchsia-500/50"></span> Profil
-                                </h2>
-                                <p className="font-sans text-sm md:text-base text-white/70 leading-relaxed font-light">
-                                    Driven Tunisian 3D Artist with a strong software engineering background, blending technical precision with creative vision to produce high-quality CGI, motion design, and product visualizations. Experienced in working with top brands, optimizing assets for VR/AR, and collaborating with multidisciplinary teams to deliver impactful visual content.
-                                </p>
-                            </section>
-
-                            {/* Experiences */}
-                            <section>
-                                <h2 className="font-mono text-xs text-white/40 tracking-[0.2em] uppercase mb-8 flex items-center gap-3">
-                                    <span className="w-3 h-[1px] bg-fuchsia-500/50"></span> Expériences Professionnelles
-                                </h2>
-                                <div className="space-y-12">
-                                    
-                                    <div className="relative pl-8 border-l border-white/10 group">
-                                        <div className="absolute top-0 -left-[5px] w-2.5 h-2.5 bg-[#0a0514] border border-fuchsia-500 rounded-full flex items-center justify-center">
-                                            <div className="w-1 h-1 bg-fuchsia-500 rounded-full animate-ping"></div>
-                                        </div>
-                                        <h3 className="font-siegra text-xl md:text-2xl text-white tracking-wider mb-2 group-hover:text-fuchsia-100 transition-colors">3D Artist</h3>
-                                        <p className="font-mono text-[10px] md:text-xs text-fuchsia-400 tracking-widest uppercase mb-5">Innov8 Creative Agency | May 2024 - Present</p>
-                                        <ul className="list-disc font-sans text-sm md:text-base text-white/60 space-y-4 pl-4 marker:text-fuchsia-500/50 font-light leading-relaxed">
-                                            <li>Produced <strong className="text-white font-medium">3D motion design</strong> and <strong className="text-white font-medium">CGI videos</strong> for high-profile marketing campaigns.</li>
-                                            <li>Designed engaging <strong className="text-white font-medium">call-to-actions</strong> combining 3D and 2D elements.</li>
-                                            <li>Collaborated with graphic designers and production teams to ensure creative and technical excellence.</li>
-                                            <li><strong className="text-white font-medium">Key Clients:</strong> Samsung, LG Electronics, Délice Danone, Orange, UBCI Bank, Papillon, Kif Biscuit, Mall of Sfax & Sousse, Jouda, Danup, Danao, Eau Délice, Rose Blanche.</li>
-                                        </ul>
-                                    </div>
-
-                                    <div className="relative pl-8 border-l border-white/10 group">
-                                        <div className="absolute top-0 -left-[3px] w-1.5 h-1.5 bg-white/20 rounded-full group-hover:bg-white/60 transition-colors"></div>
-                                        <h3 className="font-siegra text-xl md:text-2xl text-white/80 tracking-wider mb-2 group-hover:text-white transition-colors">3D Artist</h3>
-                                        <p className="font-mono text-[10px] md:text-xs text-white/40 tracking-widest uppercase mb-5">Shetech Studio (VR Game Development) | Oct 2022 – Apr 2024</p>
-                                        <ul className="list-disc font-sans text-sm md:text-base text-white/60 space-y-4 pl-4 marker:text-white/20 font-light leading-relaxed">
-                                            <li>Created VR-optimized <strong className="text-white/90 font-medium">3D environments</strong> and <strong className="text-white/90 font-medium">Level Designs</strong> for healthcare-focused VR games.</li>
-                                            <li>Modeled and textured assets using Blender, ZBrush, and Substance Painter.</li>
-                                            <li>Composed the game&apos;s original <strong className="text-white/90 font-medium">soundtrack (OST)</strong> and produced sound effects using <strong className="text-white/90 font-medium">FL Studio</strong>.</li>
-                                        </ul>
-                                    </div>
-
-                                    <div className="relative pl-8 border-l border-white/10 group">
-                                        <div className="absolute top-0 -left-[3px] w-1.5 h-1.5 bg-white/20 rounded-full group-hover:bg-white/60 transition-colors"></div>
-                                        <h3 className="font-siegra text-xl md:text-2xl text-white/80 tracking-wider mb-2 group-hover:text-white transition-colors">Freelance 3D Artist & CGI Designer</h3>
-                                        <p className="font-mono text-[10px] md:text-xs text-white/40 tracking-widest uppercase mb-5">2019 – Present</p>
-                                        <ul className="list-disc font-sans text-sm md:text-base text-white/60 space-y-4 pl-4 marker:text-white/20 font-light leading-relaxed">
-                                            <li>Developed CGI ads, product renders, and motion design for local and international clients.</li>
-                                            <li><strong className="text-white/90 font-medium">Selected Clients:</strong> Bioderma Cosmetics, Karina, Yves Rocher, GPlex Cosmetics.</li>
-                                        </ul>
-                                    </div>
-
-                                </div>
-                            </section>
-
-                            {/* Achievements */}
-                            <section className="bg-white/[0.02] border border-white/[0.05] p-8 rounded-sm mt-8">
-                                <h2 className="font-mono text-xs text-white/40 tracking-[0.2em] uppercase mb-6 flex items-center gap-3">
-                                    <span className="w-3 h-[1px] bg-fuchsia-500/50"></span> Achievements & Highlights
-                                </h2>
-                                <ul className="space-y-4 font-sans text-sm text-white/70 font-light leading-relaxed">
-                                    <li className="relative pl-6 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:rounded-full before:bg-white/20">Contributed to campaigns for some of Tunisia&apos;s most recognized brands.</li>
-                                    <li className="relative pl-6 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:rounded-full before:bg-white/20">Successfully transitioned from VR game development to high-end CGI product visualization.</li>
-                                    <li className="relative pl-6 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:rounded-full before:bg-white/20">Applied engineering expertise to improve production workflows and efficiency.</li>
-                                </ul>
                             </section>
 
                         </div>
                     </div>
                 </div>
 
+                {/* Footer bar inside modal */}
+                <div className="px-6 md:px-10 py-4 border-t border-[#191919]/10 bg-white/40 flex justify-between items-center text-[10px] text-[#5c5c5c] font-sans">
+                    <span>© {new Date().getFullYear()} Mahdi Gouadria</span>
+                    <span>Nico Studio Editorial Design</span>
+                </div>
             </div>
         </div>
     );
