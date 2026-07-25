@@ -8,6 +8,7 @@ import HomeSection from "@/components/sections/HomeSection";
 import ProjectsSection from "@/components/sections/ProjectsSection";
 import GamesSection from "@/components/sections/GamesSection";
 import ContactSection from "@/components/sections/ContactSection";
+import ToolsMarquee from "@/components/ui/ToolsMarquee";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -135,9 +136,9 @@ export default function Home() {
         <div className="w-full relative min-h-[100dvh]">
            <HomeSection isDriving={false} onDriveStart={() => {}} />
         </div>
-        <div className="w-full relative min-h-[100dvh]">
-           <ProjectsSection />
-        </div>
+        {/* Tools Marquee Strip — between hero and projects */}
+        <ToolsMarquee />
+        <ProjectsSection />
         <div className="w-full relative min-h-[100dvh]">
            <GamesSection />
         </div>

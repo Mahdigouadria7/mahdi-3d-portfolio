@@ -123,6 +123,15 @@ M[10]=1; M[15]=1;`}</pre>
 
                     {/* ── Central Typography ───────────────────────────── */}
                     <div className="absolute top-[40%] md:top-[50%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex flex-col items-center justify-center text-center pointer-events-none mix-blend-difference px-4">
+
+                        {/* ── Availability Badge (Nico Studio style) ── */}
+                        <div className="mb-4 md:mb-6 pointer-events-auto">
+                            <div className="inline-flex items-center gap-2.5 bg-white/[0.06] border border-white/10 rounded-full px-4 py-1.5 backdrop-blur-sm hover:bg-white/10 hover:border-white/20 transition-all duration-300 cursor-default">
+                                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
+                                <span className="font-mono text-[10px] md:text-[11px] tracking-[0.2em] text-white/60 uppercase">Available for work</span>
+                            </div>
+                        </div>
+
                         <h1 className="text-[11vw] md:text-[6vw] font-black tracking-[0.1em] text-white leading-none font-siegra drop-shadow-[0_10px_30px_rgba(0,0,0,0.8)] animate-glow pointer-events-auto cursor-default">
                             <ScrambleText text="MAHDI" /> <ScrambleText text="GOUADRIA" />
                         </h1>
