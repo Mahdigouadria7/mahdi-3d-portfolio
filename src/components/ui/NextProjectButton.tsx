@@ -40,11 +40,12 @@ export default function NextProjectButton({ currentSlug }: { currentSlug: string
         <a 
             href={`/projects/${nextProject.slug}`} 
             onClick={handleNext}
-            className="pointer-events-auto flex items-center gap-3.5 bg-[#141414]/80 backdrop-blur-xl border border-white/10 hover:border-[#ffff7b]/60 px-5 py-2.5 rounded-full transition-all duration-300 group shadow-lg"
+            title={`Next: ${nextProject.title}`}
+            className="pointer-events-auto flex items-center justify-center gap-3 bg-[#141414]/85 backdrop-blur-xl border border-white/15 hover:border-[#ffff7b]/60 p-2.5 md:px-5 md:py-2.5 rounded-full transition-all duration-300 group shadow-xl cursor-pointer"
         >
-            <div className="flex flex-col items-end min-w-0">
+            <div className="hidden md:flex flex-col items-end min-w-0">
                 <span className="font-mono text-[9px] text-[#ffff7b] uppercase tracking-widest font-semibold">NEXT</span>
-                <span className="font-sans text-xs md:text-sm font-bold tracking-tight text-white group-hover:text-[#ffff7b] transition-colors truncate max-w-[140px] md:max-w-[200px]">
+                <span className="font-sans text-xs md:text-sm font-bold tracking-tight text-white group-hover:text-[#ffff7b] transition-colors truncate max-w-[160px]">
                     {nextProject.title}
                 </span>
             </div>

@@ -37,12 +37,15 @@ export default function BackButton() {
         <Link 
             href="/" 
             onClick={handleBack}
-            className="pointer-events-auto inline-flex items-center gap-2.5 bg-[#ffff7b] text-[#141414] font-sans text-xs font-bold uppercase tracking-wider px-6 py-3 rounded-full hover:bg-white active:scale-95 transition-all duration-200 shadow-2xl group cursor-pointer"
+            title="Return to All Projects"
+            className="pointer-events-auto flex items-center justify-center gap-2.5 bg-[#141414]/85 backdrop-blur-xl border border-white/20 hover:border-[#ffff7b] text-white hover:text-[#ffff7b] p-3 md:px-5 md:py-2.5 rounded-full shadow-2xl transition-all duration-300 group cursor-pointer"
         >
-            <span className="w-5 h-5 rounded-full bg-[#141414] text-[#ffff7b] flex items-center justify-center text-xs group-hover:-translate-x-0.5 transition-transform flex-shrink-0">
+            <span className="w-6 h-6 rounded-full bg-[#ffff7b] text-[#141414] flex items-center justify-center text-xs font-bold flex-shrink-0 group-hover:-translate-x-0.5 transition-transform">
                 ←
             </span>
-            <span>ALL PROJECTS</span>
+            <span className="hidden md:inline font-mono text-xs font-bold tracking-wider uppercase">
+                ALL PROJECTS
+            </span>
         </Link>
     );
 }
