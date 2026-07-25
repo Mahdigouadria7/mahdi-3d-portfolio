@@ -43,7 +43,7 @@ export default function ProjectsSection() {
     }, []);
 
     return (
-        <section id="projects" className="relative w-full" style={{ background: "var(--nico-cream)" }}>
+        <section id="projects" className="relative w-full bg-white">
 
             {/* ── Section Header ─────────────────────────────── */}
             <div className="flex flex-col md:flex-row items-start md:items-end justify-between px-6 md:px-16 pt-20 pb-10 gap-6">
@@ -62,7 +62,7 @@ export default function ProjectsSection() {
                         </em>
                     </h2>
                 </div>
-                <p className="font-mono text-xs md:text-sm text-[#5c5c5c] max-w-xs md:pb-3 leading-relaxed">
+                <p className="font-mono text-xs md:text-sm text-[#191919]/70 max-w-xs md:pb-3 leading-relaxed font-medium">
                     A curated selection of 3D, CGI, and interactive projects — crafted with precision and intent.
                 </p>
             </div>
@@ -75,9 +75,9 @@ export default function ProjectsSection() {
                 ref={containerRef}
                 className="w-full overflow-x-auto overflow-y-hidden hide-scrollbar cursor-ew-resize"
                 style={{
-                    // Fade edges on cream bg
-                    maskImage: "linear-gradient(to right, #fffef3 0%, transparent 4%, transparent 96%, #fffef3 100%)",
-                    WebkitMaskImage: "linear-gradient(to right, #fffef3 0%, transparent 4%, transparent 96%, #fffef3 100%)",
+                    // Edge fade: transparent = invisible, black = fully visible
+                    maskImage: "linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%)",
+                    WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%)",
                     touchAction: "pan-y",
                 }}
             >
@@ -149,27 +149,27 @@ export default function ProjectsSection() {
                                     {/* Text block */}
                                     <div className="px-5 pt-4 pb-5">
                                         <div className="flex items-center justify-between mb-2">
-                                            <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-white/40">
+                                            <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-white/70 font-semibold">
                                                 {project.category}
                                             </span>
-                                            <span className="font-mono text-[9px] text-white/25 tracking-widest">
+                                            <span className="font-mono text-[9px] text-white/50 tracking-widest">
                                                 {project.timeline}
                                             </span>
                                         </div>
                                         <h3
-                                            className="font-playfair text-xl text-white leading-tight mb-2 group-hover:text-white transition-colors"
+                                            className="font-playfair text-xl text-white leading-tight mb-2 group-hover:text-[#ffff7b] transition-colors"
                                             style={{ fontWeight: 700 }}
                                         >
                                             {project.title}
                                         </h3>
-                                        <p className="font-cyber text-white/40 text-xs leading-relaxed line-clamp-2">
+                                        <p className="font-cyber text-white/70 text-xs leading-relaxed line-clamp-2">
                                             {project.description}
                                         </p>
-                                        <div className="flex items-center justify-between mt-4 pt-3 border-t border-white/[0.07]">
-                                            <span className="font-mono text-[9px] text-white/20 uppercase tracking-widest">
+                                        <div className="flex items-center justify-between mt-4 pt-3 border-t border-white/[0.12]">
+                                            <span className="font-mono text-[9px] text-white/50 uppercase tracking-widest font-medium">
                                                 {project.client}
                                             </span>
-                                            <span className="font-mono text-[9px] text-white/40 group-hover:text-white group-hover:gap-2 flex items-center gap-1.5 transition-all duration-300">
+                                            <span className="font-mono text-[9px] text-white/80 group-hover:text-[#ffff7b] group-hover:gap-2 flex items-center gap-1.5 transition-all duration-300 font-semibold">
                                                 View
                                                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                                     <path d="M5 12h14M12 5l7 7-7 7" />
@@ -189,10 +189,10 @@ export default function ProjectsSection() {
 
             {/* ── Scroll hint ────────────────────────────────── */}
             <div className="flex items-center gap-3 px-6 md:px-16 pb-10">
-                <span className="font-mono text-[9px] text-[#5c5c5c]/50 tracking-widest uppercase">Drag to explore</span>
+                <span className="font-mono text-[10px] text-[#191919]/70 tracking-widest uppercase font-semibold">Drag to explore →</span>
                 <div className="flex gap-1">
-                    <span className="w-6 h-px bg-[#191919]/20" />
-                    <span className="w-3 h-px bg-[#191919]/10" />
+                    <span className="w-8 h-px bg-[#191919]/40" />
+                    <span className="w-4 h-px bg-[#191919]/20" />
                 </div>
             </div>
 

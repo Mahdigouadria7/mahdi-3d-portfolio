@@ -43,7 +43,7 @@ export default function ProcessSection() {
 
                 {/* ── Left: headline + CTA ─────────────────── */}
                 <div className="md:pr-16 md:sticky md:top-24 self-start mb-10 md:mb-0">
-                    <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-[#5c5c5c] block mb-3">
+                    <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-[#191919]/60 block mb-3 font-semibold">
                         [My Process]
                     </span>
                     <h2
@@ -56,28 +56,28 @@ export default function ProcessSection() {
                         </em>
                         ?
                     </h2>
-                    <p className="font-mono text-xs text-[#5c5c5c] leading-relaxed mb-8 max-w-xs">
+                    <p className="font-mono text-xs text-[#191919]/75 leading-relaxed mb-8 max-w-xs font-medium">
                         A clear, fluid and transparent process — designed to move forward smoothly, avoid grey areas, and build a solid project from first contact to final delivery.
                     </p>
                     <a
                         href="#contact"
-                        className="inline-flex items-center gap-2.5 bg-[#191919] text-white font-mono text-xs tracking-[0.2em] uppercase px-6 py-3.5 rounded-full hover:bg-[#191919]/80 transition-all duration-300"
+                        className="inline-flex items-center gap-2.5 bg-[#191919] text-white font-mono text-xs tracking-[0.2em] uppercase px-6 py-3.5 rounded-full hover:bg-[#ffff7b] hover:text-[#191919] transition-all duration-300 font-bold"
                     >
                         Start a project
-                        <span className="w-5 h-5 rounded-full border border-white/30 flex items-center justify-center text-[10px]">
+                        <span className="w-5 h-5 rounded-full border border-current flex items-center justify-center text-[10px]">
                             ↗
                         </span>
                     </a>
                 </div>
 
                 {/* ── Right: steps ─────────────────────────── */}
-                <div className="divide-y divide-[#191919]/10 border-t border-[#191919]/10">
+                <div className="divide-y divide-[#191919]/15 border-t border-[#191919]/15">
                     {STEPS.map((step) => (
                         <div key={step.num} className="py-8 md:py-10">
                             <div className="flex items-baseline gap-5 mb-3">
                                 <span
-                                    className="font-playfair text-lg text-[#5c5c5c]/50 flex-shrink-0 italic"
-                                    style={{ fontWeight: 400, minWidth: 40 }}
+                                    className="font-playfair text-xl text-[#191919]/70 flex-shrink-0 italic font-medium"
+                                    style={{ minWidth: 40 }}
                                 >
                                     {step.num}
                                 </span>
@@ -89,14 +89,14 @@ export default function ProcessSection() {
                                 </h3>
                             </div>
                             {step.description && (
-                                <p className="font-mono text-xs text-[#5c5c5c] leading-relaxed mb-3 pl-[52px]">
+                                <p className="font-mono text-xs text-[#191919]/75 leading-relaxed mb-3 pl-[52px] font-medium">
                                     {step.description}
                                 </p>
                             )}
                             {step.objective && (
                                 <div className="pl-[52px] flex items-start gap-2">
-                                    <span className="text-emerald-600 text-xs mt-0.5 flex-shrink-0">✓</span>
-                                    <p className="font-mono text-xs text-[#5c5c5c] leading-relaxed">
+                                    <span className="text-emerald-700 font-bold text-xs mt-0.5 flex-shrink-0">✓</span>
+                                    <p className="font-mono text-xs text-[#191919]/80 leading-relaxed font-medium">
                                         <strong className="text-[#191919]">Objective:</strong>{" "}
                                         {step.objective}
                                     </p>

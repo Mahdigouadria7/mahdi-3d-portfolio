@@ -61,7 +61,7 @@ function FAQItem({ item }: { item: (typeof FAQ_ITEMS)[number] }) {
             </button>
             {open && (
                 <div className="pb-5 animate-fadeIn">
-                    <p className="font-mono text-xs text-[#5c5c5c] leading-relaxed max-w-2xl">
+                    <p className="font-mono text-xs text-[#191919]/80 leading-relaxed max-w-2xl font-medium">
                         {item.a}
                     </p>
                 </div>
@@ -77,13 +77,13 @@ export default function FAQSection() {
             className="relative w-full"
             style={{ background: "var(--nico-cream)" }}
         >
-            <div className="w-full h-px bg-[#191919]/10" />
+            <div className="w-full h-px bg-[#191919]/15" />
 
             <div className="grid grid-cols-1 md:grid-cols-[320px_1fr] gap-0 px-6 md:px-16 py-16 md:py-20">
 
                 {/* Left: sticky headline ───────────────────── */}
                 <div className="md:pr-16 md:sticky md:top-24 self-start mb-10 md:mb-0">
-                    <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-[#5c5c5c] block mb-3">
+                    <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-[#191919]/60 block mb-3 font-semibold">
                         [FAQ]
                     </span>
                     <h2
@@ -96,15 +96,15 @@ export default function FAQSection() {
                         </em>{" "}
                         questions
                     </h2>
-                    <p className="font-mono text-xs text-[#5c5c5c] leading-relaxed mb-8 max-w-xs">
+                    <p className="font-mono text-xs text-[#191919]/75 leading-relaxed mb-8 max-w-xs font-medium">
                         Still have questions? You&apos;re in the right place. This FAQ covers the most common questions before starting a project together.
                     </p>
                     <a
                         href="#contact"
-                        className="inline-flex items-center gap-2.5 bg-[#191919] text-white font-mono text-xs tracking-[0.2em] uppercase px-6 py-3.5 rounded-full hover:bg-[#191919]/80 transition-all duration-300"
+                        className="inline-flex items-center gap-2.5 bg-[#191919] text-white font-mono text-xs tracking-[0.2em] uppercase px-6 py-3.5 rounded-full hover:bg-[#ffff7b] hover:text-[#191919] transition-all duration-300 font-bold"
                     >
                         Start a project
-                        <span className="w-5 h-5 rounded-full border border-white/30 flex items-center justify-center text-[10px]">
+                        <span className="w-5 h-5 rounded-full border border-current flex items-center justify-center text-[10px]">
                             ↗
                         </span>
                     </a>

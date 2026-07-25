@@ -79,7 +79,7 @@ export default function AboutSection() {
                     </h2>
 
                     {/* Description */}
-                    <p className="font-mono text-sm text-[#5c5c5c] leading-relaxed max-w-xl mb-8">
+                    <p className="font-mono text-sm text-[#191919]/80 leading-relaxed max-w-xl mb-8 font-medium">
                         3D generalist and software engineer — I help brands and studios craft
                         stunning CGI visuals, photorealistic renders, and immersive interactive web
                         experiences that make their projects stand out.
@@ -88,16 +88,16 @@ export default function AboutSection() {
                     {/* CTA */}
                     <a
                         href="#contact"
-                        className="self-start inline-flex items-center gap-2.5 bg-[#191919] text-white font-mono text-xs tracking-[0.2em] uppercase px-6 py-3.5 rounded-full hover:bg-[#191919]/80 transition-all duration-300 mb-12"
+                        className="self-start inline-flex items-center gap-2.5 bg-[#191919] text-white font-mono text-xs tracking-[0.2em] uppercase px-6 py-3.5 rounded-full hover:bg-[#ffff7b] hover:text-[#191919] transition-all duration-300 mb-12 font-bold"
                     >
                         Start a project
-                        <span className="w-5 h-5 rounded-full border border-white/30 flex items-center justify-center text-[10px]">
+                        <span className="w-5 h-5 rounded-full border border-current flex items-center justify-center text-[10px]">
                             ↗
                         </span>
                     </a>
 
                     {/* Stats grid */}
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-8 border-t border-[#191919]/10">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-8 border-t border-[#191919]/15">
                         {STATS.map((s) => (
                             <div key={s.value}>
                                 <p
@@ -106,10 +106,10 @@ export default function AboutSection() {
                                 >
                                     {s.value}
                                 </p>
-                                <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-[#191919] mb-2">
+                                <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-[#191919] mb-2 font-bold">
                                     {s.label}
                                 </p>
-                                <p className="font-mono text-[10px] text-[#5c5c5c] leading-relaxed">
+                                <p className="font-mono text-[10px] text-[#191919]/70 leading-relaxed font-medium">
                                     {s.detail}
                                 </p>
                             </div>
