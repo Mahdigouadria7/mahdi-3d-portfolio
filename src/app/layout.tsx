@@ -3,6 +3,8 @@ import { Geist, Geist_Mono, Rajdhani, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import StickyHeader from "@/components/StickyHeader";
 import SecurityWrapper from "@/components/ui/SecurityWrapper";
+import Preloader from "@/components/ui/Preloader";
+import SmoothScrolling from "@/components/ui/SmoothScrolling";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,12 +28,12 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Mahdi | 3D Portfolio",
-  description: "A visually stunning 3D portfolio of Mahdi showcasing outstanding modern web design and interactive experiences.",
+  title: "Mahdi | 3D & CGI Artist",
+  description: "A visually stunning portfolio showcasing high-end 3D design, CGI rendering, and immersive interactive web experiences by Mahdi.",
   openGraph: {
-    title: "Mahdi | 3D Portfolio",
-    description: "Interactive 3D portfolio using React Three Fiber.",
-    url: "https://mahdi.portfolio.example.com",
+    title: "Mahdi | Premium 3D Portfolio",
+    description: "Explore cinematic 3D renders, CGI projects, and immersive web experiences.",
+    url: "https://mahdi.studio",
     siteName: "Mahdi 3D Portfolio",
     images: [
       {
@@ -46,8 +48,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mahdi | 3D Portfolio",
-    description: "Interactive 3D portfolio using React Three Fiber.",
+    title: "Mahdi | Premium 3D Portfolio",
+    description: "Explore cinematic 3D renders, CGI projects, and immersive web experiences.",
     images: ["/og-image.png"],
   },
 };
@@ -63,10 +65,13 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${rajdhani.variable} ${spaceGrotesk.variable} antialiased`}
     >
       <body className="flex flex-col">
-        <SecurityWrapper>
-          <StickyHeader />
-          {children}
-        </SecurityWrapper>
+        <SmoothScrolling>
+          <Preloader />
+          <SecurityWrapper>
+            <StickyHeader />
+            {children}
+          </SecurityWrapper>
+        </SmoothScrolling>
       </body>
     </html>
   );
