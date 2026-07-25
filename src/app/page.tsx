@@ -9,6 +9,7 @@ import ProjectsSection from "@/components/sections/ProjectsSection";
 import GamesSection from "@/components/sections/GamesSection";
 import ContactSection from "@/components/sections/ContactSection";
 import ToolsMarquee from "@/components/ui/ToolsMarquee";
+import FloatingToolsSection from "@/components/sections/FloatingToolsSection";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -133,15 +134,37 @@ export default function Home() {
 
       {/* Vertical Content Stacking */}
       <div className="flex flex-col w-full relative z-20">
+        {/* HERO: dark with 3D model */}
         <div className="w-full relative min-h-[100dvh]">
            <HomeSection isDriving={false} onDriveStart={() => {}} />
         </div>
-        {/* Tools Marquee Strip — between hero and projects */}
+
+        {/* YELLOW MARQUEE ACCENT BAR — Nico Studio signature */}
+        <div className="relative z-10" style={{ background: '#ffff7b' }}>
+          <div className="overflow-hidden py-3.5">
+            <div className="animate-marquee inline-flex whitespace-nowrap">
+              {Array(16).fill('MAHDI GOUADRIA · 3D DESIGN · CGI · INTERACTIVE · ').map((t, i) => (
+                <span key={i} className="font-mono text-[11px] font-bold tracking-[0.2em] uppercase text-[#191919] px-4">{t}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* TOOLS MARQUEE STRIP */}
         <ToolsMarquee />
+
+        {/* PROJECTS: cream background, sticky stacking */}
         <ProjectsSection />
+
+        {/* FLOATING TOOLS: cream background, scattered icons */}
+        <FloatingToolsSection />
+
+        {/* GAMES / SHOWREEL */}
         <div className="w-full relative min-h-[100dvh]">
            <GamesSection />
         </div>
+
+        {/* CONTACT */}
         <div className="w-full relative min-h-[100dvh]">
            <ContactSection />
         </div>

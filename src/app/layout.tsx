@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Rajdhani, Space_Grotesk } from "next/font/google";
+import { Geist, Geist_Mono, Rajdhani, Space_Grotesk, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import StickyHeader from "@/components/StickyHeader";
 import SecurityWrapper from "@/components/ui/SecurityWrapper";
@@ -26,6 +26,13 @@ const rajdhani = Rajdhani({
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
   subsets: ["latin"],
+});
+
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+  weight: ["400", "500", "600", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {
@@ -63,7 +70,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${rajdhani.variable} ${spaceGrotesk.variable} antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${rajdhani.variable} ${spaceGrotesk.variable} ${playfair.variable} antialiased`}
     >
       <body className="flex flex-col selection:bg-fuchsia-500/30 selection:text-white overflow-x-hidden">
         <InAppBrowserDetector />

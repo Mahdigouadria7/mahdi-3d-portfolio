@@ -107,6 +107,18 @@ img {
     font-family: var(--font-space-grotesk), sans-serif;
   }
 
+  .font-playfair {
+    font-family: var(--font-playfair), Georgia, serif;
+  }
+
+  /* Nico Studio cream/yellow tokens */
+  :root {
+    --nico-cream: #fffef3;
+    --nico-yellow: #ffff7b;
+    --nico-dark: #191919;
+    --nico-muted: #5c5c5c;
+  }
+
   @keyframes text-glow {
     0%, 100% {
       text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);

@@ -2,156 +2,160 @@
 import { useRef } from "react";
 import Link from "next/link";
 import { projects } from "@/data/projects";
-import ScrollReveal from "@/components/ui/ScrollReveal";
 import ProjectModel from "@/components/3d/ProjectModel";
 
 export default function ProjectsSection() {
-
     return (
-        <section id="projects" className="relative w-full pointer-events-none">
+        <section id="projects" className="relative w-full" style={{ background: "var(--nico-cream)" }}>
 
-            {/* ── Section Header ──────────────────────────────── */}
-            <div className="relative z-10 w-full flex flex-col items-center pt-24 pb-12 px-6 md:px-16 pointer-events-auto">
-                <ScrollReveal direction="up" delay={0.1}>
-                    <div className="flex items-center gap-3 mb-4 justify-center">
-                        <span className="font-mono text-[10px] font-bold tracking-widest text-fuchsia-400 border border-fuchsia-500/30 bg-fuchsia-500/10 px-2.5 py-0.5">01</span>
-                        <div className="flex items-center gap-0">
-                            <div className="w-6 h-[2px] bg-fuchsia-500" />
-                            <div className="w-6 h-[2px] bg-fuchsia-500/40" />
-                        </div>
-                        <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-white/40">Selected Work</span>
-                    </div>
-                </ScrollReveal>
-                <ScrollReveal direction="up" delay={0.2}>
-                    <h2 className="text-5xl md:text-8xl font-siegra font-black tracking-widest text-white uppercase leading-none drop-shadow-2xl text-center">
-                        FEATURED<br/>PROJECTS
+            {/* ── Section Header ──────────────────────────── */}
+            <div className="relative z-10 w-full flex flex-col md:flex-row items-start md:items-end justify-between px-6 md:px-16 pt-20 pb-12 gap-6">
+                <div>
+                    <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-[#5c5c5c] block mb-3">Selected Work</span>
+                    <h2
+                        className="font-playfair text-6xl md:text-8xl text-[#191919] leading-none"
+                        style={{ fontWeight: 800 }}
+                    >
+                        Featured<br />
+                        <em className="font-playfair italic" style={{ fontWeight: 400 }}>Projects</em>
                     </h2>
-                </ScrollReveal>
-                <ScrollReveal direction="up" delay={0.3}>
-                    <div className="w-16 md:w-24 h-[2px] bg-gradient-to-r from-fuchsia-500 to-cyan-500 mt-6 mb-6 mx-auto" />
-                    <p className="text-white/50 text-xs md:text-sm leading-relaxed max-w-xs font-cyber text-center">
-                        A curated selection of 3D, interactive, and real-time web projects — each built from scratch with precision and intent.
-                    </p>
-                </ScrollReveal>
+                </div>
+                <p className="font-mono text-xs md:text-sm text-[#5c5c5c] max-w-xs md:pb-2 leading-relaxed">
+                    A curated selection of 3D, CGI, and interactive projects — each crafted with precision.
+                </p>
             </div>
 
-            {/* ── Sticky Card Stack ─────────────────────────── */}
-            {/* Total height = cards * 100vh to give scroll room */}
-            <div
-                className="relative pointer-events-auto"
-                style={{ height: `${projects.length * 90}vh` }}
-            >
+            {/* ── Yellow accent divider (Nico Studio signature) */}
+            <div className="w-full h-px bg-[#191919]/10" />
+
+            {/* ── Sticky Card Stack ────────────────────────── */}
+            {/* Each card needs scroll room — 100vh per card + some for the header */}
+            <div className="relative" style={{ height: `${projects.length * 100}vh` }}>
                 {projects.map((project, i) => {
                     const acc = project.accent ?? 'fuchsia';
-                    const palettes: Record<string, { bar: string; cat: string; border: string; glow: string }> = {
-                        fuchsia: { bar: 'bg-fuchsia-500', cat: 'text-fuchsia-400', border: 'border-fuchsia-400/30 hover:border-fuchsia-400/70', glow: 'rgba(217,70,239,0.15)' },
-                        cyan:    { bar: 'bg-cyan-500',    cat: 'text-cyan-400',    border: 'border-cyan-400/30 hover:border-cyan-400/70',    glow: 'rgba(34,211,238,0.15)' },
-                        violet:  { bar: 'bg-violet-500',  cat: 'text-violet-400',  border: 'border-violet-400/30 hover:border-violet-400/70',  glow: 'rgba(167,139,250,0.15)' },
-                        amber:   { bar: 'bg-amber-500',   cat: 'text-amber-400',   border: 'border-amber-400/30 hover:border-amber-400/70',   glow: 'rgba(251,191,36,0.15)' },
-                        rose:    { bar: 'bg-rose-500',    cat: 'text-rose-400',    border: 'border-rose-400/30 hover:border-rose-400/70',    glow: 'rgba(251,113,133,0.15)' },
-                        emerald: { bar: 'bg-emerald-500', cat: 'text-emerald-400', border: 'border-emerald-400/30 hover:border-emerald-400/70', glow: 'rgba(52,211,153,0.15)' },
+                    const palettes: Record<string, { dot: string; tag: string; tagText: string }> = {
+                        fuchsia: { dot: '#d946ef', tag: '#191919', tagText: '#ffffff' },
+                        cyan:    { dot: '#22d3ee', tag: '#191919', tagText: '#ffffff' },
+                        violet:  { dot: '#a78bfa', tag: '#191919', tagText: '#ffffff' },
+                        amber:   { dot: '#fbbf24', tag: '#ffff7b', tagText: '#191919' },
+                        rose:    { dot: '#fb7185', tag: '#191919', tagText: '#ffffff' },
+                        emerald: { dot: '#34d399', tag: '#191919', tagText: '#ffffff' },
                     };
                     const p = palettes[acc] ?? palettes.fuchsia;
 
                     return (
-                        /* Each card is sticky — they stack on top of each other as you scroll */
                         <div
                             key={project.slug}
-                            className="sticky top-0 w-full h-screen flex items-center justify-center px-4 md:px-16"
-                            style={{ zIndex: i + 1 }}
+                            className="sticky top-0 w-full h-screen flex items-center justify-center px-4 md:px-16 py-8"
+                            style={{
+                                zIndex: i + 1,
+                                background: "var(--nico-cream)",
+                            }}
                         >
-                            <ScrollReveal direction="up" delay={0.1}>
-                                <Link
-                                    href={`/projects/${project.slug}`}
-                                    className={`card-glitch group relative flex flex-col md:flex-row overflow-hidden w-full max-w-4xl bg-black/80 backdrop-blur-2xl border rounded-2xl shadow-2xl transition-all duration-500 ${p.border}`}
+                            <Link
+                                href={`/projects/${project.slug}`}
+                                className="group relative w-full max-w-5xl block"
+                            >
+                                {/* Card shell — Nico Studio style: 15px radius, clean shadow */}
+                                <article
+                                    className="relative w-full overflow-hidden rounded-2xl bg-[#191919] transition-transform duration-500 group-hover:-translate-y-2"
                                     style={{
-                                        boxShadow: `0 30px 80px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.04), inset 0 1px 0 rgba(255,255,255,0.06)`,
-                                        '--glitch-delay': `-${(i * 3.7) % 8}s`,
-                                    } as React.CSSProperties}
+                                        boxShadow: "0 20px 60px rgba(25,25,25,0.20), 0 4px 16px rgba(25,25,25,0.10)",
+                                    }}
                                 >
-                                    {/* Accent top bar */}
-                                    <div className={`absolute top-0 left-0 right-0 h-[2px] ${p.bar} opacity-70 z-30`} />
+                                    {/* ── Layout: Image left, content right ── */}
+                                    <div className="flex flex-col md:flex-row min-h-[420px] md:min-h-[480px]">
 
-                                    {/* Corner brackets */}
-                                    <span className="absolute top-2 left-2 w-4 h-4 border-t border-l border-white/20 z-30" />
-                                    <span className="absolute top-2 right-2 w-4 h-4 border-t border-r border-white/20 z-30" />
-                                    <span className="absolute bottom-2 left-2 w-4 h-4 border-b border-l border-white/20 z-30" />
-                                    <span className="absolute bottom-2 right-2 w-4 h-4 border-b border-r border-white/20 z-30" />
+                                        {/* Left: full image / 3D model */}
+                                        <div className="relative w-full md:w-[55%] h-64 md:h-auto overflow-hidden">
+                                            {/* Image from first media item */}
+                                            {project.media[0]?.type === 'image' && project.media[0]?.url && (
+                                                <img
+                                                    src={project.media[0].url}
+                                                    alt={project.media[0].alt}
+                                                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                                    draggable={false}
+                                                />
+                                            )}
+                                            {/* 3D model overlay */}
+                                            {(project.slug === "trionda-ball-wc-2026" || project.slug === "redbull-gold-concept") && (
+                                                <div
+                                                    style={{ viewTransitionName: `project-model-${project.slug}` }}
+                                                    className="absolute inset-0 z-10"
+                                                >
+                                                    <ProjectModel index={i} />
+                                                </div>
+                                            )}
+                                            {/* Gradient over image for desktop */}
+                                            <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#191919]/60 hidden md:block z-20" />
+                                            {/* Gradient for mobile */}
+                                            <div className="absolute inset-0 bg-gradient-to-t from-[#191919]/80 to-transparent md:hidden z-20" />
 
-                                    {/* Left: Image / 3D Model */}
-                                    <div className="relative w-full md:w-[45%] h-64 md:h-auto flex-shrink-0 overflow-hidden">
-                                        {/* Project image from first media item */}
-                                        {project.media[0]?.type === 'image' && project.media[0]?.url && (
-                                            <img
-                                                src={project.media[0].url}
-                                                alt={project.media[0].alt}
-                                                className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
-                                                draggable={false}
-                                            />
-                                        )}
-                                        {/* 3D model overlay for supported projects */}
-                                        {(project.slug === "trionda-ball-wc-2026" || project.slug === "redbull-gold-concept") && (
-                                            <div
-                                                style={{ viewTransitionName: `project-model-${project.slug}` }}
-                                                className="absolute inset-0 z-10"
-                                            >
-                                                <ProjectModel index={i} />
+                                            {/* Big index watermark */}
+                                            <span className="absolute bottom-3 left-4 font-mono font-black text-[100px] md:text-[140px] leading-none text-white/[0.05] select-none z-0">
+                                                {String(i + 1).padStart(2, '0')}
+                                            </span>
+                                        </div>
+
+                                        {/* Right: text content */}
+                                        <div className="flex flex-col justify-between px-6 py-6 md:px-10 md:py-10 w-full md:w-[45%] flex-shrink-0">
+
+                                            {/* Top meta row */}
+                                            <div className="flex items-center justify-between mb-auto">
+                                                <span
+                                                    className="font-mono text-[10px] tracking-[0.25em] uppercase font-bold px-2.5 py-1 rounded-full"
+                                                    style={{ background: p.tag, color: p.tagText }}
+                                                >
+                                                    {project.category}
+                                                </span>
+                                                <span className="font-mono text-[10px] text-white/40 tracking-widest">
+                                                    {project.timeline}
+                                                </span>
                                             </div>
-                                        )}
-                                        {/* Dark overlay gradient */}
-                                        <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black/60 z-20 md:block hidden" />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-20 md:hidden block" />
 
-                                        {/* Large index number watermark */}
-                                        <div className="absolute bottom-4 left-4 font-mono font-black text-[80px] md:text-[120px] text-white/[0.04] select-none pointer-events-none leading-none z-0">
-                                            {String(i + 1).padStart(2, '0')}
+                                            {/* Title */}
+                                            <div className="flex-1 flex flex-col justify-center py-8">
+                                                <h3
+                                                    className="font-playfair text-3xl md:text-4xl lg:text-5xl text-white leading-tight mb-4 group-hover:text-white transition-colors"
+                                                    style={{ fontWeight: 700 }}
+                                                >
+                                                    {project.title}
+                                                </h3>
+                                                <p className="font-cyber text-white/50 text-sm leading-relaxed line-clamp-3 group-hover:text-white/70 transition-colors">
+                                                    {project.description}
+                                                </p>
+                                            </div>
+
+                                            {/* Bottom: client + arrow CTA */}
+                                            <div className="flex items-center justify-between pt-6 border-t border-white/[0.08] mt-auto">
+                                                <span className="font-mono text-[10px] text-white/30 uppercase tracking-widest">
+                                                    {project.client}
+                                                </span>
+                                                {/* Nico Studio arrow CTA */}
+                                                <span className="inline-flex items-center gap-2 font-mono text-xs text-white/60 group-hover:text-white group-hover:gap-3 transition-all duration-300">
+                                                    View project
+                                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                                        <path d="M5 12h14M12 5l7 7-7 7" />
+                                                    </svg>
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
+                                </article>
 
-                                    {/* Right: Text Content */}
-                                    <div className="flex-1 flex flex-col justify-between p-6 md:p-10">
-                                        {/* Top: Meta */}
-                                        <div className="flex items-center justify-between mb-4">
-                                            <span className={`font-mono text-[10px] md:text-xs font-bold uppercase tracking-[0.3em] ${p.cat}`}>
-                                                {project.category}
-                                            </span>
-                                            <span className="font-mono text-[10px] md:text-xs text-white/30 tracking-widest">
-                                                {project.timeline}
-                                            </span>
-                                        </div>
-
-                                        {/* Middle: Title + Description */}
-                                        <div className="flex-1 flex flex-col justify-center">
-                                            <h3 className="font-siegra text-2xl md:text-4xl font-bold text-white tracking-wider uppercase drop-shadow-lg mb-3 group-hover:text-white transition-colors leading-tight">
-                                                {project.title}
-                                            </h3>
-                                            <p className="font-cyber text-white/50 text-sm leading-relaxed line-clamp-3 group-hover:text-white/70 transition-colors">
-                                                {project.description}
-                                            </p>
-                                        </div>
-
-                                        {/* Bottom: Client + CTA */}
-                                        <div className="flex items-center justify-between mt-6 pt-4 border-t border-white/[0.06]">
-                                            <span className="font-mono text-[10px] text-white/25 uppercase tracking-widest">
-                                                {project.client}
-                                            </span>
-                                            <span className={`font-mono text-xs ${p.cat} flex items-center gap-2 group-hover:gap-3 transition-all duration-300`}>
-                                                VIEW PROJECT
-                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="group-hover:translate-x-1 transition-transform duration-300">
-                                                    <path d="M5 12h14M12 5l7 7-7 7" />
-                                                </svg>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </Link>
-                            </ScrollReveal>
+                                {/* Floating accent dot — like Nico Studio's category colour */}
+                                <span
+                                    className="absolute top-4 left-4 z-30 w-2.5 h-2.5 rounded-full ring-2 ring-white/20"
+                                    style={{ background: p.dot }}
+                                />
+                            </Link>
                         </div>
                     );
                 })}
             </div>
 
-            {/* ── Bottom spacer ──────────────────────────────── */}
-            <div className="h-24 w-full" />
+            {/* ── Bottom spacer ── */}
+            <div className="h-20 w-full bg-[var(--nico-cream)]" />
         </section>
     );
 }

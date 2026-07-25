@@ -20,18 +20,18 @@ const ITEMS = [...TOOLS, ...TOOLS];
 
 export default function ToolsMarquee() {
   return (
-    <section className="relative w-full py-5 md:py-6 overflow-hidden pointer-events-none select-none">
+    <section className="relative w-full py-5 md:py-6 overflow-hidden pointer-events-none select-none" style={{ background: 'var(--nico-cream)' }}>
       {/* Top separator line */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-[#191919]/10" />
       {/* Bottom separator line */}
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-[#191919]/10" />
 
       {/* Edge fades — exactly like Nico Studio's masked marquee */}
       <div
         className="absolute inset-0 pointer-events-none z-10"
         style={{
-          maskImage: "linear-gradient(to right, #000 0%, transparent 8%, transparent 92%, #000 100%)",
-          WebkitMaskImage: "linear-gradient(to right, #000 0%, transparent 8%, transparent 92%, #000 100%)",
+          maskImage: "linear-gradient(to right, #fffef3 0%, transparent 10%, transparent 90%, #fffef3 100%)",
+          WebkitMaskImage: "linear-gradient(to right, #fffef3 0%, transparent 10%, transparent 90%, #fffef3 100%)",
           background: "transparent",
         }}
       />
@@ -42,7 +42,7 @@ export default function ToolsMarquee() {
           {ITEMS.map((tool, i) => (
             <span
               key={i}
-              className="inline-flex items-center gap-2.5 px-6 md:px-8 text-[10px] md:text-xs font-mono tracking-[0.25em] uppercase text-white/25 hover:text-white/60 transition-colors duration-300"
+              className="inline-flex items-center gap-2.5 px-6 md:px-8 text-[10px] md:text-xs font-mono tracking-[0.25em] uppercase text-[#191919]/30 hover:text-[#191919]/70 transition-colors duration-300"
             >
               <span className="text-fuchsia-500/40 text-[8px]">{tool.icon}</span>
               {tool.name}
