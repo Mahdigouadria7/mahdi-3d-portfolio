@@ -116,7 +116,7 @@ export default function HomeSection({ isDriving }: HomeSectionProps) {
                 </p>
             </div>
 
-            {/* ── Client Logos Marquee Row (Uniform Optical Scale across all monochrome white logos) ── */}
+            {/* ── Client Logos Marquee Row (Original Full Colors without Monochrome Filter) ── */}
             <div className="w-full relative py-4 select-none pointer-events-none z-10">
                 <div
                     className="w-full overflow-hidden"
@@ -129,13 +129,13 @@ export default function HomeSection({ isDriving }: HomeSectionProps) {
                         {[...CLIENT_LOGOS, ...CLIENT_LOGOS, ...CLIENT_LOGOS].map((client, i) => (
                             <div
                                 key={i}
-                                className="inline-flex items-center justify-center w-28 h-10 md:w-32 md:h-11 px-3 flex-shrink-0 opacity-40 hover:opacity-100 transition-opacity duration-300"
+                                className="inline-flex items-center justify-center w-28 h-10 md:w-32 md:h-11 px-3 flex-shrink-0 opacity-90 transition-opacity duration-300"
                             >
                                 <img
                                     src={client.url}
                                     alt={client.name}
                                     style={client.style}
-                                    className="w-auto h-auto object-contain filter brightness-0 invert opacity-75"
+                                    className="w-auto h-auto object-contain transition-transform duration-300"
                                 />
                             </div>
                         ))}
