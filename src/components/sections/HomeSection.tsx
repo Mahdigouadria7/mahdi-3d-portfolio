@@ -9,21 +9,21 @@ interface HomeSectionProps {
 }
 
 const CLIENT_LOGOS = [
-    { name: "Samsung", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_180/v1784994634/portfolio/clients/samsung.png", height: "h-7 md:h-8" },
-    { name: "Orange", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_180/v1784994632/portfolio/clients/orange.png", height: "h-8 md:h-10" },
-    { name: "Danone", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_180/v1784994624/portfolio/clients/danone.png", height: "h-8 md:h-9" },
-    { name: "Yves Rocher", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_180/v1784994636/portfolio/clients/yves_rocher.png", height: "h-7 md:h-8" },
-    { name: "Délice Holding", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_180/v1784994627/portfolio/clients/delice.png", height: "h-8 md:h-9" },
-    { name: "DanUp", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_180/v1784994625/portfolio/clients/danup.png", height: "h-8 md:h-9" },
-    { name: "UBCI", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_180/v1784994635/portfolio/clients/ubci.png", height: "h-8 md:h-9" },
-    { name: "Diari Express", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_180/v1784994628/portfolio/clients/diari_express.png", height: "h-9 md:h-11" },
-    { name: "Jouda", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_180/v1784994630/portfolio/clients/jouda.png", height: "h-8 md:h-9" },
-    { name: "Fourré", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_180/v1784994629/portfolio/clients/fourre.png", height: "h-7 md:h-8" },
-    { name: "Papillon", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_180/v1784994632/portfolio/clients/papillon.png", height: "h-8 md:h-9" },
-    { name: "DCroc", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_180/v1784994626/portfolio/clients/dcroc.png", height: "h-8 md:h-9" },
-    { name: "Kif", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_180/v1784994631/portfolio/clients/kif.png", height: "h-8 md:h-9" },
-    { name: "Kairna", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_180/v1784994630/portfolio/clients/kairna.png", height: "h-8 md:h-9" },
-    { name: "Smile", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_180/v1784994635/portfolio/clients/smile.png", height: "h-8 md:h-9" },
+    { name: "Samsung", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_180/v1784994634/portfolio/clients/samsung.png", style: { maxHeight: "26px", maxWidth: "110px" } },
+    { name: "Orange", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_180/v1784994632/portfolio/clients/orange.png", style: { maxHeight: "30px", maxWidth: "34px" } },
+    { name: "Danone", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_180/v1784994624/portfolio/clients/danone.png", style: { maxHeight: "28px", maxWidth: "100px" } },
+    { name: "Yves Rocher", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_180/v1784994636/portfolio/clients/yves_rocher.png", style: { maxHeight: "26px", maxWidth: "110px" } },
+    { name: "Délice Holding", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_180/v1784994627/portfolio/clients/delice.png", style: { maxHeight: "28px", maxWidth: "100px" } },
+    { name: "DanUp", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_180/v1784994625/portfolio/clients/danup.png", style: { maxHeight: "28px", maxWidth: "100px" } },
+    { name: "UBCI", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_180/v1784994635/portfolio/clients/ubci.png", style: { maxHeight: "28px", maxWidth: "100px" } },
+    { name: "Diari Express", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_180/v1784994628/portfolio/clients/diari_express.png", style: { maxHeight: "32px", maxWidth: "38px" } },
+    { name: "Jouda", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_180/v1784994630/portfolio/clients/jouda.png", style: { maxHeight: "28px", maxWidth: "90px" } },
+    { name: "Fourré", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_180/v1784994629/portfolio/clients/fourre.png", style: { maxHeight: "26px", maxWidth: "100px" } },
+    { name: "Papillon", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_180/v1784994632/portfolio/clients/papillon.png", style: { maxHeight: "28px", maxWidth: "90px" } },
+    { name: "DCroc", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_180/v1784994626/portfolio/clients/dcroc.png", style: { maxHeight: "28px", maxWidth: "90px" } },
+    { name: "Kif", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_180/v1784994631/portfolio/clients/kif.png", style: { maxHeight: "28px", maxWidth: "90px" } },
+    { name: "Kairna", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_180/v1784994630/portfolio/clients/kairna.png", style: { maxHeight: "28px", maxWidth: "90px" } },
+    { name: "Smile", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_180/v1784994635/portfolio/clients/smile.png", style: { maxHeight: "28px", maxWidth: "90px" } },
 ];
 
 const SKILLS_BAR = [
@@ -116,7 +116,7 @@ export default function HomeSection({ isDriving }: HomeSectionProps) {
                 </p>
             </div>
 
-            {/* ── Client Logos Marquee Row directly under text with Gradient Edge Fade ── */}
+            {/* ── Client Logos Marquee Row (Uniform Optical Scale across all monochrome white logos) ── */}
             <div className="w-full relative py-4 select-none pointer-events-none z-10">
                 <div
                     className="w-full overflow-hidden"
@@ -129,12 +129,13 @@ export default function HomeSection({ isDriving }: HomeSectionProps) {
                         {[...CLIENT_LOGOS, ...CLIENT_LOGOS, ...CLIENT_LOGOS].map((client, i) => (
                             <div
                                 key={i}
-                                className="inline-flex items-center justify-center min-w-[90px] md:min-w-[120px] h-8 md:h-10 px-2 flex-shrink-0 opacity-35 hover:opacity-100 transition-opacity duration-300"
+                                className="inline-flex items-center justify-center w-28 h-10 md:w-32 md:h-11 px-3 flex-shrink-0 opacity-40 hover:opacity-100 transition-opacity duration-300"
                             >
                                 <img
                                     src={client.url}
                                     alt={client.name}
-                                    className={`${client.height} w-auto max-w-[120px] object-contain filter brightness-0 invert opacity-75`}
+                                    style={client.style}
+                                    className="w-auto h-auto object-contain filter brightness-0 invert opacity-75"
                                 />
                             </div>
                         ))}
