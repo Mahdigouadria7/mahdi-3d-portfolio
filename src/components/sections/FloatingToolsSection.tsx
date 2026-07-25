@@ -24,80 +24,47 @@ function CursorArrow({ className = "" }: { className?: string }) {
   );
 }
 
-/* ── Custom Software Vector Icons ────────────────────────── */
-function BlenderIcon({ className = "w-8 h-8" }: { className?: string }) {
+/* ── Adobe Photoshop & After Effects Badges ────────────────── */
+function PhotoshopIcon({ className = "w-8 h-8 md:w-9 md:h-9" }: { className?: string }) {
   return (
-    <svg className={className} viewBox="0 0 256 208" fill="none">
-      <path fill="#EA7600" d="M110 50.8L165.7 0l18.4 20.3-51 46.5L110 50.8z" />
-      <path fill="#EA7600" d="M149.3 75.3l106.7-36.2 6.5 26.6-96.6 32.8-16.6-23.2z" />
-      <path fill="#EA7600" d="M128 64c44.2 0 80 35.8 80 80s-35.8 80-80 80-80-35.8-80-80 35.8-80 80-80z" />
-      <circle fill="#224775" cx="128" cy="144" r="44" />
-      <circle fill="#FFF" cx="128" cy="144" r="20" />
-    </svg>
-  );
-}
-
-function PhotoshopIcon({ className = "w-8 h-8" }: { className?: string }) {
-  return (
-    <div className={`${className} bg-[#001E36] border border-[#31A8FF]/40 rounded-xl flex items-center justify-center font-sans font-bold text-[#31A8FF] text-base leading-none select-none shadow-sm`}>
+    <div className={`${className} bg-[#001E36] border border-[#31A8FF]/40 rounded-xl flex items-center justify-center font-sans font-bold text-[#31A8FF] text-base md:text-lg leading-none select-none shadow-sm`}>
       Ps
     </div>
   );
 }
 
-function AfterEffectsIcon({ className = "w-8 h-8" }: { className?: string }) {
+function AfterEffectsIcon({ className = "w-8 h-8 md:w-9 md:h-9" }: { className?: string }) {
   return (
-    <div className={`${className} bg-[#00005B] border border-[#9999FF]/40 rounded-xl flex items-center justify-center font-sans font-bold text-[#9999FF] text-base leading-none select-none shadow-sm`}>
+    <div className={`${className} bg-[#00005B] border border-[#9999FF]/40 rounded-xl flex items-center justify-center font-sans font-bold text-[#9999FF] text-base md:text-lg leading-none select-none shadow-sm`}>
       Ae
     </div>
   );
 }
 
-function ThreeJsIcon({ className = "w-8 h-8" }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="#191919" strokeWidth="1.8" strokeLinejoin="round">
-      <path d="M12 2L2 19h20L12 2z" />
-      <path d="M12 2v17" />
-      <path d="M7 11.5h10" />
-    </svg>
-  );
-}
-
-function HoudiniIcon({ className = "w-8 h-8" }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none">
-      <path d="M12 2L3 7v10l9 5 9-5V7l-9-5z" fill="#FF5500" />
-      <path d="M8 8v8M16 8v8M8 12h8" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-function ZBrushIcon({ className = "w-8 h-8" }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none">
-      <rect width="24" height="24" rx="6" fill="#1e1e1e" />
-      <path d="M6 7h12L7 17h11" stroke="#E63946" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
+/* ── Cloudinary Image URLs for Blender, Houdini, ZBrush, Three.js ──── */
+const CLOUDINARY_ICONS: Record<string, string> = {
+  blender: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_200/v1784992519/portfolio/software_icons/blender.jpg",
+  houdini: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_200/v1784992519/portfolio/software_icons/houdini.jpg",
+  zbrush: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_200/v1784992520/portfolio/software_icons/zbrush.jpg",
+  threejs: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,w_200/v1784992520/portfolio/software_icons/threejs.jpg",
+};
 
 function ToolIconRenderer({ type }: { type: string }) {
-  switch (type) {
-    case "blender":
-      return <BlenderIcon />;
-    case "photoshop":
-      return <PhotoshopIcon />;
-    case "aftereffects":
-      return <AfterEffectsIcon />;
-    case "threejs":
-      return <ThreeJsIcon />;
-    case "houdini":
-      return <HoudiniIcon />;
-    case "zbrush":
-      return <ZBrushIcon />;
-    default:
-      return null;
+  if (type === "photoshop") return <PhotoshopIcon />;
+  if (type === "aftereffects") return <AfterEffectsIcon />;
+
+  const imageUrl = CLOUDINARY_ICONS[type];
+  if (imageUrl) {
+    return (
+      <img
+        src={imageUrl}
+        alt={type}
+        className="w-9 h-9 md:w-11 md:h-11 object-contain rounded-xl pointer-events-none select-none"
+      />
+    );
   }
+
+  return null;
 }
 
 /* ── Tool data with explosion vectors ─────────────────────────── */
@@ -242,7 +209,7 @@ function ToolCard({
 
         {/* Icon card */}
         <div
-          className={`w-13 h-13 md:w-16 md:h-16 bg-white rounded-2xl shadow-lg flex items-center justify-center border border-black/5 transition-all duration-300 ${
+          className={`w-13 h-13 md:w-16 md:h-16 bg-white rounded-2xl shadow-lg flex items-center justify-center border border-black/5 transition-all duration-300 overflow-hidden ${
             hovered ? "shadow-2xl border-black/20" : "shadow-md"
           }`}
         >
@@ -278,7 +245,7 @@ function ToolGrid() {
           key={tool.id}
           className="flex items-center gap-2.5 bg-white/80 rounded-xl p-3 shadow-sm border border-black/5"
         >
-          <div className="w-10 h-10 bg-white rounded-xl shadow flex items-center justify-center flex-shrink-0 border border-black/5">
+          <div className="w-10 h-10 bg-white rounded-xl shadow flex items-center justify-center flex-shrink-0 border border-black/5 overflow-hidden">
             <ToolIconRenderer type={tool.icon} />
           </div>
           <div className="overflow-hidden">
