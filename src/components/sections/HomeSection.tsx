@@ -118,12 +118,13 @@ export default function HomeSection({ isDriving }: HomeSectionProps) {
 
             {/* ── TOP Yellow Ticker Bar ── */}
             <div className="w-full bg-[#ffff7b] text-[#141414] py-3 overflow-hidden select-none pointer-events-none border-t border-b border-black/10 z-10">
-                <div className="animate-marquee-ticker inline-flex items-center whitespace-nowrap">
-                    {/* Exactly 2 copies so translateX(-50%) loops with zero jump */}
+                {/* Track: flex + w-max. Spacing is padding-right ON each item (not gap)
+                    so the seam between set-1 end and set-2 start is pixel-identical */}
+                <div className="animate-marquee-ticker flex w-max">
                     {[...SKILLS_BAR, ...SKILLS_BAR].map((skill, i) => (
-                        <span key={i} className="inline-flex items-center font-sans font-bold text-xs md:text-sm tracking-wide text-[#141414] uppercase px-5">
+                        <span key={i} className="flex-shrink-0 flex items-center font-sans font-bold text-xs md:text-sm tracking-wide text-[#141414] uppercase pr-10 md:pr-14">
                             {skill}
-                            <span className="text-[#141414]/40 ml-5">✦</span>
+                            <span className="text-[#141414]/30 ml-4">✦</span>
                         </span>
                     ))}
                 </div>
@@ -134,16 +135,18 @@ export default function HomeSection({ isDriving }: HomeSectionProps) {
                 <div
                     className="w-full overflow-hidden"
                     style={{
-                        maskImage: "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
-                        WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
+                        maskImage: "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
+                        WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
                     }}
                 >
-                    <div className="animate-marquee-logos inline-flex items-center gap-8 sm:gap-12 md:gap-16 whitespace-nowrap">
-                        {/* Exactly 2 copies so translateX(-50%) loops with zero jump */}
+                    {/* Track: flex + w-max. Each logo item carries its own right-padding
+                        so the gap at the loop seam is always identical */}
+                    <div className="animate-marquee-logos flex w-max">
                         {[...CLIENT_LOGOS, ...CLIENT_LOGOS].map((client, i) => (
                             <div
                                 key={i}
-                                className="inline-flex items-center justify-center min-w-[80px] sm:min-w-[100px] md:min-w-[130px] h-12 md:h-16 px-2 md:px-3 flex-shrink-0 opacity-90"
+                                className="flex-shrink-0 flex items-center justify-center h-12 md:h-16 pr-10 sm:pr-14 md:pr-20 opacity-90"
+                                style={{ minWidth: "70px" }}
                             >
                                 <img
                                     src={client.url}
