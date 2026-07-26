@@ -157,18 +157,6 @@ export default function HomeSection({ isDriving }: HomeSectionProps) {
                 </div>
             </div>
 
-            {/* ── BOTTOM Yellow Ticker Bar (reverse direction for visual depth) ── */}
-            <div className="w-full bg-[#ffff7b] text-[#141414] py-3 overflow-hidden select-none pointer-events-none border-t border-b border-black/10 z-10">
-                <div className="animate-marquee-ticker-reverse inline-flex items-center whitespace-nowrap">
-                    {[...SKILLS_BAR, ...SKILLS_BAR].map((skill, i) => (
-                        <span key={i} className="inline-flex items-center font-sans font-bold text-xs md:text-sm tracking-wide text-[#141414] uppercase px-5">
-                            {skill}
-                            <span className="text-[#141414]/40 ml-5">✦</span>
-                        </span>
-                    ))}
-                </div>
-            </div>
-
             <CVModal isOpen={isCVOpen} onClose={() => setIsCVOpen(false)} />
         </section>
     );

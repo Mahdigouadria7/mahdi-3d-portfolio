@@ -274,31 +274,31 @@ img {
   100% { transform: translateX(0); }
 }
 
-/* — Logos row: relaxed glide — */
+/* — Logos row — */
 .animate-marquee-logos {
-  animation: marquee 25s linear infinite;
+  animation: marquee 55s linear infinite;
   will-change: transform;
 }
 @media (min-width: 768px) {
-  .animate-marquee-logos { animation-duration: 38s; }
+  .animate-marquee-logos { animation-duration: 48s; }
 }
 
-/* — Forward ticker: calm drift — */
+/* — Ticker — */
 .animate-marquee-ticker {
-  animation: marquee 18s linear infinite;
+  animation: marquee 40s linear infinite;
   will-change: transform;
 }
 @media (min-width: 768px) {
-  .animate-marquee-ticker { animation-duration: 28s; }
+  .animate-marquee-ticker { animation-duration: 36s; }
 }
 
-/* — Reverse ticker (bottom bar, opposite direction, slightly different pace) — */
+/* — Reverse ticker — */
 .animate-marquee-ticker-reverse {
-  animation: marquee-rtl 22s linear infinite;
+  animation: marquee-rtl 45s linear infinite;
   will-change: transform;
 }
 @media (min-width: 768px) {
-  .animate-marquee-ticker-reverse { animation-duration: 32s; }
+  .animate-marquee-ticker-reverse { animation-duration: 40s; }
 }
 
 /* — Legacy class for FooterSection / ToolsMarquee — */
