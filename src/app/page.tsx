@@ -142,25 +142,7 @@ export default function Home() {
       <div className="flex flex-col w-full relative z-20">
 
         {/* 1. HERO — dark, 3D scroll animation */}
-        <div className="w-full relative min-h-[100dvh]">
-          <HomeSection isDriving={false} onDriveStart={() => {}} />
-        </div>
-
-        {/* 2. YELLOW TICKER — Nico Studio signature */}
-        <div className="relative z-10" style={{ background: '#ffff7b' }}>
-          <div className="overflow-hidden py-3">
-            <div className="animate-marquee inline-flex whitespace-nowrap">
-              {Array(6).fill([
-                "3D Design", "CGI Renders", "WebGL & Three.js", "Motion Graphics", "UI/UX Engineering", "Brand Identity"
-              ]).flat().map((t, i) => (
-                <span key={i} className="inline-flex items-center gap-4 font-sans text-xs md:text-[13px] font-semibold text-[#191919] px-4">
-                  {t}
-                  <span className="text-[10px] text-[#191919]">✦</span>
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
+        <HomeSection isDriving={false} onDriveStart={() => {}} />
 
         {/* 3. ABOUT — who I am, photo, stats */}
         <AboutSection />
