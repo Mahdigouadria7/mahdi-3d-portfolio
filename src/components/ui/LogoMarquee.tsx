@@ -98,7 +98,11 @@ export default function LogoMarquee() {
         velRef.current   = 0;
         lastX.current    = e.clientX;
         lastT.current    = performance.now();
-        (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+        try {
+            (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+        } catch {
+            // Ignore pointer capture errors on older touch devices
+        }
     };
 
     const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
@@ -106,6 +110,10 @@ export default function LogoMarquee() {
         const now = performance.now();
         const dt  = Math.max(now - lastT.current, 1);
         const dx  = e.clientX - lastX.current;
+
+        if (Math.abs(dx) > 2) {
+            setHovered(null); // Clear active logo scale while dragging
+        }
 
         // Drag: move track opposite to pointer direction (pull right → items go right)
         posRef.current -= dx;
@@ -124,8 +132,9 @@ export default function LogoMarquee() {
 
     return (
         <div
-            className="w-full py-5 bg-[#141414] overflow-hidden cursor-grab active:cursor-grabbing select-none relative"
+            className="w-full py-5 bg-[#141414] overflow-hidden cursor-grab active:cursor-grabbing select-none relative touch-pan-y"
             style={{
+                touchAction: "pan-y",
                 maskImage: "linear-gradient(to right, transparent 0%, black 7%, black 93%, transparent 100%)",
                 WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 7%, black 93%, transparent 100%)",
             }}
@@ -160,6 +169,9 @@ export default function LogoMarquee() {
                             }}
                             onMouseEnter={() => setHovered(i)}
                             onMouseLeave={() => setHovered(null)}
+                            onTouchStart={() => setHovered(i)}
+                            onTouchEnd={() => setTimeout(() => setHovered(null), 500)}
+                            onTouchCancel={() => setHovered(null)}
                         >
                             <img
                                 src={client.url}
