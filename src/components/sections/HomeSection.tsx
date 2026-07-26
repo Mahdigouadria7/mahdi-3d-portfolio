@@ -3,12 +3,12 @@
 import { useState } from "react";
 import CVModal from "@/components/ui/CVModal";
 import LogoMarquee from "@/components/ui/LogoMarquee";
+import AwakenHeroCanvas from "@/components/3d/AwakenHeroCanvas";
 
 interface HomeSectionProps {
     isDriving: boolean;
     onDriveStart: () => void;
 }
-
 
 const SKILLS_BAR = [
     "3D Design",
@@ -37,15 +37,18 @@ export default function HomeSection({ isDriving }: HomeSectionProps) {
     const [isCVOpen, setIsCVOpen] = useState(false);
 
     return (
-        <section className={`relative w-full min-h-[100dvh] bg-[#141414] flex flex-col justify-between pt-16 md:pt-20 pb-0 transition-opacity duration-1000 ${isDriving ? 'opacity-0' : 'opacity-100'}`}>
+        <section className={`relative w-full min-h-[100dvh] bg-[#111111] flex flex-col justify-between pt-16 md:pt-20 pb-0 transition-opacity duration-1000 overflow-hidden ${isDriving ? 'opacity-0' : 'opacity-100'}`}>
+
+            {/* ── Interactive 3D Awaken Portal Canvas (Anomaly -> Tear -> Avatar Reveal) ── */}
+            <AwakenHeroCanvas />
 
             {/* Background subtle grid pattern */}
             <div className="absolute inset-0 pointer-events-none z-0 opacity-10">
                 <div className="w-full h-full border-b border-dashed border-white/20" />
             </div>
 
-            {/* ── Main Hero Content Box (Elevated higher, matching Reference Image 2) ── */}
-            <div className="max-w-5xl mx-auto w-full flex flex-col items-center text-center z-10 my-auto px-6 pt-4 pb-2">
+            {/* ── Main Hero Content Box (Pointer-events-none wrapper so clicks reach 3D spatial anomaly) ── */}
+            <div className="max-w-5xl mx-auto w-full flex flex-col items-center text-center z-10 my-auto px-6 pt-4 pb-2 pointer-events-none">
 
                 {/* Top Social Proof Badge (Real Human Portrait Avatars + 5 Stars) */}
                 <div className="inline-flex items-center gap-3 mb-5 bg-white/5 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/10 shadow-sm">
