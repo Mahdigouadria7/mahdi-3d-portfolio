@@ -2,29 +2,13 @@
 
 import { useState } from "react";
 import CVModal from "@/components/ui/CVModal";
+import LogoMarquee from "@/components/ui/LogoMarquee";
 
 interface HomeSectionProps {
     isDriving: boolean;
     onDriveStart: () => void;
 }
 
-const CLIENT_LOGOS = [
-    { name: "Samsung", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_180/v1784994634/portfolio/clients/samsung.png", style: { maxHeight: "44px", maxWidth: "140px" } }, // Boosted
-    { name: "Orange", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_180/v1784994632/portfolio/clients/orange.png", style: { maxHeight: "52px", maxWidth: "56px" } }, // Boosted
-    { name: "Danone", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_180/v1784994624/portfolio/clients/danone.png", style: { maxHeight: "38px", maxWidth: "110px" } },
-    { name: "Yves Rocher", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_180/v1784994636/portfolio/clients/yves_rocher.png", style: { maxHeight: "32px", maxWidth: "120px" } },
-    { name: "Délice Holding", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_180/v1784994627/portfolio/clients/delice.png", style: { maxHeight: "38px", maxWidth: "110px" } },
-    { name: "DanUp", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_180/v1784994625/portfolio/clients/danup.png", style: { maxHeight: "38px", maxWidth: "110px" } },
-    { name: "UBCI", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_180/v1784994635/portfolio/clients/ubci.png", style: { maxHeight: "36px", maxWidth: "110px" } },
-    { name: "Diari Express", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_180/v1784994628/portfolio/clients/diari_express.png", style: { maxHeight: "56px", maxWidth: "64px" } }, // Boosted
-    { name: "Jouda", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_180/v1784994630/portfolio/clients/jouda.png", style: { maxHeight: "46px", maxWidth: "120px" } }, // Boosted
-    { name: "Fourré", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_180/v1784994629/portfolio/clients/fourre.png", style: { maxHeight: "32px", maxWidth: "110px" } },
-    { name: "Papillon", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_180/v1784994632/portfolio/clients/papillon.png", style: { maxHeight: "42px", maxWidth: "110px" } },
-    { name: "DCroc", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_180/v1784994626/portfolio/clients/dcroc.png", style: { maxHeight: "42px", maxWidth: "110px" } },
-    { name: "Kif", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_180/v1784994631/portfolio/clients/kif.png", style: { maxHeight: "42px", maxWidth: "110px" } },
-    { name: "Kairna", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_180/v1784994630/portfolio/clients/kairna.png", style: { maxHeight: "42px", maxWidth: "110px" } },
-    { name: "Smile", url: "https://res.cloudinary.com/zu63qo7h/image/upload/f_auto,q_auto,h_180/v1784994635/portfolio/clients/smile.png", style: { maxHeight: "42px", maxWidth: "110px" } },
-];
 
 const SKILLS_BAR = [
     "3D Design",
@@ -130,35 +114,8 @@ export default function HomeSection({ isDriving }: HomeSectionProps) {
                 </div>
             </div>
 
-            {/* ── Client Logos Marquee Row ── */}
-            <div className="w-full relative py-4 select-none pointer-events-none z-10 bg-[#141414]">
-                <div
-                    className="w-full overflow-hidden"
-                    style={{
-                        maskImage: "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
-                        WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
-                    }}
-                >
-                    {/* Track: flex + w-max. Each logo item carries its own right-padding
-                        so the gap at the loop seam is always identical */}
-                    <div className="animate-marquee-logos flex w-max">
-                        {[...CLIENT_LOGOS, ...CLIENT_LOGOS].map((client, i) => (
-                            <div
-                                key={i}
-                                className="flex-shrink-0 flex items-center justify-center h-12 md:h-16 pr-10 sm:pr-14 md:pr-20 opacity-90"
-                                style={{ minWidth: "70px" }}
-                            >
-                                <img
-                                    src={client.url}
-                                    alt={client.name}
-                                    style={client.style}
-                                    className="w-auto h-auto object-contain"
-                                />
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </div>
+            {/* ── Client Logos Marquee Row (drag-to-spin, hover float) ── */}
+            <LogoMarquee />
 
             <CVModal isOpen={isCVOpen} onClose={() => setIsCVOpen(false)} />
         </section>
