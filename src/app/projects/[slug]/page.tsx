@@ -640,6 +640,54 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                 ))}
                             </div>
                         </div>
+
+                        {/* 4. Other Danup Projects Showcase Grid */}
+                        <div className="relative z-10 py-8">
+                            <ScrollReveal direction="up">
+                                <div className="w-full flex items-center gap-4 mb-12">
+                                    <span className="font-mono text-xs font-bold tracking-widest text-[#191919] bg-[#ffff7b] px-3.5 py-1 rounded-full border border-black/10">04</span>
+                                    <div className="flex items-center gap-1">
+                                        <div className="w-8 h-[2px] bg-[#191919]" />
+                                        <div className="w-8 h-[2px] bg-[#191919]/30" />
+                                    </div>
+                                    <h3 className="font-mono text-xs font-bold uppercase tracking-[0.3em] text-[#191919]/60">
+                                        Other Danup Projects
+                                    </h3>
+                                </div>
+                            </ScrollReveal>
+
+                            <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                                {/* Video 1: Danup Boost CGI */}
+                                <ScrollReveal direction="left" delay={0.1} className="relative h-full w-full">
+                                    <div className="w-full aspect-[9/16] bg-[#191919] border border-white/10 rounded-3xl overflow-hidden relative shadow-2xl hover:border-[#ffff7b] hover:shadow-[0_0_30px_rgba(255,255,123,0.3)] transition-all duration-500 group flex flex-col justify-end p-6">
+                                        <LazyVideo
+                                            src="/models/danup content/Videos/Danup_Boost_CGI.mp4"
+                                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
+                                        />
+                                        <div className="relative z-20 pointer-events-none bg-black/75 backdrop-blur-md p-4 rounded-2xl border border-white/10 mt-3">
+                                            <span className="font-mono text-[10px] text-[#ffff7b] font-bold uppercase tracking-widest">COMMERCIAL CGI</span>
+                                            <h4 className="font-playfair text-xl font-bold text-white uppercase tracking-tight mt-0.5">Danup Boost CGI</h4>
+                                            <p className="font-sans text-xs text-white/70 mt-1">Dynamic 3D energy fluid dynamics &amp; product reveal campaign.</p>
+                                        </div>
+                                    </div>
+                                </ScrollReveal>
+
+                                {/* Video 2: Danup Maldives CGI */}
+                                <ScrollReveal direction="right" delay={0.2} className="relative h-full w-full">
+                                    <div className="w-full aspect-[9/16] bg-[#191919] border border-white/10 rounded-3xl overflow-hidden relative shadow-2xl hover:border-[#ffff7b] hover:shadow-[0_0_30px_rgba(255,255,123,0.3)] transition-all duration-500 group flex flex-col justify-end p-6">
+                                        <LazyVideo
+                                            src="/models/danup content/Videos/Danup_Maldives_CGI.mp4"
+                                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
+                                        />
+                                        <div className="relative z-20 pointer-events-none bg-black/75 backdrop-blur-md p-4 rounded-2xl border border-white/10 mt-3">
+                                            <span className="font-mono text-[10px] text-[#ffff7b] font-bold uppercase tracking-widest">TROPICAL CGI SHOWCASE</span>
+                                            <h4 className="font-playfair text-xl font-bold text-white uppercase tracking-tight mt-0.5">Danup Maldives CGI</h4>
+                                            <p className="font-sans text-xs text-white/70 mt-1">Exotic island environment &amp; tropical flavor 3D commercial.</p>
+                                        </div>
+                                    </div>
+                                </ScrollReveal>
+                            </div>
+                        </div>
                     </div>
                 ) : project.slug !== "trionda-ball-wc-2026" ? (
                     <div className="grid md:grid-cols-2 gap-8 relative z-10">
