@@ -180,7 +180,7 @@ function SceneAnimator({ index, onScoreChange, onScoreReset, resetTrigger, start
     const groundSpring = 15.0; // Smoother, gentler snap back
     const groundDamping = 0.92; // More floaty, smoother settling
     
-    const tlRef = useRef<gsap.core.Timeline>();
+    const tlRef = useRef<gsap.core.Timeline | null>(null);
     
     // Score Tracking
     const scoreRef = useRef(0);

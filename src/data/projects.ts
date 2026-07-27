@@ -69,6 +69,35 @@ export const projects: Project[] = [
         ]
     },
     {
+        slug: "danup-x-ala",
+        accent: "rose",
+        title: "DANUP x ALA — 3D BOTTLE EDITION",
+        category: "Product & Packaging 3D CGI",
+        description: "Interactive 3D bottle configurator and commercial CGI showcase featuring 4 dynamic label flavor variants and custom motion elements.",
+        client: "Danone Danup / ALA",
+        role: "3D Artist: Mahdi Gouadria | Motion Designer: Mabrouk Aziz",
+        timeline: "2025",
+        techStack: ["Blender", "React Three Fiber", "Cloudinary CDN", "GSAP"],
+        fullDescription: "A groundbreaking interactive 3D commercial experience for Danup x ALA yogurt drinks. Featuring a real-time 3D bottle viewer with instant label texture swapping across 4 distinct flavors (Fraise, Melba, Vanilla, Tropical) accompanied by orbiting flavor elements.",
+        challenge: "Rendering an ultra-detailed GLTF bottle model in real-time while dynamically hot-swapping high-res 2K label texture maps and orbiting 3D sticker sprites smoothly.",
+        solution: "Decoupled material maps in React Three Fiber, optimized PBR shaders, and automated Cloudinary CDN asset streaming for sub-second texture loads.",
+        media: [
+            { type: 'video', url: '/models/danup content/Videos/Danup x ALA 3d Video.mp4', alt: 'Danup x ALA 3D Commercial Video' },
+            { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Spotifyvanille.png', alt: 'Vanilla Flavor Element' },
+            { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Spotify_peach.png', alt: 'Melba Flavor Element' },
+            { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Spotify_splach.png', alt: 'Splash Motion Sticker' },
+            { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Spotify_Skate.png', alt: 'Skate Lifestyle Sticker' },
+            { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Spotify_Victory.png', alt: 'Victory Motion Sticker' },
+            { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Spotify_fachfecha.png', alt: 'Fachfecha Sticker' },
+            { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Spotify_recorder.png', alt: 'Cassette Recorder Sticker' },
+            { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Spotify_thunder.png', alt: 'Thunder Motion Sticker' },
+            { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/rapup-.png', alt: 'RapUp Edition' },
+            { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/danup/videos/st1.mp4', alt: 'Story Commercial Cut 1' },
+            { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/danup/videos/st_3.mp4', alt: 'Story Commercial Cut 2' },
+            { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/danup/videos/CTA_1.mp4', alt: 'Call to Action Commercial Video' }
+        ]
+    },
+    {
         slug: "lg-electronics",
         accent: "violet",
         title: "LG Electronics",

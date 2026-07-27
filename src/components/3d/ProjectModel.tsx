@@ -7,10 +7,10 @@ import * as THREE from "three";
 
 interface PlaceholderShapeProps {
     index: number;
-    onPointerDown?: () => void;
-    onPointerUp?: () => void;
-    onPointerOut?: () => void;
-    onClick?: () => void;
+    onPointerDown?: (e?: any) => void;
+    onPointerUp?: (e?: any) => void;
+    onPointerOut?: (e?: any) => void;
+    onClick?: (e?: any) => void;
 }
 
 // Component to load and display the custom Blender Ball model
@@ -119,6 +119,41 @@ export function RedBullGoldCanModel({ scale = 1.75, onPointerDown, onPointerUp, 
         <Center>
             <pointLight position={[3, 3, 3]} intensity={2.5} color="#ffd700" />
             <pointLight position={[-3, -2, 2]} intensity={1.5} color="#ffffff" />
+            <primitive
+                object={clonedScene}
+                scale={scale}
+                onClick={(e: any) => {
+                    e.stopPropagation();
+                    if (onClick) onClick(e);
+                }}
+                onPointerDown={(e: any) => { if (onPointerDown) onPointerDown(e); }}
+                onPointerUp={(e: any) => { if (onPointerUp) onPointerUp(e); }}
+                onPointerOut={(e: any) => { if (onPointerOut) onPointerOut(e); }}
+            />
+        </Center>
+    );
+}
+
+export function DanupBottleModel({ scale = 1.6, onPointerDown, onPointerUp, onPointerOut, onClick }: RedBullGoldCanModelProps) {
+    const localModelUrl = "/models/danup content/GLTF Danup/Danup ALA.glb";
+    const { scene } = useGLTF(localModelUrl);
+    const clonedScene = useMemo(() => scene.clone(), [scene]);
+
+    useEffect(() => {
+        if (clonedScene) {
+            clonedScene.traverse((child: any) => {
+                if (child.isMesh) {
+                    child.castShadow = true;
+                    child.receiveShadow = true;
+                }
+            });
+        }
+    }, [clonedScene]);
+
+    return (
+        <Center>
+            <pointLight position={[3, 3, 3]} intensity={2.5} color="#ffffff" />
+            <pointLight position={[-3, -2, 2]} intensity={1.5} color="#ff3366" />
             <primitive
                 object={clonedScene}
                 scale={scale}
@@ -256,6 +291,12 @@ export default function ProjectModel({ index }: { index: number }) {
                                 />
                             ) : index === 1 ? (
                                 <RedBullGoldCanModel
+                                    onPointerDown={() => setIsDragging(true)}
+                                    onPointerUp={() => setIsDragging(false)}
+                                    onPointerOut={() => setIsDragging(false)}
+                                />
+                            ) : index === 2 ? (
+                                <DanupBottleModel
                                     onPointerDown={() => setIsDragging(true)}
                                     onPointerUp={() => setIsDragging(false)}
                                     onPointerOut={() => setIsDragging(false)}

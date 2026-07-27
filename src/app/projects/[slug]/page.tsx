@@ -3,6 +3,7 @@ import { projects } from "@/data/projects";
 import { Metadata } from "next";
 import AnimatedProjectHero from "@/components/sections/AnimatedProjectHero";
 import LuxuryRedBullCommercialHero from "@/components/sections/LuxuryRedBullCommercialHero";
+import DanupBottleHero from "@/components/sections/DanupBottleHero";
 import BackButton from "@/components/ui/BackButton";
 import PreviousProjectButton from "@/components/ui/PreviousProjectButton";
 import NextProjectButton from "@/components/ui/NextProjectButton";
@@ -53,9 +54,11 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                 <BackButton />
             </div>
 
-            {/* ── 1. 3D Intro & Interactive Canvas Hero (RETAINED EXACTLY AS IS) ── */}
+            {/* ── 1. 3D Intro & Interactive Canvas Hero ── */}
             {project.slug === "redbull-gold-concept" ? (
                 <LuxuryRedBullCommercialHero />
+            ) : project.slug === "danup-x-ala" ? (
+                <DanupBottleHero />
             ) : (
                 <AnimatedProjectHero project={project} index={projects.findIndex(p => p.slug === project.slug)} />
             )}
@@ -69,7 +72,37 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                     </div>
                     <div className="flex-1 border-l-2 border-[#ffff7b] pl-6 hover:border-white transition-colors duration-500">
                         <p className="font-mono text-[10px] md:text-xs tracking-[0.3em] uppercase mb-1.5 text-[#ffff7b] font-bold">Role</p>
-                        <h4 className="font-sans font-bold text-base md:text-xl text-white tracking-tight uppercase">{project.role}</h4>
+                        <div className="font-sans font-bold text-base md:text-xl text-white tracking-tight uppercase">
+                            {project.slug === "danup-x-ala" ? (
+                                <span className="flex flex-wrap items-center gap-x-2 gap-y-1">
+                                    <span>
+                                        3D Artist:{" "}
+                                        <a
+                                            href="https://www.behance.net/mahdigouadria"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-[#ffff7b] underline hover:text-white transition-colors"
+                                        >
+                                            Mahdi Gouadria
+                                        </a>
+                                    </span>
+                                    <span className="text-white/40">|</span>
+                                    <span>
+                                        Motion Designer:{" "}
+                                        <a
+                                            href="https://www.behance.net/MabroukAziz"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-[#ffff7b] underline hover:text-white transition-colors"
+                                        >
+                                            Mabrouk Aziz
+                                        </a>
+                                    </span>
+                                </span>
+                            ) : (
+                                project.role
+                            )}
+                        </div>
                     </div>
                     <div className="flex-1 border-l-2 border-[#ffff7b] pl-6 hover:border-white transition-colors duration-500">
                         <p className="font-mono text-[10px] md:text-xs tracking-[0.3em] uppercase mb-1.5 text-[#ffff7b] font-bold">Timeline</p>
@@ -105,7 +138,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                 </div>
 
                 {/* Media Showcase Frame */}
-                {project.slug !== "trionda-ball-wc-2026" && project.slug !== "redbull-gold-concept" && (
+                {project.slug !== "trionda-ball-wc-2026" && project.slug !== "redbull-gold-concept" && project.slug !== "danup-x-ala" && (
                     <div className="w-full aspect-video bg-white border border-black/10 rounded-2xl relative overflow-hidden group flex flex-col items-center justify-center shadow-md mb-16">
                         {/* Corner Precision Crosshairs */}
                         <span className="absolute top-4 left-4 text-[#191919]/30 font-mono text-xs">+</span>
@@ -434,6 +467,177 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                         />
                                     </div>
                                 </ScrollReveal>
+                            </div>
+                        </div>
+                    </div>
+                ) : project.slug === "danup-x-ala" ? (
+                    <div className="space-y-24 mt-8 relative z-10">
+                        {/* 1. Main 3D Commercial Showcase Video */}
+                        <div className="relative z-10 pt-8 pb-12">
+                            <ScrollReveal direction="up">
+                                <div className="w-full flex items-center gap-4 mb-8">
+                                    <span className="font-mono text-xs font-bold tracking-widest text-[#191919] bg-[#ffff7b] px-3.5 py-1 rounded-full border border-black/10">01</span>
+                                    <div className="flex items-center gap-1">
+                                        <div className="w-8 h-[2px] bg-[#191919]" />
+                                        <div className="w-8 h-[2px] bg-[#191919]/30" />
+                                    </div>
+                                    <h3 className="font-mono text-xs font-bold uppercase tracking-[0.3em] text-[#191919]/60">
+                                        Full 3D Commercial &amp; Packaging Showcase Film
+                                    </h3>
+                                </div>
+                            </ScrollReveal>
+
+                            <div className="grid lg:grid-cols-12 gap-8 items-center">
+                                {/* 9:16 Vertical Video Frame */}
+                                <ScrollReveal direction="up" delay={0.2} className="lg:col-span-5 relative h-full w-full">
+                                    <div className="w-full aspect-[9/16] max-w-sm mx-auto bg-[#191919] border border-white/10 rounded-3xl overflow-hidden relative shadow-2xl hover:border-[#ffff7b] hover:shadow-[0_0_30px_rgba(255,255,123,0.3)] transition-all duration-500 group">
+                                        <LazyVideo
+                                            src="/models/danup content/Videos/Danup x ALA 3d Video.mp4"
+                                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
+                                        />
+                                    </div>
+                                </ScrollReveal>
+
+                                {/* 3D CGI Process & Technical Breakdown */}
+                                <div className="lg:col-span-7 space-y-6">
+                                    <ScrollReveal direction="up" delay={0.3}>
+                                        <h4 className="font-playfair text-2xl md:text-3xl font-black uppercase text-[#191919] tracking-tight">
+                                            3D CGI Production &amp; Visual Process
+                                        </h4>
+                                        <p className="font-sans text-sm md:text-base text-[#191919]/70 mt-2 leading-relaxed">
+                                            A comprehensive 3D commercial campaign created for Danone Danup in collaboration with artist ALA. Built from scratch with photorealistic PBR material shaders, dynamic motion choreography, and high-impact social media formatting.
+                                        </p>
+                                    </ScrollReveal>
+
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                                        {[
+                                            {
+                                                step: "01",
+                                                title: "3D Modeling & UV Mapping",
+                                                desc: "High-precision CAD-level 3D bottle geometry, ergonomic grip contours, and seamless UV unwrapping for exact label texture placement."
+                                            },
+                                            {
+                                                step: "02",
+                                                title: "PBR Shading & Metallic Foil",
+                                                desc: "Realistic PBR metallic lid shaders, glossy plastic cap bump maps, and sRGB color space base color maps across all 4 flavor variants."
+                                            },
+                                            {
+                                                step: "03",
+                                                title: "Orbiting Motion & Physics",
+                                                desc: "3D floating flavor graphics with procedural sine-wave float physics, camera-facing tilt constraints, and dynamic orbital speeds."
+                                            },
+                                            {
+                                                step: "04",
+                                                title: "Studio Lighting & Color Grade",
+                                                desc: "Cinematic 3-point HDRI studio lighting, dynamic rim highlights, and color grading tuned for mobile social platforms."
+                                            }
+                                        ].map((proc, pIdx) => (
+                                            <ScrollReveal key={pIdx} direction="up" delay={0.1 * pIdx}>
+                                                <div className="p-5 rounded-2xl bg-[#191919] border border-white/10 hover:border-[#ffff7b] hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(255,255,123,0.15)] transition-all duration-300 group">
+                                                    <div className="flex items-center justify-between mb-2">
+                                                        <span className="font-mono text-xs font-bold text-[#ffff7b]">{proc.step}</span>
+                                                        <div className="w-2 h-2 rounded-full bg-[#ffff7b] opacity-0 group-hover:opacity-100 transition-opacity" />
+                                                    </div>
+                                                    <h5 className="font-sans font-bold text-sm text-white uppercase tracking-wider mb-1">
+                                                        {proc.title}
+                                                    </h5>
+                                                    <p className="font-sans text-xs text-white/60 leading-relaxed">
+                                                        {proc.desc}
+                                                    </p>
+                                                </div>
+                                            </ScrollReveal>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* 2. Commercial Cuts & Social Campaign Videos */}
+                        <div className="relative z-10 py-8">
+                            <ScrollReveal direction="up">
+                                <div className="w-full flex items-center gap-4 mb-12">
+                                    <span className="font-mono text-xs font-bold tracking-widest text-[#191919] bg-[#ffff7b] px-3.5 py-1 rounded-full border border-black/10">02</span>
+                                    <div className="flex items-center gap-1">
+                                        <div className="w-8 h-[2px] bg-[#191919]" />
+                                        <div className="w-8 h-[2px] bg-[#191919]/30" />
+                                    </div>
+                                    <h3 className="font-mono text-xs font-bold uppercase tracking-[0.3em] text-[#191919]/60">
+                                        Commercial Cuts &amp; Social Campaign Videos
+                                    </h3>
+                                </div>
+                            </ScrollReveal>
+
+                            <div className="grid md:grid-cols-3 gap-8">
+                                <ScrollReveal direction="up" delay={0.1} className="relative h-full w-full">
+                                    <div className="w-full aspect-[9/16] bg-[#191919] border border-black/10 rounded-2xl overflow-hidden relative shadow-2xl hover:border-[#ffff7b]/60 transition-all group">
+                                        <LazyVideo
+                                            src="/models/danup content/Videos/st1.mp4"
+                                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
+                                        />
+                                    </div>
+                                </ScrollReveal>
+
+                                <ScrollReveal direction="up" delay={0.2} className="relative h-full w-full">
+                                    <div className="w-full aspect-[9/16] bg-[#191919] border border-black/10 rounded-2xl overflow-hidden relative shadow-2xl hover:border-[#ffff7b]/60 transition-all group">
+                                        <LazyVideo
+                                            src="/models/danup content/Videos/st 3.mp4"
+                                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
+                                        />
+                                    </div>
+                                </ScrollReveal>
+
+                                <ScrollReveal direction="up" delay={0.3} className="relative h-full w-full">
+                                    <div className="w-full aspect-[9/16] bg-[#191919] border border-black/10 rounded-2xl overflow-hidden relative shadow-2xl hover:border-[#ffff7b]/60 transition-all group">
+                                        <LazyVideo
+                                            src="/models/danup content/Videos/CTA_1.mp4"
+                                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
+                                        />
+                                    </div>
+                                </ScrollReveal>
+                            </div>
+                        </div>
+
+                        {/* 3. Flavor Elements & Graphic Sticker Showcase Grid */}
+                        <div className="relative z-10 py-8">
+                            <ScrollReveal direction="up">
+                                <div className="w-full flex items-center gap-4 mb-12">
+                                    <span className="font-mono text-xs font-bold tracking-widest text-[#191919] bg-[#ffff7b] px-3.5 py-1 rounded-full border border-black/10">03</span>
+                                    <div className="flex items-center gap-1">
+                                        <div className="w-8 h-[2px] bg-[#191919]" />
+                                        <div className="w-8 h-[2px] bg-[#191919]/30" />
+                                    </div>
+                                    <h3 className="font-mono text-xs font-bold uppercase tracking-[0.3em] text-[#191919]/60">
+                                        Interactive Orbiting Flavor Elements &amp; Brand Stickers
+                                    </h3>
+                                </div>
+                            </ScrollReveal>
+
+                            <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
+                                {[
+                                    { src: "/models/danup content/Elements/Objet dynamique vectoriel.png", alt: "Danup x ALA Official Badge", title: "DANUP x ALA BADGE" },
+                                    { src: "/models/danup content/Elements/rapup-.png", alt: "RapUp Special Edition", title: "RAPUP EDITION" },
+                                    { src: "/models/danup content/Elements/Spotifyvanille.png", alt: "Vanilla Element", title: "VANILLA EDITION" },
+                                    { src: "/models/danup content/Elements/Spotify peach.png", alt: "Peach Element", title: "MELBA PEACH" },
+                                    { src: "/models/danup content/Elements/Spotify splach.png", alt: "Splash Motion", title: "STRAWBERRY SPLASH" },
+                                    { src: "/models/danup content/Elements/Spotify Skate.png", alt: "Skate Motion", title: "STREET SKATE" },
+                                    { src: "/models/danup content/Elements/Spotify Victory.png", alt: "Victory Tag", title: "VICTORY EDITION" },
+                                    { src: "/models/danup content/Elements/Spotify fachfecha.png", alt: "Fachfecha Tag", title: "FACHFECHA TROPICAL" },
+                                    { src: "/models/danup content/Elements/Spotify recorder.png", alt: "Recorder Cassette", title: "RETRO RECORDER" },
+                                    { src: "/models/danup content/Elements/Spotify thunder.png", alt: "Thunder Flash", title: "THUNDER ENERGY" }
+                                ].map((item, idx) => (
+                                    <ScrollReveal key={idx} direction="up" delay={0.08 * (idx % 5)} className="relative h-full w-full">
+                                        <div className="w-full aspect-square bg-[#191919] border border-white/10 rounded-2xl p-5 overflow-hidden group relative flex flex-col items-center justify-center shadow-xl hover:border-[#ffff7b] hover:-translate-y-1 transition-all duration-300">
+                                            <LightboxImage
+                                                src={item.src}
+                                                alt={item.alt}
+                                                className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500"
+                                            />
+                                            <div className="absolute bottom-2.5 left-2.5 right-2.5 bg-black/70 backdrop-blur-md px-2.5 py-1 rounded-lg border border-white/10 text-center">
+                                                <p className="font-mono text-[9px] font-bold text-[#ffff7b] uppercase tracking-wider truncate">{item.title}</p>
+                                            </div>
+                                        </div>
+                                    </ScrollReveal>
+                                ))}
                             </div>
                         </div>
                     </div>
