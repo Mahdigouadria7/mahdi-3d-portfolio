@@ -307,17 +307,18 @@ export default function DanaoBottleHero() {
 
         {/* Floating Lighting Studio GUI */}
         {showGui && (
-          <div className="absolute top-4 right-4 z-40 w-80 max-h-[80vh] overflow-y-auto bg-black/90 backdrop-blur-2xl border border-white/20 p-5 rounded-3xl shadow-2xl space-y-4 text-xs font-mono">
+          <div className="absolute top-4 right-4 z-40 w-84 max-h-[80vh] overflow-y-auto bg-black/95 backdrop-blur-2xl border border-white/20 p-5 rounded-3xl shadow-2xl space-y-4 text-xs font-mono">
             <div className="flex items-center justify-between border-b border-white/10 pb-3">
               <div className="flex items-center gap-2">
                 <span className="w-2.5 h-2.5 rounded-full bg-[#ffff7b] animate-ping" />
-                <h4 className="font-bold text-white uppercase tracking-wider text-xs">3D Studio Lighting GUI</h4>
+                <h4 className="font-bold text-white uppercase tracking-wider text-xs">3D Studio Lighting &amp; Model GUI</h4>
               </div>
               <button onClick={() => setShowGui(false)} className="text-white/50 hover:text-white text-base font-bold px-1">
                 ✕
               </button>
             </div>
 
+            {/* Presets */}
             <div className="grid grid-cols-2 gap-2">
               <button
                 onClick={() => setLighting(DEFAULT_LIGHTING)}
@@ -330,6 +331,223 @@ export default function DanaoBottleHero() {
                 className="bg-white/10 hover:bg-white/20 text-white px-2.5 py-1.5 rounded-lg border border-white/10 text-[10px] font-bold text-left transition-all"
               >
                 🌙 Dramatic Dark
+              </button>
+            </div>
+
+            {/* Sliders List */}
+            <div className="space-y-3 pt-2 border-t border-white/10 text-[11px]">
+              {/* 3D Model Scale */}
+              <div>
+                <div className="flex justify-between text-white/80 mb-1">
+                  <span>3D Model Scale</span>
+                  <span className="text-[#ffff7b] font-bold">{lighting.scale.toFixed(2)}</span>
+                </div>
+                <input
+                  type="range"
+                  min="0.5"
+                  max="10.0"
+                  step="0.1"
+                  value={lighting.scale}
+                  onChange={(e) => setLighting({ ...lighting, scale: parseFloat(e.target.value) })}
+                  className="w-full accent-[#ffff7b] bg-white/10 rounded-lg cursor-pointer"
+                />
+              </div>
+
+              {/* Model Position Y (yOffset) */}
+              <div>
+                <div className="flex justify-between text-white/80 mb-1">
+                  <span>Model Position Y (yOffset)</span>
+                  <span className="text-[#ffff7b] font-bold">{lighting.yOffset.toFixed(2)}</span>
+                </div>
+                <input
+                  type="range"
+                  min="-3.0"
+                  max="3.0"
+                  step="0.05"
+                  value={lighting.yOffset}
+                  onChange={(e) => setLighting({ ...lighting, yOffset: parseFloat(e.target.value) })}
+                  className="w-full accent-[#ffff7b] bg-white/10 rounded-lg cursor-pointer"
+                />
+              </div>
+
+              {/* Ambient Light */}
+              <div>
+                <div className="flex justify-between text-white/80 mb-1">
+                  <span>Ambient Light Intensity</span>
+                  <span className="text-[#ffff7b] font-bold">{lighting.ambientIntensity.toFixed(2)}</span>
+                </div>
+                <input
+                  type="range"
+                  min="0"
+                  max="4"
+                  step="0.05"
+                  value={lighting.ambientIntensity}
+                  onChange={(e) => setLighting({ ...lighting, ambientIntensity: parseFloat(e.target.value) })}
+                  className="w-full accent-[#ffff7b] bg-white/10 rounded-lg cursor-pointer"
+                />
+              </div>
+
+              {/* Key Light Intensity */}
+              <div>
+                <div className="flex justify-between text-white/80 mb-1">
+                  <span>Key Light Intensity</span>
+                  <span className="text-[#ffff7b] font-bold">{lighting.keyIntensity.toFixed(2)}</span>
+                </div>
+                <input
+                  type="range"
+                  min="0"
+                  max="5"
+                  step="0.1"
+                  value={lighting.keyIntensity}
+                  onChange={(e) => setLighting({ ...lighting, keyIntensity: parseFloat(e.target.value) })}
+                  className="w-full accent-[#ffff7b] bg-white/10 rounded-lg cursor-pointer"
+                />
+              </div>
+
+              {/* Key Light Position X */}
+              <div>
+                <div className="flex justify-between text-white/80 mb-1">
+                  <span>Key Light Position X</span>
+                  <span className="text-[#ffff7b] font-bold">{lighting.keyX.toFixed(1)}</span>
+                </div>
+                <input
+                  type="range"
+                  min="-15"
+                  max="15"
+                  step="0.5"
+                  value={lighting.keyX}
+                  onChange={(e) => setLighting({ ...lighting, keyX: parseFloat(e.target.value) })}
+                  className="w-full accent-[#ffff7b] bg-white/10 rounded-lg cursor-pointer"
+                />
+              </div>
+
+              {/* Key Light Position Y */}
+              <div>
+                <div className="flex justify-between text-white/80 mb-1">
+                  <span>Key Light Position Y</span>
+                  <span className="text-[#ffff7b] font-bold">{lighting.keyY.toFixed(1)}</span>
+                </div>
+                <input
+                  type="range"
+                  min="-15"
+                  max="15"
+                  step="0.5"
+                  value={lighting.keyY}
+                  onChange={(e) => setLighting({ ...lighting, keyY: parseFloat(e.target.value) })}
+                  className="w-full accent-[#ffff7b] bg-white/10 rounded-lg cursor-pointer"
+                />
+              </div>
+
+              {/* Key Light Position Z */}
+              <div>
+                <div className="flex justify-between text-white/80 mb-1">
+                  <span>Key Light Position Z</span>
+                  <span className="text-[#ffff7b] font-bold">{lighting.keyZ.toFixed(1)}</span>
+                </div>
+                <input
+                  type="range"
+                  min="-15"
+                  max="15"
+                  step="0.5"
+                  value={lighting.keyZ}
+                  onChange={(e) => setLighting({ ...lighting, keyZ: parseFloat(e.target.value) })}
+                  className="w-full accent-[#ffff7b] bg-white/10 rounded-lg cursor-pointer"
+                />
+              </div>
+
+              {/* Fill Light Intensity */}
+              <div>
+                <div className="flex justify-between text-white/80 mb-1">
+                  <span>Fill Light Intensity</span>
+                  <span className="text-[#ffff7b] font-bold">{lighting.fillIntensity.toFixed(2)}</span>
+                </div>
+                <input
+                  type="range"
+                  min="0"
+                  max="4"
+                  step="0.05"
+                  value={lighting.fillIntensity}
+                  onChange={(e) => setLighting({ ...lighting, fillIntensity: parseFloat(e.target.value) })}
+                  className="w-full accent-[#ffff7b] bg-white/10 rounded-lg cursor-pointer"
+                />
+              </div>
+
+              {/* Rim Light */}
+              <div>
+                <div className="flex justify-between text-white/80 mb-1">
+                  <span>Rim Light Intensity</span>
+                  <span className="text-[#ffff7b] font-bold">{lighting.rimIntensity.toFixed(2)}</span>
+                </div>
+                <input
+                  type="range"
+                  min="0"
+                  max="5"
+                  step="0.1"
+                  value={lighting.rimIntensity}
+                  onChange={(e) => setLighting({ ...lighting, rimIntensity: parseFloat(e.target.value) })}
+                  className="w-full accent-[#ffff7b] bg-white/10 rounded-lg cursor-pointer"
+                />
+              </div>
+
+              {/* Mouse Light */}
+              <div>
+                <div className="flex justify-between text-white/80 mb-1">
+                  <span>Mouse Light Intensity</span>
+                  <span className="text-[#ffff7b] font-bold">{lighting.mouseLightIntensity.toFixed(2)}</span>
+                </div>
+                <input
+                  type="range"
+                  min="0"
+                  max="5"
+                  step="0.1"
+                  value={lighting.mouseLightIntensity}
+                  onChange={(e) => setLighting({ ...lighting, mouseLightIntensity: parseFloat(e.target.value) })}
+                  className="w-full accent-[#ffff7b] bg-white/10 rounded-lg cursor-pointer"
+                />
+              </div>
+
+              {/* Environment HDRI */}
+              <div>
+                <div className="flex justify-between text-white/80 mb-1">
+                  <span>Environment HDRI Intensity</span>
+                  <span className="text-[#ffff7b] font-bold">{lighting.envIntensity.toFixed(2)}</span>
+                </div>
+                <input
+                  type="range"
+                  min="0"
+                  max="2"
+                  step="0.05"
+                  value={lighting.envIntensity}
+                  onChange={(e) => setLighting({ ...lighting, envIntensity: parseFloat(e.target.value) })}
+                  className="w-full accent-[#ffff7b] bg-white/10 rounded-lg cursor-pointer"
+                />
+              </div>
+
+              {/* Material Roughness */}
+              <div>
+                <div className="flex justify-between text-white/80 mb-1">
+                  <span>Plastic Roughness</span>
+                  <span className="text-[#ffff7b] font-bold">{lighting.roughness.toFixed(2)}</span>
+                </div>
+                <input
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.02"
+                  value={lighting.roughness}
+                  onChange={(e) => setLighting({ ...lighting, roughness: parseFloat(e.target.value) })}
+                  className="w-full accent-[#ffff7b] bg-white/10 rounded-lg cursor-pointer"
+                />
+              </div>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="pt-2 border-t border-white/10 flex gap-2">
+              <button
+                onClick={() => navigator.clipboard.writeText(JSON.stringify(lighting, null, 2))}
+                className="flex-1 bg-[#ffff7b] text-[#191919] font-bold py-2 rounded-xl text-center hover:bg-white transition-all shadow-md text-xs uppercase"
+              >
+                📋 Copy Config JSON
               </button>
             </div>
           </div>
