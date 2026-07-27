@@ -574,7 +574,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                 <ScrollReveal direction="up" delay={0.1} className="relative h-full w-full">
                                     <div className="w-full aspect-[9/16] bg-[#191919] border border-black/10 rounded-2xl overflow-hidden relative shadow-2xl hover:border-[#ffff7b]/60 transition-all group">
                                         <LazyVideo
-                                            src="/models/danup content/Videos/st1.mp4"
+                                            src="https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/danup/videos/st1.mp4"
                                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
                                         />
                                     </div>
@@ -583,7 +583,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                 <ScrollReveal direction="up" delay={0.2} className="relative h-full w-full">
                                     <div className="w-full aspect-[9/16] bg-[#191919] border border-black/10 rounded-2xl overflow-hidden relative shadow-2xl hover:border-[#ffff7b]/60 transition-all group">
                                         <LazyVideo
-                                            src="/models/danup content/Videos/st 3.mp4"
+                                            src="https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/danup/videos/st_3.mp4"
                                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
                                         />
                                     </div>
@@ -592,7 +592,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                 <ScrollReveal direction="up" delay={0.3} className="relative h-full w-full">
                                     <div className="w-full aspect-[9/16] bg-[#191919] border border-black/10 rounded-2xl overflow-hidden relative shadow-2xl hover:border-[#ffff7b]/60 transition-all group">
                                         <LazyVideo
-                                            src="/models/danup content/Videos/CTA_1.mp4"
+                                            src="https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/danup/videos/CTA_1.mp4"
                                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
                                         />
                                     </div>
@@ -664,7 +664,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                 <ScrollReveal direction="left" delay={0.1} className="relative h-full w-full">
                                     <div className="w-full aspect-[9/16] bg-[#191919] border border-white/10 rounded-3xl overflow-hidden relative shadow-2xl hover:border-[#ffff7b] hover:shadow-[0_0_30px_rgba(255,255,123,0.3)] transition-all duration-500 group flex flex-col justify-end p-6">
                                         <LazyVideo
-                                            src="/models/danup content/Videos/Danup_Boost_CGI.mp4"
+                                            src="https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/danup/videos/Danup_Boost_CGI.mp4"
                                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
                                         />
                                         <div className="relative z-20 pointer-events-none bg-black/75 backdrop-blur-md p-4 rounded-2xl border border-white/10 mt-3">
@@ -679,7 +679,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                 <ScrollReveal direction="right" delay={0.2} className="relative h-full w-full">
                                     <div className="w-full aspect-[9/16] bg-[#191919] border border-white/10 rounded-3xl overflow-hidden relative shadow-2xl hover:border-[#ffff7b] hover:shadow-[0_0_30px_rgba(255,255,123,0.3)] transition-all duration-500 group flex flex-col justify-end p-6">
                                         <LazyVideo
-                                            src="/models/danup content/Videos/Danup_Maldives_CGI.mp4"
+                                            src="https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/danup/videos/Danup_Maldives_CGI.mp4"
                                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
                                         />
                                         <div className="relative z-20 pointer-events-none bg-black/75 backdrop-blur-md p-4 rounded-2xl border border-white/10 mt-3">

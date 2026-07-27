@@ -174,7 +174,7 @@ export default function DanaoBottleHero() {
 
   return (
     <div
-      className="relative w-full min-h-screen text-white overflow-hidden flex flex-col justify-between px-6 md:px-12 pt-24 md:pt-32 pb-8 md:pb-12 selection:bg-[#2ECC71] selection:text-white transition-colors duration-700"
+      className="relative w-full min-h-screen text-white overflow-hidden flex flex-col justify-between px-4 sm:px-8 md:px-12 pt-16 md:pt-28 pb-6 md:pb-12 selection:bg-[#2ECC71] selection:text-white transition-colors duration-700"
       style={{ backgroundColor: "#060806" }}
     >
       {/* Background Radial Glow */}
@@ -245,7 +245,7 @@ export default function DanaoBottleHero() {
       </div>
 
       {/* Central 3D Canvas Area */}
-      <div className="relative w-full h-[55vh] md:h-[65vh] my-2 cursor-grab active:cursor-grabbing flex items-center justify-center">
+      <div className="relative w-full h-[52vh] sm:h-[60vh] md:h-[65vh] min-h-[380px] my-2 cursor-grab active:cursor-grabbing flex items-center justify-center">
         <Canvas camera={{ position: [0, 0, 5.2], fov: 38 }}>
           <ambientLight intensity={lighting.ambientIntensity} />
           <directionalLight
