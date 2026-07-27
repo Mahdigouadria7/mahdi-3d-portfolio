@@ -99,11 +99,15 @@ function DanaoBottle({
   const modelUrl = "https://res.cloudinary.com/zu63qo7h/raw/upload/v1785167697/portfolio/danao/models/danao_model_main.glb";
   const { scene } = useGLTF(modelUrl) as any;
   const bottleRef = useRef<THREE.Group>(null);
-  const textureLoader = useMemo(() => new THREE.TextureLoader(), []);
+  const textureLoader = useMemo(() => {
+    const loader = new THREE.TextureLoader();
+    loader.setCrossOrigin("anonymous");
+    return loader;
+  }, []);
 
   const activeLabelTexture = useMemo(() => {
-    const tex = textureLoader.load(activeFlavor.textureUrl, undefined, undefined, () => {
-      textureLoader.load(activeFlavor.localTextureUrl);
+    const tex = textureLoader.load(activeFlavor.localTextureUrl, undefined, undefined, () => {
+      textureLoader.load(activeFlavor.textureUrl);
     });
     tex.colorSpace = THREE.SRGBColorSpace;
     tex.flipY = false;

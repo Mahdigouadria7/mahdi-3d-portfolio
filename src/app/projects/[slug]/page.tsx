@@ -574,7 +574,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                 <ScrollReveal direction="up" delay={0.1} className="relative h-full w-full">
                                     <div className="w-full aspect-[9/16] bg-[#191919] border border-black/10 rounded-2xl overflow-hidden relative shadow-2xl hover:border-[#ffff7b]/60 transition-all group">
                                         <LazyVideo
-                                            src="https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/danup/videos/st1.mp4"
+                                            src="https://res.cloudinary.com/zu63qo7h/video/upload/v1785168656/portfolio/danup/videos/st1.mp4"
                                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
                                         />
                                     </div>
@@ -583,7 +583,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                 <ScrollReveal direction="up" delay={0.2} className="relative h-full w-full">
                                     <div className="w-full aspect-[9/16] bg-[#191919] border border-black/10 rounded-2xl overflow-hidden relative shadow-2xl hover:border-[#ffff7b]/60 transition-all group">
                                         <LazyVideo
-                                            src="https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/danup/videos/st_3.mp4"
+                                            src="https://res.cloudinary.com/zu63qo7h/video/upload/v1785168710/portfolio/danup/videos/st_3.mp4"
                                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
                                         />
                                     </div>
@@ -592,7 +592,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                 <ScrollReveal direction="up" delay={0.3} className="relative h-full w-full">
                                     <div className="w-full aspect-[9/16] bg-[#191919] border border-black/10 rounded-2xl overflow-hidden relative shadow-2xl hover:border-[#ffff7b]/60 transition-all group">
                                         <LazyVideo
-                                            src="https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/danup/videos/CTA_1.mp4"
+                                            src="https://res.cloudinary.com/zu63qo7h/video/upload/v1785168731/portfolio/danup/videos/CTA_1.mp4"
                                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
                                         />
                                     </div>
@@ -617,16 +617,16 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
                             <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
                                 {[
-                                    { src: "/models/danup content/Elements/Objet dynamique vectoriel.png", alt: "Danup x ALA Official Badge", title: "DANUP x ALA BADGE" },
-                                    { src: "/models/danup content/Elements/rapup-.png", alt: "RapUp Special Edition", title: "RAPUP EDITION" },
-                                    { src: "/models/danup content/Elements/Spotifyvanille.png", alt: "Vanilla Element", title: "VANILLA EDITION" },
-                                    { src: "/models/danup content/Elements/Spotify peach.png", alt: "Peach Element", title: "MELBA PEACH" },
-                                    { src: "/models/danup content/Elements/Spotify splach.png", alt: "Splash Motion", title: "STRAWBERRY SPLASH" },
-                                    { src: "/models/danup content/Elements/Spotify Skate.png", alt: "Skate Motion", title: "STREET SKATE" },
-                                    { src: "/models/danup content/Elements/Spotify Victory.png", alt: "Victory Tag", title: "VICTORY EDITION" },
-                                    { src: "/models/danup content/Elements/Spotify fachfecha.png", alt: "Fachfecha Tag", title: "FACHFECHA TROPICAL" },
-                                    { src: "/models/danup content/Elements/Spotify recorder.png", alt: "Recorder Cassette", title: "RETRO RECORDER" },
-                                    { src: "/models/danup content/Elements/Spotify thunder.png", alt: "Thunder Flash", title: "THUNDER ENERGY" }
+                                    { src: "https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Objet_dynamique_vectoriel.png", alt: "Danup x ALA Official Badge", title: "DANUP x ALA BADGE" },
+                                    { src: "https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/rapup-.png", alt: "RapUp Special Edition", title: "RAPUP EDITION" },
+                                    { src: "https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Spotifyvanille.png", alt: "Vanilla Element", title: "VANILLA EDITION" },
+                                    { src: "https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Spotify_peach.png", alt: "Peach Element", title: "MELBA PEACH" },
+                                    { src: "https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Spotify_splach.png", alt: "Splash Motion", title: "STRAWBERRY SPLASH" },
+                                    { src: "https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Spotify_Skate.png", alt: "Skate Motion", title: "STREET SKATE" },
+                                    { src: "https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Spotify_Victory.png", alt: "Victory Tag", title: "VICTORY EDITION" },
+                                    { src: "https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Spotify_fachfecha.png", alt: "Fachfecha Tag", title: "FACHFECHA TROPICAL" },
+                                    { src: "https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Spotify_recorder.png", alt: "Recorder Cassette", title: "RETRO RECORDER" },
+                                    { src: "https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Spotify_thunder.png", alt: "Thunder Flash", title: "THUNDER ENERGY" }
                                 ].map((item, idx) => (
                                     <ScrollReveal key={idx} direction="up" delay={0.08 * (idx % 5)} className="relative h-full w-full">
                                         <div className="w-full aspect-square bg-[#191919] border border-white/10 rounded-2xl p-5 overflow-hidden group relative flex flex-col items-center justify-center shadow-xl hover:border-[#ffff7b] hover:-translate-y-1 transition-all duration-300">
@@ -664,7 +664,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                 <ScrollReveal direction="left" delay={0.1} className="relative h-full w-full">
                                     <div className="w-full aspect-[9/16] bg-[#191919] border border-white/10 rounded-3xl overflow-hidden relative shadow-2xl hover:border-[#ffff7b] hover:shadow-[0_0_30px_rgba(255,255,123,0.3)] transition-all duration-500 group flex flex-col justify-end p-6">
                                         <LazyVideo
-                                            src="https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/danup/videos/Danup_Boost_CGI.mp4"
+                                            src="https://res.cloudinary.com/zu63qo7h/video/upload/v1785168599/portfolio/danup/videos/Danup_Boost_CGI.mp4"
                                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
                                         />
                                         <div className="relative z-20 pointer-events-none bg-black/75 backdrop-blur-md p-4 rounded-2xl border border-white/10 mt-3">
@@ -679,7 +679,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                 <ScrollReveal direction="right" delay={0.2} className="relative h-full w-full">
                                     <div className="w-full aspect-[9/16] bg-[#191919] border border-white/10 rounded-3xl overflow-hidden relative shadow-2xl hover:border-[#ffff7b] hover:shadow-[0_0_30px_rgba(255,255,123,0.3)] transition-all duration-500 group flex flex-col justify-end p-6">
                                         <LazyVideo
-                                            src="https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/danup/videos/Danup_Maldives_CGI.mp4"
+                                            src="https://res.cloudinary.com/zu63qo7h/video/upload/v1785168566/portfolio/danup/videos/Danup_Maldives_CGI.mp4"
                                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
                                         />
                                         <div className="relative z-20 pointer-events-none bg-black/75 backdrop-blur-md p-4 rounded-2xl border border-white/10 mt-3">
@@ -714,7 +714,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                 <ScrollReveal direction="up" delay={0.2} className="lg:col-span-5 relative h-full w-full">
                                     <div className="w-full aspect-[9/16] max-w-sm mx-auto bg-[#191919] border border-white/10 rounded-3xl overflow-hidden relative shadow-2xl hover:border-[#ffff7b] hover:shadow-[0_0_30px_rgba(255,255,123,0.3)] transition-all duration-500 group">
                                         <LazyVideo
-                                            src="https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/danao/videos/Danao_CGI_Video.mp4"
+                                            src="https://res.cloudinary.com/zu63qo7h/video/upload/v1785167351/portfolio/danao/videos/Danao_Motion_3D.mp4"
                                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
                                         />
                                     </div>
@@ -757,7 +757,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                             <ScrollReveal key={pIdx} direction="up" delay={0.1 * pIdx}>
                                                 <div className="p-5 rounded-2xl bg-[#191919] border border-white/10 hover:border-[#ffff7b] hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(255,255,123,0.15)] transition-all duration-300 group">
                                                     <div className="flex items-center justify-between mb-2">
-                                                        <span className="font-mono text-xs font-bold text-[#ffff7b]">{proc.step}</span>
+                                                        <span className="font-[#ffff7b] font-mono text-xs font-bold">{proc.step}</span>
                                                         <div className="w-2 h-2 rounded-full bg-[#ffff7b] opacity-0 group-hover:opacity-100 transition-opacity" />
                                                     </div>
                                                     <h5 className="font-sans font-bold text-sm text-white uppercase tracking-wider mb-1">
@@ -793,7 +793,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                 <ScrollReveal direction="up" delay={0.1} className="relative h-full w-full">
                                     <div className="w-full aspect-[9/16] bg-[#191919] border border-black/10 rounded-2xl overflow-hidden relative shadow-2xl hover:border-[#ffff7b]/60 transition-all group">
                                         <LazyVideo
-                                            src="https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/danao/videos/Danao_Island_CGI.mp4"
+                                            src="https://res.cloudinary.com/zu63qo7h/video/upload/v1785167347/portfolio/danao/videos/Forest_Danao.mp4"
                                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
                                         />
                                     </div>
@@ -802,7 +802,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                 <ScrollReveal direction="up" delay={0.2} className="relative h-full w-full">
                                     <div className="w-full aspect-[9/16] bg-[#191919] border border-black/10 rounded-2xl overflow-hidden relative shadow-2xl hover:border-[#ffff7b]/60 transition-all group">
                                         <LazyVideo
-                                            src="https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/danao/videos/Forest_Danao.mp4"
+                                            src="https://res.cloudinary.com/zu63qo7h/video/upload/v1785167337/portfolio/danao/videos/Dj_Danao.mp4"
                                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
                                         />
                                     </div>
@@ -811,7 +811,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                 <ScrollReveal direction="up" delay={0.3} className="relative h-full w-full">
                                     <div className="w-full aspect-[9/16] bg-[#191919] border border-black/10 rounded-2xl overflow-hidden relative shadow-2xl hover:border-[#ffff7b]/60 transition-all group">
                                         <LazyVideo
-                                            src="https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/danao/videos/Dj_Danao.mp4"
+                                            src="https://res.cloudinary.com/zu63qo7h/video/upload/v1785167323/portfolio/danao/videos/Danao_Loop_SciFi_2.mp4"
                                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
                                         />
                                     </div>
