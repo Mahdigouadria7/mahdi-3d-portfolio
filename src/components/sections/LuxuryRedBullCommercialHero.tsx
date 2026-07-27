@@ -335,7 +335,7 @@ export default function LuxuryRedBullCommercialHero() {
       </div>
 
       {/* Main Split Content: Left Editorial Typography & Right 3D Canvas */}
-      <div className="relative z-20 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center my-auto py-8">
+      <div className="relative z-20 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center max-w-7xl mx-auto w-full my-auto py-8">
         {/* Left Column: Nico Studio Editorial Typography */}
         <div className="lg:col-span-6 flex flex-col justify-center space-y-7 order-2 lg:order-1 pt-12 md:pt-0">
           <ScrollReveal direction="right" delay={0.2}>

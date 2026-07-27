@@ -778,7 +778,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                         {/* 2. Environment & Commercial Cuts */}
                         <div className="relative z-10 py-8">
                             <ScrollReveal direction="up">
-                                <div className="w-full flex items-center gap-4 mb-12">
+                                <div className="w-full max-w-6xl mx-auto flex items-center gap-4 mb-12">
                                     <span className="font-mono text-xs font-bold tracking-widest text-[#191919] bg-[#ffff7b] px-3.5 py-1 rounded-full border border-black/10">02</span>
                                     <div className="flex items-center gap-1">
                                         <div className="w-8 h-[2px] bg-[#191919]" />
@@ -790,8 +790,8 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                 </div>
                             </ScrollReveal>
 
-                            <div className="grid md:grid-cols-3 gap-8">
-                                <ScrollReveal direction="up" delay={0.1} className="relative h-full w-full">
+                            <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto justify-items-center">
+                                <ScrollReveal direction="up" delay={0.1} className="relative h-full w-full max-w-sm">
                                     <div className="w-full aspect-[9/16] bg-[#191919] border border-black/10 rounded-2xl overflow-hidden relative shadow-2xl hover:border-[#ffff7b]/60 transition-all group">
                                         <LazyVideo
                                             src="https://res.cloudinary.com/zu63qo7h/video/upload/v1785167347/portfolio/danao/videos/Forest_Danao.mp4"
@@ -800,7 +800,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                     </div>
                                 </ScrollReveal>
 
-                                <ScrollReveal direction="up" delay={0.2} className="relative h-full w-full">
+                                <ScrollReveal direction="up" delay={0.2} className="relative h-full w-full max-w-sm">
                                     <div className="w-full aspect-[9/16] bg-[#191919] border border-black/10 rounded-2xl overflow-hidden relative shadow-2xl hover:border-[#ffff7b]/60 transition-all group">
                                         <LazyVideo
                                             src="https://res.cloudinary.com/zu63qo7h/video/upload/v1785167337/portfolio/danao/videos/Dj_Danao.mp4"
@@ -809,7 +809,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                     </div>
                                 </ScrollReveal>
 
-                                <ScrollReveal direction="up" delay={0.3} className="relative h-full w-full">
+                                <ScrollReveal direction="up" delay={0.3} className="relative h-full w-full max-w-sm">
                                     <div className="w-full aspect-[9/16] bg-[#191919] border border-black/10 rounded-2xl overflow-hidden relative shadow-2xl hover:border-[#ffff7b]/60 transition-all group">
                                         <LazyVideo
                                             src="https://res.cloudinary.com/zu63qo7h/video/upload/v1785167323/portfolio/danao/videos/Danao_Loop_SciFi_2.mp4"
@@ -823,7 +823,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                         {/* 3. 3D Render Showcase & Motion Loops */}
                         <div className="relative z-10 py-8">
                             <ScrollReveal direction="up">
-                                <div className="w-full flex items-center gap-4 mb-12">
+                                <div className="w-full max-w-6xl mx-auto flex items-center gap-4 mb-12">
                                     <span className="font-mono text-xs font-bold tracking-widest text-[#191919] bg-[#ffff7b] px-3.5 py-1 rounded-full border border-black/10">03</span>
                                     <div className="flex items-center gap-1">
                                         <div className="w-8 h-[2px] bg-[#191919]" />
@@ -835,8 +835,9 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                 </div>
                             </ScrollReveal>
 
-                            <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-12">
-                                <ScrollReveal direction="left" delay={0.1} className="relative h-full w-full">
+                            {/* Centered 2-Video Showcase */}
+                            <div className="flex flex-col md:flex-row justify-center items-center gap-8 max-w-4xl mx-auto mb-12">
+                                <ScrollReveal direction="left" delay={0.1} className="relative h-full w-full max-w-sm">
                                     <div className="w-full aspect-[9/16] bg-[#191919] border border-white/10 rounded-3xl overflow-hidden relative shadow-2xl hover:border-[#ffff7b] hover:shadow-[0_0_30px_rgba(255,255,123,0.3)] transition-all duration-500 group">
                                         <LazyVideo
                                             src="https://res.cloudinary.com/zu63qo7h/video/upload/v1785172226/danao_motion_island_xcxa6y.mp4"
@@ -845,7 +846,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                     </div>
                                 </ScrollReveal>
 
-                                <ScrollReveal direction="right" delay={0.2} className="relative h-full w-full">
+                                <ScrollReveal direction="right" delay={0.2} className="relative h-full w-full max-w-sm">
                                     <div className="w-full aspect-[9/16] bg-[#191919] border border-white/10 rounded-3xl overflow-hidden relative shadow-2xl hover:border-[#ffff7b] hover:shadow-[0_0_30px_rgba(255,255,123,0.3)] transition-all duration-500 group">
                                         <LazyVideo
                                             src="https://res.cloudinary.com/zu63qo7h/video/upload/v1785172129/danao_cgi_street_e1oibf.mp4"
@@ -856,13 +857,13 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                             </div>
 
                             {/* Render Stills Grid */}
-                            <div className="grid md:grid-cols-3 gap-6">
+                            <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto justify-items-center">
                                 {[
                                     { src: "https://res.cloudinary.com/zu63qo7h/image/upload/v1785166627/portfolio/danao/renders/shwrsec2ravagb9revpz.png", alt: "Danao CGI Render Pass 1" },
                                     { src: "https://res.cloudinary.com/zu63qo7h/image/upload/v1785171525/portfolio/danao/renders/danao_render_pass_2.jpg", alt: "Danao CGI Render Pass 2" },
                                     { src: "https://res.cloudinary.com/zu63qo7h/image/upload/v1785166618/portfolio/danao/renders/tc1nmxmdqz4gnxeakq4i.png", alt: "Danao CGI Render Pass 3" }
                                 ].map((still, sIdx) => (
-                                    <ScrollReveal key={sIdx} direction="up" delay={0.1 * sIdx} className="relative h-full w-full">
+                                    <ScrollReveal key={sIdx} direction="up" delay={0.1 * sIdx} className="relative h-full w-full max-w-sm">
                                         <div className="w-full aspect-[3/4] bg-[#191919] border border-white/10 rounded-2xl overflow-hidden relative shadow-xl hover:border-[#ffff7b] hover:-translate-y-1 transition-all duration-300 group">
                                             <LightboxImage
                                                 src={still.src}
