@@ -401,71 +401,109 @@ function DanupBottle({
   const clonedScene = useMemo(() => scene.clone(), [scene]);
   const groupRef = useRef<THREE.Group>(null);
 
-  useEffect(() => {
-    if (!clonedScene) return;
-
+  const textureLoader = useMemo(() => {
     const loader = new THREE.TextureLoader();
     loader.setCrossOrigin("anonymous");
+    return loader;
+  }, []);
 
-    const applyTexture = (tex: THREE.Texture) => {
-      tex.colorSpace = THREE.SRGBColorSpace;
-      tex.flipY = false;
+  const currentTextureRef = useRef<THREE.Texture | null>(null);
+  const uniformsRef = useRef({
+    uMapPrev: { value: null as THREE.Texture | null },
+    uMapNext: { value: null as THREE.Texture | null },
+    uMorph: { value: 1.0 },
+  });
 
-      clonedScene.traverse((child: any) => {
-        if (child.isMesh && child.material) {
-          const matName = (child.material.name || "").trim();
+  const activeLabelTexture = useMemo(() => {
+    const tex = textureLoader.load(activeFlavor.textureUrl);
+    tex.colorSpace = THREE.SRGBColorSpace;
+    tex.flipY = false;
+    return tex;
+  }, [activeFlavor, textureLoader]);
 
-          // 1. Metal Lid: PRESERVE ORIGINAL GLTF METALLIC MATERIAL UNTOUCHED (prevents lid glitching)
-          if (matName === "Metal Lid") {
-            return;
-          }
+  useEffect(() => {
+    if (!clonedScene || !activeLabelTexture) return;
 
-          // 2. Plastic: Opaque plastic cap & bottle top (prevents see-through inside-out artifacts)
-          if (matName === "Plastic") {
-            child.material.transparent = false;
-            child.material.opacity = 1.0;
-            child.material.depthWrite = true;
-            child.material.depthTest = true;
-            child.material.side = THREE.FrontSide;
-            child.material.needsUpdate = true;
-            return;
-          }
+    if (currentTextureRef.current && currentTextureRef.current !== activeLabelTexture) {
+      uniformsRef.current.uMapPrev.value = currentTextureRef.current;
+      uniformsRef.current.uMapNext.value = activeLabelTexture;
+      uniformsRef.current.uMorph.value = 0.0;
+    } else {
+      uniformsRef.current.uMapPrev.value = activeLabelTexture;
+      uniformsRef.current.uMapNext.value = activeLabelTexture;
+      uniformsRef.current.uMorph.value = 1.0;
+    }
+    currentTextureRef.current = activeLabelTexture;
 
-          // 3. Bottle Label & Melba: Hot-swap active flavor texture
-          if (matName === "label" || matName === "Melba" || matName.toLowerCase().includes("label")) {
-            child.material = child.material.clone();
-            child.material.map = tex;
-            child.material.transparent = false;
-            child.material.opacity = 1.0;
-            child.material.depthWrite = true;
-            child.material.depthTest = true;
-            child.material.side = THREE.FrontSide;
-            child.material.roughness = lighting.roughness;
-            child.material.metalness = lighting.metalness;
-            child.material.needsUpdate = true;
-          }
-        }
-      });
-    };
-
-    // Initial pass: fix Plastic transparency without altering Metal Lid
     clonedScene.traverse((child: any) => {
       if (child.isMesh && child.material) {
         const matName = (child.material.name || "").trim();
+
+        if (matName === "Metal Lid") {
+          return;
+        }
+
         if (matName === "Plastic") {
           child.material.transparent = false;
           child.material.opacity = 1.0;
           child.material.depthWrite = true;
           child.material.depthTest = true;
           child.material.side = THREE.FrontSide;
+          child.material.needsUpdate = true;
+          return;
+        }
+
+        if (matName === "label" || matName === "Melba" || matName.toLowerCase().includes("label")) {
+          child.material.map = activeLabelTexture;
+          child.material.transparent = false;
+          child.material.opacity = 1.0;
+          child.material.depthWrite = true;
+          child.material.depthTest = true;
+          child.material.side = THREE.FrontSide;
+          child.material.roughness = lighting.roughness;
+          child.material.metalness = lighting.metalness;
+
+          if (!child.material.isCustomMorph) {
+            child.material.isCustomMorph = true;
+            child.material.onBeforeCompile = (shader: any) => {
+              shader.uniforms.uMapPrev = uniformsRef.current.uMapPrev;
+              shader.uniforms.uMapNext = uniformsRef.current.uMapNext;
+              shader.uniforms.uMorph = uniformsRef.current.uMorph;
+
+              shader.fragmentShader = shader.fragmentShader.replace(
+                "#include <map_pars_fragment>",
+                `
+                #include <map_pars_fragment>
+                uniform sampler2D uMapPrev;
+                uniform sampler2D uMapNext;
+                uniform float uMorph;
+                `
+              );
+
+              shader.fragmentShader = shader.fragmentShader.replace(
+                "#include <map_fragment>",
+                `
+                #ifdef USE_MAP
+                  vec4 texPrev = texture2D( uMapPrev, vMapUv );
+                  vec4 texNext = texture2D( uMapNext, vMapUv );
+                  vec4 texMixed = mix( texPrev, texNext, smoothstep(0.0, 1.0, uMorph) );
+                  texMixed = mapTexelToLinear( texMixed );
+                  diffuseColor *= texMixed;
+                #endif
+                `
+              );
+            };
+          }
+          child.material.needsUpdate = true;
         }
       }
     });
+  }, [clonedScene, activeLabelTexture, lighting.roughness, lighting.metalness]);
 
-    loader.load(activeFlavor.textureUrl, applyTexture);
-  }, [clonedScene, activeFlavor, lighting.roughness, lighting.metalness]);
-
-  useFrame((state) => {
+  useFrame((state, delta) => {
+    if (uniformsRef.current.uMorph.value < 1.0) {
+      uniformsRef.current.uMorph.value = Math.min(1.0, uniformsRef.current.uMorph.value + delta * 2.2);
+    }
     if (groupRef.current) {
       const targetY = autoSpin
         ? Math.sin(state.clock.elapsedTime * 0.45) * 0.25 + state.mouse.x * 0.4
