@@ -14,10 +14,10 @@ export interface FlavorConfig {
   accentGlow: string;
   notes: string;
   textureUrl: string;
-  localTextureUrl: string;
+  localTextureUrl?: string;
   stickers: {
     url: string;
-    localUrl: string;
+    localUrl?: string;
     scale: number;
     orbitRadius: number;
     orbitSpeed: number;
@@ -67,11 +67,9 @@ export const DANUP_FLAVORS: FlavorConfig[] = [
     accentGlow: "rgba(255, 46, 99, 0.45)",
     notes: "Juicy Wild Strawberry • Creamy Milk • 260g",
     textureUrl: "https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/textures/labels/ALA-DANUP-Fraise260g.png",
-    localTextureUrl: "/models/danup content/Textures/label/Base Color/ALA-DANUP-Fraise260g.png",
     stickers: [
       {
         url: "https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Objet_dynamique_vectoriel.png",
-        localUrl: "/models/danup content/Elements/Objet dynamique vectoriel.png",
         scale: 0.95,
         orbitRadius: 2.1,
         orbitSpeed: 0.35,
@@ -80,7 +78,6 @@ export const DANUP_FLAVORS: FlavorConfig[] = [
       },
       {
         url: "https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Spotify_splach.png",
-        localUrl: "/models/danup content/Elements/Spotify splach.png",
         scale: 0.85,
         orbitRadius: 2.3,
         orbitSpeed: -0.3,
@@ -89,7 +86,6 @@ export const DANUP_FLAVORS: FlavorConfig[] = [
       },
       {
         url: "https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/rapup-.png",
-        localUrl: "/models/danup content/Elements/rapup-.png",
         scale: 0.9,
         orbitRadius: 2.2,
         orbitSpeed: 0.4,
@@ -98,7 +94,6 @@ export const DANUP_FLAVORS: FlavorConfig[] = [
       },
       {
         url: "https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Spotify_thunder.png",
-        localUrl: "/models/danup content/Elements/Spotify thunder.png",
         scale: 0.75,
         orbitRadius: 2.4,
         orbitSpeed: -0.25,
@@ -115,11 +110,9 @@ export const DANUP_FLAVORS: FlavorConfig[] = [
     accentGlow: "rgba(255, 123, 37, 0.45)",
     notes: "Ripe Golden Peach • Vanilla Swirl • 260g",
     textureUrl: "https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/textures/labels/ALA-DANUP-Melba-260g.png",
-    localTextureUrl: "/models/danup content/Textures/label/Base Color/ALA-DANUP-Melba-260g.png",
     stickers: [
       {
         url: "https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Objet_dynamique_vectoriel.png",
-        localUrl: "/models/danup content/Elements/Objet dynamique vectoriel.png",
         scale: 0.95,
         orbitRadius: 2.1,
         orbitSpeed: 0.35,
@@ -128,7 +121,6 @@ export const DANUP_FLAVORS: FlavorConfig[] = [
       },
       {
         url: "https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Spotify_peach.png",
-        localUrl: "/models/danup content/Elements/Spotify peach.png",
         scale: 0.9,
         orbitRadius: 2.25,
         orbitSpeed: -0.35,
@@ -137,7 +129,6 @@ export const DANUP_FLAVORS: FlavorConfig[] = [
       },
       {
         url: "https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/rapup-.png",
-        localUrl: "/models/danup content/Elements/rapup-.png",
         scale: 0.85,
         orbitRadius: 2.3,
         orbitSpeed: 0.3,
@@ -146,7 +137,6 @@ export const DANUP_FLAVORS: FlavorConfig[] = [
       },
       {
         url: "https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Spotify_Skate.png",
-        localUrl: "/models/danup content/Elements/Spotify Skate.png",
         scale: 0.8,
         orbitRadius: 2.4,
         orbitSpeed: -0.28,
@@ -163,11 +153,9 @@ export const DANUP_FLAVORS: FlavorConfig[] = [
     accentGlow: "rgba(250, 208, 44, 0.45)",
     notes: "Velvety Madagascar Vanilla • Rich Cream • 260g",
     textureUrl: "https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/textures/labels/ALA-Tropical-260g-2.png",
-    localTextureUrl: "/models/danup content/Textures/label/Base Color/ALA-Tropical-260g-2.png",
     stickers: [
       {
         url: "https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Objet_dynamique_vectoriel.png",
-        localUrl: "/models/danup content/Elements/Objet dynamique vectoriel.png",
         scale: 0.95,
         orbitRadius: 2.1,
         orbitSpeed: 0.35,
@@ -176,7 +164,6 @@ export const DANUP_FLAVORS: FlavorConfig[] = [
       },
       {
         url: "https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Spotifyvanille.png",
-        localUrl: "/models/danup content/Elements/Spotifyvanille.png",
         scale: 1.05,
         orbitRadius: 2.2,
         orbitSpeed: -0.35,
@@ -185,7 +172,6 @@ export const DANUP_FLAVORS: FlavorConfig[] = [
       },
       {
         url: "https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/rapup-.png",
-        localUrl: "/models/danup content/Elements/rapup-.png",
         scale: 0.85,
         orbitRadius: 2.3,
         orbitSpeed: 0.3,
@@ -194,7 +180,6 @@ export const DANUP_FLAVORS: FlavorConfig[] = [
       },
       {
         url: "https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Spotify_recorder.png",
-        localUrl: "/models/danup content/Elements/Spotify recorder.png",
         scale: 0.8,
         orbitRadius: 2.45,
         orbitSpeed: -0.25,
@@ -211,11 +196,9 @@ export const DANUP_FLAVORS: FlavorConfig[] = [
     accentGlow: "rgba(0, 229, 192, 0.45)",
     notes: "Exotic Mango • Passionfruit Zing • 260g",
     textureUrl: "https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/textures/labels/ALA-Tropical-260g.png",
-    localTextureUrl: "/models/danup content/Textures/label/Base Color/ALA-Tropical-260g.png",
     stickers: [
       {
         url: "https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Objet_dynamique_vectoriel.png",
-        localUrl: "/models/danup content/Elements/Objet dynamique vectoriel.png",
         scale: 0.95,
         orbitRadius: 2.1,
         orbitSpeed: 0.35,
@@ -224,7 +207,6 @@ export const DANUP_FLAVORS: FlavorConfig[] = [
       },
       {
         url: "https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Spotify_fachfecha.png",
-        localUrl: "/models/danup content/Elements/Spotify fachfecha.png",
         scale: 0.9,
         orbitRadius: 2.25,
         orbitSpeed: -0.35,
@@ -233,7 +215,6 @@ export const DANUP_FLAVORS: FlavorConfig[] = [
       },
       {
         url: "https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/rapup-.png",
-        localUrl: "/models/danup content/Elements/rapup-.png",
         scale: 0.85,
         orbitRadius: 2.3,
         orbitSpeed: 0.3,
@@ -242,7 +223,6 @@ export const DANUP_FLAVORS: FlavorConfig[] = [
       },
       {
         url: "https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Spotify_thunder.png",
-        localUrl: "/models/danup content/Elements/Spotify thunder.png",
         scale: 0.8,
         orbitRadius: 2.4,
         orbitSpeed: -0.28,
@@ -342,7 +322,7 @@ function OrbitingSticker({
   initialAngle,
 }: {
   texturePath: string;
-  localTexturePath: string;
+  localTexturePath?: string;
   scale: number;
   orbitRadius: number;
   orbitSpeed: number;
@@ -356,21 +336,11 @@ function OrbitingSticker({
 
   useEffect(() => {
     const loader = new THREE.TextureLoader();
-    loader.load(
-      localTexturePath,
-      (tex) => {
-        tex.colorSpace = THREE.SRGBColorSpace;
-        setTexture(tex);
-      },
-      undefined,
-      () => {
-        loader.load(texturePath, (remoteTex) => {
-          remoteTex.colorSpace = THREE.SRGBColorSpace;
-          setTexture(remoteTex);
-        });
-      }
-    );
-  }, [texturePath, localTexturePath]);
+    loader.load(texturePath, (remoteTex) => {
+      remoteTex.colorSpace = THREE.SRGBColorSpace;
+      setTexture(remoteTex);
+    });
+  }, [texturePath]);
 
   useFrame((state) => {
     if (!meshRef.current) return;
@@ -424,9 +394,9 @@ function DanupBottle({
   autoSpin: boolean;
   lighting: LightingSettings;
 }) {
-  const localModelUrl = "/models/danup content/GLTF Danup/Danup ALA.glb";
+  const cdnModelUrl = "https://res.cloudinary.com/zu63qo7h/raw/upload/v1785160938/portfolio/danup/models/Danup_ALA.glb";
 
-  const { scene } = useGLTF(localModelUrl);
+  const { scene } = useGLTF(cdnModelUrl);
   const clonedScene = useMemo(() => scene.clone(), [scene]);
   const groupRef = useRef<THREE.Group>(null);
 
@@ -490,14 +460,7 @@ function DanupBottle({
       }
     });
 
-    loader.load(
-      activeFlavor.localTextureUrl,
-      applyTexture,
-      undefined,
-      () => {
-        loader.load(activeFlavor.textureUrl, applyTexture);
-      }
-    );
+    loader.load(activeFlavor.textureUrl, applyTexture);
   }, [clonedScene, activeFlavor, lighting.roughness, lighting.metalness]);
 
   useFrame((state) => {
@@ -531,7 +494,6 @@ function DanupBottle({
         <OrbitingSticker
           key={`${activeFlavor.id}-sticker-${idx}`}
           texturePath={sticker.url}
-          localTexturePath={sticker.localUrl}
           scale={sticker.scale}
           orbitRadius={sticker.orbitRadius}
           orbitSpeed={sticker.orbitSpeed}

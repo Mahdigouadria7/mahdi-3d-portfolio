@@ -81,7 +81,7 @@ img {
   
   @font-face {
     font-family: 'Siegra';
-    src: url('/models/SiegraRegular-ALg9A.otf') format('opentype');
+    src: url('/fonts/SiegraRegular-ALg9A.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;

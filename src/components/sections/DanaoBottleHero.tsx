@@ -13,7 +13,7 @@ export interface FlavorConfig {
   accentGlow: string;
   notes: string;
   textureUrl: string;
-  localTextureUrl: string;
+  localTextureUrl?: string;
 }
 
 export interface LightingSettings {
@@ -57,7 +57,6 @@ export const DANAO_FLAVORS: FlavorConfig[] = [
     accentGlow: "rgba(46, 204, 113, 0.45)",
     notes: "Fresh Green Apple • Tangy Citrus • Milk & Juice Blend",
     textureUrl: "https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danao/textures/labels/pp3rjv9ytgrlidqsoltf.png",
-    localTextureUrl: "/models/Danao content/Model/Textures/danao Label/Base Color/Apple Danao.png",
   },
   {
     id: "peche",
@@ -67,7 +66,6 @@ export const DANAO_FLAVORS: FlavorConfig[] = [
     accentGlow: "rgba(255, 126, 71, 0.45)",
     notes: "Sun-Ripened Golden Peach • Creamy Smooth Milk • 250ml",
     textureUrl: "https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danao/textures/labels/kbtii4slf4ezmfzvlykc.png",
-    localTextureUrl: "/models/Danao content/Model/Textures/danao Label/Base Color/peche dnao.png",
   },
 ];
 
@@ -106,9 +104,7 @@ function DanaoBottle({
   }, []);
 
   const activeLabelTexture = useMemo(() => {
-    const tex = textureLoader.load(activeFlavor.localTextureUrl, undefined, undefined, () => {
-      textureLoader.load(activeFlavor.textureUrl);
-    });
+    const tex = textureLoader.load(activeFlavor.textureUrl);
     tex.colorSpace = THREE.SRGBColorSpace;
     tex.flipY = false;
     return tex;

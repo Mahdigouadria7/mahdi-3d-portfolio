@@ -135,8 +135,8 @@ export function RedBullGoldCanModel({ scale = 1.75, onPointerDown, onPointerUp, 
 }
 
 export function DanupBottleModel({ scale = 1.6, onPointerDown, onPointerUp, onPointerOut, onClick }: RedBullGoldCanModelProps) {
-    const localModelUrl = "/models/danup content/GLTF Danup/Danup ALA.glb";
-    const { scene } = useGLTF(localModelUrl);
+    const cdnModelUrl = "https://res.cloudinary.com/zu63qo7h/raw/upload/v1785160938/portfolio/danup/models/Danup_ALA.glb";
+    const { scene } = useGLTF(cdnModelUrl);
     const clonedScene = useMemo(() => scene.clone(), [scene]);
 
     useEffect(() => {
