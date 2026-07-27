@@ -140,21 +140,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                     </ScrollReveal>
                 </div>
 
-                {/* Media Showcase Frame */}
-                {project.slug !== "trionda-ball-wc-2026" && project.slug !== "redbull-gold-concept" && project.slug !== "danup-x-ala" && (
-                    <div className="w-full aspect-video bg-white border border-black/10 rounded-2xl relative overflow-hidden group flex flex-col items-center justify-center shadow-md mb-16">
-                        {/* Corner Precision Crosshairs */}
-                        <span className="absolute top-4 left-4 text-[#191919]/30 font-mono text-xs">+</span>
-                        <span className="absolute top-4 right-4 text-[#191919]/30 font-mono text-xs">+</span>
-                        <span className="absolute bottom-4 left-4 text-[#191919]/30 font-mono text-xs">+</span>
-                        <span className="absolute bottom-4 right-4 text-[#191919]/30 font-mono text-xs">+</span>
 
-                        <span className="font-playfair text-[#191919] text-2xl md:text-4xl font-bold uppercase tracking-wide mb-2 z-10">
-                            Render <em className="font-playfair italic font-normal">Showcase</em>
-                        </span>
-                        <span className="font-mono text-[#191919]/50 tracking-[0.3em] uppercase text-xs z-10">[ 1920 x 1080 ] Production Asset</span>
-                    </div>
-                )}
 
                 {/* ── 4. Challenge & Solution Grid (Alternating Nico Studio Surface Cards) ── */}
                 <div className="relative z-10 pt-4 pb-12">
