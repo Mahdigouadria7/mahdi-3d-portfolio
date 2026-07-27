@@ -9,48 +9,44 @@ interface LazyVideoProps {
 }
 
 /**
- * LazyVideo: Viewport-triggered video playback with interactive sound (mute/unmute) & play controls.
+ * LazyVideo: High-performance video player with rock-solid desktop & mobile playback,
+ * interactive sound controls (mute/unmute), and play/pause toggle.
  */
 export default function LazyVideo({ src, className = "", allowControls = true }: LazyVideoProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isInView, setIsInView] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [userPaused, setUserPaused] = useState(false);
 
   useEffect(() => {
+    if (!videoRef.current) return;
+
+    const v = videoRef.current;
+    v.muted = true;
+
+    const playVideo = () => {
+      v.play().catch(() => {
+        // Retry playing on user interaction or scroll
+      });
+    };
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsInView(true);
-            observer.disconnect();
+          if (entry.isIntersecting && !userPaused) {
+            playVideo();
           }
         });
       },
-      {
-        rootMargin: "1500px",
-        threshold: 0,
-      }
+      { threshold: 0.1 }
     );
 
-    if (videoRef.current) {
-      observer.observe(videoRef.current);
-    }
+    observer.observe(v);
+
+    // Initial attempt to play once mounted
+    playVideo();
 
     return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (isInView && videoRef.current) {
-      videoRef.current.src = src;
-      videoRef.current.load();
-      videoRef.current.play().then(() => {
-        setIsPlaying(true);
-      }).catch(() => {
-        setIsPlaying(false);
-      });
-    }
-  }, [isInView, src]);
+  }, [src, userPaused]);
 
   const toggleSound = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -66,25 +62,26 @@ export default function LazyVideo({ src, className = "", allowControls = true }:
     if (videoRef.current) {
       if (videoRef.current.paused) {
         videoRef.current.play();
-        setIsPlaying(true);
+        setUserPaused(false);
       } else {
         videoRef.current.pause();
-        setIsPlaying(false);
+        setUserPaused(true);
       }
     }
   };
 
   return (
-    <div className="relative w-full h-full group/video overflow-hidden">
+    <div className="relative w-full h-full group/video overflow-hidden bg-[#121214]">
       <video
         ref={videoRef}
+        src={src}
         autoPlay
         loop
-        muted={isMuted}
+        muted
         playsInline
-        preload="none"
+        preload="auto"
         onClick={togglePlay}
-        className={`${className} cursor-pointer`}
+        className={`${className} cursor-pointer w-full h-full object-cover`}
       />
 
       {/* Floating Interactive Audio Toggle Button */}
@@ -121,11 +118,11 @@ export default function LazyVideo({ src, className = "", allowControls = true }:
         </div>
       )}
 
-      {/* Floating Play / Pause Overlay Status */}
-      {!isPlaying && (
+      {/* Floating Play Overlay Status when User Explicitly Pauses */}
+      {userPaused && (
         <div
           onClick={togglePlay}
-          className="absolute inset-0 bg-black/40 backdrop-blur-xs flex items-center justify-center cursor-pointer z-20"
+          className="absolute inset-0 bg-black/50 backdrop-blur-xs flex items-center justify-center cursor-pointer z-20"
         >
           <div className="w-14 h-14 rounded-full bg-[#ffff7b] text-[#191919] flex items-center justify-center shadow-2xl scale-110">
             <svg className="w-6 h-6 translate-x-0.5" fill="currentColor" viewBox="0 0 24 24">
