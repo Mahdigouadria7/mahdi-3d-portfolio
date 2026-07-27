@@ -726,7 +726,7 @@ export default function AnimatedProjectHero({ project, index }: { project: Proje
             <div ref={gradientRef} className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_20%,_#141414_100%)] z-20 pointer-events-none opacity-0"></div>
 
             {/* Foreground DOM layer */}
-            <div className="relative z-30 w-full h-full pointer-events-none flex flex-col md:flex-row p-6 md:p-12 lg:p-24 overflow-hidden">
+            <div className="relative z-30 w-full h-full pointer-events-none flex flex-col md:flex-row px-6 md:px-12 lg:px-24 pt-24 md:pt-32 pb-8 overflow-hidden">
                 
                 {/* Left Side: Main Typography & Metadata */}
                 <div className="w-full md:w-1/2 flex flex-col justify-start md:justify-center h-auto md:h-full relative z-10 opacity-0 min-h-[30vh] md:min-h-0" ref={textRef}>

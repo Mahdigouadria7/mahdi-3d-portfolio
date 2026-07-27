@@ -318,7 +318,7 @@ export default function LuxuryRedBullCommercialHero() {
       ref={containerRef}
       onPointerMove={handlePointerMoveGlobal}
       onPointerUp={handlePointerUpGlobal}
-      className="relative w-full min-h-[92vh] bg-[#141414] text-white overflow-hidden flex flex-col justify-between p-6 md:p-12 border-b border-white/10 select-none"
+      className="relative w-full min-h-[92vh] bg-[#141414] text-white overflow-hidden flex flex-col justify-between px-6 md:px-12 pt-24 md:pt-32 pb-8 md:pb-12 border-b border-white/10 select-none"
     >
       {/* Background Radial Glow */}
       <div

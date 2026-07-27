@@ -40,7 +40,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
         <main className="min-h-screen bg-[#f5f4ef] text-[#191919] selection:bg-[#ffff7b] selection:text-[#191919] pb-32 relative overflow-hidden">
 
             {/* Top Navigation Bar */}
-            <nav className="fixed top-0 left-0 w-full z-50 p-4 md:p-10 flex justify-between items-start pointer-events-none gap-4">
+            <nav className="fixed top-0 left-0 w-full z-50 p-4 md:px-10 md:py-5 flex justify-between items-start pointer-events-none gap-4">
                 <div className="pointer-events-auto flex-1 flex justify-start">
                     <PreviousProjectButton currentSlug={project.slug} />
                 </div>

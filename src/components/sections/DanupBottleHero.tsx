@@ -564,7 +564,7 @@ export default function DanupBottleHero() {
 
   return (
     <div
-      className="relative w-full min-h-screen text-white overflow-hidden flex flex-col justify-between pt-24 pb-12 px-4 md:px-12 selection:bg-[#FF2E63] selection:text-white transition-colors duration-700"
+      className="relative w-full min-h-screen text-white overflow-hidden flex flex-col justify-between px-6 md:px-12 pt-24 md:pt-32 pb-8 md:pb-12 selection:bg-[#FF2E63] selection:text-white transition-colors duration-700"
       style={{
         backgroundColor: "#060608",
       }}
