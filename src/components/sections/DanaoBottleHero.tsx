@@ -103,13 +103,6 @@ function DanaoBottle({
     return loader;
   }, []);
 
-  const currentTextureRef = useRef<THREE.Texture | null>(null);
-  const uniformsRef = useRef({
-    uMapPrev: { value: null as THREE.Texture | null },
-    uMapNext: { value: null as THREE.Texture | null },
-    uMorph: { value: 1.0 },
-  });
-
   const activeLabelTexture = useMemo(() => {
     const tex = textureLoader.load(activeFlavor.textureUrl);
     tex.colorSpace = THREE.SRGBColorSpace;
@@ -117,20 +110,14 @@ function DanaoBottle({
     return tex;
   }, [activeFlavor, textureLoader]);
 
+  // Smooth rotation impulse on flavor change
+  const spinImpulseRef = useRef(0);
+
   useEffect(() => {
-    if (!activeLabelTexture) return;
+    spinImpulseRef.current = Math.PI * 2; // Smooth 360 spin on flavor click
+  }, [activeFlavor]);
 
-    if (currentTextureRef.current && currentTextureRef.current !== activeLabelTexture) {
-      uniformsRef.current.uMapPrev.value = currentTextureRef.current;
-      uniformsRef.current.uMapNext.value = activeLabelTexture;
-      uniformsRef.current.uMorph.value = 0.0;
-    } else {
-      uniformsRef.current.uMapPrev.value = activeLabelTexture;
-      uniformsRef.current.uMapNext.value = activeLabelTexture;
-      uniformsRef.current.uMorph.value = 1.0;
-    }
-    currentTextureRef.current = activeLabelTexture;
-
+  useEffect(() => {
     scene.traverse((child: any) => {
       if (child.isMesh && child.material) {
         const matName = (child.material.name || "").toLowerCase();
@@ -145,38 +132,6 @@ function DanaoBottle({
           child.material.side = THREE.DoubleSide;
           child.material.roughness = 0.25;
           child.material.metalness = 0.0;
-
-          if (!child.material.isCustomMorph) {
-            child.material.isCustomMorph = true;
-            child.material.onBeforeCompile = (shader: any) => {
-              shader.uniforms.uMapPrev = uniformsRef.current.uMapPrev;
-              shader.uniforms.uMapNext = uniformsRef.current.uMapNext;
-              shader.uniforms.uMorph = uniformsRef.current.uMorph;
-
-              shader.fragmentShader = shader.fragmentShader.replace(
-                "#include <map_pars_fragment>",
-                `
-                #include <map_pars_fragment>
-                uniform sampler2D uMapPrev;
-                uniform sampler2D uMapNext;
-                uniform float uMorph;
-                `
-              );
-
-              shader.fragmentShader = shader.fragmentShader.replace(
-                "#include <map_fragment>",
-                `
-                #ifdef USE_MAP
-                  vec4 texPrev = texture2D( uMapPrev, vMapUv );
-                  vec4 texNext = texture2D( uMapNext, vMapUv );
-                  vec4 texMixed = mix( texPrev, texNext, smoothstep(0.0, 1.0, uMorph) );
-                  texMixed = mapTexelToLinear( texMixed );
-                  diffuseColor *= texMixed;
-                #endif
-                `
-              );
-            };
-          }
           child.material.needsUpdate = true;
         } else if (matName.includes("lid")) {
           child.material.color = new THREE.Color("#CCCCCC");
@@ -202,11 +157,14 @@ function DanaoBottle({
   }, [scene, activeLabelTexture, lighting]);
 
   useFrame((_, delta) => {
-    if (uniformsRef.current.uMorph.value < 1.0) {
-      uniformsRef.current.uMorph.value = Math.min(1.0, uniformsRef.current.uMorph.value + delta * 2.2);
-    }
-    if (bottleRef.current && autoSpin) {
-      bottleRef.current.rotation.y += delta * 0.4;
+    if (bottleRef.current) {
+      if (spinImpulseRef.current > 0.01) {
+        const step = spinImpulseRef.current * delta * 6.0;
+        bottleRef.current.rotation.y += step;
+        spinImpulseRef.current -= step;
+      } else if (autoSpin) {
+        bottleRef.current.rotation.y += delta * 0.4;
+      }
     }
   });
 

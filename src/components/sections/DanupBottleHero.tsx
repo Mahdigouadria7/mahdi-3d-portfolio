@@ -407,13 +407,6 @@ function DanupBottle({
     return loader;
   }, []);
 
-  const currentTextureRef = useRef<THREE.Texture | null>(null);
-  const uniformsRef = useRef({
-    uMapPrev: { value: null as THREE.Texture | null },
-    uMapNext: { value: null as THREE.Texture | null },
-    uMorph: { value: 1.0 },
-  });
-
   const activeLabelTexture = useMemo(() => {
     const tex = textureLoader.load(activeFlavor.textureUrl);
     tex.colorSpace = THREE.SRGBColorSpace;
@@ -421,19 +414,15 @@ function DanupBottle({
     return tex;
   }, [activeFlavor, textureLoader]);
 
+  // Smooth rotation impulse on flavor change
+  const spinImpulseRef = useRef(0);
+
+  useEffect(() => {
+    spinImpulseRef.current = Math.PI * 2; // Smooth 360 spin on flavor click
+  }, [activeFlavor]);
+
   useEffect(() => {
     if (!clonedScene || !activeLabelTexture) return;
-
-    if (currentTextureRef.current && currentTextureRef.current !== activeLabelTexture) {
-      uniformsRef.current.uMapPrev.value = currentTextureRef.current;
-      uniformsRef.current.uMapNext.value = activeLabelTexture;
-      uniformsRef.current.uMorph.value = 0.0;
-    } else {
-      uniformsRef.current.uMapPrev.value = activeLabelTexture;
-      uniformsRef.current.uMapNext.value = activeLabelTexture;
-      uniformsRef.current.uMorph.value = 1.0;
-    }
-    currentTextureRef.current = activeLabelTexture;
 
     clonedScene.traverse((child: any) => {
       if (child.isMesh && child.material) {
@@ -462,38 +451,6 @@ function DanupBottle({
           child.material.side = THREE.FrontSide;
           child.material.roughness = lighting.roughness;
           child.material.metalness = lighting.metalness;
-
-          if (!child.material.isCustomMorph) {
-            child.material.isCustomMorph = true;
-            child.material.onBeforeCompile = (shader: any) => {
-              shader.uniforms.uMapPrev = uniformsRef.current.uMapPrev;
-              shader.uniforms.uMapNext = uniformsRef.current.uMapNext;
-              shader.uniforms.uMorph = uniformsRef.current.uMorph;
-
-              shader.fragmentShader = shader.fragmentShader.replace(
-                "#include <map_pars_fragment>",
-                `
-                #include <map_pars_fragment>
-                uniform sampler2D uMapPrev;
-                uniform sampler2D uMapNext;
-                uniform float uMorph;
-                `
-              );
-
-              shader.fragmentShader = shader.fragmentShader.replace(
-                "#include <map_fragment>",
-                `
-                #ifdef USE_MAP
-                  vec4 texPrev = texture2D( uMapPrev, vMapUv );
-                  vec4 texNext = texture2D( uMapNext, vMapUv );
-                  vec4 texMixed = mix( texPrev, texNext, smoothstep(0.0, 1.0, uMorph) );
-                  texMixed = mapTexelToLinear( texMixed );
-                  diffuseColor *= texMixed;
-                #endif
-                `
-              );
-            };
-          }
           child.material.needsUpdate = true;
         }
       }
@@ -501,10 +458,13 @@ function DanupBottle({
   }, [clonedScene, activeLabelTexture, lighting.roughness, lighting.metalness]);
 
   useFrame((state, delta) => {
-    if (uniformsRef.current.uMorph.value < 1.0) {
-      uniformsRef.current.uMorph.value = Math.min(1.0, uniformsRef.current.uMorph.value + delta * 2.2);
-    }
     if (groupRef.current) {
+      if (spinImpulseRef.current > 0.01) {
+        const step = spinImpulseRef.current * delta * 6.0;
+        groupRef.current.rotation.y += step;
+        spinImpulseRef.current -= step;
+      }
+
       const targetY = autoSpin
         ? Math.sin(state.clock.elapsedTime * 0.45) * 0.25 + state.mouse.x * 0.4
         : state.mouse.x * 0.5;
