@@ -44,8 +44,8 @@ const DEFAULT_LIGHTING: LightingSettings = {
   envIntensity: 0.05,
   roughness: 1.0,
   metalness: 0.05,
-  scale: 1.15,
-  yOffset: -0.2,
+  scale: 4.2,
+  yOffset: -0.15,
 };
 
 export const DANAO_FLAVORS: FlavorConfig[] = [
@@ -56,7 +56,7 @@ export const DANAO_FLAVORS: FlavorConfig[] = [
     color: "#2ECC71",
     accentGlow: "rgba(46, 204, 113, 0.45)",
     notes: "Fresh Green Apple • Tangy Citrus • Milk & Juice Blend",
-    textureUrl: "https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danao/textures/labels/Apple_Danao.png",
+    textureUrl: "https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danao/textures/labels/pp3rjv9ytgrlidqsoltf.png",
     localTextureUrl: "/models/Danao content/Model/Textures/danao Label/Base Color/Apple Danao.png",
   },
   {
@@ -66,7 +66,7 @@ export const DANAO_FLAVORS: FlavorConfig[] = [
     color: "#FF7E47",
     accentGlow: "rgba(255, 126, 71, 0.45)",
     notes: "Sun-Ripened Golden Peach • Creamy Smooth Milk • 250ml",
-    textureUrl: "https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danao/textures/labels/peche_dnao.png",
+    textureUrl: "https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danao/textures/labels/kbtii4slf4ezmfzvlykc.png",
     localTextureUrl: "/models/Danao content/Model/Textures/danao Label/Base Color/peche dnao.png",
   },
 ];
@@ -110,31 +110,6 @@ function DanaoBottle({
     return tex;
   }, [activeFlavor, textureLoader]);
 
-  const plasticTextures = useMemo(() => {
-    const baseMap = textureLoader.load("https://res.cloudinary.com/zu63qo7h/image/upload/v1785166590/portfolio/danao/textures/plastic/dyvfotkkzokucmnkrtqt.jpg");
-    baseMap.colorSpace = THREE.SRGBColorSpace;
-    baseMap.flipY = false;
-    
-    const roughMap = textureLoader.load("https://res.cloudinary.com/zu63qo7h/image/upload/v1785166592/portfolio/danao/textures/plastic/cgbqu4k0asbwwm5za4ry.jpg");
-    roughMap.flipY = false;
-
-    return { baseMap, roughMap };
-  }, [textureLoader]);
-
-  const lidTextures = useMemo(() => {
-    const baseMap = textureLoader.load("https://res.cloudinary.com/zu63qo7h/image/upload/v1785166584/portfolio/danao/textures/lid/anxr934tklsujvdnfivy.jpg");
-    baseMap.colorSpace = THREE.SRGBColorSpace;
-    baseMap.flipY = false;
-
-    const normalMap = textureLoader.load("https://res.cloudinary.com/zu63qo7h/image/upload/v1785166586/portfolio/danao/textures/lid/n1mkbuqagy94hvzxskfa.jpg");
-    normalMap.flipY = false;
-
-    const metallicMap = textureLoader.load("https://res.cloudinary.com/zu63qo7h/image/upload/v1785166586/portfolio/danao/textures/lid/unn1kgst6fcpwcu5tufi.jpg");
-    metallicMap.flipY = false;
-
-    return { baseMap, normalMap, metallicMap };
-  }, [textureLoader]);
-
   useEffect(() => {
     scene.traverse((child: any) => {
       if (child.isMesh && child.material) {
@@ -142,38 +117,38 @@ function DanaoBottle({
 
         if (matName.includes("label")) {
           child.material.map = activeLabelTexture;
+          child.material.color = new THREE.Color("#FFFFFF");
           child.material.transparent = false;
           child.material.opacity = 1.0;
           child.material.alphaTest = 0.1;
           child.material.depthWrite = true;
           child.material.depthTest = true;
           child.material.side = THREE.DoubleSide;
+          child.material.roughness = 0.25;
+          child.material.metalness = 0.0;
           child.material.needsUpdate = true;
         } else if (matName.includes("lid")) {
-          child.material.map = lidTextures.baseMap;
-          child.material.normalMap = lidTextures.normalMap;
-          child.material.metalnessMap = lidTextures.metallicMap;
-          child.material.metalness = 0.9;
+          child.material.color = new THREE.Color("#CCCCCC");
+          child.material.metalness = 0.85;
           child.material.roughness = 0.2;
           child.material.transparent = false;
           child.material.depthWrite = true;
           child.material.side = THREE.DoubleSide;
           child.material.needsUpdate = true;
         } else if (matName.includes("plastic") || matName === "") {
-          child.material.map = plasticTextures.baseMap;
-          child.material.roughnessMap = plasticTextures.roughMap;
+          child.material.color = new THREE.Color("#F5F5F5");
           child.material.transparent = false;
           child.material.opacity = 1.0;
           child.material.depthWrite = true;
           child.material.depthTest = true;
           child.material.side = THREE.DoubleSide;
-          child.material.roughness = lighting.roughness * 0.3;
-          child.material.metalness = lighting.metalness;
+          child.material.roughness = 0.2;
+          child.material.metalness = 0.0;
           child.material.needsUpdate = true;
         }
       }
     });
-  }, [scene, activeLabelTexture, lidTextures, plasticTextures, lighting]);
+  }, [scene, activeLabelTexture, lighting]);
 
   useFrame((_, delta) => {
     if (bottleRef.current && autoSpin) {
