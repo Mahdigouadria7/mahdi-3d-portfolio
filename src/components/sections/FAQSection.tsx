@@ -40,32 +40,32 @@ function FAQItem({ item }: { item: (typeof FAQ_ITEMS)[number] }) {
     const [open, setOpen] = useState(false);
 
     return (
-        <div className="border-b border-[#191919]/10">
+        <div className="border-b border-[#191919]/10 group">
             <button
                 onClick={() => setOpen(!open)}
-                className="w-full flex items-center justify-between py-5 md:py-6 text-left group"
+                className="w-full flex items-center justify-between py-6 md:py-7 text-left transition-colors duration-300"
                 aria-expanded={open}
             >
                 <span
-                    className={`font-playfair text-lg md:text-xl text-[#191919] leading-snug pr-4 transition-all duration-200 ${open ? "italic" : "group-hover:italic"}`}
-                    style={{ fontWeight: open ? 400 : 600 }}
+                    className={`font-playfair text-xl md:text-2xl text-[#191919] leading-snug pr-4 transition-all duration-300 group-hover:translate-x-1 ${open ? "italic font-normal" : "font-semibold"}`}
                 >
                     {item.q}
                 </span>
                 <span
-                    className={`w-8 h-8 rounded-full border border-[#191919]/20 flex items-center justify-center text-[#191919] flex-shrink-0 transition-all duration-300 ${open ? "bg-[#191919] text-white border-[#191919] rotate-45" : "group-hover:border-[#191919]/40"}`}
-                    style={{ fontSize: 18 }}
+                    className={`w-8 h-8 rounded-full border border-[#191919]/20 flex items-center justify-center text-sm font-mono flex-shrink-0 transition-all duration-300 group-hover:border-[#191919] ${open ? "bg-[#191919] text-white border-[#191919]" : "bg-transparent text-[#191919]"}`}
                 >
-                    +
+                    {open ? "−" : "+"}
                 </span>
             </button>
-            {open && (
-                <div className="pb-5 animate-fadeIn">
-                    <p className="font-mono text-xs text-[#191919]/80 leading-relaxed max-w-2xl font-medium">
+            <div
+                className={`grid transition-all duration-500 ease-in-out overflow-hidden ${open ? "grid-rows-[1fr] opacity-100 pb-6" : "grid-rows-[0fr] opacity-0"}`}
+            >
+                <div className="overflow-hidden">
+                    <p className="font-mono text-xs text-[#191919]/80 leading-relaxed max-w-3xl font-medium pr-6">
                         {item.a}
                     </p>
                 </div>
-            )}
+            </div>
         </div>
     );
 }
@@ -79,7 +79,7 @@ export default function FAQSection() {
         >
             <div className="w-full h-px bg-[#191919]/15" />
 
-            <div className="grid grid-cols-1 md:grid-cols-[320px_1fr] gap-0 px-6 md:px-16 py-16 md:py-20">
+            <div className="grid grid-cols-1 md:grid-cols-[340px_1fr] gap-0 px-6 md:px-16 py-16 md:py-20 max-w-7xl mx-auto">
 
                 {/* Left: sticky headline ───────────────────── */}
                 <div className="md:pr-16 md:sticky md:top-24 self-start mb-10 md:mb-0">
@@ -101,7 +101,7 @@ export default function FAQSection() {
                     </p>
                     <a
                         href="#contact"
-                        className="inline-flex items-center gap-2.5 bg-[#191919] text-white font-mono text-xs tracking-[0.2em] uppercase px-6 py-3.5 rounded-full hover:bg-[#ffff7b] hover:text-[#191919] transition-all duration-300 font-bold"
+                        className="inline-flex items-center gap-2.5 bg-[#191919] text-white font-mono text-xs tracking-[0.2em] uppercase px-6 py-3.5 rounded-full hover:bg-[#ffff7b] hover:text-[#191919] transition-all duration-300 font-bold shadow-md"
                     >
                         Start a project
                         <span className="w-5 h-5 rounded-full border border-current flex items-center justify-center text-[10px]">
@@ -111,7 +111,7 @@ export default function FAQSection() {
                 </div>
 
                 {/* Right: accordion ────────────────────────── */}
-                <div className="border-t border-[#191919]/10">
+                <div className="border-t border-[#191919]/10 border-b">
                     {FAQ_ITEMS.map((item) => (
                         <FAQItem key={item.q} item={item} />
                     ))}
