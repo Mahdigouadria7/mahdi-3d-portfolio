@@ -137,15 +137,26 @@ export default function ProjectsSection() {
                                         boxShadow: "0 8px 40px rgba(25,25,25,0.18), 0 2px 8px rgba(25,25,25,0.08)",
                                     }}
                                 >
-                                    {/* Image area */}
-                                    <div className="relative w-full overflow-hidden" style={{ height: 220 }}>
-                                        {project.media[0]?.type === "image" && project.media[0]?.url ? (
-                                            <img
-                                                src={project.media[0].url}
-                                                alt={project.media[0].alt}
-                                                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                                                draggable={false}
-                                            />
+                                    {/* Image / Video area */}
+                                    <div className="relative w-full overflow-hidden bg-[#222]" style={{ height: 220 }}>
+                                        {project.media[0] ? (
+                                            project.media[0].type === "video" ? (
+                                                <video
+                                                    src={project.media[0].url}
+                                                    autoPlay
+                                                    loop
+                                                    muted
+                                                    playsInline
+                                                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 pointer-events-none"
+                                                />
+                                            ) : (
+                                                <img
+                                                    src={project.media[0].url}
+                                                    alt={project.media[0].alt}
+                                                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                                    draggable={false}
+                                                />
+                                            )
                                         ) : (
                                             <div className="absolute inset-0 bg-[#222]" />
                                         )}
