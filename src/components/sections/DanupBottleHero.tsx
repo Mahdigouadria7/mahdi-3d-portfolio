@@ -394,7 +394,7 @@ function DanupBottle({
   autoSpin: boolean;
   lighting: LightingSettings;
 }) {
-  const cdnModelUrl = "https://res.cloudinary.com/zu63qo7h/raw/upload/v1785160938/portfolio/danup/models/Danup_ALA.glb";
+  const cdnModelUrl = "https://res.cloudinary.com/zu63qo7h/raw/upload/v1785158509/portfolio/danup/models/danup_ala_bottle.glb";
 
   const { scene } = useGLTF(cdnModelUrl);
   const clonedScene = useMemo(() => scene.clone(), [scene]);
