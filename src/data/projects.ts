@@ -113,12 +113,11 @@ export const projects: Project[] = [
         media: [
             { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/v1785166627/portfolio/danao/renders/shwrsec2ravagb9revpz.png', alt: 'Danao CGI Master Render Pass' },
             { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/v1785166618/portfolio/danao/renders/tc1nmxmdqz4gnxeakq4i.png', alt: 'Danao CGI Lighting Render Pass' },
-            { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/danao/videos/Danao_CGI_Video.mp4', alt: 'Danao 3D CGI Main Commercial Video' },
-            { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/danao/videos/Danao_Island_CGI.mp4', alt: 'Danao Island Environment CGI Cut' },
-            { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/danao/videos/Danao_Motion_3D.mp4', alt: 'Danao 3D Motion Showcase' },
-            { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/danao/videos/Forest_Danao.mp4', alt: 'Forest Environment CGI Cut' },
-            { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/danao/videos/Dj_Danao.mp4', alt: 'DJ Theme CGI Cut' },
-            { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/danao/videos/Danao_Loop_SciFi_2.mp4', alt: 'SciFi Motion Loop' }
+            { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/v1785172226/danao_motion_island_xcxa6y.mp4', alt: 'Danao 3D Motion Island Video' },
+            { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/v1785172129/danao_cgi_street_e1oibf.mp4', alt: 'Danao CGI Street Video' },
+            { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/v1785167351/portfolio/danao/videos/Danao_Motion_3D.mp4', alt: 'Danao 3D Motion Showcase' },
+            { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/v1785167347/portfolio/danao/videos/Forest_Danao.mp4', alt: 'Forest Environment CGI Cut' },
+            { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/v1785167337/portfolio/danao/videos/Dj_Danao.mp4', alt: 'DJ Theme CGI Cut' }
         ]
     },
     {

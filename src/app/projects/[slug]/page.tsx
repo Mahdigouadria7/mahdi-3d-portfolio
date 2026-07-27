@@ -838,7 +838,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                 <ScrollReveal direction="left" delay={0.1} className="relative h-full w-full">
                                     <div className="w-full aspect-[9/16] bg-[#191919] border border-white/10 rounded-3xl overflow-hidden relative shadow-2xl hover:border-[#ffff7b] hover:shadow-[0_0_30px_rgba(255,255,123,0.3)] transition-all duration-500 group">
                                         <LazyVideo
-                                            src="https://res.cloudinary.com/zu63qo7h/video/upload/v1785167351/portfolio/danao/videos/Danao_Motion_3D.mp4"
+                                            src="https://res.cloudinary.com/zu63qo7h/video/upload/v1785172226/danao_motion_island_xcxa6y.mp4"
                                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
                                         />
                                     </div>
@@ -847,7 +847,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                 <ScrollReveal direction="right" delay={0.2} className="relative h-full w-full">
                                     <div className="w-full aspect-[9/16] bg-[#191919] border border-white/10 rounded-3xl overflow-hidden relative shadow-2xl hover:border-[#ffff7b] hover:shadow-[0_0_30px_rgba(255,255,123,0.3)] transition-all duration-500 group">
                                         <LazyVideo
-                                            src="https://res.cloudinary.com/zu63qo7h/video/upload/v1785167323/portfolio/danao/videos/Danao_Loop_SciFi_2.mp4"
+                                            src="https://res.cloudinary.com/zu63qo7h/video/upload/v1785172129/danao_cgi_street_e1oibf.mp4"
                                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
                                         />
                                     </div>
