@@ -44,7 +44,7 @@ const DEFAULT_LIGHTING: LightingSettings = {
   envIntensity: 0.05,
   roughness: 1.0,
   metalness: 0.05,
-  scale: 4.5,
+  scale: 1.15,
   yOffset: -0.2,
 };
 
@@ -110,35 +110,70 @@ function DanaoBottle({
     return tex;
   }, [activeFlavor, textureLoader]);
 
+  const plasticTextures = useMemo(() => {
+    const baseMap = textureLoader.load("https://res.cloudinary.com/zu63qo7h/image/upload/v1785166590/portfolio/danao/textures/plastic/dyvfotkkzokucmnkrtqt.jpg");
+    baseMap.colorSpace = THREE.SRGBColorSpace;
+    baseMap.flipY = false;
+    
+    const roughMap = textureLoader.load("https://res.cloudinary.com/zu63qo7h/image/upload/v1785166592/portfolio/danao/textures/plastic/cgbqu4k0asbwwm5za4ry.jpg");
+    roughMap.flipY = false;
+
+    return { baseMap, roughMap };
+  }, [textureLoader]);
+
+  const lidTextures = useMemo(() => {
+    const baseMap = textureLoader.load("https://res.cloudinary.com/zu63qo7h/image/upload/v1785166584/portfolio/danao/textures/lid/anxr934tklsujvdnfivy.jpg");
+    baseMap.colorSpace = THREE.SRGBColorSpace;
+    baseMap.flipY = false;
+
+    const normalMap = textureLoader.load("https://res.cloudinary.com/zu63qo7h/image/upload/v1785166586/portfolio/danao/textures/lid/n1mkbuqagy94hvzxskfa.jpg");
+    normalMap.flipY = false;
+
+    const metallicMap = textureLoader.load("https://res.cloudinary.com/zu63qo7h/image/upload/v1785166586/portfolio/danao/textures/lid/unn1kgst6fcpwcu5tufi.jpg");
+    metallicMap.flipY = false;
+
+    return { baseMap, normalMap, metallicMap };
+  }, [textureLoader]);
+
   useEffect(() => {
     scene.traverse((child: any) => {
       if (child.isMesh && child.material) {
         const matName = (child.material.name || "").toLowerCase();
-        const meshName = (child.name || "").toLowerCase();
 
-        if (matName.includes("label") || meshName.includes("label")) {
+        if (matName.includes("label")) {
           child.material.map = activeLabelTexture;
+          child.material.transparent = false;
+          child.material.opacity = 1.0;
+          child.material.alphaTest = 0.1;
+          child.material.depthWrite = true;
+          child.material.depthTest = true;
+          child.material.side = THREE.DoubleSide;
           child.material.needsUpdate = true;
-        }
-
-        if (matName.includes("plastic") || meshName.includes("plastic")) {
+        } else if (matName.includes("lid")) {
+          child.material.map = lidTextures.baseMap;
+          child.material.normalMap = lidTextures.normalMap;
+          child.material.metalnessMap = lidTextures.metallicMap;
+          child.material.metalness = 0.9;
+          child.material.roughness = 0.2;
+          child.material.transparent = false;
+          child.material.depthWrite = true;
+          child.material.side = THREE.DoubleSide;
+          child.material.needsUpdate = true;
+        } else if (matName.includes("plastic") || matName === "") {
+          child.material.map = plasticTextures.baseMap;
+          child.material.roughnessMap = plasticTextures.roughMap;
           child.material.transparent = false;
           child.material.opacity = 1.0;
           child.material.depthWrite = true;
-          child.material.side = THREE.FrontSide;
-          child.material.roughness = lighting.roughness;
+          child.material.depthTest = true;
+          child.material.side = THREE.DoubleSide;
+          child.material.roughness = lighting.roughness * 0.3;
           child.material.metalness = lighting.metalness;
-          child.material.needsUpdate = true;
-        }
-
-        if (matName.includes("lid") || meshName.includes("lid")) {
-          child.material.metalness = 0.85;
-          child.material.roughness = 0.2;
           child.material.needsUpdate = true;
         }
       }
     });
-  }, [scene, activeLabelTexture, lighting]);
+  }, [scene, activeLabelTexture, lidTextures, plasticTextures, lighting]);
 
   useFrame((_, delta) => {
     if (bottleRef.current && autoSpin) {
