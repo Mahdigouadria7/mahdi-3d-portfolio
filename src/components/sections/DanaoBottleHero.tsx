@@ -33,14 +33,14 @@ export interface LightingSettings {
 }
 
 const DEFAULT_LIGHTING: LightingSettings = {
-  ambientIntensity: 1.15,
+  ambientIntensity: 0.55,
   keyIntensity: 1.6,
   keyX: -5.5,
-  keyY: 6.0,
-  keyZ: 5.0,
-  fillIntensity: 1.7,
+  keyY: 1.5,
+  keyZ: 2.0,
+  fillIntensity: 1.4,
   rimIntensity: 1.2,
-  mouseLightIntensity: 1.1,
+  mouseLightIntensity: 1.0,
   envIntensity: 0.05,
   roughness: 1.0,
   metalness: 0.05,
@@ -170,6 +170,7 @@ export default function DanaoBottleHero() {
   const [autoSpin, setAutoSpin] = useState(true);
   const [lighting, setLighting] = useState<LightingSettings>(DEFAULT_LIGHTING);
   const [showGui, setShowGui] = useState(false);
+  const [copiedCode, setCopiedCode] = useState(false);
 
   return (
     <div
@@ -305,37 +306,38 @@ export default function DanaoBottleHero() {
           </button>
         </div>
 
-        {/* Floating Lighting Studio GUI */}
+        {/* Floating Lighting Studio GUI Modal */}
         {showGui && (
-          <div className="absolute top-4 right-4 z-40 w-84 max-h-[80vh] overflow-y-auto bg-black/95 backdrop-blur-2xl border border-white/20 p-5 rounded-3xl shadow-2xl space-y-4 text-xs font-mono">
-            <div className="flex items-center justify-between border-b border-white/10 pb-3">
+          <div className="fixed top-20 right-4 md:right-8 z-50 w-84 md:w-96 max-h-[75vh] flex flex-col bg-black/95 backdrop-blur-2xl border border-white/20 p-5 rounded-3xl shadow-2xl text-xs font-mono">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between border-b border-white/10 pb-3 mb-3">
               <div className="flex items-center gap-2">
                 <span className="w-2.5 h-2.5 rounded-full bg-[#ffff7b] animate-ping" />
                 <h4 className="font-bold text-white uppercase tracking-wider text-xs">3D Studio Lighting &amp; Model GUI</h4>
               </div>
-              <button onClick={() => setShowGui(false)} className="text-white/50 hover:text-white text-base font-bold px-1">
+              <button onClick={() => setShowGui(false)} className="text-white/50 hover:text-white text-base font-bold px-2 py-1 hover:bg-white/10 rounded-lg transition-all">
                 ✕
               </button>
             </div>
 
-            {/* Presets */}
-            <div className="grid grid-cols-2 gap-2">
+            {/* Presets Bar */}
+            <div className="grid grid-cols-2 gap-2 mb-3">
               <button
                 onClick={() => setLighting(DEFAULT_LIGHTING)}
-                className="bg-white/10 hover:bg-white/20 text-white px-2.5 py-1.5 rounded-lg border border-white/10 text-[10px] font-bold text-left transition-all"
+                className="bg-white/10 hover:bg-white/20 text-white px-2.5 py-2 rounded-xl border border-white/10 text-[10px] font-bold text-left transition-all"
               >
                 ☀️ Default Studio
               </button>
               <button
                 onClick={() => setLighting({ ...DEFAULT_LIGHTING, ambientIntensity: 0.35, keyIntensity: 2.2, rimIntensity: 3.8, envIntensity: 0.4 })}
-                className="bg-white/10 hover:bg-white/20 text-white px-2.5 py-1.5 rounded-lg border border-white/10 text-[10px] font-bold text-left transition-all"
+                className="bg-white/10 hover:bg-white/20 text-white px-2.5 py-2 rounded-xl border border-white/10 text-[10px] font-bold text-left transition-all"
               >
                 🌙 Dramatic Dark
               </button>
             </div>
 
-            {/* Sliders List */}
-            <div className="space-y-3 pt-2 border-t border-white/10 text-[11px]">
+            {/* Scrollable Sliders Area */}
+            <div className="flex-1 overflow-y-auto pr-2 space-y-3 text-[11px] custom-scrollbar">
               {/* 3D Model Scale */}
               <div>
                 <div className="flex justify-between text-white/80 mb-1">
@@ -541,13 +543,17 @@ export default function DanaoBottleHero() {
               </div>
             </div>
 
-            {/* Action Buttons */}
-            <div className="pt-2 border-t border-white/10 flex gap-2">
+            {/* Fixed Sticky Action Buttons */}
+            <div className="pt-3 mt-3 border-t border-white/10 flex gap-2">
               <button
-                onClick={() => navigator.clipboard.writeText(JSON.stringify(lighting, null, 2))}
-                className="flex-1 bg-[#ffff7b] text-[#191919] font-bold py-2 rounded-xl text-center hover:bg-white transition-all shadow-md text-xs uppercase"
+                onClick={() => {
+                  navigator.clipboard.writeText(JSON.stringify(lighting, null, 2));
+                  setCopiedCode(true);
+                  setTimeout(() => setCopiedCode(false), 2000);
+                }}
+                className="flex-1 bg-[#ffff7b] text-[#191919] font-bold py-2.5 rounded-xl text-center hover:bg-white transition-all shadow-md text-xs uppercase"
               >
-                📋 Copy Config JSON
+                {copiedCode ? "✓ COPIED VALUES!" : "📋 COPY CONFIG JSON"}
               </button>
             </div>
           </div>
