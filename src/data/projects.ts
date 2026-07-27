@@ -82,8 +82,8 @@ export const projects: Project[] = [
         challenge: "Rendering an ultra-detailed GLTF bottle model in real-time while dynamically hot-swapping high-res 2K label texture maps and orbiting 3D sticker sprites smoothly.",
         solution: "Decoupled material maps in React Three Fiber, optimized PBR shaders, and automated Cloudinary CDN asset streaming for sub-second texture loads.",
         media: [
-            { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Spotify_splach.png', alt: 'Danup x ALA Splash Motion' },
-            { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/danup/videos/Danup_x_ALA_3d_Video.mp4', alt: 'Danup x ALA 3D Commercial Video' },
+            { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/v1785172806/danup_Motion_vglmg0.mov', alt: 'Danup 3D Motion Commercial Video' },
+            { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/v1785168603/portfolio/danup/videos/Danup_x_ALA_3d_Video.mp4', alt: 'Danup x ALA 3D Commercial Video' },
             { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Spotifyvanille.png', alt: 'Vanilla Flavor Element' },
             { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Spotify_peach.png', alt: 'Melba Flavor Element' },
             { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Spotify_Skate.png', alt: 'Skate Lifestyle Sticker' },

@@ -96,7 +96,7 @@ function DanaoBottle({
   autoSpin: boolean;
   lighting: LightingSettings;
 }) {
-  const modelUrl = "https://res.cloudinary.com/zu63qo7h/raw/upload/v1785167697/portfolio/danao/models/danao_model_main.glb";
+  const modelUrl = "https://res.cloudinary.com/zu63qo7h/image/upload/v1785172780/Danao_model_c64anv.glb";
   const { scene } = useGLTF(modelUrl) as any;
   const bottleRef = useRef<THREE.Group>(null);
   const textureLoader = useMemo(() => {
