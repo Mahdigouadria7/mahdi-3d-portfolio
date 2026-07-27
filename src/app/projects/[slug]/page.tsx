@@ -495,7 +495,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                 <ScrollReveal direction="up" delay={0.2} className="lg:col-span-5 relative h-full w-full">
                                     <div className="w-full aspect-[9/16] max-w-sm mx-auto bg-[#191919] border border-white/10 rounded-3xl overflow-hidden relative shadow-2xl hover:border-[#ffff7b] hover:shadow-[0_0_30px_rgba(255,255,123,0.3)] transition-all duration-500 group">
                                         <LazyVideo
-                                            src="/models/danup content/Videos/Danup x ALA 3d Video.mp4"
+                                            src="https://res.cloudinary.com/zu63qo7h/video/upload/v1785168603/portfolio/danup/videos/Danup_x_ALA_3d_Video.mp4"
                                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
                                         />
                                     </div>
@@ -617,16 +617,16 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
                             <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
                                 {[
-                                    { src: "https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Objet_dynamique_vectoriel.png", alt: "Danup x ALA Official Badge", title: "DANUP x ALA BADGE" },
-                                    { src: "https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/rapup-.png", alt: "RapUp Special Edition", title: "RAPUP EDITION" },
-                                    { src: "https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Spotifyvanille.png", alt: "Vanilla Element", title: "VANILLA EDITION" },
-                                    { src: "https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Spotify_peach.png", alt: "Peach Element", title: "MELBA PEACH" },
-                                    { src: "https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Spotify_splach.png", alt: "Splash Motion", title: "STRAWBERRY SPLASH" },
-                                    { src: "https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Spotify_Skate.png", alt: "Skate Motion", title: "STREET SKATE" },
-                                    { src: "https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Spotify_Victory.png", alt: "Victory Tag", title: "VICTORY EDITION" },
-                                    { src: "https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Spotify_fachfecha.png", alt: "Fachfecha Tag", title: "FACHFECHA TROPICAL" },
-                                    { src: "https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Spotify_recorder.png", alt: "Recorder Cassette", title: "RETRO RECORDER" },
-                                    { src: "https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Spotify_thunder.png", alt: "Thunder Flash", title: "THUNDER ENERGY" }
+                                    { src: "https://res.cloudinary.com/zu63qo7h/image/upload/v1785171311/portfolio/danup/elements_named/Objet_dynamique_vectoriel.png", alt: "Danup x ALA Official Badge", title: "DANUP x ALA BADGE" },
+                                    { src: "https://res.cloudinary.com/zu63qo7h/image/upload/v1785171313/portfolio/danup/elements_named/rapup-.png", alt: "RapUp Special Edition", title: "RAPUP EDITION" },
+                                    { src: "https://res.cloudinary.com/zu63qo7h/image/upload/v1785171324/portfolio/danup/elements_named/Spotifyvanille.png", alt: "Vanilla Element", title: "VANILLA EDITION" },
+                                    { src: "https://res.cloudinary.com/zu63qo7h/image/upload/v1785171317/portfolio/danup/elements_named/Spotify_peach.png", alt: "Peach Element", title: "MELBA PEACH" },
+                                    { src: "https://res.cloudinary.com/zu63qo7h/image/upload/v1785171320/portfolio/danup/elements_named/Spotify_splach.png", alt: "Splash Motion", title: "STRAWBERRY SPLASH" },
+                                    { src: "https://res.cloudinary.com/zu63qo7h/image/upload/v1785171319/portfolio/danup/elements_named/Spotify_Skate.png", alt: "Skate Motion", title: "STREET SKATE" },
+                                    { src: "https://res.cloudinary.com/zu63qo7h/image/upload/v1785171322/portfolio/danup/elements_named/Spotify_Victory.png", alt: "Victory Tag", title: "VICTORY EDITION" },
+                                    { src: "https://res.cloudinary.com/zu63qo7h/image/upload/v1785171314/portfolio/danup/elements_named/Spotify_fachfecha.png", alt: "Fachfecha Tag", title: "FACHFECHA TROPICAL" },
+                                    { src: "https://res.cloudinary.com/zu63qo7h/image/upload/v1785171318/portfolio/danup/elements_named/Spotify_recorder.png", alt: "Recorder Cassette", title: "RETRO RECORDER" },
+                                    { src: "https://res.cloudinary.com/zu63qo7h/image/upload/v1785171321/portfolio/danup/elements_named/Spotify_thunder.png", alt: "Thunder Flash", title: "THUNDER ENERGY" }
                                 ].map((item, idx) => (
                                     <ScrollReveal key={idx} direction="up" delay={0.08 * (idx % 5)} className="relative h-full w-full">
                                         <div className="w-full aspect-square bg-[#191919] border border-white/10 rounded-2xl p-5 overflow-hidden group relative flex flex-col items-center justify-center shadow-xl hover:border-[#ffff7b] hover:-translate-y-1 transition-all duration-300">
@@ -838,7 +838,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                 <ScrollReveal direction="left" delay={0.1} className="relative h-full w-full">
                                     <div className="w-full aspect-[9/16] bg-[#191919] border border-white/10 rounded-3xl overflow-hidden relative shadow-2xl hover:border-[#ffff7b] hover:shadow-[0_0_30px_rgba(255,255,123,0.3)] transition-all duration-500 group">
                                         <LazyVideo
-                                            src="https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/danao/videos/Danao_Motion_3D.mp4"
+                                            src="https://res.cloudinary.com/zu63qo7h/video/upload/v1785167351/portfolio/danao/videos/Danao_Motion_3D.mp4"
                                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
                                         />
                                     </div>
@@ -847,7 +847,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                 <ScrollReveal direction="right" delay={0.2} className="relative h-full w-full">
                                     <div className="w-full aspect-[9/16] bg-[#191919] border border-white/10 rounded-3xl overflow-hidden relative shadow-2xl hover:border-[#ffff7b] hover:shadow-[0_0_30px_rgba(255,255,123,0.3)] transition-all duration-500 group">
                                         <LazyVideo
-                                            src="https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/danao/videos/Danao_Loop_SciFi_2.mp4"
+                                            src="https://res.cloudinary.com/zu63qo7h/video/upload/v1785167323/portfolio/danao/videos/Danao_Loop_SciFi_2.mp4"
                                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
                                         />
                                     </div>
@@ -858,7 +858,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                             <div className="grid md:grid-cols-3 gap-6">
                                 {[
                                     { src: "https://res.cloudinary.com/zu63qo7h/image/upload/v1785166627/portfolio/danao/renders/shwrsec2ravagb9revpz.png", alt: "Danao CGI Render Pass 1" },
-                                    { src: "https://res.cloudinary.com/zu63qo7h/image/upload/v1785167355/portfolio/danao/renders/render_6.png", alt: "Danao CGI Render Pass 2" },
+                                    { src: "https://res.cloudinary.com/zu63qo7h/image/upload/v1785171525/portfolio/danao/renders/danao_render_pass_2.jpg", alt: "Danao CGI Render Pass 2" },
                                     { src: "https://res.cloudinary.com/zu63qo7h/image/upload/v1785166618/portfolio/danao/renders/tc1nmxmdqz4gnxeakq4i.png", alt: "Danao CGI Render Pass 3" }
                                 ].map((still, sIdx) => (
                                     <ScrollReveal key={sIdx} direction="up" delay={0.1 * sIdx} className="relative h-full w-full">
