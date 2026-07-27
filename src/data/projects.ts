@@ -231,5 +231,27 @@ export const projects: Project[] = [
         challenge: "Rig flexible enough for extreme poses with realistic muscle deformation.",
         solution: "Hybrid bone and corrective blendshape system driven by joint angles.",
         media: []
+    },
+    {
+        slug: "danao-3d-commercial",
+        accent: "emerald",
+        title: "DANAO 3D CGI",
+        category: "Commercial Packaging & 3D CGI",
+        description: "Full 3D commercial campaign for Danao Juice & Milk featuring photorealistic PBR liquid shaders, environment animation, and interactive bottle visualization.",
+        client: "Danao (Danone Group)",
+        role: "3D Artist & Motion Designer",
+        timeline: "2025",
+        techStack: ["Blender", "Octane Render", "React Three Fiber", "Next.js", "Tailwind CSS"],
+        fullDescription: "A high-impact, photorealistic 3D commercial animation showcasing Danao's juice & milk beverage line with tropical island environments, sci-fi motion loops, and live 3D web interactive controls.",
+        challenge: "Simulating rich fruit juice & milk fluid dynamics, realistic PBR bottle materials, and multi-environment CGI staging while ensuring fast 60fps web performance.",
+        solution: "High-precision PBR material overrides, Octane Render lighting passes, lightweight web video streaming, and real-time React Three Fiber bottle viewport with custom studio lighting controls.",
+        media: [
+            { type: 'video', url: '/models/Danao content/Project Content/compressed/Danao_CGI_Video.mp4', alt: 'Danao 3D CGI Main Commercial Video' },
+            { type: 'video', url: '/models/Danao content/Project Content/compressed/Danao_Island_CGI.mp4', alt: 'Danao Island Environment CGI Cut' },
+            { type: 'video', url: '/models/Danao content/Project Content/compressed/Danao_Motion_3D.mp4', alt: 'Danao 3D Motion Showcase' },
+            { type: 'video', url: '/models/Danao content/Project Content/compressed/Forest_Danao.mp4', alt: 'Forest Environment CGI Cut' },
+            { type: 'video', url: '/models/Danao content/Project Content/compressed/Dj_Danao.mp4', alt: 'DJ Theme CGI Cut' },
+            { type: 'video', url: '/models/Danao content/Project Content/compressed/Danao_Loop_SciFi_2.mp4', alt: 'SciFi Motion Loop' }
+        ]
     }
 ];

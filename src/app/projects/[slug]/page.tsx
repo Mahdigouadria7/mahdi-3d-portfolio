@@ -4,6 +4,7 @@ import { Metadata } from "next";
 import AnimatedProjectHero from "@/components/sections/AnimatedProjectHero";
 import LuxuryRedBullCommercialHero from "@/components/sections/LuxuryRedBullCommercialHero";
 import DanupBottleHero from "@/components/sections/DanupBottleHero";
+import DanaoBottleHero from "@/components/sections/DanaoBottleHero";
 import BackButton from "@/components/ui/BackButton";
 import PreviousProjectButton from "@/components/ui/PreviousProjectButton";
 import NextProjectButton from "@/components/ui/NextProjectButton";
@@ -59,6 +60,8 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                 <LuxuryRedBullCommercialHero />
             ) : project.slug === "danup-x-ala" ? (
                 <DanupBottleHero />
+            ) : project.slug === "danao-3d-commercial" ? (
+                <DanaoBottleHero />
             ) : (
                 <AnimatedProjectHero project={project} index={projects.findIndex(p => p.slug === project.slug)} />
             )}
@@ -686,6 +689,188 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                         </div>
                                     </div>
                                 </ScrollReveal>
+                            </div>
+                        </div>
+                    </div>
+                ) : project.slug === "danao-3d-commercial" ? (
+                    <div className="space-y-24 mt-8 relative z-10">
+                        {/* 1. Main 3D Commercial Showcase Video */}
+                        <div className="relative z-10 pt-8 pb-12">
+                            <ScrollReveal direction="up">
+                                <div className="w-full flex items-center gap-4 mb-8">
+                                    <span className="font-mono text-xs font-bold tracking-widest text-[#191919] bg-[#ffff7b] px-3.5 py-1 rounded-full border border-black/10">01</span>
+                                    <div className="flex items-center gap-1">
+                                        <div className="w-8 h-[2px] bg-[#191919]" />
+                                        <div className="w-8 h-[2px] bg-[#191919]/30" />
+                                    </div>
+                                    <h3 className="font-mono text-xs font-bold uppercase tracking-[0.3em] text-[#191919]/60">
+                                        Full 3D Commercial &amp; Packaging Showcase Film
+                                    </h3>
+                                </div>
+                            </ScrollReveal>
+
+                            <div className="grid lg:grid-cols-12 gap-8 items-center">
+                                {/* 9:16 Vertical Video Frame */}
+                                <ScrollReveal direction="up" delay={0.2} className="lg:col-span-5 relative h-full w-full">
+                                    <div className="w-full aspect-[9/16] max-w-sm mx-auto bg-[#191919] border border-white/10 rounded-3xl overflow-hidden relative shadow-2xl hover:border-[#ffff7b] hover:shadow-[0_0_30px_rgba(255,255,123,0.3)] transition-all duration-500 group">
+                                        <LazyVideo
+                                            src="/models/Danao content/Project Content/compressed/Danao_CGI_Video.mp4"
+                                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
+                                        />
+                                    </div>
+                                </ScrollReveal>
+
+                                {/* 3D CGI Process & Technical Breakdown */}
+                                <div className="lg:col-span-7 space-y-6">
+                                    <ScrollReveal direction="up" delay={0.3}>
+                                        <h4 className="font-playfair text-2xl md:text-3xl font-black uppercase text-[#191919] tracking-tight">
+                                            3D CGI Production &amp; Visual Process
+                                        </h4>
+                                        <p className="font-sans text-sm md:text-base text-[#191919]/70 mt-2 leading-relaxed">
+                                            A full-spectrum 3D commercial campaign produced for Danone Danao Juice &amp; Milk. Featuring complex fluid dynamics simulations, tropical island staging, and photorealistic PBR material rendering.
+                                        </p>
+                                    </ScrollReveal>
+
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                                        {[
+                                            {
+                                                step: "01",
+                                                title: "Juice & Milk Fluid Dynamics",
+                                                desc: "Realistic fluid particle simulations, splash mesh generation, and subsurface scattering shaders for Danao juice & milk blends."
+                                            },
+                                            {
+                                                step: "02",
+                                                title: "PBR Material & Foil Shading",
+                                                desc: "Physical metallic lid reflection, non-transparent glossy plastic cap bump maps, and vibrant sRGB fruit label textures."
+                                            },
+                                            {
+                                                step: "03",
+                                                title: "Island & Forest Staging",
+                                                desc: "Custom 3D environment builds ranging from tropical island palm beaches to lush forest natural lighting scenarios."
+                                            },
+                                            {
+                                                step: "04",
+                                                title: "Studio Lighting & Motion Grading",
+                                                desc: "Multi-light HDRI studio rigs, specular rim highlights, and high-contrast color grading tuned for mobile video displays."
+                                            }
+                                        ].map((proc, pIdx) => (
+                                            <ScrollReveal key={pIdx} direction="up" delay={0.1 * pIdx}>
+                                                <div className="p-5 rounded-2xl bg-[#191919] border border-white/10 hover:border-[#ffff7b] hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(255,255,123,0.15)] transition-all duration-300 group">
+                                                    <div className="flex items-center justify-between mb-2">
+                                                        <span className="font-mono text-xs font-bold text-[#ffff7b]">{proc.step}</span>
+                                                        <div className="w-2 h-2 rounded-full bg-[#ffff7b] opacity-0 group-hover:opacity-100 transition-opacity" />
+                                                    </div>
+                                                    <h5 className="font-sans font-bold text-sm text-white uppercase tracking-wider mb-1">
+                                                        {proc.title}
+                                                    </h5>
+                                                    <p className="font-sans text-xs text-white/60 leading-relaxed">
+                                                        {proc.desc}
+                                                    </p>
+                                                </div>
+                                            </ScrollReveal>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* 2. Environment & Commercial Cuts */}
+                        <div className="relative z-10 py-8">
+                            <ScrollReveal direction="up">
+                                <div className="w-full flex items-center gap-4 mb-12">
+                                    <span className="font-mono text-xs font-bold tracking-widest text-[#191919] bg-[#ffff7b] px-3.5 py-1 rounded-full border border-black/10">02</span>
+                                    <div className="flex items-center gap-1">
+                                        <div className="w-8 h-[2px] bg-[#191919]" />
+                                        <div className="w-8 h-[2px] bg-[#191919]/30" />
+                                    </div>
+                                    <h3 className="font-mono text-xs font-bold uppercase tracking-[0.3em] text-[#191919]/60">
+                                        Themed Commercial Cuts &amp; Environment Animations
+                                    </h3>
+                                </div>
+                            </ScrollReveal>
+
+                            <div className="grid md:grid-cols-3 gap-8">
+                                <ScrollReveal direction="up" delay={0.1} className="relative h-full w-full">
+                                    <div className="w-full aspect-[9/16] bg-[#191919] border border-black/10 rounded-2xl overflow-hidden relative shadow-2xl hover:border-[#ffff7b]/60 transition-all group">
+                                        <LazyVideo
+                                            src="/models/Danao content/Project Content/compressed/Danao_Island_CGI.mp4"
+                                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
+                                        />
+                                    </div>
+                                </ScrollReveal>
+
+                                <ScrollReveal direction="up" delay={0.2} className="relative h-full w-full">
+                                    <div className="w-full aspect-[9/16] bg-[#191919] border border-black/10 rounded-2xl overflow-hidden relative shadow-2xl hover:border-[#ffff7b]/60 transition-all group">
+                                        <LazyVideo
+                                            src="/models/Danao content/Project Content/compressed/Forest_Danao.mp4"
+                                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
+                                        />
+                                    </div>
+                                </ScrollReveal>
+
+                                <ScrollReveal direction="up" delay={0.3} className="relative h-full w-full">
+                                    <div className="w-full aspect-[9/16] bg-[#191919] border border-black/10 rounded-2xl overflow-hidden relative shadow-2xl hover:border-[#ffff7b]/60 transition-all group">
+                                        <LazyVideo
+                                            src="/models/Danao content/Project Content/compressed/Dj_Danao.mp4"
+                                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
+                                        />
+                                    </div>
+                                </ScrollReveal>
+                            </div>
+                        </div>
+
+                        {/* 3. 3D Render Showcase & Motion Loops */}
+                        <div className="relative z-10 py-8">
+                            <ScrollReveal direction="up">
+                                <div className="w-full flex items-center gap-4 mb-12">
+                                    <span className="font-mono text-xs font-bold tracking-widest text-[#191919] bg-[#ffff7b] px-3.5 py-1 rounded-full border border-black/10">03</span>
+                                    <div className="flex items-center gap-1">
+                                        <div className="w-8 h-[2px] bg-[#191919]" />
+                                        <div className="w-8 h-[2px] bg-[#191919]/30" />
+                                    </div>
+                                    <h3 className="font-mono text-xs font-bold uppercase tracking-[0.3em] text-[#191919]/60">
+                                        3D Motion Showcase &amp; Render Stills
+                                    </h3>
+                                </div>
+                            </ScrollReveal>
+
+                            <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-12">
+                                <ScrollReveal direction="left" delay={0.1} className="relative h-full w-full">
+                                    <div className="w-full aspect-[9/16] bg-[#191919] border border-white/10 rounded-3xl overflow-hidden relative shadow-2xl hover:border-[#ffff7b] hover:shadow-[0_0_30px_rgba(255,255,123,0.3)] transition-all duration-500 group">
+                                        <LazyVideo
+                                            src="/models/Danao content/Project Content/compressed/Danao_Motion_3D.mp4"
+                                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
+                                        />
+                                    </div>
+                                </ScrollReveal>
+
+                                <ScrollReveal direction="right" delay={0.2} className="relative h-full w-full">
+                                    <div className="w-full aspect-[9/16] bg-[#191919] border border-white/10 rounded-3xl overflow-hidden relative shadow-2xl hover:border-[#ffff7b] hover:shadow-[0_0_30px_rgba(255,255,123,0.3)] transition-all duration-500 group">
+                                        <LazyVideo
+                                            src="/models/Danao content/Project Content/compressed/Danao_Loop_SciFi_2.mp4"
+                                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
+                                        />
+                                    </div>
+                                </ScrollReveal>
+                            </div>
+
+                            {/* Render Stills Grid */}
+                            <div className="grid md:grid-cols-3 gap-6">
+                                {[
+                                    { src: "/models/Danao content/Project Content/2ender.png", alt: "Danao CGI Render Pass 1" },
+                                    { src: "/models/Danao content/Project Content/6render.png", alt: "Danao CGI Render Pass 2" },
+                                    { src: "/models/Danao content/Project Content/11render.png", alt: "Danao CGI Render Pass 3" }
+                                ].map((still, sIdx) => (
+                                    <ScrollReveal key={sIdx} direction="up" delay={0.1 * sIdx} className="relative h-full w-full">
+                                        <div className="w-full aspect-[3/4] bg-[#191919] border border-white/10 rounded-2xl overflow-hidden relative shadow-xl hover:border-[#ffff7b] hover:-translate-y-1 transition-all duration-300 group">
+                                            <LightboxImage
+                                                src={still.src}
+                                                alt={still.alt}
+                                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                                            />
+                                        </div>
+                                    </ScrollReveal>
+                                ))}
                             </div>
                         </div>
                     </div>
