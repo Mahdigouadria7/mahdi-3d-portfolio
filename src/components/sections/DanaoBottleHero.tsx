@@ -44,8 +44,8 @@ const DEFAULT_LIGHTING: LightingSettings = {
   envIntensity: 0.05,
   roughness: 1.0,
   metalness: 0.05,
-  scale: 0.44,
-  yOffset: -0.15,
+  scale: 4.5,
+  yOffset: -0.2,
 };
 
 export const DANAO_FLAVORS: FlavorConfig[] = [
@@ -96,14 +96,14 @@ function DanaoBottle({
   autoSpin: boolean;
   lighting: LightingSettings;
 }) {
-  const modelUrl = "/models/Danao content/Model/Danao model.glb";
+  const modelUrl = "https://res.cloudinary.com/zu63qo7h/raw/upload/v1785166567/portfolio/danao/models/danao_bottle_model.glb";
   const { scene } = useGLTF(modelUrl) as any;
   const bottleRef = useRef<THREE.Group>(null);
   const textureLoader = useMemo(() => new THREE.TextureLoader(), []);
 
   const activeLabelTexture = useMemo(() => {
-    const tex = textureLoader.load(activeFlavor.localTextureUrl, undefined, undefined, () => {
-      textureLoader.load(activeFlavor.textureUrl);
+    const tex = textureLoader.load(activeFlavor.textureUrl, undefined, undefined, () => {
+      textureLoader.load(activeFlavor.localTextureUrl);
     });
     tex.colorSpace = THREE.SRGBColorSpace;
     tex.flipY = false;

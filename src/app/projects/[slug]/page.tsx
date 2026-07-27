@@ -714,7 +714,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                 <ScrollReveal direction="up" delay={0.2} className="lg:col-span-5 relative h-full w-full">
                                     <div className="w-full aspect-[9/16] max-w-sm mx-auto bg-[#191919] border border-white/10 rounded-3xl overflow-hidden relative shadow-2xl hover:border-[#ffff7b] hover:shadow-[0_0_30px_rgba(255,255,123,0.3)] transition-all duration-500 group">
                                         <LazyVideo
-                                            src="/models/Danao content/Project Content/compressed/Danao_CGI_Video.mp4"
+                                            src="https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/danao/videos/Danao_CGI_Video.mp4"
                                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
                                         />
                                     </div>
@@ -793,7 +793,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                 <ScrollReveal direction="up" delay={0.1} className="relative h-full w-full">
                                     <div className="w-full aspect-[9/16] bg-[#191919] border border-black/10 rounded-2xl overflow-hidden relative shadow-2xl hover:border-[#ffff7b]/60 transition-all group">
                                         <LazyVideo
-                                            src="/models/Danao content/Project Content/compressed/Danao_Island_CGI.mp4"
+                                            src="https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/danao/videos/Danao_Island_CGI.mp4"
                                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
                                         />
                                     </div>
@@ -802,7 +802,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                 <ScrollReveal direction="up" delay={0.2} className="relative h-full w-full">
                                     <div className="w-full aspect-[9/16] bg-[#191919] border border-black/10 rounded-2xl overflow-hidden relative shadow-2xl hover:border-[#ffff7b]/60 transition-all group">
                                         <LazyVideo
-                                            src="/models/Danao content/Project Content/compressed/Forest_Danao.mp4"
+                                            src="https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/danao/videos/Forest_Danao.mp4"
                                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
                                         />
                                     </div>
@@ -811,7 +811,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                 <ScrollReveal direction="up" delay={0.3} className="relative h-full w-full">
                                     <div className="w-full aspect-[9/16] bg-[#191919] border border-black/10 rounded-2xl overflow-hidden relative shadow-2xl hover:border-[#ffff7b]/60 transition-all group">
                                         <LazyVideo
-                                            src="/models/Danao content/Project Content/compressed/Dj_Danao.mp4"
+                                            src="https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/danao/videos/Dj_Danao.mp4"
                                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
                                         />
                                     </div>
@@ -838,7 +838,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                 <ScrollReveal direction="left" delay={0.1} className="relative h-full w-full">
                                     <div className="w-full aspect-[9/16] bg-[#191919] border border-white/10 rounded-3xl overflow-hidden relative shadow-2xl hover:border-[#ffff7b] hover:shadow-[0_0_30px_rgba(255,255,123,0.3)] transition-all duration-500 group">
                                         <LazyVideo
-                                            src="/models/Danao content/Project Content/compressed/Danao_Motion_3D.mp4"
+                                            src="https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/danao/videos/Danao_Motion_3D.mp4"
                                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
                                         />
                                     </div>
@@ -847,7 +847,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                 <ScrollReveal direction="right" delay={0.2} className="relative h-full w-full">
                                     <div className="w-full aspect-[9/16] bg-[#191919] border border-white/10 rounded-3xl overflow-hidden relative shadow-2xl hover:border-[#ffff7b] hover:shadow-[0_0_30px_rgba(255,255,123,0.3)] transition-all duration-500 group">
                                         <LazyVideo
-                                            src="/models/Danao content/Project Content/compressed/Danao_Loop_SciFi_2.mp4"
+                                            src="https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/danao/videos/Danao_Loop_SciFi_2.mp4"
                                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
                                         />
                                     </div>
@@ -857,9 +857,9 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                             {/* Render Stills Grid */}
                             <div className="grid md:grid-cols-3 gap-6">
                                 {[
-                                    { src: "/models/Danao content/Project Content/2ender.png", alt: "Danao CGI Render Pass 1" },
-                                    { src: "/models/Danao content/Project Content/6render.png", alt: "Danao CGI Render Pass 2" },
-                                    { src: "/models/Danao content/Project Content/11render.png", alt: "Danao CGI Render Pass 3" }
+                                    { src: "https://res.cloudinary.com/zu63qo7h/image/upload/v1785166627/portfolio/danao/renders/shwrsec2ravagb9revpz.png", alt: "Danao CGI Render Pass 1" },
+                                    { src: "https://res.cloudinary.com/zu63qo7h/image/upload/v1785167355/portfolio/danao/renders/render_6.png", alt: "Danao CGI Render Pass 2" },
+                                    { src: "https://res.cloudinary.com/zu63qo7h/image/upload/v1785166618/portfolio/danao/renders/tc1nmxmdqz4gnxeakq4i.png", alt: "Danao CGI Render Pass 3" }
                                 ].map((still, sIdx) => (
                                     <ScrollReveal key={sIdx} direction="up" delay={0.1 * sIdx} className="relative h-full w-full">
                                         <div className="w-full aspect-[3/4] bg-[#191919] border border-white/10 rounded-2xl overflow-hidden relative shadow-xl hover:border-[#ffff7b] hover:-translate-y-1 transition-all duration-300 group">

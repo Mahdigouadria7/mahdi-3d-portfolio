@@ -49,6 +49,7 @@ export const projects: Project[] = [
         challenge: "Capturing photorealistic gold reflections, intricate micro-embossing, and luxury metallic highlights while optimizing real-time 3D assets for fluid web performance.",
         solution: "Custom PBR gold texture maps, physically-based studio HDRI lighting, and Draco-compressed geometry tailored for interactive web display.",
         media: [
+            { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/v1784899929/portfolio/redbull/redbullr.webp', alt: 'Red Bull Gold Master Render' },
             { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/v1784899265/portfolio/redbull/darkgold_render_video.mp4', alt: 'Cinematic Gold Render Video' },
             { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/v1784899273/portfolio/redbull/ticket2.png', alt: 'VIP Launch Event Pass' },
             { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/v1784899377/portfolio/redbull/redbull_smoke.mp4', alt: 'Red Bull Smoke Simulation' },
@@ -57,7 +58,6 @@ export const projects: Project[] = [
             { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/v1784899907/portfolio/redbull/liwa_redbull_3.webp', alt: 'Liwa Desert Staging Render 2' },
             { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/v1784899913/portfolio/redbull/redbull_gold_darker.webp', alt: 'Deep Gold Specular Pass' },
             { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/v1784899924/portfolio/redbull/redbull_gold_2.webp', alt: 'Micro-Embossed Gold Can' },
-            { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/v1784899929/portfolio/redbull/redbullr.webp', alt: 'Gold Master Render' },
             { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/v1784899935/portfolio/redbull/redbull_environmet_xt.webp', alt: 'Obsidian Studio High-Key' },
             { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/v1784899938/portfolio/redbull/redbull_environmet.webp', alt: 'Obsidian Studio Mid-Pass' },
             { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/v1784899941/portfolio/redbull/redbull_environmetsss.webp', alt: 'Obsidian Studio Subsurface' },
@@ -82,10 +82,10 @@ export const projects: Project[] = [
         challenge: "Rendering an ultra-detailed GLTF bottle model in real-time while dynamically hot-swapping high-res 2K label texture maps and orbiting 3D sticker sprites smoothly.",
         solution: "Decoupled material maps in React Three Fiber, optimized PBR shaders, and automated Cloudinary CDN asset streaming for sub-second texture loads.",
         media: [
+            { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Spotify_splach.png', alt: 'Danup x ALA Splash Motion' },
             { type: 'video', url: '/models/danup content/Videos/Danup x ALA 3d Video.mp4', alt: 'Danup x ALA 3D Commercial Video' },
             { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Spotifyvanille.png', alt: 'Vanilla Flavor Element' },
             { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Spotify_peach.png', alt: 'Melba Flavor Element' },
-            { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Spotify_splach.png', alt: 'Splash Motion Sticker' },
             { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Spotify_Skate.png', alt: 'Skate Lifestyle Sticker' },
             { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Spotify_Victory.png', alt: 'Victory Motion Sticker' },
             { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Spotify_fachfecha.png', alt: 'Fachfecha Sticker' },
@@ -111,15 +111,14 @@ export const projects: Project[] = [
         challenge: "Simulating rich fruit juice & milk fluid dynamics, realistic PBR bottle materials, and multi-environment CGI staging while ensuring fast 60fps web performance.",
         solution: "High-precision PBR material overrides, Octane Render lighting passes, lightweight web video streaming, and real-time React Three Fiber bottle viewport with custom studio lighting controls.",
         media: [
-            { type: 'image', url: '/models/Danao content/Project Content/2ender.png', alt: 'Danao CGI Master Render Pass' },
-            { type: 'image', url: '/models/Danao content/Project Content/6render.png', alt: 'Danao CGI Environment Render Pass' },
-            { type: 'image', url: '/models/Danao content/Project Content/11render.png', alt: 'Danao CGI Lighting Render Pass' },
-            { type: 'video', url: '/models/Danao content/Project Content/compressed/Danao_CGI_Video.mp4', alt: 'Danao 3D CGI Main Commercial Video' },
-            { type: 'video', url: '/models/Danao content/Project Content/compressed/Danao_Island_CGI.mp4', alt: 'Danao Island Environment CGI Cut' },
-            { type: 'video', url: '/models/Danao content/Project Content/compressed/Danao_Motion_3D.mp4', alt: 'Danao 3D Motion Showcase' },
-            { type: 'video', url: '/models/Danao content/Project Content/compressed/Forest_Danao.mp4', alt: 'Forest Environment CGI Cut' },
-            { type: 'video', url: '/models/Danao content/Project Content/compressed/Dj_Danao.mp4', alt: 'DJ Theme CGI Cut' },
-            { type: 'video', url: '/models/Danao content/Project Content/compressed/Danao_Loop_SciFi_2.mp4', alt: 'SciFi Motion Loop' }
+            { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/v1785166627/portfolio/danao/renders/shwrsec2ravagb9revpz.png', alt: 'Danao CGI Master Render Pass' },
+            { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/v1785166618/portfolio/danao/renders/tc1nmxmdqz4gnxeakq4i.png', alt: 'Danao CGI Lighting Render Pass' },
+            { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/danao/videos/Danao_CGI_Video.mp4', alt: 'Danao 3D CGI Main Commercial Video' },
+            { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/danao/videos/Danao_Island_CGI.mp4', alt: 'Danao Island Environment CGI Cut' },
+            { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/danao/videos/Danao_Motion_3D.mp4', alt: 'Danao 3D Motion Showcase' },
+            { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/danao/videos/Forest_Danao.mp4', alt: 'Forest Environment CGI Cut' },
+            { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/danao/videos/Dj_Danao.mp4', alt: 'DJ Theme CGI Cut' },
+            { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/danao/videos/Danao_Loop_SciFi_2.mp4', alt: 'SciFi Motion Loop' }
         ]
     },
     {

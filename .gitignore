@@ -40,9 +40,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# raw uncompressed video sources
-public/models/*.mp4
-public/models/Danao content/Project Content/*.mp4
-public/models/Danao content/Project Content/*.mkv
-!public/models/Danao content/Project Content/compressed/
+# raw and compressed video files (hosted on Cloudinary CDN)
+*.mp4
+*.mkv
+public/models/**/*.mp4
+public/models/**/*.mkv
 

@@ -149,17 +149,8 @@ export default function ProjectsSection() {
                                         ) : (
                                             <div className="absolute inset-0 bg-[#222]" />
                                         )}
-                                        {/* 3D model */}
-                                        {(project.slug === "trionda-ball-wc-2026" || project.slug === "redbull-gold-concept") && (
-                                            <div
-                                                style={{ viewTransitionName: `project-model-${project.slug}` }}
-                                                className="absolute inset-0 z-10"
-                                            >
-                                                <ProjectModel index={i} />
-                                            </div>
-                                        )}
-                                        {/* Gradient */}
-                                        <div className="absolute inset-0 bg-gradient-to-t from-[#191919] via-transparent to-transparent z-20" />
+                                        {/* Gradient overlay */}
+                                        <div className="absolute inset-0 bg-gradient-to-t from-[#191919] via-transparent to-transparent z-10" />
                                         {/* Index watermark */}
                                         <span className="absolute bottom-2 right-3 font-mono font-black text-[72px] leading-none text-white/[0.06] select-none z-0">
                                             {String(i + 1).padStart(2, "0")}
