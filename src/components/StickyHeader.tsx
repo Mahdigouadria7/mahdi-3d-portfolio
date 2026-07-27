@@ -34,6 +34,20 @@ export default function StickyHeader() {
         };
     }, []);
 
+    const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+        if (href.startsWith("#")) {
+            e.preventDefault();
+            const targetId = href.replace("#", "");
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
+            } else {
+                window.location.hash = href;
+            }
+        }
+        setIsMobileMenuOpen(false);
+    };
+
     if (pathname && pathname.startsWith("/projects/")) {
         return null;
     }
@@ -68,7 +82,8 @@ export default function StickyHeader() {
                             <a
                                 key={item.label}
                                 href={item.href}
-                                className="font-sans text-[13px] font-semibold text-white/80 hover:text-white transition-colors duration-200 focus-visible:outline-none"
+                                onClick={(e) => handleNavClick(e, item.href)}
+                                className="font-sans text-[13px] font-semibold text-white/80 hover:text-white transition-colors duration-200 focus-visible:outline-none cursor-pointer"
                             >
                                 {item.label}
                             </a>
@@ -88,7 +103,8 @@ export default function StickyHeader() {
                         {/* Solid Contact / Book Call Button */}
                         <a
                             href="#contact"
-                            className="px-5 py-2 rounded-full bg-white text-[#191919] font-sans text-[13px] font-semibold hover:bg-[#ffff7b] transition-all duration-200 flex items-center gap-2 shadow-md"
+                            onClick={(e) => handleNavClick(e, "#contact")}
+                            className="px-5 py-2 rounded-full bg-white text-[#191919] font-sans text-[13px] font-semibold hover:bg-[#ffff7b] transition-all duration-200 flex items-center gap-2 shadow-md cursor-pointer"
                         >
                             Contact me
                             <span className="w-5 h-5 rounded-full bg-[#191919] text-white flex items-center justify-center text-[10px]">
@@ -122,8 +138,8 @@ export default function StickyHeader() {
                         <a
                             key={item.label}
                             href={item.href}
-                            onClick={() => setIsMobileMenuOpen(false)}
-                            className="font-playfair text-3xl text-white font-bold tracking-wider hover:italic transition-all"
+                            onClick={(e) => handleNavClick(e, item.href)}
+                            className="font-playfair text-3xl text-white font-bold tracking-wider hover:italic transition-all cursor-pointer"
                         >
                             {item.label}
                         </a>
@@ -136,14 +152,14 @@ export default function StickyHeader() {
                             setIsMobileMenuOpen(false);
                             setIsCVOpen(true);
                         }}
-                        className="px-7 py-2.5 rounded-full border border-white/40 text-white font-sans text-xs font-medium text-center"
+                        className="px-7 py-2.5 rounded-full border border-white/40 text-white font-sans text-xs font-medium text-center cursor-pointer"
                     >
                         View CV
                     </button>
                     <a
                         href="#contact"
-                        onClick={() => setIsMobileMenuOpen(false)}
-                        className="px-7 py-2.5 rounded-full bg-[#ffff7b] text-[#191919] font-sans text-xs font-semibold text-center"
+                        onClick={(e) => handleNavClick(e, "#contact")}
+                        className="px-7 py-2.5 rounded-full bg-[#ffff7b] text-[#191919] font-sans text-xs font-semibold text-center cursor-pointer"
                     >
                         Contact Me ↗
                     </a>

@@ -20,6 +20,10 @@
   --foreground: #f8f8ff;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 html,
 body {
   /* height: 100%; */
