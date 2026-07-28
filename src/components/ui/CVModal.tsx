@@ -268,6 +268,45 @@ export default function CVModal({ isOpen, onClose }: CVModalProps) {
                                         </ul>
                                     </div>
 
+                                    {/* Euro Tech Conseil (ETC) */}
+                                    <div className="border-l-2 border-[#191919]/30 pl-4 space-y-2">
+                                        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start">
+                                            <h4 className="font-sans text-sm font-bold text-[#191919]">UX/UI DESIGNER &amp; WEB DEVELOPER – EURO TECH CONSEIL (ETC)</h4>
+                                            <span className="font-sans text-[11px] font-semibold text-[#191919]/60">Feb 2022 — Nov 2022</span>
+                                        </div>
+                                        <p className="font-sans text-xs text-[#191919]/70 font-medium">Kairouan, Tunisia</p>
+                                        <ul className="list-disc list-inside font-sans text-xs text-[#191919]/80 space-y-1.5 leading-relaxed font-normal">
+                                            <li>Architected and developed an enterprise Human Resource Management System (HRMS) streamlining client and employee administration, payroll tracking, and organizational workflow automation.</li>
+                                            <li>Conducted user research, wireframing, and interactive UI component design utilizing Adobe XD and Photoshop.</li>
+                                            <li>Engineered robust full-stack web features leveraging Node.js, Express.js, MongoDB, Angular, and RESTful APIs.</li>
+                                        </ul>
+                                    </div>
+
+                                    {/* GPro */}
+                                    <div className="border-l-2 border-[#191919]/30 pl-4 space-y-2">
+                                        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start">
+                                            <h4 className="font-sans text-sm font-bold text-[#191919]">WEBGL &amp; INTERACTIVE WEB DEVELOPER – GPRO</h4>
+                                            <span className="font-sans text-[11px] font-semibold text-[#191919]/60">2021</span>
+                                        </div>
+                                        <p className="font-sans text-xs text-[#191919]/70 font-medium">Sousse, Tunisia</p>
+                                        <ul className="list-disc list-inside font-sans text-xs text-[#191919]/80 space-y-1.5 leading-relaxed font-normal">
+                                            <li>Architected high-performance interactive web applications integrating real-time 3D models and custom graphics shaders using Three.js, React.js, and JavaScript.</li>
+                                        </ul>
+                                    </div>
+
+                                    {/* IT Gate */}
+                                    <div className="border-l-2 border-[#191919]/30 pl-4 space-y-2">
+                                        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start">
+                                            <h4 className="font-sans text-sm font-bold text-[#191919]">GAME DESIGNER &amp; 3D ASSET SPECIALIST (INTERNSHIP) – IT GATE</h4>
+                                            <span className="font-sans text-[11px] font-semibold text-[#191919]/60">2019</span>
+                                        </div>
+                                        <p className="font-sans text-xs text-[#191919]/70 font-medium">Sousse, Tunisia</p>
+                                        <ul className="list-disc list-inside font-sans text-xs text-[#191919]/80 space-y-1.5 leading-relaxed font-normal">
+                                            <li>Modeled and textured historical 3D game environments and traditional architectural assets inspired by Kairouan’s heritage for real-time game engines.</li>
+                                            <li>Successfully completed as part of the Computer Science graduation project, awarded with excellent distinction.</li>
+                                        </ul>
+                                    </div>
+
                                     {/* Freelance */}
                                     <div className="border-l-2 border-[#191919]/30 pl-4 space-y-2">
                                         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start">
@@ -275,7 +314,7 @@ export default function CVModal({ isOpen, onClose }: CVModalProps) {
                                             <span className="font-sans text-[11px] font-semibold text-[#191919]/60">2019 — Present</span>
                                         </div>
                                         <p className="font-sans text-xs text-[#191919]/80 leading-relaxed font-normal">
-                                            Developed CGI ads, product renders, and motion design for local and international clients.
+                                            Developed high-end CGI commercials, product renders, and 3D motion graphics for international and local clients.
                                         </p>
                                         <div className="pt-1">
                                             <span className="font-sans text-[10px] font-bold uppercase tracking-wider text-[#191919]/50 block mb-1">Selected Clients:</span>
