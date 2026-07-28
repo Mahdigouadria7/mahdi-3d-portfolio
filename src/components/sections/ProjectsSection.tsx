@@ -3,8 +3,10 @@ import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import { projects } from "@/data/projects";
 
-function ProjectCard({ project, i }: { project: (typeof projects)[0]; i: number }) {
+function ProjectCard({ project, i, isMobileActive }: { project: (typeof projects)[0]; i: number; isMobileActive?: boolean }) {
     const [stackedMedia, setStackedMedia] = useState<{ type: 'image' | 'video'; url: string; alt: string }[]>([]);
+    const [isHovered, setIsHovered] = useState(false);
+    const isActive = isHovered || isMobileActive;
 
     useEffect(() => {
         const videos = project.media.filter((m) => m.type === 'video');
@@ -32,14 +34,17 @@ function ProjectCard({ project, i }: { project: (typeof projects)[0]; i: number 
         <Link
             href={`/projects/${project.slug}`}
             draggable={false}
+            data-card-index={i}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
             className="group flex-shrink-0 block select-none focus-visible:outline-none"
             style={{ width: "320px", height: "350px", perspective: "1200px" }}
         >
-            <article className="relative w-full h-full rounded-[32px] bg-black p-[3px] border-[3px] border-black/90 shadow-2xl overflow-hidden transition-all duration-700 group-hover:-translate-y-2">
+            <article className={`relative w-full h-full rounded-[32px] bg-black p-[3px] border-[3px] border-black/90 shadow-2xl overflow-hidden transition-all duration-700 ${isActive ? "-translate-y-2" : ""}`}>
                 
-                {/* High-Intensity Emission Outer Glow (Fades in on hover) */}
+                {/* High-Intensity Emission Outer Glow (Fades in on hover / mobile center) */}
                 <div
-                    className="absolute inset-0 rounded-[32px] opacity-0 group-hover:opacity-100 transition-all duration-700 pointer-events-none z-0"
+                    className={`absolute inset-0 rounded-[32px] transition-all duration-700 pointer-events-none z-0 ${isActive ? "opacity-100" : "opacity-0"}`}
                     style={{
                         boxShadow: `0 0 40px ${currentGlow.glow}, 0 20px 60px -5px ${currentGlow.glow}`,
                         borderColor: currentGlow.border,
@@ -53,7 +58,7 @@ function ProjectCard({ project, i }: { project: (typeof projects)[0]; i: number 
 
                         {/* 3D Stack Card 3 (Furthest Back) */}
                         {stackedMedia[2] && (
-                            <div className="absolute inset-x-4 top-2 h-[170px] rounded-[20px] overflow-hidden border border-white/20 shadow-2xl transition-all duration-700 ease-out group-hover:-translate-y-12 group-hover:-rotate-8 group-hover:scale-95 group-hover:opacity-100 opacity-0 pointer-events-none z-1">
+                            <div className={`absolute inset-x-4 top-2 h-[170px] rounded-[20px] overflow-hidden border border-white/20 shadow-2xl transition-all duration-700 ease-out pointer-events-none z-1 ${isActive ? "-translate-y-12 -rotate-8 scale-95 opacity-100" : "opacity-0"}`}>
                                 {stackedMedia[2].type === "video" ? (
                                     <video src={stackedMedia[2].url} autoPlay loop muted playsInline className="w-full h-full object-cover" />
                                 ) : (
@@ -64,7 +69,7 @@ function ProjectCard({ project, i }: { project: (typeof projects)[0]; i: number 
 
                         {/* 3D Stack Card 2 (Middle - Floating Forward) */}
                         {stackedMedia[1] && (
-                            <div className="absolute inset-x-3 top-2 h-[180px] rounded-[20px] overflow-hidden border border-white/25 shadow-2xl transition-all duration-700 ease-out delay-75 group-hover:-translate-y-6 group-hover:rotate-4 group-hover:scale-[1.02] group-hover:opacity-100 opacity-0 pointer-events-none z-2">
+                            <div className={`absolute inset-x-3 top-2 h-[180px] rounded-[20px] overflow-hidden border border-white/25 shadow-2xl transition-all duration-700 ease-out delay-75 pointer-events-none z-2 ${isActive ? "-translate-y-6 rotate-4 scale-[1.02] opacity-100" : "opacity-0"}`}>
                                 {stackedMedia[1].type === "video" ? (
                                     <video src={stackedMedia[1].url} autoPlay loop muted playsInline className="w-full h-full object-cover" />
                                 ) : (
@@ -75,7 +80,7 @@ function ProjectCard({ project, i }: { project: (typeof projects)[0]; i: number 
 
                         {/* 3D Main Preview Base (Frontmost Video - Full Bleed!) */}
                         {stackedMedia[0] && (
-                            <div className="absolute inset-0 w-full h-full rounded-t-[25px] overflow-hidden transition-all duration-500 group-hover:scale-105 shadow-xl z-3">
+                            <div className={`absolute inset-0 w-full h-full rounded-t-[25px] overflow-hidden transition-all duration-500 shadow-xl z-3 ${isActive ? "scale-105" : ""}`}>
                                 {stackedMedia[0].type === "video" ? (
                                     <video
                                         key={stackedMedia[0].url}
@@ -84,19 +89,19 @@ function ProjectCard({ project, i }: { project: (typeof projects)[0]; i: number 
                                         loop
                                         muted
                                         playsInline
-                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 pointer-events-none"
+                                        className={`w-full h-full object-cover transition-transform duration-700 pointer-events-none ${isActive ? "scale-110" : ""}`}
                                     />
                                 ) : (
                                     <img
                                         src={stackedMedia[0].url}
                                         alt={stackedMedia[0].alt}
-                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                        className={`w-full h-full object-cover transition-transform duration-700 ${isActive ? "scale-110" : ""}`}
                                         draggable={false}
                                     />
                                 )}
 
-                                {/* Black Vignette Overlay - Fades Out Completely on Hover! */}
-                                <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/20 to-black/50 pointer-events-none transition-opacity duration-700 ease-out group-hover:opacity-0 z-10" />
+                                {/* Black Vignette Overlay - Fades Out Completely on Hover / Mobile Active! */}
+                                <div className={`absolute inset-0 bg-gradient-to-b from-black/70 via-black/20 to-black/50 pointer-events-none transition-opacity duration-700 ease-out z-10 ${isActive ? "opacity-0" : "opacity-100"}`} />
                             </div>
                         )}
 
@@ -117,7 +122,7 @@ function ProjectCard({ project, i }: { project: (typeof projects)[0]; i: number 
                         }}
                     >
                         {/* Ultra-Smooth Sweeping Neon Emission Layer inside the Emission Flap */}
-                        <div className="absolute inset-x-0 bottom-0 h-36 rounded-b-[28px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-0 overflow-hidden">
+                        <div className={`absolute inset-x-0 bottom-0 h-36 rounded-b-[28px] transition-opacity duration-700 pointer-events-none z-0 overflow-hidden ${isActive ? "opacity-100" : "opacity-0"}`}>
                             {/* Base smooth ambient glow */}
                             <div
                                 className="absolute inset-0"
@@ -139,7 +144,11 @@ function ProjectCard({ project, i }: { project: (typeof projects)[0]; i: number 
 
                         {/* SVG Folder Tab Shape Overlay (#141416 dark panel) */}
                         <svg
-                            className="absolute inset-0 w-full h-full text-[#141416] fill-current drop-shadow-[0_-10px_20px_rgba(0,0,0,0.8)] transition-transform duration-700 group-hover:[transform:rotateX(20deg)_translateZ(20px)]"
+                            className="absolute inset-0 w-full h-full text-[#141416] fill-current drop-shadow-[0_-10px_20px_rgba(0,0,0,0.8)] transition-transform duration-700"
+                            style={{
+                                transform: isActive ? "rotateX(20deg) translateZ(20px)" : "rotateX(0deg) translateZ(0px)",
+                                transformOrigin: "bottom center",
+                            }}
                             viewBox="0 0 310 175"
                             preserveAspectRatio="none"
                         >
@@ -147,10 +156,16 @@ function ProjectCard({ project, i }: { project: (typeof projects)[0]; i: number 
                         </svg>
 
                         {/* Tab Content Layer */}
-                        <div className="relative z-10 w-full h-full px-5 pt-4 pb-4 flex flex-col justify-between transition-transform duration-700 group-hover:[transform:rotateX(20deg)_translateZ(20px)]">
-                            {/* Tab Left Header (Holds project.title as requested!) */}
+                        <div
+                            className="relative z-10 w-full h-full px-5 pt-4 pb-4 flex flex-col justify-between transition-transform duration-700"
+                            style={{
+                                transform: isActive ? "rotateX(20deg) translateZ(20px)" : "rotateX(0deg) translateZ(0px)",
+                                transformOrigin: "bottom center",
+                            }}
+                        >
+                            {/* Tab Left Header (Holds project.title) */}
                             <div className="max-w-[150px]">
-                                <h3 className="font-playfair text-base text-white font-bold leading-tight group-hover:text-[#ffff7b] transition-colors line-clamp-1">
+                                <h3 className={`font-playfair text-base font-bold leading-tight transition-colors line-clamp-1 ${isActive ? "text-[#ffff7b]" : "text-white"}`}>
                                     {project.title}
                                 </h3>
                                 <span className="font-mono text-[10px] text-white/50 uppercase tracking-widest block mt-1 font-medium truncate">
@@ -169,7 +184,7 @@ function ProjectCard({ project, i }: { project: (typeof projects)[0]; i: number 
                                     </span>
                                 </div>
 
-                                <span className="font-mono text-xs text-white/90 group-hover:text-[#ffff7b] group-hover:gap-2 flex items-center gap-1.5 transition-all duration-300 font-bold">
+                                <span className={`font-mono text-xs flex items-center gap-1.5 transition-all duration-300 font-bold ${isActive ? "text-[#ffff7b] gap-2" : "text-white/90 gap-1.5"}`}>
                                     View
                                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                                         <path d="M5 12h14M12 5l7 7-7 7" />
@@ -189,14 +204,38 @@ export default function ProjectsSection() {
     const containerRef = useRef<HTMLDivElement>(null);
     const [canScrollLeft, setCanScrollLeft] = useState(false);
     const [canScrollRight, setCanScrollRight] = useState(true);
+    const [activeMobileIndex, setActiveMobileIndex] = useState<number | null>(0);
 
     const checkScroll = () => {
         const container = containerRef.current;
         if (!container) return;
+
         setCanScrollLeft(container.scrollLeft > 10);
         setCanScrollRight(
             container.scrollLeft < container.scrollWidth - container.clientWidth - 10
         );
+
+        // Calculate centered card on mobile screens (under 1024px)
+        if (window.innerWidth < 1024) {
+            const containerCenter = container.getBoundingClientRect().left + container.clientWidth / 2;
+            const cardElements = container.querySelectorAll<HTMLElement>("[data-card-index]");
+            let minDistance = Infinity;
+            let closestIndex = 0;
+
+            cardElements.forEach((cardEl) => {
+                const rect = cardEl.getBoundingClientRect();
+                const cardCenter = rect.left + rect.width / 2;
+                const distance = Math.abs(cardCenter - containerCenter);
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    closestIndex = Number(cardEl.getAttribute("data-card-index"));
+                }
+            });
+
+            setActiveMobileIndex(closestIndex);
+        } else {
+            setActiveMobileIndex(null);
+        }
     };
 
     useEffect(() => {
@@ -293,7 +332,7 @@ export default function ProjectsSection() {
                 {/* Inner row of cards */}
                 <div className="inline-flex flex-row gap-6 px-6 md:px-16 w-max">
                     {projects.map((project, i) => (
-                        <ProjectCard key={project.slug} project={project} i={i} />
+                        <ProjectCard key={project.slug} project={project} i={i} isMobileActive={i === activeMobileIndex} />
                     ))}
                 </div>
             </div>
