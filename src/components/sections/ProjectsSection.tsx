@@ -4,88 +4,101 @@ import Link from "next/link";
 import { projects } from "@/data/projects";
 
 function ProjectCard({ project, i }: { project: (typeof projects)[0]; i: number }) {
-    const [previewMedia, setPreviewMedia] = useState<{ type: 'image' | 'video'; url: string; alt: string } | null>(null);
+    const [stackedMedia, setStackedMedia] = useState<{ type: 'image' | 'video'; url: string; alt: string }[]>([]);
 
     useEffect(() => {
         const videos = project.media.filter((m) => m.type === 'video');
-        if (videos.length > 0) {
-            const randomVideo = videos[Math.floor(Math.random() * videos.length)];
-            setPreviewMedia(randomVideo);
-        } else if (project.media.length > 0) {
-            const randomMedia = project.media[Math.floor(Math.random() * project.media.length)];
-            setPreviewMedia(randomMedia);
+        const images = project.media.filter((m) => m.type === 'image');
+        const pool = [...videos, ...images];
+
+        if (pool.length > 0) {
+            const shuffled = [...pool].sort(() => 0.5 - Math.random());
+            setStackedMedia(shuffled.slice(0, 3));
         }
     }, [project]);
-
-    const acc = project.accent ?? "fuchsia";
-    const dots: Record<string, string> = {
-        fuchsia: "#d946ef",
-        cyan:    "#22d3ee",
-        violet:  "#a78bfa",
-        amber:   "#fbbf24",
-        rose:    "#fb7185",
-        emerald: "#34d399",
-    };
-    const dot = dots[acc] ?? dots.fuchsia;
 
     return (
         <Link
             href={`/projects/${project.slug}`}
             draggable={false}
             className="group flex-shrink-0 block select-none focus-visible:outline-none"
-            style={{ width: "310px", height: "330px" }}
+            style={{ width: "320px", height: "350px", perspective: "1000px" }}
         >
-            <article className="relative w-full h-full rounded-[32px] bg-black p-[3px] border-[3px] border-black/80 shadow-2xl overflow-hidden transition-transform duration-500 group-hover:-translate-y-2">
-                <div className="relative w-full h-full rounded-[28px] overflow-hidden bg-[#161618] flex flex-col justify-between">
+            <article className="relative w-full h-full rounded-[32px] bg-black p-[3px] border-[3px] border-black/80 shadow-2xl overflow-visible transition-transform duration-500 group-hover:-translate-y-3">
+                <div className="relative w-full h-full rounded-[28px] overflow-visible bg-[#141416] flex flex-col justify-between">
 
-                    {/* Media Area (Top) */}
-                    <div className="relative w-full h-[180px] overflow-hidden">
-                        {previewMedia ? (
-                            previewMedia.type === "video" ? (
-                                <video
-                                    key={previewMedia.url}
-                                    src={previewMedia.url}
-                                    autoPlay
-                                    loop
-                                    muted
-                                    playsInline
-                                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 pointer-events-none"
-                                />
-                            ) : (
-                                <img
-                                    src={previewMedia.url}
-                                    alt={previewMedia.alt}
-                                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                                    draggable={false}
-                                />
-                            )
-                        ) : (
-                            <div className="absolute inset-0 bg-[#222]" />
+                    {/* Media Container (Holds the 3D Floating Video Stack) */}
+                    <div className="relative w-full h-[185px] rounded-t-[28px] overflow-visible">
+
+                        {/* 3D Stack Card 3 (Furthest Back - Fans Left) */}
+                        {stackedMedia[2] && (
+                            <div className="absolute inset-x-4 top-2 h-[145px] rounded-[18px] overflow-hidden border border-white/20 shadow-2xl transition-all duration-700 ease-out group-hover:-translate-y-20 group-hover:-rotate-12 group-hover:scale-90 group-hover:opacity-100 opacity-0 pointer-events-none z-1">
+                                {stackedMedia[2].type === "video" ? (
+                                    <video src={stackedMedia[2].url} autoPlay loop muted playsInline className="w-full h-full object-cover" />
+                                ) : (
+                                    <img src={stackedMedia[2].url} alt={stackedMedia[2].alt} className="w-full h-full object-cover" />
+                                )}
+                            </div>
                         )}
-                        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-transparent pointer-events-none" />
 
-                        {/* Top Right Project Title Overlay (Matching "Taskello App Card Design" in reference) */}
-                        <div className="absolute top-4 right-4 text-right max-w-[160px] pointer-events-none z-10">
+                        {/* 3D Stack Card 2 (Middle - Fans Right) */}
+                        {stackedMedia[1] && (
+                            <div className="absolute inset-x-3 top-2 h-[155px] rounded-[18px] overflow-hidden border border-white/25 shadow-2xl transition-all duration-700 ease-out delay-75 group-hover:-translate-y-12 group-hover:rotate-8 group-hover:scale-95 group-hover:opacity-100 opacity-0 pointer-events-none z-2">
+                                {stackedMedia[1].type === "video" ? (
+                                    <video src={stackedMedia[1].url} autoPlay loop muted playsInline className="w-full h-full object-cover" />
+                                ) : (
+                                    <img src={stackedMedia[1].url} alt={stackedMedia[1].alt} className="w-full h-full object-cover" />
+                                )}
+                            </div>
+                        )}
+
+                        {/* 3D Main Preview Base (Frontmost Video) */}
+                        {stackedMedia[0] && (
+                            <div className="absolute inset-0 w-full h-full rounded-t-[25px] overflow-hidden transition-all duration-500 group-hover:-translate-y-4 group-hover:scale-[1.02] shadow-xl z-3">
+                                {stackedMedia[0].type === "video" ? (
+                                    <video
+                                        key={stackedMedia[0].url}
+                                        src={stackedMedia[0].url}
+                                        autoPlay
+                                        loop
+                                        muted
+                                        playsInline
+                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 pointer-events-none"
+                                    />
+                                ) : (
+                                    <img
+                                        src={stackedMedia[0].url}
+                                        alt={stackedMedia[0].alt}
+                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                        draggable={false}
+                                    />
+                                )}
+                                <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-transparent pointer-events-none" />
+                            </div>
+                        )}
+
+                        {/* Top Right Title Overlay */}
+                        <div className="absolute top-4 right-4 text-right max-w-[160px] pointer-events-none z-20">
                             <h3 className="font-playfair text-sm font-extrabold text-white leading-tight drop-shadow-md group-hover:text-[#ffff7b] transition-colors line-clamp-2">
                                 {project.title}
                             </h3>
                         </div>
                     </div>
 
-                    {/* Folder Tab Notch Info Section (Bottom) */}
-                    <div className="relative w-full h-[170px] -mt-8 z-20">
+                    {/* Folder Flap / Notch Info Panel (Rotates Open in 3D on Hover) */}
+                    <div className="relative w-full h-[175px] -mt-8 z-30 transition-all duration-700 ease-out origin-bottom group-hover:translate-y-3">
                         {/* SVG Folder Tab Shape Background */}
                         <svg
-                            className="absolute inset-0 w-full h-full text-[#1c1c1e] fill-current drop-shadow-[0_-6px_14px_rgba(0,0,0,0.5)]"
-                            viewBox="0 0 310 170"
+                            className="absolute inset-0 w-full h-full text-[#1c1c1e] fill-current drop-shadow-[0_-8px_18px_rgba(0,0,0,0.6)]"
+                            viewBox="0 0 310 175"
                             preserveAspectRatio="none"
                         >
-                            <path d="M 0,20 Q 0,0 20,0 L 155,0 Q 170,0 178,10 L 190,28 Q 198,36 210,36 L 290,36 Q 310,36 310,56 L 310,170 L 0,170 Z" />
+                            <path d="M 0,20 Q 0,0 20,0 L 155,0 Q 170,0 178,10 L 190,28 Q 198,36 210,36 L 290,36 Q 310,36 310,56 L 310,175 L 0,175 Z" />
                         </svg>
 
                         {/* Tab Content Layer */}
                         <div className="relative z-10 w-full h-full px-5 pt-4 pb-4 flex flex-col justify-between">
-                            {/* Tab Left Header (Matching "Daily memo / Notes & Journaling" in reference) */}
+                            {/* Tab Left Header */}
                             <div className="max-w-[145px]">
                                 <span className="font-mono text-xs font-bold text-white block truncate">
                                     {project.category}
@@ -95,7 +108,7 @@ function ProjectCard({ project, i }: { project: (typeof projects)[0]; i: number 
                                 </span>
                             </div>
 
-                            {/* Bottom Row: Index (05 Doc) & View CTA (1270 Notes) */}
+                            {/* Bottom Row */}
                             <div className="flex items-end justify-between pt-2">
                                 <div className="flex items-baseline gap-1.5">
                                     <span className="font-mono text-2xl font-black text-white">
