@@ -24,6 +24,8 @@ export default function SmoothScrolling({ children }: { children: React.ReactNod
             infinite: false,
         });
 
+        (window as any).__lenis = lenis;
+
         lenis.scrollTo(0, { immediate: true });
 
         function raf(time: number) {
@@ -34,6 +36,7 @@ export default function SmoothScrolling({ children }: { children: React.ReactNod
         requestAnimationFrame(raf);
 
         return () => {
+            (window as any).__lenis = null;
             lenis.destroy();
         };
     }, []);

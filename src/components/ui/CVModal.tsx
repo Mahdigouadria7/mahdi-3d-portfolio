@@ -28,21 +28,54 @@ export default function CVModal({ isOpen, onClose }: CVModalProps) {
     const [isAnimating, setIsAnimating] = useState(false);
     const [renderModal, setRenderModal] = useState(false);
     const [activeIndex, setActiveIndex] = useState(0);
+    const [isMobile, setIsMobile] = useState(false);
     const [viewMode, setViewMode] = useState<"dial" | "scroll">("dial");
     
     const dialRailRef = useRef<HTMLDivElement>(null);
     const touchStartY = useRef<number | null>(null);
     const isScrolling = useRef(false);
 
+    // Responsive Mobile Detection
+    useEffect(() => {
+        const checkMobile = () => {
+            const mobile = window.innerWidth < 1024;
+            setIsMobile(mobile);
+            if (mobile) {
+                setViewMode("scroll");
+            }
+        };
+
+        checkMobile();
+        window.addEventListener("resize", checkMobile);
+        return () => window.removeEventListener("resize", checkMobile);
+    }, []);
+
+    // Strict Scroll Lock on Background Landing Page
     useEffect(() => {
         if (isOpen) {
             setRenderModal(true);
             setActiveIndex(0);
+            if (window.innerWidth < 1024) {
+                setViewMode("scroll");
+            } else {
+                setViewMode("dial");
+            }
+
             document.body.style.overflow = "hidden";
+            document.documentElement.style.overflow = "hidden";
+            if ((window as any).__lenis) {
+                (window as any).__lenis.stop();
+            }
+
             setTimeout(() => setIsAnimating(true), 30);
         } else {
             setIsAnimating(false);
             document.body.style.overflow = "auto";
+            document.documentElement.style.overflow = "auto";
+            if ((window as any).__lenis) {
+                (window as any).__lenis.start();
+            }
+
             const timer = setTimeout(() => setRenderModal(false), 300);
             return () => clearTimeout(timer);
         }
@@ -51,6 +84,7 @@ export default function CVModal({ isOpen, onClose }: CVModalProps) {
     // Handle Wheel Navigation ONLY on Left Dial Rail
     const handleWheelNav = useCallback((e: WheelEvent) => {
         e.stopPropagation();
+        e.preventDefault();
         if (viewMode !== "dial") return;
 
         if (isScrolling.current) return;
@@ -72,7 +106,7 @@ export default function CVModal({ isOpen, onClose }: CVModalProps) {
         const handleKeyDown = (e: KeyboardEvent) => {
             if (!isOpen) return;
             if (e.key === "Escape") onClose();
-            if (viewMode === "dial") {
+            if (viewMode === "dial" && !isMobile) {
                 if (e.key === "ArrowDown" || e.key === "ArrowRight") {
                     e.preventDefault();
                     setActiveIndex((prev) => Math.min(prev + 1, cvSections.length - 1));
@@ -85,18 +119,18 @@ export default function CVModal({ isOpen, onClose }: CVModalProps) {
 
         window.addEventListener("keydown", handleKeyDown);
         return () => window.removeEventListener("keydown", handleKeyDown);
-    }, [isOpen, viewMode, onClose]);
+    }, [isOpen, viewMode, isMobile, onClose]);
 
     // Wheel listener bound ONLY to Left Dial Rail
     useEffect(() => {
         const rail = dialRailRef.current;
-        if (!rail) return;
+        if (!rail || isMobile) return;
 
         rail.addEventListener("wheel", handleWheelNav, { passive: false });
         return () => {
             rail.removeEventListener("wheel", handleWheelNav);
         };
-    }, [handleWheelNav, renderModal]);
+    }, [handleWheelNav, renderModal, isMobile]);
 
     // Touch Handlers for Swipe Navigation on Mobile Dial Rail
     const handleTouchStart = (e: React.TouchEvent) => {
@@ -104,7 +138,7 @@ export default function CVModal({ isOpen, onClose }: CVModalProps) {
     };
 
     const handleTouchMove = (e: React.TouchEvent) => {
-        if (viewMode !== "dial" || touchStartY.current === null) return;
+        if (viewMode !== "dial" || touchStartY.current === null || isMobile) return;
         const diffY = touchStartY.current - e.touches[0].clientY;
 
         if (Math.abs(diffY) > 40) {
@@ -119,10 +153,16 @@ export default function CVModal({ isOpen, onClose }: CVModalProps) {
 
     if (!renderModal) return null;
 
+    const currentViewMode = isMobile ? "scroll" : viewMode;
+
     return (
-        <div className="fixed inset-0 z-[99999] flex items-center justify-center p-2 sm:p-4 md:p-6 pointer-events-auto">
+        <div
+            data-lenis-prevent="true"
+            className="fixed inset-0 z-[99999] flex items-center justify-center p-2 sm:p-4 md:p-6 pointer-events-auto overscroll-none"
+        >
             {/* Solid High-Z Backdrop */}
             <div
+                data-lenis-prevent="true"
                 className={`absolute inset-0 bg-[#191919]/90 backdrop-blur-lg transition-opacity duration-300 ${
                     isAnimating ? "opacity-100" : "opacity-0"
                 }`}
@@ -131,7 +171,8 @@ export default function CVModal({ isOpen, onClose }: CVModalProps) {
 
             {/* Modal Card — Warm Off-White Surface */}
             <div
-                className={`relative z-10 w-full max-w-5xl h-full max-h-[92vh] rounded-3xl overflow-hidden shadow-2xl flex flex-col transition-all duration-300 ${
+                data-lenis-prevent="true"
+                className={`relative z-10 w-full max-w-5xl h-full max-h-[92vh] rounded-3xl overflow-hidden shadow-2xl flex flex-col transition-all duration-300 overscroll-none ${
                     isAnimating ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-95 translate-y-4"
                 }`}
                 style={{ background: "#fcfbf7" }}
@@ -156,13 +197,15 @@ export default function CVModal({ isOpen, onClose }: CVModalProps) {
                     </div>
 
                     <div className="flex items-center justify-between sm:justify-end gap-3 w-full sm:w-auto relative z-30 pt-2 sm:pt-0 border-t sm:border-t-0 border-white/10">
-                        {/* View Mode Toggle Button */}
-                        <button
-                            onClick={() => setViewMode(viewMode === "dial" ? "scroll" : "dial")}
-                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 text-white font-mono text-[11px] font-bold hover:bg-white/20 transition-all cursor-pointer"
-                        >
-                            <span>{viewMode === "dial" ? "🎡 Radial Dial View" : "📜 Full Scroll View"}</span>
-                        </button>
+                        {/* View Mode Toggle Button (Hidden on Mobile) */}
+                        {!isMobile && (
+                            <button
+                                onClick={() => setViewMode(viewMode === "dial" ? "scroll" : "dial")}
+                                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 text-white font-mono text-[11px] font-bold hover:bg-white/20 transition-all cursor-pointer"
+                            >
+                                <span>{viewMode === "dial" ? "🎡 Radial Dial View" : "📜 Full Scroll View"}</span>
+                            </button>
+                        )}
 
                         {/* Download PDF Button */}
                         <a
@@ -193,7 +236,7 @@ export default function CVModal({ isOpen, onClose }: CVModalProps) {
                 </div>
 
                 {/* ── Modal Body Area ────────────────────────────────────── */}
-                {viewMode === "dial" ? (
+                {currentViewMode === "dial" ? (
                     <div className="flex-1 relative overflow-hidden flex flex-col lg:flex-row select-none">
                         
                         {/* ── Left Arc Ring Dial Navigation Column ──────────────── */}
