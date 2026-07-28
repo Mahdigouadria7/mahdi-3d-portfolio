@@ -15,6 +15,11 @@
   100% { background-position: -200% 0; }
 }
 
+@keyframes neonSweep {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
 :root {
   --background: #0a0514;
   --foreground: #f8f8ff;

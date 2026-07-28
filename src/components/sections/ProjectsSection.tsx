@@ -18,13 +18,13 @@ function ProjectCard({ project, i }: { project: (typeof projects)[0]; i: number 
     }, [project]);
 
     const acc = project.accent ?? "fuchsia";
-    const glowColors: Record<string, { glow: string; border: string }> = {
-        fuchsia: { glow: "rgba(217, 70, 239, 0.6)", border: "rgba(232, 121, 249, 0.4)" },
-        cyan:    { glow: "rgba(34, 211, 238, 0.6)", border: "rgba(56, 189, 248, 0.4)" },
-        violet:  { glow: "rgba(167, 139, 250, 0.6)", border: "rgba(192, 132, 252, 0.4)" },
-        amber:   { glow: "rgba(251, 191, 36, 0.6)", border: "rgba(252, 211, 77, 0.4)" },
-        rose:    { glow: "rgba(251, 113, 133, 0.6)", border: "rgba(253, 164, 175, 0.4)" },
-        emerald: { glow: "rgba(52, 211, 153, 0.6)", border: "rgba(110, 231, 183, 0.4)" },
+    const glowColors: Record<string, { glow: string; border: string; beam: string }> = {
+        fuchsia: { glow: "rgba(217, 70, 239, 0.9)", border: "#e879f9", beam: "#f0abfc" },
+        cyan:    { glow: "rgba(34, 211, 238, 0.9)", border: "#38bdf8", beam: "#7dd3fc" },
+        violet:  { glow: "rgba(167, 139, 250, 0.9)", border: "#c084fc", beam: "#d8b4fe" },
+        amber:   { glow: "rgba(251, 191, 36, 0.9)", border: "#fcd34d", beam: "#fef08a" },
+        rose:    { glow: "rgba(251, 113, 133, 0.9)", border: "#fda4af", beam: "#fecdd3" },
+        emerald: { glow: "rgba(52, 211, 153, 0.9)", border: "#6ee7b7", beam: "#a7f3d0" },
     };
     const currentGlow = glowColors[acc] ?? glowColors.fuchsia;
 
@@ -35,18 +35,30 @@ function ProjectCard({ project, i }: { project: (typeof projects)[0]; i: number 
             className="group flex-shrink-0 block select-none focus-visible:outline-none"
             style={{ width: "320px", height: "350px", perspective: "1200px" }}
         >
-            <article className="relative w-full h-full rounded-[32px] bg-black p-[3px] border-[3px] border-black/80 shadow-2xl overflow-hidden transition-all duration-700 group-hover:-translate-y-2">
+            <article className="relative w-full h-full rounded-[32px] bg-black p-[3px] border-[3px] border-black/90 shadow-2xl overflow-hidden transition-all duration-700 group-hover:-translate-y-2">
                 
-                {/* Smooth Palette Emission Glow Outer Ring (Fades in on hover) */}
+                {/* High-Intensity Emission Outer Glow (Fades in on hover) */}
                 <div
                     className="absolute inset-0 rounded-[32px] opacity-0 group-hover:opacity-100 transition-all duration-700 pointer-events-none z-0"
                     style={{
-                        boxShadow: `0 20px 50px -10px ${currentGlow.glow}, inset 0 0 15px ${currentGlow.glow}`,
+                        boxShadow: `0 0 35px ${currentGlow.glow}, 0 20px 60px -5px ${currentGlow.glow}`,
                         borderColor: currentGlow.border,
                     }}
                 />
 
-                <div className="relative w-full h-full rounded-[28px] overflow-hidden bg-[#141416] flex flex-col justify-between z-1" style={{ transformStyle: "preserve-3d" }}>
+                {/* Left-to-Right Sweeping Neon Laser Beam along Bottom Border */}
+                <div className="absolute inset-x-0 bottom-0 h-[4px] overflow-hidden rounded-b-[32px] pointer-events-none z-40 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <div
+                        className="w-full h-full"
+                        style={{
+                            background: `linear-gradient(90deg, transparent 0%, ${currentGlow.beam} 50%, transparent 100%)`,
+                            animation: "neonSweep 1.8s infinite linear",
+                            boxShadow: `0 0 15px ${currentGlow.border}`,
+                        }}
+                    />
+                </div>
+
+                <div className="relative w-full h-full rounded-[28px] overflow-hidden bg-[#161618] flex flex-col justify-between z-1" style={{ transformStyle: "preserve-3d" }}>
 
                     {/* Media Container (Top) */}
                     <div className="relative w-full h-[190px] overflow-hidden rounded-t-[26px]">
@@ -94,7 +106,9 @@ function ProjectCard({ project, i }: { project: (typeof projects)[0]; i: number 
                                         draggable={false}
                                     />
                                 )}
-                                <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-transparent pointer-events-none" />
+
+                                {/* Black Vignette Overlay - Fades Out Completely on Hover! */}
+                                <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/30 to-black/40 pointer-events-none transition-opacity duration-700 ease-out group-hover:opacity-0 z-10" />
                             </div>
                         )}
 
@@ -116,9 +130,9 @@ function ProjectCard({ project, i }: { project: (typeof projects)[0]; i: number 
                     >
                         {/* Bottom Inner Emission Glow Layer */}
                         <div
-                            className="absolute inset-x-0 bottom-0 h-28 rounded-b-[26px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-0"
+                            className="absolute inset-x-0 bottom-0 h-32 rounded-b-[26px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-0"
                             style={{
-                                background: `radial-gradient(ellipse at 50% 120%, ${currentGlow.glow}, transparent 75%)`,
+                                background: `radial-gradient(ellipse at 50% 120%, ${currentGlow.glow}, transparent 70%)`,
                             }}
                         />
 
