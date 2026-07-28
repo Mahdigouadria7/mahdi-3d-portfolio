@@ -37,10 +37,10 @@ function ProjectCard({ project, i, isMobileActive }: { project: (typeof projects
             data-card-index={i}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
-            className="group flex-shrink-0 block select-none focus-visible:outline-none snap-center"
+            className="group flex-shrink-0 block select-none focus-visible:outline-none snap-center transform-gpu"
             style={{ width: "320px", height: "350px", perspective: "1200px" }}
         >
-            <article className={`relative w-full h-full rounded-[32px] bg-black p-[3px] border-[3px] border-black/90 shadow-2xl overflow-hidden transition-all duration-700 ${isActive ? "-translate-y-2" : ""}`}>
+            <article className={`relative w-full h-full rounded-[32px] bg-[#141416] p-[3px] border-[3px] border-black/90 shadow-2xl overflow-hidden transition-all duration-700 transform-gpu ${isActive ? "-translate-y-2" : ""}`}>
                 
                 {/* High-Intensity Outer Neon Glow Bloom */}
                 <div
@@ -63,10 +63,10 @@ function ProjectCard({ project, i, isMobileActive }: { project: (typeof projects
                     />
                 </div>
 
-                <div className="relative w-full h-full rounded-[28px] overflow-hidden bg-black flex flex-col justify-between z-2" style={{ transformStyle: "preserve-3d" }}>
+                <div className="relative w-full h-full rounded-[28px] overflow-hidden bg-[#141416] flex flex-col justify-between z-2 transform-gpu" style={{ transformStyle: "preserve-3d" }}>
 
                     {/* Full-Bleed Media Container (Extends all the way down behind folder tab shape) */}
-                    <div className="absolute top-0 inset-x-0 w-full h-[225px] overflow-hidden rounded-t-[26px] z-1">
+                    <div className="absolute top-0 inset-x-0 w-full h-[225px] overflow-hidden rounded-t-[26px] z-1 bg-[#141416]">
 
                         {/* 3D Stack Card 3 (Furthest Back) */}
                         {stackedMedia[2] && (
@@ -154,9 +154,9 @@ function ProjectCard({ project, i, isMobileActive }: { project: (typeof projects
                                 transformOrigin: "bottom center",
                             }}
                         >
-                            {/* Tab Left Header (Holds project.title) */}
+                            {/* Tab Left Header (Holds FIXED PERMANENT project.title!) */}
                             <div className="max-w-[150px]">
-                                <h3 className={`font-playfair text-base font-bold leading-tight transition-colors line-clamp-1 ${isActive ? "text-[#ffff7b]" : "text-white"}`}>
+                                <h3 className="font-playfair text-base font-bold text-white leading-tight block line-clamp-1">
                                     {project.title}
                                 </h3>
                                 <span className="font-mono text-[10px] text-white/50 uppercase tracking-widest block mt-1 font-medium truncate">
@@ -175,7 +175,7 @@ function ProjectCard({ project, i, isMobileActive }: { project: (typeof projects
                                     </span>
                                 </div>
 
-                                <span className={`font-mono text-xs flex items-center gap-1.5 transition-all duration-300 font-bold ${isActive ? "text-[#ffff7b] gap-2" : "text-white/90 gap-1.5"}`}>
+                                <span className="font-mono text-xs text-white/90 flex items-center gap-1.5 font-bold">
                                     View
                                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                                         <path d="M5 12h14M12 5l7 7-7 7" />
@@ -196,6 +196,14 @@ export default function ProjectsSection() {
     const [canScrollLeft, setCanScrollLeft] = useState(false);
     const [canScrollRight, setCanScrollRight] = useState(true);
     const [activeMobileIndex, setActiveMobileIndex] = useState<number | null>(0);
+    const [isDesktop, setIsDesktop] = useState(false);
+
+    useEffect(() => {
+        setIsDesktop(window.innerWidth >= 768);
+        const handleResize = () => setIsDesktop(window.innerWidth >= 768);
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
 
     const checkScroll = () => {
         const container = containerRef.current;
@@ -206,7 +214,6 @@ export default function ProjectsSection() {
             container.scrollLeft < container.scrollWidth - container.clientWidth - 10
         );
 
-        // Calculate centered card on mobile screens (under 1024px)
         if (window.innerWidth < 1024) {
             const containerCenter = container.getBoundingClientRect().left + container.clientWidth / 2;
             const cardElements = container.querySelectorAll<HTMLElement>("[data-card-index]");
@@ -250,7 +257,7 @@ export default function ProjectsSection() {
     };
 
     return (
-        <section id="projects" className="relative w-full bg-white py-16 md:py-20">
+        <section id="projects" className="relative w-full bg-[#fcfcfc] py-16 md:py-20 overflow-hidden">
 
             {/* ── Section Header ─────────────────────────────── */}
             <div className="flex flex-col md:flex-row items-start md:items-end justify-between px-6 md:px-16 pb-8 gap-6">
@@ -316,8 +323,8 @@ export default function ProjectsSection() {
                 ref={containerRef}
                 className="w-full overflow-x-auto hide-scrollbar scroll-smooth snap-x snap-mandatory py-8 px-4 md:px-0"
                 style={{
-                    maskImage: "linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%)",
-                    WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%)",
+                    maskImage: isDesktop ? "linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%)" : "none",
+                    WebkitMaskImage: isDesktop ? "linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%)" : "none",
                 }}
             >
                 {/* Inner row of cards */}
