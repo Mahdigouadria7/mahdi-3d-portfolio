@@ -325,10 +325,10 @@ export default function CVModal({ isOpen, onClose }: CVModalProps) {
                                     onClick={() => setActiveIndex((prev) => Math.max(prev - 1, 0))}
                                     disabled={activeIndex === 0}
                                     aria-label="Previous CV Section"
-                                    className={`w-9 h-9 rounded-full font-bold text-base flex items-center justify-center transition-all duration-200 ${
+                                    className={`w-8 h-8 rounded-full font-bold text-base flex items-center justify-center transition-all duration-200 ${
                                         activeIndex === 0
-                                            ? "opacity-25 cursor-not-allowed text-[#191919]/40 bg-transparent"
-                                            : "text-[#191919] bg-transparent hover:bg-[#191919] hover:text-[#ffff7b] active:bg-[#191919] active:text-[#ffff7b] cursor-pointer active:scale-90"
+                                            ? "opacity-20 cursor-not-allowed text-[#191919]/20 bg-transparent"
+                                            : "text-[#191919]/40 bg-transparent hover:bg-[#191919] hover:text-[#ffff7b] active:bg-[#191919] active:text-[#ffff7b] cursor-pointer active:scale-90"
                                     }`}
                                 >
                                     ↑
@@ -337,15 +337,15 @@ export default function CVModal({ isOpen, onClose }: CVModalProps) {
                                     onClick={() => setActiveIndex((prev) => Math.min(prev + 1, cvSections.length - 1))}
                                     disabled={activeIndex === cvSections.length - 1}
                                     aria-label="Next CV Section"
-                                    className={`w-9 h-9 rounded-full font-bold text-base flex items-center justify-center transition-all duration-200 ${
+                                    className={`w-8 h-8 rounded-full font-bold text-base flex items-center justify-center transition-all duration-200 ${
                                         activeIndex === cvSections.length - 1
-                                            ? "opacity-25 cursor-not-allowed text-[#191919]/40 bg-transparent"
-                                            : "text-[#191919] bg-transparent hover:bg-[#191919] hover:text-[#ffff7b] active:bg-[#191919] active:text-[#ffff7b] cursor-pointer active:scale-90"
+                                            ? "opacity-20 cursor-not-allowed text-[#191919]/20 bg-transparent"
+                                            : "text-[#191919]/40 bg-transparent hover:bg-[#191919] hover:text-[#ffff7b] active:bg-[#191919] active:text-[#ffff7b] cursor-pointer active:scale-90"
                                     }`}
                                 >
                                     ↓
                                 </button>
-                                <span className="font-mono text-xs text-[#191919] font-black uppercase tracking-widest ml-1">
+                                <span className="font-mono text-xs text-[#191919]/40 font-bold uppercase tracking-widest ml-1">
                                     {activeIndex + 1} / {cvSections.length}
                                 </span>
                             </div>
