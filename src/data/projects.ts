@@ -84,17 +84,14 @@ export const projects: Project[] = [
         media: [
             { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/v1785172806/danup_Motion_vglmg0.mov', alt: 'Danup 3D Motion Commercial Video' },
             { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/v1785168603/portfolio/danup/videos/Danup_x_ALA_3d_Video.mp4', alt: 'Danup x ALA 3D Commercial Video' },
+            { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/v1785168599/portfolio/danup/videos/Danup_Boost_CGI.mp4', alt: 'Danup Boost CGI Commercial' },
+            { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/v1785168566/portfolio/danup/videos/Danup_Maldives_CGI.mp4', alt: 'Danup Maldives CGI Commercial' },
+            { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/v1785168656/portfolio/danup/videos/st1.mp4', alt: 'Story Commercial Cut 1' },
+            { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/v1785168710/portfolio/danup/videos/st_3.mp4', alt: 'Story Commercial Cut 2' },
+            { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/v1785168731/portfolio/danup/videos/CTA_1.mp4', alt: 'Call to Action Commercial Video' },
             { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Spotifyvanille.png', alt: 'Vanilla Flavor Element' },
             { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Spotify_peach.png', alt: 'Melba Flavor Element' },
-            { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Spotify_Skate.png', alt: 'Skate Lifestyle Sticker' },
-            { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Spotify_Victory.png', alt: 'Victory Motion Sticker' },
-            { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Spotify_fachfecha.png', alt: 'Fachfecha Sticker' },
-            { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Spotify_recorder.png', alt: 'Cassette Recorder Sticker' },
-            { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Spotify_thunder.png', alt: 'Thunder Motion Sticker' },
-            { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/rapup-.png', alt: 'RapUp Edition' },
-            { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/danup/videos/st1.mp4', alt: 'Story Commercial Cut 1' },
-            { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/danup/videos/st_3.mp4', alt: 'Story Commercial Cut 2' },
-            { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/danup/videos/CTA_1.mp4', alt: 'Call to Action Commercial Video' }
+            { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/portfolio/danup/elements/Spotify_Skate.png', alt: 'Skate Lifestyle Sticker' }
         ]
     },
     {
@@ -111,13 +108,13 @@ export const projects: Project[] = [
         challenge: "Simulating rich fruit juice & milk fluid dynamics, realistic PBR bottle materials, and multi-environment CGI staging while ensuring fast 60fps web performance.",
         solution: "High-precision PBR material overrides, Octane Render lighting passes, lightweight web video streaming, and real-time React Three Fiber bottle viewport with custom studio lighting controls.",
         media: [
-            { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/v1785166627/portfolio/danao/renders/shwrsec2ravagb9revpz.png', alt: 'Danao CGI Master Render Pass' },
-            { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/v1785166618/portfolio/danao/renders/tc1nmxmdqz4gnxeakq4i.png', alt: 'Danao CGI Lighting Render Pass' },
             { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/v1785172226/danao_motion_island_xcxa6y.mp4', alt: 'Danao 3D Motion Island Video' },
             { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/v1785172129/danao_cgi_street_e1oibf.mp4', alt: 'Danao CGI Street Video' },
             { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/v1785167351/portfolio/danao/videos/Danao_Motion_3D.mp4', alt: 'Danao 3D Motion Showcase' },
             { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/v1785167347/portfolio/danao/videos/Forest_Danao.mp4', alt: 'Forest Environment CGI Cut' },
-            { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/v1785167337/portfolio/danao/videos/Dj_Danao.mp4', alt: 'DJ Theme CGI Cut' }
+            { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/v1785167337/portfolio/danao/videos/Dj_Danao.mp4', alt: 'DJ Theme CGI Cut' },
+            { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/v1785167323/portfolio/danao/videos/Danao_Loop_SciFi_2.mp4', alt: 'Danao SciFi Loop Video' },
+            { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/v1785166627/portfolio/danao/renders/shwrsec2ravagb9revpz.png', alt: 'Danao CGI Master Render Pass' }
         ]
     },
     {

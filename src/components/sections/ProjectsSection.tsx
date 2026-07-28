@@ -2,7 +2,117 @@
 import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import { projects } from "@/data/projects";
-import ProjectModel from "@/components/3d/ProjectModel";
+
+function ProjectCard({ project, i }: { project: (typeof projects)[0]; i: number }) {
+    const [previewMedia, setPreviewMedia] = useState<{ type: 'image' | 'video'; url: string; alt: string } | null>(null);
+
+    useEffect(() => {
+        const videos = project.media.filter((m) => m.type === 'video');
+        if (videos.length > 0) {
+            const randomVideo = videos[Math.floor(Math.random() * videos.length)];
+            setPreviewMedia(randomVideo);
+        } else if (project.media.length > 0) {
+            const randomMedia = project.media[Math.floor(Math.random() * project.media.length)];
+            setPreviewMedia(randomMedia);
+        }
+    }, [project]);
+
+    const acc = project.accent ?? "fuchsia";
+    const dots: Record<string, string> = {
+        fuchsia: "#d946ef",
+        cyan:    "#22d3ee",
+        violet:  "#a78bfa",
+        amber:   "#fbbf24",
+        rose:    "#fb7185",
+        emerald: "#34d399",
+    };
+    const dot = dots[acc] ?? dots.fuchsia;
+
+    return (
+        <Link
+            href={`/projects/${project.slug}`}
+            draggable={false}
+            className="group flex-shrink-0 block select-none focus-visible:outline-none"
+            style={{ width: "clamp(260px, 28vw, 340px)" }}
+        >
+            <article
+                className="relative w-full overflow-hidden rounded-2xl bg-[#191919] transition-transform duration-500 group-hover:-translate-y-2"
+                style={{
+                    boxShadow: "0 8px 40px rgba(25,25,25,0.18), 0 2px 8px rgba(25,25,25,0.08)",
+                }}
+            >
+                {/* Image / Video area */}
+                <div className="relative w-full overflow-hidden bg-[#222]" style={{ height: 220 }}>
+                    {previewMedia ? (
+                        previewMedia.type === "video" ? (
+                            <video
+                                key={previewMedia.url}
+                                src={previewMedia.url}
+                                autoPlay
+                                loop
+                                muted
+                                playsInline
+                                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 pointer-events-none"
+                            />
+                        ) : (
+                            <img
+                                src={previewMedia.url}
+                                alt={previewMedia.alt}
+                                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                draggable={false}
+                            />
+                        )
+                    ) : (
+                        <div className="absolute inset-0 bg-[#222]" />
+                    )}
+                    {/* Gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#191919] via-transparent to-transparent z-10" />
+                    {/* Index watermark */}
+                    <span className="absolute bottom-2 right-3 font-mono font-black text-[72px] leading-none text-white/[0.06] select-none z-0">
+                        {String(i + 1).padStart(2, "0")}
+                    </span>
+                    {/* Accent dot */}
+                    <span
+                        className="absolute top-3 left-3 z-30 w-2 h-2 rounded-full ring-2 ring-black/20"
+                        style={{ background: dot }}
+                    />
+                </div>
+
+                {/* Text block */}
+                <div className="px-5 pt-4 pb-5">
+                    <div className="flex items-center justify-between mb-2">
+                        <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-white/70 font-semibold">
+                            {project.category}
+                        </span>
+                        <span className="font-mono text-[9px] text-white/50 tracking-widest">
+                            {project.timeline}
+                        </span>
+                    </div>
+                    <h3
+                        className="font-playfair text-xl text-white leading-tight mb-2 group-hover:text-[#ffff7b] transition-colors"
+                        style={{ fontWeight: 700 }}
+                    >
+                        {project.title}
+                    </h3>
+                    <p className="font-cyber text-white/70 text-xs leading-relaxed line-clamp-2">
+                        {project.description}
+                    </p>
+                    <div className="flex items-center justify-between mt-4 pt-3 border-t border-white/[0.12]">
+                        <span className="font-mono text-[9px] text-white/50 uppercase tracking-widest font-medium">
+                            {project.client}
+                        </span>
+                        <span className="font-mono text-[9px] text-white/80 group-hover:text-[#ffff7b] group-hover:gap-2 flex items-center gap-1.5 transition-all duration-300 font-semibold">
+                            View
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+            </article>
+        </Link>
+    );
+}
 
 export default function ProjectsSection() {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -111,103 +221,9 @@ export default function ProjectsSection() {
             >
                 {/* Inner row of cards */}
                 <div className="inline-flex flex-row gap-6 px-6 md:px-16 w-max">
-                    {projects.map((project, i) => {
-                        const acc = project.accent ?? "fuchsia";
-                        const dots: Record<string, string> = {
-                            fuchsia: "#d946ef",
-                            cyan:    "#22d3ee",
-                            violet:  "#a78bfa",
-                            amber:   "#fbbf24",
-                            rose:    "#fb7185",
-                            emerald: "#34d399",
-                        };
-                        const dot = dots[acc] ?? dots.fuchsia;
-
-                        return (
-                            <Link
-                                key={project.slug}
-                                href={`/projects/${project.slug}`}
-                                draggable={false}
-                                className="group flex-shrink-0 block select-none focus-visible:outline-none"
-                                style={{ width: "clamp(260px, 28vw, 340px)" }}
-                            >
-                                <article
-                                    className="relative w-full overflow-hidden rounded-2xl bg-[#191919] transition-transform duration-500 group-hover:-translate-y-2"
-                                    style={{
-                                        boxShadow: "0 8px 40px rgba(25,25,25,0.18), 0 2px 8px rgba(25,25,25,0.08)",
-                                    }}
-                                >
-                                    {/* Image / Video area */}
-                                    <div className="relative w-full overflow-hidden bg-[#222]" style={{ height: 220 }}>
-                                        {project.media[0] ? (
-                                            project.media[0].type === "video" ? (
-                                                <video
-                                                    src={project.media[0].url}
-                                                    autoPlay
-                                                    loop
-                                                    muted
-                                                    playsInline
-                                                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 pointer-events-none"
-                                                />
-                                            ) : (
-                                                <img
-                                                    src={project.media[0].url}
-                                                    alt={project.media[0].alt}
-                                                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                                                    draggable={false}
-                                                />
-                                            )
-                                        ) : (
-                                            <div className="absolute inset-0 bg-[#222]" />
-                                        )}
-                                        {/* Gradient overlay */}
-                                        <div className="absolute inset-0 bg-gradient-to-t from-[#191919] via-transparent to-transparent z-10" />
-                                        {/* Index watermark */}
-                                        <span className="absolute bottom-2 right-3 font-mono font-black text-[72px] leading-none text-white/[0.06] select-none z-0">
-                                            {String(i + 1).padStart(2, "0")}
-                                        </span>
-                                        {/* Accent dot */}
-                                        <span
-                                            className="absolute top-3 left-3 z-30 w-2 h-2 rounded-full ring-2 ring-black/20"
-                                            style={{ background: dot }}
-                                        />
-                                    </div>
-
-                                    {/* Text block */}
-                                    <div className="px-5 pt-4 pb-5">
-                                        <div className="flex items-center justify-between mb-2">
-                                            <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-white/70 font-semibold">
-                                                {project.category}
-                                            </span>
-                                            <span className="font-mono text-[9px] text-white/50 tracking-widest">
-                                                {project.timeline}
-                                            </span>
-                                        </div>
-                                        <h3
-                                            className="font-playfair text-xl text-white leading-tight mb-2 group-hover:text-[#ffff7b] transition-colors"
-                                            style={{ fontWeight: 700 }}
-                                        >
-                                            {project.title}
-                                        </h3>
-                                        <p className="font-cyber text-white/70 text-xs leading-relaxed line-clamp-2">
-                                            {project.description}
-                                        </p>
-                                        <div className="flex items-center justify-between mt-4 pt-3 border-t border-white/[0.12]">
-                                            <span className="font-mono text-[9px] text-white/50 uppercase tracking-widest font-medium">
-                                                {project.client}
-                                            </span>
-                                            <span className="font-mono text-[9px] text-white/80 group-hover:text-[#ffff7b] group-hover:gap-2 flex items-center gap-1.5 transition-all duration-300 font-semibold">
-                                                View
-                                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                                    <path d="M5 12h14M12 5l7 7-7 7" />
-                                                </svg>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </article>
-                            </Link>
-                        );
-                    })}
+                    {projects.map((project, i) => (
+                        <ProjectCard key={project.slug} project={project} i={i} />
+                    ))}
                 </div>
             </div>
 
