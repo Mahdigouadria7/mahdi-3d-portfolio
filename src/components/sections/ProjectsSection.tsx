@@ -33,86 +33,92 @@ function ProjectCard({ project, i }: { project: (typeof projects)[0]; i: number 
             href={`/projects/${project.slug}`}
             draggable={false}
             className="group flex-shrink-0 block select-none focus-visible:outline-none"
-            style={{ width: "330px", height: "370px" }}
+            style={{ width: "320px", height: "340px" }}
         >
-            <article
-                className="relative w-full h-full overflow-hidden rounded-[26px] bg-[#121214] border border-white/10 p-2.5 flex flex-col justify-between transition-all duration-500 group-hover:-translate-y-2 group-hover:border-white/25"
-                style={{
-                    boxShadow: "0 12px 40px rgba(0,0,0,0.35)",
-                }}
-            >
-                {/* Media area (Top) */}
-                <div className="relative w-full h-[185px] overflow-hidden rounded-t-[18px] rounded-b-[10px] bg-[#1a1a1c]">
-                    {previewMedia ? (
-                        previewMedia.type === "video" ? (
-                            <video
-                                key={previewMedia.url}
-                                src={previewMedia.url}
-                                autoPlay
-                                loop
-                                muted
-                                playsInline
-                                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 pointer-events-none"
-                            />
+            <article className="relative w-full h-full rounded-[32px] bg-black p-[3px] border-[3px] border-black/80 shadow-2xl overflow-hidden transition-transform duration-500 group-hover:-translate-y-2">
+                <div className="relative w-full h-full rounded-[28px] overflow-hidden bg-[#161618] flex flex-col justify-between">
+
+                    {/* Media Area (Top) */}
+                    <div className="relative w-full h-[185px] overflow-hidden">
+                        {previewMedia ? (
+                            previewMedia.type === "video" ? (
+                                <video
+                                    key={previewMedia.url}
+                                    src={previewMedia.url}
+                                    autoPlay
+                                    loop
+                                    muted
+                                    playsInline
+                                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 pointer-events-none"
+                                />
+                            ) : (
+                                <img
+                                    src={previewMedia.url}
+                                    alt={previewMedia.alt}
+                                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                    draggable={false}
+                                />
+                            )
                         ) : (
-                            <img
-                                src={previewMedia.url}
-                                alt={previewMedia.alt}
-                                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                                draggable={false}
-                            />
-                        )
-                    ) : (
-                        <div className="absolute inset-0 bg-[#1e1e20]" />
-                    )}
-                    <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-transparent pointer-events-none" />
+                            <div className="absolute inset-0 bg-[#222]" />
+                        )}
+                        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/20 pointer-events-none" />
 
-                    {/* Accent dot & Timeline */}
-                    <span
-                        className="absolute top-3 left-3 z-30 w-2.5 h-2.5 rounded-full ring-2 ring-black/40"
-                        style={{ background: dot }}
-                    />
-                    <span className="absolute top-3 right-3 z-30 font-mono text-[9px] font-bold text-white/90 bg-black/60 backdrop-blur-md px-2.5 py-0.5 rounded-full border border-white/15 tracking-widest">
-                        {project.timeline}
-                    </span>
-                </div>
-
-                {/* Folder Notch Tab Info Container (Bottom) */}
-                <div className="relative w-full flex-1 bg-[#1a1a1e] rounded-b-[18px] rounded-t-[14px] p-4 flex flex-col justify-between mt-2 border-t border-white/5">
-                    {/* Header Category & Title */}
-                    <div>
-                        <div className="flex items-center justify-between mb-1">
-                            <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-white/60 font-semibold">
-                                {project.category}
-                            </span>
-                        </div>
-                        <h3
-                            className="font-playfair text-lg text-white font-bold leading-tight mb-1.5 group-hover:text-[#ffff7b] transition-colors line-clamp-1"
-                        >
-                            {project.title}
-                        </h3>
-                        <p className="font-cyber text-white/60 text-[11px] leading-relaxed line-clamp-2">
-                            {project.description}
-                        </p>
-                    </div>
-
-                    {/* Bottom Metadata & View Button */}
-                    <div className="flex items-center justify-between pt-3 border-t border-white/10 mt-2">
-                        <div className="flex items-baseline gap-1.5">
-                            <span className="font-mono text-base font-black text-white/90">
-                                {String(i + 1).padStart(2, "0")}
-                            </span>
-                            <span className="font-mono text-[9px] text-white/50 uppercase tracking-wider font-semibold line-clamp-1 max-w-[120px]">
+                        {/* Top Right Client & Timeline Overlay */}
+                        <div className="absolute top-3.5 right-4 text-right max-w-[140px] pointer-events-none z-10">
+                            <span className="font-playfair text-xs font-bold text-white leading-tight block drop-shadow-md">
                                 {project.client}
                             </span>
+                            <span className="font-mono text-[9px] text-white/70 tracking-wider uppercase block mt-0.5">
+                                {project.timeline}
+                            </span>
                         </div>
-                        <span className="font-mono text-[10px] text-white/90 group-hover:text-[#ffff7b] group-hover:gap-1.5 flex items-center gap-1 transition-all duration-300 font-bold">
-                            View
-                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                                <path d="M5 12h14M12 5l7 7-7 7" />
-                            </svg>
-                        </span>
                     </div>
+
+                    {/* Folder Tab Notch Info Section (Bottom) */}
+                    <div className="relative w-full h-[175px] -mt-6 z-20">
+                        {/* SVG Folder Tab Shape Background */}
+                        <svg
+                            className="absolute inset-0 w-full h-full text-[#1c1c1e] fill-current drop-shadow-[0_-4px_12px_rgba(0,0,0,0.4)]"
+                            viewBox="0 0 320 175"
+                            preserveAspectRatio="none"
+                        >
+                            <path d="M 0,20 Q 0,0 20,0 L 150,0 Q 165,0 172,10 L 184,28 Q 192,36 205,36 L 300,36 Q 320,36 320,56 L 320,175 L 0,175 Z" />
+                        </svg>
+
+                        {/* Tab Content Layer */}
+                        <div className="relative z-10 w-full h-full p-5 flex flex-col justify-between">
+                            {/* Tab Header: Title & Category (No Description) */}
+                            <div>
+                                <h3 className="font-playfair text-lg text-white font-bold leading-tight group-hover:text-[#ffff7b] transition-colors line-clamp-1">
+                                    {project.title}
+                                </h3>
+                                <span className="font-mono text-[10px] text-white/50 uppercase tracking-widest block mt-1 font-medium">
+                                    {project.category}
+                                </span>
+                            </div>
+
+                            {/* Bottom Metadata: Index & View CTA */}
+                            <div className="flex items-end justify-between pt-2">
+                                <div className="flex items-baseline gap-1.5">
+                                    <span className="font-mono text-2xl font-black text-white">
+                                        {String(i + 1).padStart(2, "0")}
+                                    </span>
+                                    <span className="font-mono text-[10px] text-white/50 uppercase tracking-wider font-semibold">
+                                        Project
+                                    </span>
+                                </div>
+
+                                <span className="font-mono text-xs text-white/90 group-hover:text-[#ffff7b] group-hover:gap-2 flex items-center gap-1.5 transition-all duration-300 font-bold">
+                                    View
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                                        <path d="M5 12h14M12 5l7 7-7 7" />
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </article>
         </Link>
