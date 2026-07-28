@@ -370,14 +370,18 @@ export default function CVModal({ isOpen, onClose }: CVModalProps) {
                                         <p className="font-sans text-base md:text-lg text-[#191919]/90 leading-relaxed font-normal">
                                             Driven Tunisian 3D Artist with a strong software engineering background, blending technical precision with creative vision to produce high-quality CGI, motion design, and product visualizations. Experienced in working with top brands, optimizing assets for VR/AR, and collaborating with multidisciplinary teams to deliver impactful visual content.
                                         </p>
-                                        <div className="pt-4 border-t border-[#191919]/10 grid grid-cols-2 sm:grid-cols-3 gap-4 font-sans text-sm md:text-base">
+                                        <div className="pt-4 border-t border-[#191919]/10 grid grid-cols-2 sm:grid-cols-4 gap-4 font-sans text-sm md:text-base">
                                             <div>
                                                 <span className="text-[#191919]/50 block font-semibold uppercase text-xs">Location</span>
                                                 <span className="font-bold text-[#191919]">Tunisia (Remote)</span>
                                             </div>
                                             <div>
                                                 <span className="text-[#191919]/50 block font-semibold uppercase text-xs">Experience</span>
-                                                <span className="font-bold text-[#191919]">5+ Years</span>
+                                                <span className="font-bold text-[#191919]">+5 Years</span>
+                                            </div>
+                                            <div>
+                                                <span className="text-[#191919]/50 block font-semibold uppercase text-xs">Projects</span>
+                                                <span className="font-bold text-[#191919]">+30 Projects</span>
                                             </div>
                                             <div>
                                                 <span className="text-[#191919]/50 block font-semibold uppercase text-xs">Availability</span>
@@ -396,7 +400,7 @@ export default function CVModal({ isOpen, onClose }: CVModalProps) {
                                             <h3 className="font-playfair text-2xl md:text-3xl text-[#191919] font-bold">
                                                 Work <em className="font-playfair italic font-normal">Experience</em>
                                             </h3>
-                                            <span className="font-mono text-xs md:text-sm font-bold text-[#191919]/60">6 Companies &amp; Roles</span>
+                                            <span className="font-mono text-xs md:text-sm font-bold text-[#191919]/60">+30 Projects · +5 Years</span>
                                         </div>
 
                                         {/* Innov8 Agency */}
