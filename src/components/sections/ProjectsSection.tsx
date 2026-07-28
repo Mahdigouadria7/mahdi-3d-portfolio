@@ -17,6 +17,17 @@ function ProjectCard({ project, i }: { project: (typeof projects)[0]; i: number 
         }
     }, [project]);
 
+    const acc = project.accent ?? "fuchsia";
+    const glowColors: Record<string, { glow: string; border: string }> = {
+        fuchsia: { glow: "rgba(217, 70, 239, 0.6)", border: "rgba(232, 121, 249, 0.4)" },
+        cyan:    { glow: "rgba(34, 211, 238, 0.6)", border: "rgba(56, 189, 248, 0.4)" },
+        violet:  { glow: "rgba(167, 139, 250, 0.6)", border: "rgba(192, 132, 252, 0.4)" },
+        amber:   { glow: "rgba(251, 191, 36, 0.6)", border: "rgba(252, 211, 77, 0.4)" },
+        rose:    { glow: "rgba(251, 113, 133, 0.6)", border: "rgba(253, 164, 175, 0.4)" },
+        emerald: { glow: "rgba(52, 211, 153, 0.6)", border: "rgba(110, 231, 183, 0.4)" },
+    };
+    const currentGlow = glowColors[acc] ?? glowColors.fuchsia;
+
     return (
         <Link
             href={`/projects/${project.slug}`}
@@ -24,8 +35,18 @@ function ProjectCard({ project, i }: { project: (typeof projects)[0]; i: number 
             className="group flex-shrink-0 block select-none focus-visible:outline-none"
             style={{ width: "320px", height: "350px", perspective: "1200px" }}
         >
-            <article className="relative w-full h-full rounded-[32px] bg-black p-[3px] border-[3px] border-black/80 shadow-2xl overflow-hidden transition-all duration-500 group-hover:-translate-y-2">
-                <div className="relative w-full h-full rounded-[28px] overflow-hidden bg-[#141416] flex flex-col justify-between" style={{ transformStyle: "preserve-3d" }}>
+            <article className="relative w-full h-full rounded-[32px] bg-black p-[3px] border-[3px] border-black/80 shadow-2xl overflow-hidden transition-all duration-700 group-hover:-translate-y-2">
+                
+                {/* Smooth Palette Emission Glow Outer Ring (Fades in on hover) */}
+                <div
+                    className="absolute inset-0 rounded-[32px] opacity-0 group-hover:opacity-100 transition-all duration-700 pointer-events-none z-0"
+                    style={{
+                        boxShadow: `0 20px 50px -10px ${currentGlow.glow}, inset 0 0 15px ${currentGlow.glow}`,
+                        borderColor: currentGlow.border,
+                    }}
+                />
+
+                <div className="relative w-full h-full rounded-[28px] overflow-hidden bg-[#141416] flex flex-col justify-between z-1" style={{ transformStyle: "preserve-3d" }}>
 
                     {/* Media Container (Top) */}
                     <div className="relative w-full h-[190px] overflow-hidden rounded-t-[26px]">
@@ -93,6 +114,14 @@ function ProjectCard({ project, i }: { project: (typeof projects)[0]; i: number 
                             transformStyle: "preserve-3d",
                         }}
                     >
+                        {/* Bottom Inner Emission Glow Layer */}
+                        <div
+                            className="absolute inset-x-0 bottom-0 h-28 rounded-b-[26px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-0"
+                            style={{
+                                background: `radial-gradient(ellipse at 50% 120%, ${currentGlow.glow}, transparent 75%)`,
+                            }}
+                        />
+
                         {/* SVG Folder Tab Shape with Rounded Bottom Corners matching card */}
                         <svg
                             className="absolute inset-0 w-full h-full text-[#1c1c1e] fill-current drop-shadow-[0_-10px_20px_rgba(0,0,0,0.7)] transition-transform duration-700 group-hover:[transform:rotateX(20deg)_translateZ(20px)]"
