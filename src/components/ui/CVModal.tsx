@@ -325,10 +325,10 @@ export default function CVModal({ isOpen, onClose }: CVModalProps) {
                                     onClick={() => setActiveIndex((prev) => Math.max(prev - 1, 0))}
                                     disabled={activeIndex === 0}
                                     aria-label="Previous CV Section"
-                                    className={`w-9 h-9 rounded-full border-2 font-bold text-sm flex items-center justify-center transition-all duration-200 ${
+                                    className={`w-9 h-9 rounded-full font-bold text-base flex items-center justify-center transition-all duration-200 ${
                                         activeIndex === 0
-                                            ? "opacity-25 cursor-not-allowed border-[#191919]/30 text-[#191919]/40 bg-transparent"
-                                            : "border-[#191919] text-[#191919] bg-transparent hover:bg-[#191919] hover:text-[#ffff7b] active:bg-[#191919] active:text-[#ffff7b] cursor-pointer active:scale-90 shadow-xs"
+                                            ? "opacity-25 cursor-not-allowed text-[#191919]/40 bg-transparent"
+                                            : "text-[#191919] bg-transparent hover:bg-[#191919] hover:text-[#ffff7b] active:bg-[#191919] active:text-[#ffff7b] cursor-pointer active:scale-90"
                                     }`}
                                 >
                                     ↑
@@ -337,10 +337,10 @@ export default function CVModal({ isOpen, onClose }: CVModalProps) {
                                     onClick={() => setActiveIndex((prev) => Math.min(prev + 1, cvSections.length - 1))}
                                     disabled={activeIndex === cvSections.length - 1}
                                     aria-label="Next CV Section"
-                                    className={`w-9 h-9 rounded-full border-2 font-bold text-sm flex items-center justify-center transition-all duration-200 ${
+                                    className={`w-9 h-9 rounded-full font-bold text-base flex items-center justify-center transition-all duration-200 ${
                                         activeIndex === cvSections.length - 1
-                                            ? "opacity-25 cursor-not-allowed border-[#191919]/30 text-[#191919]/40 bg-transparent"
-                                            : "border-[#191919] text-[#191919] bg-transparent hover:bg-[#191919] hover:text-[#ffff7b] active:bg-[#191919] active:text-[#ffff7b] cursor-pointer active:scale-90 shadow-xs"
+                                            ? "opacity-25 cursor-not-allowed text-[#191919]/40 bg-transparent"
+                                            : "text-[#191919] bg-transparent hover:bg-[#191919] hover:text-[#ffff7b] active:bg-[#191919] active:text-[#ffff7b] cursor-pointer active:scale-90"
                                     }`}
                                 >
                                     ↓
