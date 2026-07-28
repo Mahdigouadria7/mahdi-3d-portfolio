@@ -46,14 +46,14 @@ function ProjectCard({ project, i }: { project: (typeof projects)[0]; i: number 
                     }}
                 />
 
-                <div className="relative w-full h-full rounded-[28px] overflow-hidden bg-[#18181a] flex flex-col justify-between z-1" style={{ transformStyle: "preserve-3d" }}>
+                <div className="relative w-full h-full rounded-[28px] overflow-hidden bg-black flex flex-col justify-between z-1" style={{ transformStyle: "preserve-3d" }}>
 
-                    {/* Media Container (Top) */}
-                    <div className="relative w-full h-[190px] overflow-hidden rounded-t-[26px] bg-[#18181a]">
+                    {/* Full-Bleed Media Container (Extends all the way down behind folder tab shape) */}
+                    <div className="absolute top-0 inset-x-0 w-full h-[225px] overflow-hidden rounded-t-[26px] z-1">
 
                         {/* 3D Stack Card 3 (Furthest Back) */}
                         {stackedMedia[2] && (
-                            <div className="absolute inset-x-4 top-2 h-[150px] rounded-[20px] overflow-hidden border border-white/20 shadow-2xl transition-all duration-700 ease-out group-hover:-translate-y-12 group-hover:-rotate-8 group-hover:scale-95 group-hover:opacity-100 opacity-0 pointer-events-none z-1">
+                            <div className="absolute inset-x-4 top-2 h-[170px] rounded-[20px] overflow-hidden border border-white/20 shadow-2xl transition-all duration-700 ease-out group-hover:-translate-y-12 group-hover:-rotate-8 group-hover:scale-95 group-hover:opacity-100 opacity-0 pointer-events-none z-1">
                                 {stackedMedia[2].type === "video" ? (
                                     <video src={stackedMedia[2].url} autoPlay loop muted playsInline className="w-full h-full object-cover" />
                                 ) : (
@@ -64,7 +64,7 @@ function ProjectCard({ project, i }: { project: (typeof projects)[0]; i: number 
 
                         {/* 3D Stack Card 2 (Middle - Floating Forward) */}
                         {stackedMedia[1] && (
-                            <div className="absolute inset-x-3 top-2 h-[160px] rounded-[20px] overflow-hidden border border-white/25 shadow-2xl transition-all duration-700 ease-out delay-75 group-hover:-translate-y-6 group-hover:rotate-4 group-hover:scale-[1.02] group-hover:opacity-100 opacity-0 pointer-events-none z-2">
+                            <div className="absolute inset-x-3 top-2 h-[180px] rounded-[20px] overflow-hidden border border-white/25 shadow-2xl transition-all duration-700 ease-out delay-75 group-hover:-translate-y-6 group-hover:rotate-4 group-hover:scale-[1.02] group-hover:opacity-100 opacity-0 pointer-events-none z-2">
                                 {stackedMedia[1].type === "video" ? (
                                     <video src={stackedMedia[1].url} autoPlay loop muted playsInline className="w-full h-full object-cover" />
                                 ) : (
@@ -73,7 +73,7 @@ function ProjectCard({ project, i }: { project: (typeof projects)[0]; i: number 
                             </div>
                         )}
 
-                        {/* 3D Main Preview Base (Frontmost Video) */}
+                        {/* 3D Main Preview Base (Frontmost Video - Full Bleed!) */}
                         {stackedMedia[0] && (
                             <div className="absolute inset-0 w-full h-full rounded-t-[25px] overflow-hidden transition-all duration-500 group-hover:scale-105 shadow-xl z-3">
                                 {stackedMedia[0].type === "video" ? (
@@ -96,7 +96,7 @@ function ProjectCard({ project, i }: { project: (typeof projects)[0]; i: number 
                                 )}
 
                                 {/* Black Vignette Overlay - Fades Out Completely on Hover! */}
-                                <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/30 to-black/40 pointer-events-none transition-opacity duration-700 ease-out group-hover:opacity-0 z-10" />
+                                <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/20 to-black/50 pointer-events-none transition-opacity duration-700 ease-out group-hover:opacity-0 z-10" />
                             </div>
                         )}
 
@@ -108,9 +108,9 @@ function ProjectCard({ project, i }: { project: (typeof projects)[0]; i: number 
                         </div>
                     </div>
 
-                    {/* 3D Folder Flap Notch Panel (Opens FORWARD towards user in 3D) */}
+                    {/* 3D Folder Flap Notch Panel (Overlay at bottom - Opens FORWARD in 3D) */}
                     <div
-                        className="relative w-full h-[170px] -mt-8 z-30 transition-all duration-700 ease-out bg-[#18181a] rounded-b-[28px]"
+                        className="absolute inset-x-0 bottom-0 h-[175px] z-30 transition-all duration-700 ease-out rounded-b-[28px]"
                         style={{
                             transformOrigin: "bottom center",
                             transformStyle: "preserve-3d",
@@ -137,13 +137,13 @@ function ProjectCard({ project, i }: { project: (typeof projects)[0]; i: number 
                             />
                         </div>
 
-                        {/* SVG Folder Tab Shape with Seamless Matching #18181a Color */}
+                        {/* SVG Folder Tab Shape Overlay (#141416 dark panel) */}
                         <svg
-                            className="absolute inset-0 w-full h-full text-[#18181a] fill-current drop-shadow-[0_-8px_16px_rgba(0,0,0,0.6)] transition-transform duration-700 group-hover:[transform:rotateX(20deg)_translateZ(20px)]"
-                            viewBox="0 0 310 170"
+                            className="absolute inset-0 w-full h-full text-[#141416] fill-current drop-shadow-[0_-10px_20px_rgba(0,0,0,0.8)] transition-transform duration-700 group-hover:[transform:rotateX(20deg)_translateZ(20px)]"
+                            viewBox="0 0 310 175"
                             preserveAspectRatio="none"
                         >
-                            <path d="M 0,20 Q 0,0 20,0 L 155,0 Q 170,0 178,10 L 190,28 Q 198,36 210,36 L 290,36 Q 310,36 310,56 L 310,170 L 0,170 Z" />
+                            <path d="M 0,20 Q 0,0 20,0 L 155,0 Q 170,0 178,10 L 190,28 Q 198,36 210,36 L 290,36 Q 310,36 310,56 L 310,175 L 0,175 Z" />
                         </svg>
 
                         {/* Tab Content Layer */}
