@@ -100,11 +100,11 @@ function ProjectCard({ project, i }: { project: (typeof projects)[0]; i: number 
                             </div>
                         )}
 
-                        {/* Top Right Title Overlay */}
-                        <div className="absolute top-4 right-4 text-right max-w-[160px] pointer-events-none z-20">
-                            <h3 className="font-playfair text-sm font-extrabold text-white leading-tight drop-shadow-md group-hover:text-[#ffff7b] transition-colors line-clamp-2">
-                                {project.title}
-                            </h3>
+                        {/* Top Right Timeline Badge Overlay */}
+                        <div className="absolute top-4 right-4 text-right pointer-events-none z-20">
+                            <span className="font-mono text-[9px] font-bold text-white/90 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/15 tracking-widest uppercase shadow-md">
+                                {project.timeline}
+                            </span>
                         </div>
                     </div>
 
@@ -148,13 +148,13 @@ function ProjectCard({ project, i }: { project: (typeof projects)[0]; i: number 
 
                         {/* Tab Content Layer */}
                         <div className="relative z-10 w-full h-full px-5 pt-4 pb-4 flex flex-col justify-between transition-transform duration-700 group-hover:[transform:rotateX(20deg)_translateZ(20px)]">
-                            {/* Tab Left Header */}
-                            <div className="max-w-[145px]">
-                                <span className="font-mono text-xs font-bold text-white block truncate">
+                            {/* Tab Left Header (Holds project.title as requested!) */}
+                            <div className="max-w-[150px]">
+                                <h3 className="font-playfair text-base text-white font-bold leading-tight group-hover:text-[#ffff7b] transition-colors line-clamp-1">
+                                    {project.title}
+                                </h3>
+                                <span className="font-mono text-[10px] text-white/50 uppercase tracking-widest block mt-1 font-medium truncate">
                                     {project.category}
-                                </span>
-                                <span className="font-mono text-[10px] text-white/50 uppercase tracking-wider block mt-0.5 font-medium truncate">
-                                    {project.client} • {project.timeline}
                                 </span>
                             </div>
 
