@@ -22,17 +22,17 @@ function ProjectCard({ project, i }: { project: (typeof projects)[0]; i: number 
             href={`/projects/${project.slug}`}
             draggable={false}
             className="group flex-shrink-0 block select-none focus-visible:outline-none"
-            style={{ width: "320px", height: "350px", perspective: "1000px" }}
+            style={{ width: "320px", height: "350px", perspective: "1200px" }}
         >
-            <article className="relative w-full h-full rounded-[32px] bg-black p-[3px] border-[3px] border-black/80 shadow-2xl overflow-visible transition-transform duration-500 group-hover:-translate-y-3">
-                <div className="relative w-full h-full rounded-[28px] overflow-visible bg-[#141416] flex flex-col justify-between">
+            <article className="relative w-full h-full rounded-[32px] bg-black p-[3px] border-[3px] border-black/80 shadow-2xl overflow-hidden transition-all duration-500 group-hover:-translate-y-2">
+                <div className="relative w-full h-full rounded-[28px] overflow-hidden bg-[#141416] flex flex-col justify-between" style={{ transformStyle: "preserve-3d" }}>
 
-                    {/* Media Container (Holds the 3D Floating Video Stack) */}
-                    <div className="relative w-full h-[185px] rounded-t-[28px] overflow-visible">
+                    {/* Media Container (Top) */}
+                    <div className="relative w-full h-[190px] overflow-hidden rounded-t-[26px]">
 
-                        {/* 3D Stack Card 3 (Furthest Back - Fans Left) */}
+                        {/* 3D Stack Card 3 (Furthest Back) */}
                         {stackedMedia[2] && (
-                            <div className="absolute inset-x-4 top-2 h-[145px] rounded-[18px] overflow-hidden border border-white/20 shadow-2xl transition-all duration-700 ease-out group-hover:-translate-y-20 group-hover:-rotate-12 group-hover:scale-90 group-hover:opacity-100 opacity-0 pointer-events-none z-1">
+                            <div className="absolute inset-x-4 top-2 h-[150px] rounded-[20px] overflow-hidden border border-white/20 shadow-2xl transition-all duration-700 ease-out group-hover:-translate-y-12 group-hover:-rotate-8 group-hover:scale-95 group-hover:opacity-100 opacity-0 pointer-events-none z-1">
                                 {stackedMedia[2].type === "video" ? (
                                     <video src={stackedMedia[2].url} autoPlay loop muted playsInline className="w-full h-full object-cover" />
                                 ) : (
@@ -41,9 +41,9 @@ function ProjectCard({ project, i }: { project: (typeof projects)[0]; i: number 
                             </div>
                         )}
 
-                        {/* 3D Stack Card 2 (Middle - Fans Right) */}
+                        {/* 3D Stack Card 2 (Middle - Floating Forward) */}
                         {stackedMedia[1] && (
-                            <div className="absolute inset-x-3 top-2 h-[155px] rounded-[18px] overflow-hidden border border-white/25 shadow-2xl transition-all duration-700 ease-out delay-75 group-hover:-translate-y-12 group-hover:rotate-8 group-hover:scale-95 group-hover:opacity-100 opacity-0 pointer-events-none z-2">
+                            <div className="absolute inset-x-3 top-2 h-[160px] rounded-[20px] overflow-hidden border border-white/25 shadow-2xl transition-all duration-700 ease-out delay-75 group-hover:-translate-y-6 group-hover:rotate-4 group-hover:scale-[1.02] group-hover:opacity-100 opacity-0 pointer-events-none z-2">
                                 {stackedMedia[1].type === "video" ? (
                                     <video src={stackedMedia[1].url} autoPlay loop muted playsInline className="w-full h-full object-cover" />
                                 ) : (
@@ -54,7 +54,7 @@ function ProjectCard({ project, i }: { project: (typeof projects)[0]; i: number 
 
                         {/* 3D Main Preview Base (Frontmost Video) */}
                         {stackedMedia[0] && (
-                            <div className="absolute inset-0 w-full h-full rounded-t-[25px] overflow-hidden transition-all duration-500 group-hover:-translate-y-4 group-hover:scale-[1.02] shadow-xl z-3">
+                            <div className="absolute inset-0 w-full h-full rounded-t-[25px] overflow-hidden transition-all duration-500 group-hover:scale-105 shadow-xl z-3">
                                 {stackedMedia[0].type === "video" ? (
                                     <video
                                         key={stackedMedia[0].url}
@@ -63,13 +63,13 @@ function ProjectCard({ project, i }: { project: (typeof projects)[0]; i: number 
                                         loop
                                         muted
                                         playsInline
-                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 pointer-events-none"
+                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 pointer-events-none"
                                     />
                                 ) : (
                                     <img
                                         src={stackedMedia[0].url}
                                         alt={stackedMedia[0].alt}
-                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                         draggable={false}
                                     />
                                 )}
@@ -85,19 +85,25 @@ function ProjectCard({ project, i }: { project: (typeof projects)[0]; i: number 
                         </div>
                     </div>
 
-                    {/* Folder Flap / Notch Info Panel (Rotates Open in 3D on Hover) */}
-                    <div className="relative w-full h-[175px] -mt-8 z-30 transition-all duration-700 ease-out origin-bottom group-hover:translate-y-3">
-                        {/* SVG Folder Tab Shape Background */}
+                    {/* 3D Folder Flap Notch Panel (Opens FORWARD towards user in 3D) */}
+                    <div
+                        className="relative w-full h-[170px] -mt-8 z-30 transition-all duration-700 ease-out"
+                        style={{
+                            transformOrigin: "bottom center",
+                            transformStyle: "preserve-3d",
+                        }}
+                    >
+                        {/* SVG Folder Tab Shape with Rounded Bottom Corners matching card */}
                         <svg
-                            className="absolute inset-0 w-full h-full text-[#1c1c1e] fill-current drop-shadow-[0_-8px_18px_rgba(0,0,0,0.6)]"
-                            viewBox="0 0 310 175"
+                            className="absolute inset-0 w-full h-full text-[#1c1c1e] fill-current drop-shadow-[0_-10px_20px_rgba(0,0,0,0.7)] transition-transform duration-700 group-hover:[transform:rotateX(20deg)_translateZ(20px)]"
+                            viewBox="0 0 310 170"
                             preserveAspectRatio="none"
                         >
-                            <path d="M 0,20 Q 0,0 20,0 L 155,0 Q 170,0 178,10 L 190,28 Q 198,36 210,36 L 290,36 Q 310,36 310,56 L 310,175 L 0,175 Z" />
+                            <path d="M 0,20 Q 0,0 20,0 L 155,0 Q 170,0 178,10 L 190,28 Q 198,36 210,36 L 290,36 Q 310,36 310,50 L 310,146 Q 310,166 290,166 L 20,166 Q 0,166 0,146 Z" />
                         </svg>
 
                         {/* Tab Content Layer */}
-                        <div className="relative z-10 w-full h-full px-5 pt-4 pb-4 flex flex-col justify-between">
+                        <div className="relative z-10 w-full h-full px-5 pt-4 pb-4 flex flex-col justify-between transition-transform duration-700 group-hover:[transform:rotateX(20deg)_translateZ(20px)]">
                             {/* Tab Left Header */}
                             <div className="max-w-[145px]">
                                 <span className="font-mono text-xs font-bold text-white block truncate">
