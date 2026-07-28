@@ -16,13 +16,21 @@ const cvSections = [
     { id: "highlights", num: "06", title: "Highlights", subtitle: "Impact & Brand" },
 ];
 
+function DateBadge({ children }: { children: React.ReactNode }) {
+    return (
+        <span className="font-sans text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200 inline-block whitespace-nowrap shadow-2xs">
+            {children}
+        </span>
+    );
+}
+
 export default function CVModal({ isOpen, onClose }: CVModalProps) {
     const [isAnimating, setIsAnimating] = useState(false);
     const [renderModal, setRenderModal] = useState(false);
     const [activeIndex, setActiveIndex] = useState(0);
     const [viewMode, setViewMode] = useState<"dial" | "scroll">("dial");
     
-    const scrollContainerRef = useRef<HTMLDivElement>(null);
+    const dialRailRef = useRef<HTMLDivElement>(null);
     const touchStartY = useRef<number | null>(null);
     const isScrolling = useRef(false);
 
@@ -40,7 +48,7 @@ export default function CVModal({ isOpen, onClose }: CVModalProps) {
         }
     }, [isOpen]);
 
-    // Handle Wheel Navigation on Dial Mode
+    // Handle Wheel Navigation ONLY on Left Dial Rail
     const handleWheelNav = useCallback((e: WheelEvent) => {
         e.stopPropagation();
         if (viewMode !== "dial") return;
@@ -56,7 +64,7 @@ export default function CVModal({ isOpen, onClose }: CVModalProps) {
 
         setTimeout(() => {
             isScrolling.current = false;
-        }, 320);
+        }, 280);
     }, [viewMode]);
 
     // Keyboard Navigation
@@ -79,18 +87,18 @@ export default function CVModal({ isOpen, onClose }: CVModalProps) {
         return () => window.removeEventListener("keydown", handleKeyDown);
     }, [isOpen, viewMode, onClose]);
 
-    // Wheel listener binding
+    // Wheel listener bound ONLY to Left Dial Rail
     useEffect(() => {
-        const container = scrollContainerRef.current;
-        if (!container) return;
+        const rail = dialRailRef.current;
+        if (!rail) return;
 
-        container.addEventListener("wheel", handleWheelNav, { passive: false });
+        rail.addEventListener("wheel", handleWheelNav, { passive: false });
         return () => {
-            container.removeEventListener("wheel", handleWheelNav);
+            rail.removeEventListener("wheel", handleWheelNav);
         };
     }, [handleWheelNav, renderModal]);
 
-    // Touch Handlers for Swipe Navigation on Mobile
+    // Touch Handlers for Swipe Navigation on Mobile Dial Rail
     const handleTouchStart = (e: React.TouchEvent) => {
         touchStartY.current = e.touches[0].clientY;
     };
@@ -186,14 +194,15 @@ export default function CVModal({ isOpen, onClose }: CVModalProps) {
 
                 {/* ── Modal Body Area ────────────────────────────────────── */}
                 {viewMode === "dial" ? (
-                    <div
-                        ref={scrollContainerRef}
-                        onTouchStart={handleTouchStart}
-                        onTouchMove={handleTouchMove}
-                        className="flex-1 relative overflow-hidden flex flex-col lg:flex-row select-none"
-                    >
+                    <div className="flex-1 relative overflow-hidden flex flex-col lg:flex-row select-none">
+                        
                         {/* ── Left Arc Ring Dial Navigation Column ──────────────── */}
-                        <div className="w-full lg:w-[320px] flex-shrink-0 relative flex items-center justify-center lg:justify-start border-b lg:border-b-0 lg:border-r border-[#191919]/10 bg-[#f7f5ed] py-8 lg:py-0 min-h-[160px] lg:min-h-0 overflow-hidden">
+                        <div
+                            ref={dialRailRef}
+                            onTouchStart={handleTouchStart}
+                            onTouchMove={handleTouchMove}
+                            className="w-full lg:w-[320px] flex-shrink-0 relative flex items-center justify-center lg:justify-start border-b lg:border-b-0 lg:border-r border-[#191919]/10 bg-[#f7f5ed] py-8 lg:py-0 min-h-[160px] lg:min-h-0 overflow-hidden cursor-grab active:cursor-grabbing"
+                        >
                             
                             {/* Radial Arc Ring SVG Guide */}
                             <svg
@@ -293,8 +302,8 @@ export default function CVModal({ isOpen, onClose }: CVModalProps) {
                             </div>
                         </div>
 
-                        {/* ── Main Centered Content Display Area (Right Side) ──────────── */}
-                        <div className="flex-1 overflow-y-auto p-6 md:p-10 space-y-6 flex flex-col justify-center">
+                        {/* ── Main Centered Content Display Area (Right Side - Independently Scrollable!) ── */}
+                        <div className="flex-1 overflow-y-auto p-6 md:p-10 space-y-6 max-h-[78vh] touch-pan-y overscroll-contain">
                             
                             {/* 01: PROFIL */}
                             {activeIndex === 0 && (
@@ -333,7 +342,7 @@ export default function CVModal({ isOpen, onClose }: CVModalProps) {
                             {/* 02: WORK EXPERIENCE */}
                             {activeIndex === 1 && (
                                 <div className="space-y-6 animate-fadeIn">
-                                    <div className="bg-white rounded-2xl p-6 md:p-8 border border-[#191919]/15 shadow-sm max-h-[62vh] overflow-y-auto space-y-6">
+                                    <div className="bg-white rounded-2xl p-6 md:p-8 border border-[#191919]/15 shadow-sm space-y-6">
                                         <div className="flex justify-between items-center border-b border-[#191919]/10 pb-3">
                                             <h3 className="font-playfair text-2xl text-[#191919] font-bold">
                                                 Work <em className="font-playfair italic font-normal">Experience</em>
@@ -343,9 +352,9 @@ export default function CVModal({ isOpen, onClose }: CVModalProps) {
 
                                         {/* Innov8 Agency */}
                                         <div className="border-l-2 border-[#191919] pl-4 space-y-2">
-                                            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start">
+                                            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
                                                 <h4 className="font-sans text-sm font-bold text-[#191919]">3D ARTIST – INNOV8 CREATIVE AGENCY</h4>
-                                                <span className="font-sans text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 inline-block w-max mt-1 sm:mt-0">May 2024 — Present</span>
+                                                <DateBadge>May 2024 — Present</DateBadge>
                                             </div>
                                             <ul className="list-disc list-inside font-sans text-xs text-[#191919]/80 space-y-1.5 leading-relaxed">
                                                 <li>Produced 3D motion design and CGI videos for high-profile marketing campaigns.</li>
@@ -354,17 +363,17 @@ export default function CVModal({ isOpen, onClose }: CVModalProps) {
                                             </ul>
                                             <div className="pt-2 border-t border-[#191919]/5">
                                                 <span className="font-sans text-[10px] font-bold uppercase tracking-wider text-[#191919]/50 block mb-1">Key Clients &amp; Brands:</span>
-                                                <p className="font-sans text-[11px] text-[#191919] font-medium leading-relaxed bg-[#191919]/5 p-2 rounded-lg">
+                                                <p className="font-sans text-[11px] text-[#191919] font-medium leading-relaxed bg-[#191919]/5 p-2.5 rounded-lg border border-[#191919]/10">
                                                     Samsung, LG Electronics, Délice Danone, Orange, UBCI Bank, Papillon, Kif Biscuit, Mall of Sfax &amp; Sousse, Jouda, Danup, Danao, Eau Délice, Rose Blanche.
                                                 </p>
                                             </div>
                                         </div>
 
                                         {/* SheTech Studio */}
-                                        <div className="border-l-2 border-[#191919]/30 pl-4 space-y-2">
-                                            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start">
+                                        <div className="border-l-2 border-[#191919]/30 pl-4 space-y-2 pt-2">
+                                            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
                                                 <h4 className="font-sans text-sm font-bold text-[#191919]">3D ARTIST – SHETECH STUDIO (VR Game Dev)</h4>
-                                                <span className="font-sans text-[11px] font-semibold text-[#191919]/60">Oct 2022 — Apr 2024</span>
+                                                <DateBadge>Oct 2022 — Apr 2024</DateBadge>
                                             </div>
                                             <p className="font-sans text-xs text-[#191919]/70 font-medium">Tunisia</p>
                                             <ul className="list-disc list-inside font-sans text-xs text-[#191919]/80 space-y-1.5 leading-relaxed">
@@ -375,10 +384,10 @@ export default function CVModal({ isOpen, onClose }: CVModalProps) {
                                         </div>
 
                                         {/* Euro Tech Conseil (ETC) */}
-                                        <div className="border-l-2 border-[#191919]/30 pl-4 space-y-2">
-                                            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start">
+                                        <div className="border-l-2 border-[#191919]/30 pl-4 space-y-2 pt-2">
+                                            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
                                                 <h4 className="font-sans text-sm font-bold text-[#191919]">UX/UI DESIGNER &amp; WEB DEVELOPER – EURO TECH CONSEIL (ETC)</h4>
-                                                <span className="font-sans text-[11px] font-semibold text-[#191919]/60">Feb 2022 — Nov 2022</span>
+                                                <DateBadge>Feb 2022 — Nov 2022</DateBadge>
                                             </div>
                                             <p className="font-sans text-xs text-[#191919]/70 font-medium">Kairouan, Tunisia</p>
                                             <ul className="list-disc list-inside font-sans text-xs text-[#191919]/80 space-y-1.5 leading-relaxed">
@@ -389,36 +398,45 @@ export default function CVModal({ isOpen, onClose }: CVModalProps) {
                                         </div>
 
                                         {/* GPro */}
-                                        <div className="border-l-2 border-[#191919]/30 pl-4 space-y-2">
-                                            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start">
+                                        <div className="border-l-2 border-[#191919]/30 pl-4 space-y-2 pt-2">
+                                            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
                                                 <h4 className="font-sans text-sm font-bold text-[#191919]">WEBGL &amp; INTERACTIVE WEB DEVELOPER – GPRO</h4>
-                                                <span className="font-sans text-[11px] font-semibold text-[#191919]/60">2021</span>
+                                                <DateBadge>2021</DateBadge>
                                             </div>
-                                            <p className="font-sans text-xs text-[#191919]/80 leading-relaxed">
-                                                Architected high-performance interactive web applications integrating real-time 3D models and custom graphics shaders using Three.js, React.js, and JavaScript.
-                                            </p>
+                                            <p className="font-sans text-xs text-[#191919]/70 font-medium">Sousse, Tunisia</p>
+                                            <ul className="list-disc list-inside font-sans text-xs text-[#191919]/80 space-y-1.5 leading-relaxed">
+                                                <li>Architected high-performance interactive web applications integrating real-time 3D models and custom graphics shaders using Three.js, React.js, and JavaScript.</li>
+                                            </ul>
                                         </div>
 
                                         {/* IT Gate */}
-                                        <div className="border-l-2 border-[#191919]/30 pl-4 space-y-2">
-                                            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start">
+                                        <div className="border-l-2 border-[#191919]/30 pl-4 space-y-2 pt-2">
+                                            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
                                                 <h4 className="font-sans text-sm font-bold text-[#191919]">GAME DESIGNER &amp; 3D ASSET SPECIALIST (INTERNSHIP) – IT GATE</h4>
-                                                <span className="font-sans text-[11px] font-semibold text-[#191919]/60">2019</span>
+                                                <DateBadge>2019</DateBadge>
                                             </div>
-                                            <p className="font-sans text-xs text-[#191919]/80 leading-relaxed">
-                                                Modeled and textured historical 3D game environments and traditional architectural assets inspired by Kairouan’s heritage for real-time game engines. Awarded with excellent mark.
-                                            </p>
+                                            <p className="font-sans text-xs text-[#191919]/70 font-medium">Sousse, Tunisia</p>
+                                            <ul className="list-disc list-inside font-sans text-xs text-[#191919]/80 space-y-1.5 leading-relaxed">
+                                                <li>Modeled and textured historical 3D game environments and traditional architectural assets inspired by Kairouan’s heritage for real-time game engines.</li>
+                                                <li>Successfully completed as part of the Computer Science graduation project, awarded with excellent distinction.</li>
+                                            </ul>
                                         </div>
 
                                         {/* Freelance */}
-                                        <div className="border-l-2 border-[#191919]/30 pl-4 space-y-2">
-                                            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start">
+                                        <div className="border-l-2 border-[#191919]/30 pl-4 space-y-2 pt-2">
+                                            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
                                                 <h4 className="font-sans text-sm font-bold text-[#191919]">FREELANCE 3D ARTIST &amp; CGI DESIGNER</h4>
-                                                <span className="font-sans text-[11px] font-semibold text-[#191919]/60">2019 — Present</span>
+                                                <DateBadge>2019 — Present</DateBadge>
                                             </div>
                                             <p className="font-sans text-xs text-[#191919]/80 leading-relaxed">
-                                                Developed high-end CGI commercials, product renders, and 3D motion graphics for international and local clients (Bioderma Cosmetics, Karina, Yves Rocher, GPlex).
+                                                Developed high-end CGI commercials, product renders, and 3D motion graphics for international and local clients.
                                             </p>
+                                            <div className="pt-1">
+                                                <span className="font-sans text-[10px] font-bold uppercase tracking-wider text-[#191919]/50 block mb-1">Selected Clients:</span>
+                                                <span className="font-sans text-[11px] text-[#191919] font-medium">
+                                                    Bioderma Cosmetics, Karina, Yves Rocher, GPlex Cosmetics.
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -480,9 +498,9 @@ export default function CVModal({ isOpen, onClose }: CVModalProps) {
                                         
                                         <div className="space-y-5">
                                             <div className="border-l-2 border-[#191919] pl-4 space-y-1">
-                                                <div className="flex justify-between items-baseline">
+                                                <div className="flex justify-between items-baseline gap-2">
                                                     <h4 className="font-sans text-sm font-bold text-[#191919]">Software Engineering Degree</h4>
-                                                    <span className="font-sans text-xs font-bold text-[#191919]/60">2019 — 2022</span>
+                                                    <DateBadge>2019 — 2022</DateBadge>
                                                 </div>
                                                 <p className="font-sans text-xs text-[#191919]/70 font-medium">École Polytechnique de Sousse</p>
                                                 <p className="font-sans text-xs text-[#191919]/90 italic pt-1 leading-relaxed">
@@ -491,9 +509,9 @@ export default function CVModal({ isOpen, onClose }: CVModalProps) {
                                             </div>
 
                                             <div className="border-l-2 border-[#191919]/30 pl-4 space-y-1">
-                                                <div className="flex justify-between items-baseline">
+                                                <div className="flex justify-between items-baseline gap-2">
                                                     <h4 className="font-sans text-sm font-bold text-[#191919]">Computer Science Degree</h4>
-                                                    <span className="font-sans text-xs font-bold text-[#191919]/60">2016 — 2019</span>
+                                                    <DateBadge>2016 — 2019</DateBadge>
                                                 </div>
                                                 <p className="font-sans text-xs text-[#191919]/70 font-medium">ISIG Kairouan</p>
                                                 <p className="font-sans text-xs text-[#191919]/90 italic pt-1 leading-relaxed">
@@ -502,9 +520,9 @@ export default function CVModal({ isOpen, onClose }: CVModalProps) {
                                             </div>
 
                                             <div className="border-l-2 border-[#191919]/30 pl-4 space-y-1">
-                                                <div className="flex justify-between items-baseline">
+                                                <div className="flex justify-between items-baseline gap-2">
                                                     <h4 className="font-sans text-sm font-bold text-[#191919]">Baccalaureate Mathematics</h4>
-                                                    <span className="font-sans text-xs font-bold text-[#191919]/60">2015 — 2016</span>
+                                                    <DateBadge>2015 — 2016</DateBadge>
                                                 </div>
                                                 <p className="font-sans text-xs text-[#191919]/70 font-medium">Dar Lamen High School, Kairouan</p>
                                             </div>
@@ -576,27 +594,29 @@ export default function CVModal({ isOpen, onClose }: CVModalProps) {
                         </div>
                     </div>
                 ) : (
-                    /* ── Classic Full Scroll View Mode ─────────────────────── */
+                    /* ── Complete 100% Full Scroll View Mode ─────────────────────── */
                     <div
-                        ref={scrollContainerRef}
                         data-lenis-prevent="true"
                         className="flex-1 overflow-y-auto px-6 md:px-10 py-8 space-y-8 overscroll-contain touch-pan-y"
                     >
-                        {/* Profil Banner */}
-                        <div className="bg-white rounded-2xl p-6 border border-[#191919]/15 shadow-sm">
-                            <div className="flex items-center gap-2 mb-2">
-                                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                        {/* Executive Summary */}
+                        <div className="bg-white rounded-2xl p-6 border border-[#191919]/15 shadow-sm space-y-3">
+                            <div className="flex items-center gap-2">
+                                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
                                 <span className="font-sans text-xs font-bold tracking-[0.2em] uppercase text-emerald-700">
                                     Profil — Executive Summary
                                 </span>
                             </div>
+                            <h3 className="font-playfair text-2xl font-extrabold text-[#191919]">Gouadria Mahdi — 3D Generalist &amp; Software Engineer</h3>
                             <p className="font-sans text-sm text-[#191919] leading-relaxed font-normal">
-                                Driven Tunisian 3D Artist with a strong software engineering background, blending technical precision with creative vision to produce high-quality CGI, motion design, and product visualizations.
+                                Driven Tunisian 3D Artist with a strong software engineering background, blending technical precision with creative vision to produce high-quality CGI, motion design, and product visualizations. Experienced in working with top brands, optimizing assets for VR/AR, and collaborating with multidisciplinary teams to deliver impactful visual content.
                             </p>
                         </div>
 
-                        {/* Full 2-Column Grid */}
+                        {/* 2-Column Full Grid */}
                         <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+                            
+                            {/* Left Column */}
                             <div className="md:col-span-5 space-y-6">
                                 {/* Contact Info */}
                                 <section className="bg-white rounded-2xl p-6 border border-[#191919]/15 shadow-sm">
@@ -606,65 +626,180 @@ export default function CVModal({ isOpen, onClose }: CVModalProps) {
                                     <ul className="space-y-3 font-sans text-xs text-[#191919]">
                                         <li className="flex justify-between border-b border-[#191919]/5 pb-2">
                                             <span className="font-semibold text-[#191919]/60">Email</span>
-                                            <a href="mailto:mahdigouadria8@gmail.com" className="font-medium hover:underline">mahdigouadria8@gmail.com</a>
+                                            <a href="mailto:mahdigouadria8@gmail.com" className="font-bold hover:underline text-[#191919]">mahdigouadria8@gmail.com</a>
                                         </li>
                                         <li className="flex justify-between border-b border-[#191919]/5 pb-2">
                                             <span className="font-semibold text-[#191919]/60">Phone</span>
-                                            <a href="tel:+21621833752" className="font-medium hover:underline">+216 21-833-752</a>
+                                            <a href="tel:+21621833752" className="font-bold hover:underline text-[#191919]">+216 21-833-752</a>
                                         </li>
                                         <li className="flex justify-between border-b border-[#191919]/5 pb-2">
                                             <span className="font-semibold text-[#191919]/60">Location</span>
-                                            <span className="font-medium">Tunisia (Worldwide Remote)</span>
+                                            <span className="font-bold">Tunisia (Remote)</span>
                                         </li>
-                                        <li className="flex justify-between">
+                                        <li className="flex justify-between border-b border-[#191919]/5 pb-2">
                                             <span className="font-semibold text-[#191919]/60">Languages</span>
-                                            <span className="font-medium">Arabic, French, English, German</span>
+                                            <span className="font-bold">Arabic, French, English, German</span>
+                                        </li>
+                                        <li className="flex justify-between pt-1">
+                                            <span className="font-semibold text-[#191919]/60">Socials</span>
+                                            <div className="flex gap-2 font-bold">
+                                                <a href="https://www.linkedin.com/in/mahdi-gouadria" target="_blank" rel="noopener" className="hover:underline">LinkedIn</a>
+                                                <span>·</span>
+                                                <a href="https://www.instagram.com/mahdi_gouadria" target="_blank" rel="noopener" className="hover:underline">Instagram</a>
+                                            </div>
                                         </li>
                                     </ul>
                                 </section>
 
-                                {/* Software */}
+                                {/* Software & Tools */}
                                 <section className="bg-white rounded-2xl p-6 border border-[#191919]/15 shadow-sm">
                                     <h3 className="font-playfair text-xl text-[#191919] font-bold mb-4 border-b border-[#191919]/10 pb-2">
                                         Software <em className="font-playfair italic font-normal">&amp; Tools</em>
                                     </h3>
                                     <div className="flex flex-wrap gap-1.5">
-                                        {["Blender 3D", "HoudiniFX", "EmberGen", "Substance Painter", "ZBrush", "After Effects", "DaVinci Resolve", "Photoshop", "Three.js", "WebGL / GLSL", "React / Next.js", "Node.js"].map((tool) => (
+                                        {["Blender 3D", "HoudiniFX", "EmberGen", "Substance Painter", "AccuRig", "ZBrush", "After Effects", "DaVinci Resolve", "Photoshop", "Illustrator", "FL Studio", "Three.js", "WebGL / GLSL", "React / Next.js", "Node.js", "Express.js", "MongoDB", "Angular"].map((tool) => (
                                             <span key={tool} className="px-2.5 py-1 bg-[#191919]/5 border border-[#191919]/10 rounded-full font-sans text-xs font-semibold text-[#191919]">
                                                 {tool}
                                             </span>
                                         ))}
                                     </div>
                                 </section>
+
+                                {/* Achievements */}
+                                <section className="bg-white rounded-2xl p-6 border border-[#191919]/15 shadow-sm">
+                                    <h3 className="font-playfair text-xl text-[#191919] font-bold mb-3 border-b border-[#191919]/10 pb-2">
+                                        Key <em className="font-playfair italic font-normal">Achievements</em>
+                                    </h3>
+                                    <ul className="list-disc list-inside font-sans text-xs text-[#191919]/80 space-y-2 leading-relaxed">
+                                        <li>CGI marketing campaigns for Samsung, LG, Danone, Orange, and UBCI Bank.</li>
+                                        <li>Transition from healthcare VR game dev to high-end commercial CGI visualization.</li>
+                                        <li>Built optimized 3D asset pipelines applying software engineering.</li>
+                                    </ul>
+                                </section>
                             </div>
 
+                            {/* Right Column */}
                             <div className="md:col-span-7 space-y-6">
-                                {/* Work Experience */}
+                                {/* All 6 Work Experiences */}
                                 <section className="bg-white rounded-2xl p-6 border border-[#191919]/15 shadow-sm">
                                     <h3 className="font-playfair text-xl text-[#191919] font-bold mb-6 border-b border-[#191919]/10 pb-2">
-                                        Work <em className="font-playfair italic font-normal">Experience</em>
+                                        Complete Work <em className="font-playfair italic font-normal">Experience</em>
                                     </h3>
                                     <div className="space-y-6">
-                                        <div className="border-l-2 border-[#191919] pl-4 space-y-1">
-                                            <h4 className="font-sans text-sm font-bold text-[#191919]">3D ARTIST – INNOV8 CREATIVE AGENCY</h4>
-                                            <span className="font-sans text-[11px] font-bold text-emerald-700">May 2024 — Present</span>
-                                            <p className="font-sans text-xs text-[#191919]/80 leading-relaxed pt-1">Produced 3D motion design &amp; CGI videos for Samsung, LG, Danone, Orange, and UBCI Bank.</p>
+                                        
+                                        {/* Innov8 */}
+                                        <div className="border-l-2 border-[#191919] pl-4 space-y-2">
+                                            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1">
+                                                <h4 className="font-sans text-sm font-bold text-[#191919]">3D ARTIST – INNOV8 CREATIVE AGENCY</h4>
+                                                <DateBadge>May 2024 — Present</DateBadge>
+                                            </div>
+                                            <ul className="list-disc list-inside font-sans text-xs text-[#191919]/80 space-y-1 leading-relaxed">
+                                                <li>Produced 3D motion design and CGI videos for high-profile marketing campaigns.</li>
+                                                <li>Designed engaging call-to-actions combining 3D and 2D elements.</li>
+                                                <li>Collaborated with graphic designers and production teams.</li>
+                                            </ul>
+                                            <div className="pt-2 border-t border-[#191919]/5">
+                                                <span className="font-sans text-[10px] font-bold uppercase tracking-wider text-[#191919]/50 block mb-1">Key Clients &amp; Brands:</span>
+                                                <p className="font-sans text-[11px] text-[#191919] font-medium leading-relaxed bg-[#191919]/5 p-2 rounded-lg">
+                                                    Samsung, LG Electronics, Délice Danone, Orange, UBCI Bank, Papillon, Kif Biscuit, Mall of Sfax &amp; Sousse, Jouda, Danup, Danao, Eau Délice, Rose Blanche.
+                                                </p>
+                                            </div>
                                         </div>
 
-                                        <div className="border-l-2 border-[#191919]/30 pl-4 space-y-1">
-                                            <h4 className="font-sans text-sm font-bold text-[#191919]">3D ARTIST – SHETECH STUDIO</h4>
-                                            <span className="font-sans text-[11px] font-semibold text-[#191919]/60">Oct 2022 — Apr 2024</span>
-                                            <p className="font-sans text-xs text-[#191919]/80 leading-relaxed pt-1">VR environments, modeling &amp; original soundtrack composition in FL Studio.</p>
+                                        {/* SheTech */}
+                                        <div className="border-l-2 border-[#191919]/30 pl-4 space-y-2">
+                                            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1">
+                                                <h4 className="font-sans text-sm font-bold text-[#191919]">3D ARTIST – SHETECH STUDIO (VR Game Dev)</h4>
+                                                <DateBadge>Oct 2022 — Apr 2024</DateBadge>
+                                            </div>
+                                            <p className="font-sans text-xs text-[#191919]/70 font-medium">Tunisia</p>
+                                            <ul className="list-disc list-inside font-sans text-xs text-[#191919]/80 space-y-1 leading-relaxed">
+                                                <li>VR environments and level design for healthcare games.</li>
+                                                <li>Modeled and textured assets in Blender, ZBrush, Substance Painter.</li>
+                                                <li>Composed original soundtrack (OST) and sound effects in FL Studio.</li>
+                                            </ul>
                                         </div>
 
-                                        <div className="border-l-2 border-[#191919]/30 pl-4 space-y-1">
-                                            <h4 className="font-sans text-sm font-bold text-[#191919]">UX/UI DESIGNER &amp; WEB DEVELOPER – ETC</h4>
-                                            <span className="font-sans text-[11px] font-semibold text-[#191919]/60">Feb 2022 — Nov 2022</span>
-                                            <p className="font-sans text-xs text-[#191919]/80 leading-relaxed pt-1">Enterprise HRMS system design and full-stack development with Node.js &amp; Angular.</p>
+                                        {/* ETC */}
+                                        <div className="border-l-2 border-[#191919]/30 pl-4 space-y-2">
+                                            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1">
+                                                <h4 className="font-sans text-sm font-bold text-[#191919]">UX/UI DESIGNER &amp; WEB DEVELOPER – EURO TECH CONSEIL (ETC)</h4>
+                                                <DateBadge>Feb 2022 — Nov 2022</DateBadge>
+                                            </div>
+                                            <p className="font-sans text-xs text-[#191919]/70 font-medium">Kairouan, Tunisia</p>
+                                            <ul className="list-disc list-inside font-sans text-xs text-[#191919]/80 space-y-1 leading-relaxed">
+                                                <li>Architected enterprise HRMS system for client and employee administration.</li>
+                                                <li>UI component design in Adobe XD &amp; Photoshop.</li>
+                                                <li>Node.js, Express.js, MongoDB, Angular, and RESTful APIs.</li>
+                                            </ul>
+                                        </div>
+
+                                        {/* GPro */}
+                                        <div className="border-l-2 border-[#191919]/30 pl-4 space-y-2">
+                                            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1">
+                                                <h4 className="font-sans text-sm font-bold text-[#191919]">WEBGL &amp; INTERACTIVE WEB DEVELOPER – GPRO</h4>
+                                                <DateBadge>2021</DateBadge>
+                                            </div>
+                                            <p className="font-sans text-xs text-[#191919]/70 font-medium">Sousse, Tunisia</p>
+                                            <p className="font-sans text-xs text-[#191919]/80 leading-relaxed">Interactive web application integrating real-time 3D models with Three.js &amp; React.js.</p>
+                                        </div>
+
+                                        {/* IT Gate */}
+                                        <div className="border-l-2 border-[#191919]/30 pl-4 space-y-2">
+                                            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1">
+                                                <h4 className="font-sans text-sm font-bold text-[#191919]">GAME DESIGNER &amp; 3D ASSET SPECIALIST – IT GATE</h4>
+                                                <DateBadge>2019</DateBadge>
+                                            </div>
+                                            <p className="font-sans text-xs text-[#191919]/70 font-medium">Sousse, Tunisia</p>
+                                            <p className="font-sans text-xs text-[#191919]/80 leading-relaxed">3D game environments &amp; Kairouan architectural heritage assets for graduation project (excellent mark).</p>
+                                        </div>
+
+                                        {/* Freelance */}
+                                        <div className="border-l-2 border-[#191919]/30 pl-4 space-y-2">
+                                            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1">
+                                                <h4 className="font-sans text-sm font-bold text-[#191919]">FREELANCE 3D ARTIST &amp; CGI DESIGNER</h4>
+                                                <DateBadge>2019 — Present</DateBadge>
+                                            </div>
+                                            <p className="font-sans text-xs text-[#191919]/80 leading-relaxed">CGI ads, product renders, and motion graphics for Bioderma Cosmetics, Karina, Yves Rocher, and GPlex Cosmetics.</p>
+                                        </div>
+
+                                    </div>
+                                </section>
+
+                                {/* Education */}
+                                <section className="bg-white rounded-2xl p-6 border border-[#191919]/15 shadow-sm">
+                                    <h3 className="font-playfair text-xl text-[#191919] font-bold mb-4 border-b border-[#191919]/10 pb-2">
+                                        Education <em className="font-playfair italic font-normal">&amp; Academic Credentials</em>
+                                    </h3>
+                                    <div className="space-y-4">
+                                        <div className="border-l-2 border-[#191919] pl-3 space-y-1">
+                                            <div className="flex justify-between items-baseline gap-2">
+                                                <h4 className="font-sans text-xs font-bold text-[#191919]">Software Engineering Degree</h4>
+                                                <DateBadge>2019 — 2022</DateBadge>
+                                            </div>
+                                            <p className="font-sans text-xs text-[#191919]/70 font-medium">École Polytechnique de Sousse</p>
+                                            <p className="font-sans text-[11px] text-[#191919]/90 italic pt-0.5">Final Project: Enterprise HR software for ETC Tunisie combining UX/UI, 3D elements, and engineering.</p>
+                                        </div>
+
+                                        <div className="border-l-2 border-[#191919]/20 pl-3 space-y-1">
+                                            <div className="flex justify-between items-baseline gap-2">
+                                                <h4 className="font-sans text-xs font-bold text-[#191919]">Computer Science Degree</h4>
+                                                <DateBadge>2016 — 2019</DateBadge>
+                                            </div>
+                                            <p className="font-sans text-xs text-[#191919]/70 font-medium">ISIG Kairouan</p>
+                                        </div>
+
+                                        <div className="border-l-2 border-[#191919]/20 pl-3 space-y-1">
+                                            <div className="flex justify-between items-baseline gap-2">
+                                                <h4 className="font-sans text-xs font-bold text-[#191919]">Baccalaureate Mathematics</h4>
+                                                <DateBadge>2015 — 2016</DateBadge>
+                                            </div>
+                                            <p className="font-sans text-xs text-[#191919]/70 font-medium">Dar Lamen High School, Kairouan</p>
                                         </div>
                                     </div>
                                 </section>
                             </div>
+
                         </div>
                     </div>
                 )}
