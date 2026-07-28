@@ -33,16 +33,16 @@ function ProjectCard({ project, i }: { project: (typeof projects)[0]; i: number 
             href={`/projects/${project.slug}`}
             draggable={false}
             className="group flex-shrink-0 block select-none focus-visible:outline-none"
-            style={{ width: "clamp(260px, 28vw, 340px)" }}
+            style={{ width: "330px", height: "370px" }}
         >
             <article
-                className="relative w-full overflow-hidden rounded-2xl bg-[#191919] transition-transform duration-500 group-hover:-translate-y-2"
+                className="relative w-full h-full overflow-hidden rounded-[26px] bg-[#121214] border border-white/10 p-2.5 flex flex-col justify-between transition-all duration-500 group-hover:-translate-y-2 group-hover:border-white/25"
                 style={{
-                    boxShadow: "0 8px 40px rgba(25,25,25,0.18), 0 2px 8px rgba(25,25,25,0.08)",
+                    boxShadow: "0 12px 40px rgba(0,0,0,0.35)",
                 }}
             >
-                {/* Image / Video area */}
-                <div className="relative w-full overflow-hidden bg-[#222]" style={{ height: 220 }}>
+                {/* Media area (Top) */}
+                <div className="relative w-full h-[185px] overflow-hidden rounded-t-[18px] rounded-b-[10px] bg-[#1a1a1c]">
                     {previewMedia ? (
                         previewMedia.type === "video" ? (
                             <video
@@ -63,47 +63,52 @@ function ProjectCard({ project, i }: { project: (typeof projects)[0]; i: number 
                             />
                         )
                     ) : (
-                        <div className="absolute inset-0 bg-[#222]" />
+                        <div className="absolute inset-0 bg-[#1e1e20]" />
                     )}
-                    {/* Gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#191919] via-transparent to-transparent z-10" />
-                    {/* Index watermark */}
-                    <span className="absolute bottom-2 right-3 font-mono font-black text-[72px] leading-none text-white/[0.06] select-none z-0">
-                        {String(i + 1).padStart(2, "0")}
-                    </span>
-                    {/* Accent dot */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-transparent pointer-events-none" />
+
+                    {/* Accent dot & Timeline */}
                     <span
-                        className="absolute top-3 left-3 z-30 w-2 h-2 rounded-full ring-2 ring-black/20"
+                        className="absolute top-3 left-3 z-30 w-2.5 h-2.5 rounded-full ring-2 ring-black/40"
                         style={{ background: dot }}
                     />
+                    <span className="absolute top-3 right-3 z-30 font-mono text-[9px] font-bold text-white/90 bg-black/60 backdrop-blur-md px-2.5 py-0.5 rounded-full border border-white/15 tracking-widest">
+                        {project.timeline}
+                    </span>
                 </div>
 
-                {/* Text block */}
-                <div className="px-5 pt-4 pb-5">
-                    <div className="flex items-center justify-between mb-2">
-                        <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-white/70 font-semibold">
-                            {project.category}
-                        </span>
-                        <span className="font-mono text-[9px] text-white/50 tracking-widest">
-                            {project.timeline}
-                        </span>
+                {/* Folder Notch Tab Info Container (Bottom) */}
+                <div className="relative w-full flex-1 bg-[#1a1a1e] rounded-b-[18px] rounded-t-[14px] p-4 flex flex-col justify-between mt-2 border-t border-white/5">
+                    {/* Header Category & Title */}
+                    <div>
+                        <div className="flex items-center justify-between mb-1">
+                            <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-white/60 font-semibold">
+                                {project.category}
+                            </span>
+                        </div>
+                        <h3
+                            className="font-playfair text-lg text-white font-bold leading-tight mb-1.5 group-hover:text-[#ffff7b] transition-colors line-clamp-1"
+                        >
+                            {project.title}
+                        </h3>
+                        <p className="font-cyber text-white/60 text-[11px] leading-relaxed line-clamp-2">
+                            {project.description}
+                        </p>
                     </div>
-                    <h3
-                        className="font-playfair text-xl text-white leading-tight mb-2 group-hover:text-[#ffff7b] transition-colors"
-                        style={{ fontWeight: 700 }}
-                    >
-                        {project.title}
-                    </h3>
-                    <p className="font-cyber text-white/70 text-xs leading-relaxed line-clamp-2">
-                        {project.description}
-                    </p>
-                    <div className="flex items-center justify-between mt-4 pt-3 border-t border-white/[0.12]">
-                        <span className="font-mono text-[9px] text-white/50 uppercase tracking-widest font-medium">
-                            {project.client}
-                        </span>
-                        <span className="font-mono text-[9px] text-white/80 group-hover:text-[#ffff7b] group-hover:gap-2 flex items-center gap-1.5 transition-all duration-300 font-semibold">
+
+                    {/* Bottom Metadata & View Button */}
+                    <div className="flex items-center justify-between pt-3 border-t border-white/10 mt-2">
+                        <div className="flex items-baseline gap-1.5">
+                            <span className="font-mono text-base font-black text-white/90">
+                                {String(i + 1).padStart(2, "0")}
+                            </span>
+                            <span className="font-mono text-[9px] text-white/50 uppercase tracking-wider font-semibold line-clamp-1 max-w-[120px]">
+                                {project.client}
+                            </span>
+                        </div>
+                        <span className="font-mono text-[10px] text-white/90 group-hover:text-[#ffff7b] group-hover:gap-1.5 flex items-center gap-1 transition-all duration-300 font-bold">
                             View
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                                 <path d="M5 12h14M12 5l7 7-7 7" />
                             </svg>
                         </span>

@@ -29,6 +29,9 @@ export const projects: Project[] = [
         challenge: "Optimizing a heavily detailed, multi-material Blender model to run flawlessly at 60fps on mobile.",
         solution: "Aggressive texture baking, Draco compression, and dynamic environment mapping in React Three Fiber.",
         media: [
+            { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/v1785168599/portfolio/trionda/balls_rolling.mp4', alt: 'Trionda Balls Rolling Animation' },
+            { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/v1785168566/portfolio/trionda/ball_tunisia.mp4', alt: 'Trionda Ball Showcase' },
+            { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/v1785168603/portfolio/trionda/transition2.mp4', alt: 'Trionda Transition Video' },
             { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/v1784898993/portfolio/trionda/cover_ball.webp', alt: 'Trionda Ball Material Close Up' },
             { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/v1784898994/portfolio/trionda/render_ball.webp', alt: 'Trionda Ball Wireframe Overlay' },
             { type: 'image', url: 'https://res.cloudinary.com/zu63qo7h/image/upload/v1784898995/portfolio/trionda/stadium_mockup.webp', alt: 'Interactive Web Player Showcase' },
