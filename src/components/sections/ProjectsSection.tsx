@@ -37,21 +37,33 @@ function ProjectCard({ project, i, isMobileActive }: { project: (typeof projects
             data-card-index={i}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
-            className="group flex-shrink-0 block select-none focus-visible:outline-none"
+            className="group flex-shrink-0 block select-none focus-visible:outline-none snap-center"
             style={{ width: "320px", height: "350px", perspective: "1200px" }}
         >
             <article className={`relative w-full h-full rounded-[32px] bg-black p-[3px] border-[3px] border-black/90 shadow-2xl overflow-hidden transition-all duration-700 ${isActive ? "-translate-y-2" : ""}`}>
                 
-                {/* High-Intensity Emission Outer Glow (Fades in on hover / mobile center) */}
+                {/* High-Intensity Outer Neon Glow Bloom */}
                 <div
                     className={`absolute inset-0 rounded-[32px] transition-all duration-700 pointer-events-none z-0 ${isActive ? "opacity-100" : "opacity-0"}`}
                     style={{
-                        boxShadow: `0 0 40px ${currentGlow.glow}, 0 20px 60px -5px ${currentGlow.glow}`,
+                        boxShadow: `0 0 45px ${currentGlow.glow}, 0 25px 65px -5px ${currentGlow.glow}`,
                         borderColor: currentGlow.border,
                     }}
                 />
 
-                <div className="relative w-full h-full rounded-[28px] overflow-hidden bg-black flex flex-col justify-between z-1" style={{ transformStyle: "preserve-3d" }}>
+                {/* Bottom Sweeping Neon Glow Aura (Placed OUTSIDE folder flap so it NEVER washes over the text!) */}
+                <div className={`absolute inset-x-0 bottom-0 h-20 rounded-b-[32px] overflow-hidden pointer-events-none z-[1] transition-opacity duration-700 ${isActive ? "opacity-100" : "opacity-0"}`}>
+                    <div
+                        className="absolute -inset-x-full bottom-0 h-full w-[200%]"
+                        style={{
+                            background: `radial-gradient(ellipse at 50% 120%, ${currentGlow.beam} 0%, ${currentGlow.glow} 50%, transparent 85%)`,
+                            filter: "blur(14px)",
+                            animation: "neonSweep 2.2s infinite linear",
+                        }}
+                    />
+                </div>
+
+                <div className="relative w-full h-full rounded-[28px] overflow-hidden bg-black flex flex-col justify-between z-2" style={{ transformStyle: "preserve-3d" }}>
 
                     {/* Full-Bleed Media Container (Extends all the way down behind folder tab shape) */}
                     <div className="absolute top-0 inset-x-0 w-full h-[225px] overflow-hidden rounded-t-[26px] z-1">
@@ -121,27 +133,6 @@ function ProjectCard({ project, i, isMobileActive }: { project: (typeof projects
                             transformStyle: "preserve-3d",
                         }}
                     >
-                        {/* Ultra-Smooth Sweeping Neon Emission Layer inside the Emission Flap */}
-                        <div className={`absolute inset-x-0 bottom-0 h-36 rounded-b-[28px] transition-opacity duration-700 pointer-events-none z-0 overflow-hidden ${isActive ? "opacity-100" : "opacity-0"}`}>
-                            {/* Base smooth ambient glow */}
-                            <div
-                                className="absolute inset-0"
-                                style={{
-                                    background: `radial-gradient(ellipse at 50% 120%, ${currentGlow.glow}, transparent 75%)`,
-                                    filter: "blur(6px)",
-                                }}
-                            />
-                            {/* Smooth Left-to-Right Sweeping Neon Beam Wave */}
-                            <div
-                                className="absolute -inset-x-full bottom-0 h-full w-[200%]"
-                                style={{
-                                    background: `radial-gradient(ellipse at 50% 100%, ${currentGlow.beam} 0%, ${currentGlow.glow} 40%, transparent 80%)`,
-                                    filter: "blur(12px)",
-                                    animation: "neonSweep 2.2s infinite linear",
-                                }}
-                            />
-                        </div>
-
                         {/* SVG Folder Tab Shape Overlay (#141416 dark panel) */}
                         <svg
                             className="absolute inset-0 w-full h-full text-[#141416] fill-current drop-shadow-[0_-10px_20px_rgba(0,0,0,0.8)] transition-transform duration-700"
@@ -320,10 +311,10 @@ export default function ProjectsSection() {
             {/* ── Top border ─────────────────────────────────── */}
             <div className="w-full h-px bg-[#191919]/10" />
 
-            {/* ── Horizontal scroll track (Arrow Controlled) ──── */}
+            {/* ── Horizontal scroll track (Arrow Controlled + Mobile Snap) ──── */}
             <div
                 ref={containerRef}
-                className="w-full overflow-x-auto hide-scrollbar scroll-smooth py-8"
+                className="w-full overflow-x-auto hide-scrollbar scroll-smooth snap-x snap-mandatory py-8 px-4 md:px-0"
                 style={{
                     maskImage: "linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%)",
                     WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%)",
