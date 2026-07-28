@@ -19,12 +19,12 @@ function ProjectCard({ project, i }: { project: (typeof projects)[0]; i: number 
 
     const acc = project.accent ?? "fuchsia";
     const glowColors: Record<string, { glow: string; border: string; beam: string }> = {
-        fuchsia: { glow: "rgba(217, 70, 239, 0.9)", border: "#e879f9", beam: "#f0abfc" },
-        cyan:    { glow: "rgba(34, 211, 238, 0.9)", border: "#38bdf8", beam: "#7dd3fc" },
-        violet:  { glow: "rgba(167, 139, 250, 0.9)", border: "#c084fc", beam: "#d8b4fe" },
-        amber:   { glow: "rgba(251, 191, 36, 0.9)", border: "#fcd34d", beam: "#fef08a" },
-        rose:    { glow: "rgba(251, 113, 133, 0.9)", border: "#fda4af", beam: "#fecdd3" },
-        emerald: { glow: "rgba(52, 211, 153, 0.9)", border: "#6ee7b7", beam: "#a7f3d0" },
+        fuchsia: { glow: "rgba(217, 70, 239, 0.85)", border: "#e879f9", beam: "rgba(240, 171, 252, 0.95)" },
+        cyan:    { glow: "rgba(34, 211, 238, 0.85)", border: "#38bdf8", beam: "rgba(125, 211, 252, 0.95)" },
+        violet:  { glow: "rgba(167, 139, 250, 0.85)", border: "#c084fc", beam: "rgba(216, 180, 254, 0.95)" },
+        amber:   { glow: "rgba(251, 191, 36, 0.85)", border: "#fcd34d", beam: "rgba(254, 240, 138, 0.95)" },
+        rose:    { glow: "rgba(251, 113, 133, 0.85)", border: "#fda4af", beam: "rgba(254, 205, 211, 0.95)" },
+        emerald: { glow: "rgba(52, 211, 153, 0.85)", border: "#6ee7b7", beam: "rgba(167, 243, 208, 0.95)" },
     };
     const currentGlow = glowColors[acc] ?? glowColors.fuchsia;
 
@@ -41,27 +41,15 @@ function ProjectCard({ project, i }: { project: (typeof projects)[0]; i: number 
                 <div
                     className="absolute inset-0 rounded-[32px] opacity-0 group-hover:opacity-100 transition-all duration-700 pointer-events-none z-0"
                     style={{
-                        boxShadow: `0 0 35px ${currentGlow.glow}, 0 20px 60px -5px ${currentGlow.glow}`,
+                        boxShadow: `0 0 40px ${currentGlow.glow}, 0 20px 60px -5px ${currentGlow.glow}`,
                         borderColor: currentGlow.border,
                     }}
                 />
 
-                {/* Left-to-Right Sweeping Neon Laser Beam along Bottom Border */}
-                <div className="absolute inset-x-0 bottom-0 h-[4px] overflow-hidden rounded-b-[32px] pointer-events-none z-40 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    <div
-                        className="w-full h-full"
-                        style={{
-                            background: `linear-gradient(90deg, transparent 0%, ${currentGlow.beam} 50%, transparent 100%)`,
-                            animation: "neonSweep 1.8s infinite linear",
-                            boxShadow: `0 0 15px ${currentGlow.border}`,
-                        }}
-                    />
-                </div>
-
-                <div className="relative w-full h-full rounded-[28px] overflow-hidden bg-[#161618] flex flex-col justify-between z-1" style={{ transformStyle: "preserve-3d" }}>
+                <div className="relative w-full h-full rounded-[28px] overflow-hidden bg-[#18181a] flex flex-col justify-between z-1" style={{ transformStyle: "preserve-3d" }}>
 
                     {/* Media Container (Top) */}
-                    <div className="relative w-full h-[190px] overflow-hidden rounded-t-[26px]">
+                    <div className="relative w-full h-[190px] overflow-hidden rounded-t-[26px] bg-[#18181a]">
 
                         {/* 3D Stack Card 3 (Furthest Back) */}
                         {stackedMedia[2] && (
@@ -122,27 +110,40 @@ function ProjectCard({ project, i }: { project: (typeof projects)[0]; i: number 
 
                     {/* 3D Folder Flap Notch Panel (Opens FORWARD towards user in 3D) */}
                     <div
-                        className="relative w-full h-[170px] -mt-8 z-30 transition-all duration-700 ease-out"
+                        className="relative w-full h-[170px] -mt-8 z-30 transition-all duration-700 ease-out bg-[#18181a] rounded-b-[28px]"
                         style={{
                             transformOrigin: "bottom center",
                             transformStyle: "preserve-3d",
                         }}
                     >
-                        {/* Bottom Inner Emission Glow Layer */}
-                        <div
-                            className="absolute inset-x-0 bottom-0 h-32 rounded-b-[26px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-0"
-                            style={{
-                                background: `radial-gradient(ellipse at 50% 120%, ${currentGlow.glow}, transparent 70%)`,
-                            }}
-                        />
+                        {/* Ultra-Smooth Sweeping Neon Emission Layer inside the Emission Flap */}
+                        <div className="absolute inset-x-0 bottom-0 h-36 rounded-b-[28px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-0 overflow-hidden">
+                            {/* Base smooth ambient glow */}
+                            <div
+                                className="absolute inset-0"
+                                style={{
+                                    background: `radial-gradient(ellipse at 50% 120%, ${currentGlow.glow}, transparent 75%)`,
+                                    filter: "blur(6px)",
+                                }}
+                            />
+                            {/* Smooth Left-to-Right Sweeping Neon Beam Wave */}
+                            <div
+                                className="absolute -inset-x-full bottom-0 h-full w-[200%]"
+                                style={{
+                                    background: `radial-gradient(ellipse at 50% 100%, ${currentGlow.beam} 0%, ${currentGlow.glow} 40%, transparent 80%)`,
+                                    filter: "blur(12px)",
+                                    animation: "neonSweep 2.2s infinite linear",
+                                }}
+                            />
+                        </div>
 
-                        {/* SVG Folder Tab Shape with Rounded Bottom Corners matching card */}
+                        {/* SVG Folder Tab Shape with Seamless Matching #18181a Color */}
                         <svg
-                            className="absolute inset-0 w-full h-full text-[#1c1c1e] fill-current drop-shadow-[0_-10px_20px_rgba(0,0,0,0.7)] transition-transform duration-700 group-hover:[transform:rotateX(20deg)_translateZ(20px)]"
+                            className="absolute inset-0 w-full h-full text-[#18181a] fill-current drop-shadow-[0_-8px_16px_rgba(0,0,0,0.6)] transition-transform duration-700 group-hover:[transform:rotateX(20deg)_translateZ(20px)]"
                             viewBox="0 0 310 170"
                             preserveAspectRatio="none"
                         >
-                            <path d="M 0,20 Q 0,0 20,0 L 155,0 Q 170,0 178,10 L 190,28 Q 198,36 210,36 L 290,36 Q 310,36 310,50 L 310,146 Q 310,166 290,166 L 20,166 Q 0,166 0,146 Z" />
+                            <path d="M 0,20 Q 0,0 20,0 L 155,0 Q 170,0 178,10 L 190,28 Q 198,36 210,36 L 290,36 Q 310,36 310,56 L 310,170 L 0,170 Z" />
                         </svg>
 
                         {/* Tab Content Layer */}
