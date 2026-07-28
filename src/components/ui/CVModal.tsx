@@ -320,12 +320,15 @@ export default function CVModal({ isOpen, onClose }: CVModalProps) {
                             </div>
 
                             {/* Section Controls (Prev/Next Arrows) */}
-                            <div className="absolute bottom-4 left-6 hidden lg:flex items-center gap-2 z-40">
+                            <div className="absolute bottom-4 left-6 hidden lg:flex items-center gap-2.5 z-40">
                                 <button
                                     onClick={() => setActiveIndex((prev) => Math.max(prev - 1, 0))}
                                     disabled={activeIndex === 0}
-                                    className={`w-8 h-8 rounded-full border border-[#191919]/20 flex items-center justify-center transition-all ${
-                                        activeIndex === 0 ? "opacity-30 cursor-not-allowed" : "hover:bg-[#191919] hover:text-white cursor-pointer active:scale-95"
+                                    aria-label="Previous CV Section"
+                                    className={`w-9 h-9 rounded-full border-2 font-bold text-sm flex items-center justify-center transition-all duration-200 ${
+                                        activeIndex === 0
+                                            ? "opacity-25 cursor-not-allowed border-[#191919]/30 text-[#191919]/40 bg-transparent"
+                                            : "border-[#191919] text-[#191919] bg-transparent hover:bg-[#191919] hover:text-[#ffff7b] active:bg-[#191919] active:text-[#ffff7b] cursor-pointer active:scale-90 shadow-xs"
                                     }`}
                                 >
                                     ↑
@@ -333,13 +336,16 @@ export default function CVModal({ isOpen, onClose }: CVModalProps) {
                                 <button
                                     onClick={() => setActiveIndex((prev) => Math.min(prev + 1, cvSections.length - 1))}
                                     disabled={activeIndex === cvSections.length - 1}
-                                    className={`w-8 h-8 rounded-full border border-[#191919]/20 flex items-center justify-center transition-all ${
-                                        activeIndex === cvSections.length - 1 ? "opacity-30 cursor-not-allowed" : "hover:bg-[#191919] hover:text-white cursor-pointer active:scale-95"
+                                    aria-label="Next CV Section"
+                                    className={`w-9 h-9 rounded-full border-2 font-bold text-sm flex items-center justify-center transition-all duration-200 ${
+                                        activeIndex === cvSections.length - 1
+                                            ? "opacity-25 cursor-not-allowed border-[#191919]/30 text-[#191919]/40 bg-transparent"
+                                            : "border-[#191919] text-[#191919] bg-transparent hover:bg-[#191919] hover:text-[#ffff7b] active:bg-[#191919] active:text-[#ffff7b] cursor-pointer active:scale-90 shadow-xs"
                                     }`}
                                 >
                                     ↓
                                 </button>
-                                <span className="font-mono text-[10px] text-[#191919]/60 font-bold uppercase tracking-widest ml-2">
+                                <span className="font-mono text-xs text-[#191919] font-black uppercase tracking-widest ml-1">
                                     {activeIndex + 1} / {cvSections.length}
                                 </span>
                             </div>
