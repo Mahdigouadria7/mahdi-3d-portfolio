@@ -33,13 +33,13 @@ function ProjectCard({ project, i }: { project: (typeof projects)[0]; i: number 
             href={`/projects/${project.slug}`}
             draggable={false}
             className="group flex-shrink-0 block select-none focus-visible:outline-none"
-            style={{ width: "320px", height: "340px" }}
+            style={{ width: "310px", height: "330px" }}
         >
             <article className="relative w-full h-full rounded-[32px] bg-black p-[3px] border-[3px] border-black/80 shadow-2xl overflow-hidden transition-transform duration-500 group-hover:-translate-y-2">
                 <div className="relative w-full h-full rounded-[28px] overflow-hidden bg-[#161618] flex flex-col justify-between">
 
                     {/* Media Area (Top) */}
-                    <div className="relative w-full h-[185px] overflow-hidden">
+                    <div className="relative w-full h-[180px] overflow-hidden">
                         {previewMedia ? (
                             previewMedia.type === "video" ? (
                                 <video
@@ -62,50 +62,47 @@ function ProjectCard({ project, i }: { project: (typeof projects)[0]; i: number 
                         ) : (
                             <div className="absolute inset-0 bg-[#222]" />
                         )}
-                        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/20 pointer-events-none" />
+                        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-transparent pointer-events-none" />
 
-                        {/* Top Right Client & Timeline Overlay */}
-                        <div className="absolute top-3.5 right-4 text-right max-w-[140px] pointer-events-none z-10">
-                            <span className="font-playfair text-xs font-bold text-white leading-tight block drop-shadow-md">
-                                {project.client}
-                            </span>
-                            <span className="font-mono text-[9px] text-white/70 tracking-wider uppercase block mt-0.5">
-                                {project.timeline}
-                            </span>
+                        {/* Top Right Project Title Overlay (Matching "Taskello App Card Design" in reference) */}
+                        <div className="absolute top-4 right-4 text-right max-w-[160px] pointer-events-none z-10">
+                            <h3 className="font-playfair text-sm font-extrabold text-white leading-tight drop-shadow-md group-hover:text-[#ffff7b] transition-colors line-clamp-2">
+                                {project.title}
+                            </h3>
                         </div>
                     </div>
 
                     {/* Folder Tab Notch Info Section (Bottom) */}
-                    <div className="relative w-full h-[175px] -mt-6 z-20">
+                    <div className="relative w-full h-[170px] -mt-8 z-20">
                         {/* SVG Folder Tab Shape Background */}
                         <svg
-                            className="absolute inset-0 w-full h-full text-[#1c1c1e] fill-current drop-shadow-[0_-4px_12px_rgba(0,0,0,0.4)]"
-                            viewBox="0 0 320 175"
+                            className="absolute inset-0 w-full h-full text-[#1c1c1e] fill-current drop-shadow-[0_-6px_14px_rgba(0,0,0,0.5)]"
+                            viewBox="0 0 310 170"
                             preserveAspectRatio="none"
                         >
-                            <path d="M 0,20 Q 0,0 20,0 L 150,0 Q 165,0 172,10 L 184,28 Q 192,36 205,36 L 300,36 Q 320,36 320,56 L 320,175 L 0,175 Z" />
+                            <path d="M 0,20 Q 0,0 20,0 L 155,0 Q 170,0 178,10 L 190,28 Q 198,36 210,36 L 290,36 Q 310,36 310,56 L 310,170 L 0,170 Z" />
                         </svg>
 
                         {/* Tab Content Layer */}
-                        <div className="relative z-10 w-full h-full p-5 flex flex-col justify-between">
-                            {/* Tab Header: Title & Category (No Description) */}
-                            <div>
-                                <h3 className="font-playfair text-lg text-white font-bold leading-tight group-hover:text-[#ffff7b] transition-colors line-clamp-1">
-                                    {project.title}
-                                </h3>
-                                <span className="font-mono text-[10px] text-white/50 uppercase tracking-widest block mt-1 font-medium">
+                        <div className="relative z-10 w-full h-full px-5 pt-4 pb-4 flex flex-col justify-between">
+                            {/* Tab Left Header (Matching "Daily memo / Notes & Journaling" in reference) */}
+                            <div className="max-w-[145px]">
+                                <span className="font-mono text-xs font-bold text-white block truncate">
                                     {project.category}
+                                </span>
+                                <span className="font-mono text-[10px] text-white/50 uppercase tracking-wider block mt-0.5 font-medium truncate">
+                                    {project.client} • {project.timeline}
                                 </span>
                             </div>
 
-                            {/* Bottom Metadata: Index & View CTA */}
+                            {/* Bottom Row: Index (05 Doc) & View CTA (1270 Notes) */}
                             <div className="flex items-end justify-between pt-2">
                                 <div className="flex items-baseline gap-1.5">
                                     <span className="font-mono text-2xl font-black text-white">
                                         {String(i + 1).padStart(2, "0")}
                                     </span>
                                     <span className="font-mono text-[10px] text-white/50 uppercase tracking-wider font-semibold">
-                                        Project
+                                        Work
                                     </span>
                                 </div>
 
