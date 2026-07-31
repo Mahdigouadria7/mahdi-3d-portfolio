@@ -113,9 +113,6 @@ export default function SamsungHero() {
                         </em>
                     </h1>
 
-                    <p className="hero-text-anim font-sans text-white/80 text-sm sm:text-base md:text-lg leading-relaxed max-w-lg font-normal mb-4 md:mb-6 pointer-events-auto" style={{ textShadow: "0 2px 10px rgba(0,0,0,1)" }}>
-                        {project.description}
-                    </p>
 
                 </div>
               )}
