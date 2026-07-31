@@ -134,7 +134,7 @@ export class SamsungHeroApp {
     this._scratchQuatB = new THREE.Quaternion();
     this._scratchEuler = new THREE.Euler();
 
-    this.onMouseMove = (e) => {
+    this.onPointerMove = (e) => {
       this.mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
       this.mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
 
@@ -150,7 +150,7 @@ export class SamsungHeroApp {
         this.previousMousePosition.set(e.clientX, e.clientY);
       }
     };
-    window.addEventListener('mousemove', this.onMouseMove);
+    window.addEventListener('pointermove', this.onPointerMove);
     // 3D Glowing Soft Trail for S-Pen using Canvas Gradient Sprites
     const canvas = document.createElement('canvas');
     canvas.width = 64;
@@ -339,6 +339,7 @@ export class SamsungHeroApp {
     // Instead, we lock the camera to a fixed Z distance.
     const isMobile = window.innerWidth <= 768;
     const targetScale = isMobile ? 0.65 : 1.0; // Scale down 3D content on mobile
+    const cameraY = isMobile ? 1.0 : 0; // Pan camera up so model moves down on mobile screen
     
     if (this.sceneGroup) {
       gsap.to(this.sceneGroup.scale, {
@@ -352,12 +353,12 @@ export class SamsungHeroApp {
 
     gsap.to(this.camera.position, {
       x: 0,
-      y: 0,
+      y: cameraY,
       z: 5.5,
       duration: 1.2,
       ease: "power2.out",
       onUpdate: () => {
-        this.camera.lookAt(0, 0, 0);
+        this.camera.lookAt(0, cameraY, 0);
       }
     });
   }
