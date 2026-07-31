@@ -16,6 +16,23 @@ export interface Project {
 
 export const projects: Project[] = [
     {
+        slug: "samsung-s22-ultra-3d-hero",
+        accent: "cyan",
+        title: "SAMSUNG S22 ULTRA — 3D INTERACTIVE",
+        category: "Interactive 3D & WebGL",
+        description: "Physically simulated hanging Samsung Galaxy S22 Ultra phone with Rapier physics, bone chain deformation, S-Pen extraction, and real-time screen vector drawing.",
+        client: "Samsung Showcase Concept",
+        role: "Senior Graphics Engineer & Physics Programmer",
+        timeline: "2026",
+        techStack: ["Three.js", "Rapier Physics", "GSAP", "WebGL", "TypeScript", "Canvas API"],
+        fullDescription: "A production-ready, physically simulated interactive hero showcase featuring a suspended Samsung S22 Ultra phone on a metallic chain. Built with Rapier 3D physics, real-time bone armature binding, S-Pen GSAP extraction, and an offscreen vector drawing canvas texture system.",
+        challenge: "Simulating realistic multi-body pendulum dynamics and multi-material reflection rendering while driving skinned mesh chain deformation and real-time screen UV stroke rendering at a fluid 60+ FPS.",
+        solution: "Decoupled Rapier rigid body chain simulation mapped directly to armature bones, zero-allocation vector raycasting, offscreen HTML canvas texture updates, and ACES Filmic tone mapping with PMREM reflections.",
+        media: [
+            { type: 'image', url: 'https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&w=1200&q=80', alt: 'Samsung Galaxy S22 Ultra Showcase' }
+        ]
+    },
+    {
         slug: "trionda-ball-wc-2026",
         accent: "fuchsia",
         title: "TRIONDA BALL WC 2026",

@@ -5,6 +5,7 @@ import AnimatedProjectHero from "@/components/sections/AnimatedProjectHero";
 import LuxuryRedBullCommercialHero from "@/components/sections/LuxuryRedBullCommercialHero";
 import DanupBottleHero from "@/components/sections/DanupBottleHero";
 import DanaoBottleHero from "@/components/sections/DanaoBottleHero";
+import SamsungHero from "@/components/SamsungHero";
 import BackButton from "@/components/ui/BackButton";
 import PreviousProjectButton from "@/components/ui/PreviousProjectButton";
 import NextProjectButton from "@/components/ui/NextProjectButton";
@@ -56,7 +57,9 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             </div>
 
             {/* ── 1. 3D Intro & Interactive Canvas Hero ── */}
-            {project.slug === "redbull-gold-concept" ? (
+            {project.slug === "samsung-s22-ultra-3d-hero" ? (
+                <SamsungHero />
+            ) : project.slug === "redbull-gold-concept" ? (
                 <LuxuryRedBullCommercialHero />
             ) : project.slug === "danup-x-ala" ? (
                 <DanupBottleHero />
@@ -873,6 +876,44 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                         </div>
                                     </ScrollReveal>
                                 ))}
+                            </div>
+                        </div>
+                    </div>
+                ) : project.slug === "samsung-s22-ultra-3d-hero" ? (
+                    <div className="space-y-16 mt-8 relative z-10">
+                        {/* 1. Samsung Videos */}
+                        <div className="relative z-10 py-8">
+                            <ScrollReveal direction="up">
+                                <div className="w-full max-w-6xl mx-auto flex items-center gap-4 mb-12">
+                                    <span className="font-mono text-xs font-bold tracking-widest text-[#191919] bg-[#ffff7b] px-3.5 py-1 rounded-full border border-black/10">01</span>
+                                    <div className="flex items-center gap-1">
+                                        <div className="w-8 h-[2px] bg-[#191919]" />
+                                        <div className="w-8 h-[2px] bg-[#191919]/30" />
+                                    </div>
+                                    <h3 className="font-mono text-xs font-bold uppercase tracking-[0.3em] text-[#191919]/60">
+                                        Samsung S22 Ultra 3D Showcase &amp; Animation
+                                    </h3>
+                                </div>
+                            </ScrollReveal>
+
+                            <div className="flex flex-col md:flex-row justify-center items-center gap-8 max-w-4xl mx-auto mb-12">
+                                <ScrollReveal direction="left" delay={0.1} className="relative h-full w-full max-w-sm">
+                                    <div className="w-full aspect-[9/16] bg-[#191919] border border-white/10 rounded-3xl overflow-hidden relative shadow-2xl hover:border-[#ffff7b] hover:shadow-[0_0_30px_rgba(255,255,123,0.3)] transition-all duration-500 group">
+                                        <LazyVideo
+                                            src="https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/samsung/videos/samsung_3d_zflip_6.mp4"
+                                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
+                                        />
+                                    </div>
+                                </ScrollReveal>
+
+                                <ScrollReveal direction="right" delay={0.2} className="relative h-full w-full max-w-sm">
+                                    <div className="w-full aspect-[9/16] bg-[#191919] border border-white/10 rounded-3xl overflow-hidden relative shadow-2xl hover:border-[#ffff7b] hover:shadow-[0_0_30px_rgba(255,255,123,0.3)] transition-all duration-500 group">
+                                        <LazyVideo
+                                            src="https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/samsung/videos/samsung_cgi_final.mp4"
+                                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
+                                        />
+                                    </div>
+                                </ScrollReveal>
                             </div>
                         </div>
                     </div>

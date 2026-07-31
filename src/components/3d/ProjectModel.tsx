@@ -231,7 +231,7 @@ export function PlaceholderShape({ index, onPointerDown, onPointerUp, onPointerO
  * 2. Load your model: const { scene } = useGLTF('/models/my-product.glb')
  * 3. Replace <PlaceholderShape /> with <primitive object={scene} scale={0.65} />
  */
-export default function ProjectModel({ index }: { index: number }) {
+export default function ProjectModel({ slug, index = 0 }: { slug?: string; index?: number }) {
     const [isDragging, setIsDragging] = useState(false);
     const containerRef = useRef<HTMLDivElement>(null);
     const [isVisible, setIsVisible] = useState(false);
@@ -283,19 +283,19 @@ export default function ProjectModel({ index }: { index: number }) {
                         azimuth={[-Infinity, Infinity]}
                     >
                         <Float speed={isDragging ? 0 : 2} rotationIntensity={0.5} floatIntensity={0.5}>
-                            {index === 0 ? (
+                            {slug === "trionda-ball-wc-2026" ? (
                                 <BallModel
                                     onPointerDown={() => setIsDragging(true)}
                                     onPointerUp={() => setIsDragging(false)}
                                     onPointerOut={() => setIsDragging(false)}
                                 />
-                            ) : index === 1 ? (
+                            ) : slug === "redbull-gold-concept" ? (
                                 <RedBullGoldCanModel
                                     onPointerDown={() => setIsDragging(true)}
                                     onPointerUp={() => setIsDragging(false)}
                                     onPointerOut={() => setIsDragging(false)}
                                 />
-                            ) : index === 2 ? (
+                            ) : slug === "danup-x-ala" ? (
                                 <DanupBottleModel
                                     onPointerDown={() => setIsDragging(true)}
                                     onPointerUp={() => setIsDragging(false)}

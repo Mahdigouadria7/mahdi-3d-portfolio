@@ -149,12 +149,15 @@ function IntroSequence({ onComplete }: { onComplete: () => void }) {
     );
 }
 
-function SceneAnimator({ index, onScoreChange, onScoreReset, resetTrigger, startIntro }: { index: number, onScoreChange?: () => void, onScoreReset?: () => void, resetTrigger?: number, startIntro?: boolean }) {
+function SceneAnimator({ project, index, onScoreChange, onScoreReset, resetTrigger, startIntro }: { project: Project, index: number, onScoreChange?: () => void, onScoreReset?: () => void, resetTrigger?: number, startIntro?: boolean }) {
     const groupRef = useRef<THREE.Group>(null);
     const jumpRef = useRef<THREE.Group>(null);
     const spinRef = useRef<THREE.Group>(null);
     const groundMeshRef = useRef<THREE.Mesh>(null);
-    
+
+    const isTrionda = project.slug === "trionda-ball-wc-2026";
+    const isRedBull = project.slug === "redbull-gold-concept";
+
     // Material refs for ground fade
     const groundMatRef = useRef<THREE.MeshStandardMaterial>(null);
     const lineMat1Ref = useRef<THREE.MeshBasicMaterial>(null);
@@ -194,7 +197,7 @@ function SceneAnimator({ index, onScoreChange, onScoreReset, resetTrigger, start
         const tl = gsap.timeline({
             paused: true,
             onComplete: () => {
-                if (index === 0) {
+                if (isTrionda) {
                     // Trigger fade in for the ground once the ball animation is completely done
                     gsap.to(groundOpacityRef, {
                         current: 1.0,
@@ -232,7 +235,7 @@ function SceneAnimator({ index, onScoreChange, onScoreReset, resetTrigger, start
         return () => {
             tl.kill();
         };
-    }, [index]);
+    }, [isTrionda]);
 
     useEffect(() => {
         if (startIntro && tlRef.current) {
@@ -418,7 +421,7 @@ function SceneAnimator({ index, onScoreChange, onScoreReset, resetTrigger, start
     };
 
     const handleGroundClick = (event: any) => {
-        if (index !== 0 || !introDone.current) return;
+        if (!isTrionda || !introDone.current) return;
         
         // If the first thing hit by the raycaster was NOT the ground, ignore it!
         // This ensures dragging the ball doesn't accidentally tilt the ground behind it.
@@ -446,7 +449,7 @@ function SceneAnimator({ index, onScoreChange, onScoreReset, resetTrigger, start
     return (
         <group>
             {/* The Pitch / Ground Plane */}
-            {index === 0 && (
+            {isTrionda && (
                 <group position={[0, 0, 0]} scale={[1.2, 1.2, 1.2]}>
                     <mesh position={[0, -1.2, 0]} receiveShadow ref={groundMeshRef} onPointerDown={handleGroundClick}>
                         <cylinderGeometry args={[3.5, 3.5, 0.05, 64]} />
@@ -497,9 +500,9 @@ function SceneAnimator({ index, onScoreChange, onScoreReset, resetTrigger, start
                         snap={false}
                     >
                         <group ref={spinRef}>
-                            {index === 0 ? (
+                            {isTrionda ? (
                                 <BallModel onClick={handleBallClick} />
-                            ) : index === 1 ? (
+                            ) : isRedBull ? (
                                 <RedBullGoldCanModel onClick={handleBallClick} />
                             ) : (
                                 <PlaceholderShape index={index} onClick={handleBallClick} />
@@ -519,11 +522,14 @@ export default function AnimatedProjectHero({ project, index }: { project: Proje
     const canvasContainerRef = useRef<HTMLDivElement>(null);
     const scoreBoardRef = useRef<HTMLDivElement>(null);
     
+    const isTrionda = project.slug === "trionda-ball-wc-2026";
+    const isRedBull = project.slug === "redbull-gold-concept";
+
     // Game State
     const [score, setScore] = useState(0);
     const [highScore, setHighScore] = useState(0);
     const [resetTrigger, setResetTrigger] = useState(0);
-    const [introFinished, setIntroFinished] = useState(index !== 0);
+    const [introFinished, setIntroFinished] = useState(!isTrionda);
     const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
@@ -624,7 +630,7 @@ export default function AnimatedProjectHero({ project, index }: { project: Proje
             className="relative w-full h-[100vh] flex overflow-hidden border-b border-white/5"
         >
             {/* Scoreboard HUD (Only for Ball Project) */}
-            {index === 0 && (
+            {isTrionda && (
                 <div ref={scoreBoardRef} className="absolute top-[80px] md:top-12 left-1/2 transform -translate-x-1/2 z-50 flex space-x-2 md:space-x-6 pointer-events-none opacity-0 items-stretch scale-75 md:scale-100 origin-top">
                     <div className="flex flex-col items-center justify-center bg-[#0a0510]/80 backdrop-blur-md border border-white/10 px-4 md:px-6 py-3 rounded-sm shadow-2xl min-w-[90px] md:min-w-[120px]">
                         <span className="text-white/50 text-[8px] md:text-[10px] font-cyber tracking-widest uppercase mb-1">Juggles</span>
@@ -689,6 +695,7 @@ export default function AnimatedProjectHero({ project, index }: { project: Proje
                         />
                         
                         <SceneAnimator 
+                            project={project}
                             index={index} 
                             onScoreChange={handleScoreChange} 
                             onScoreReset={handleScoreReset}
@@ -703,11 +710,11 @@ export default function AnimatedProjectHero({ project, index }: { project: Proje
 
             {/* Background ambient glow */}
             <div className="absolute inset-0 flex items-center justify-center opacity-30 pointer-events-none z-0">
-                <div className={`w-[80vw] h-[80vw] md:w-[40vw] md:h-[40vw] rounded-full blur-[150px] ${index === 1 ? 'bg-amber-500/20' : 'bg-fuchsia-500/10'}`}></div>
+                <div className={`w-[80vw] h-[80vw] md:w-[40vw] md:h-[40vw] rounded-full blur-[150px] ${isRedBull ? 'bg-amber-500/20' : 'bg-fuchsia-500/10'}`}></div>
             </div>
 
             {/* Intro Sequence Background */}
-            {index === 0 && (
+            {isTrionda && (
                 <IntroSequence onComplete={handleIntroComplete} />
             )}
 

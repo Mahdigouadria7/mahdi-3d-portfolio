@@ -5,6 +5,7 @@ import StickyHeader from "@/components/StickyHeader";
 import SecurityWrapper from "@/components/ui/SecurityWrapper";
 import Preloader from "@/components/ui/Preloader";
 import SmoothScrolling from "@/components/ui/SmoothScrolling";
+import ScrollToTop from "@/components/ui/ScrollToTop";
 import InAppBrowserDetector from "@/components/ui/InAppBrowserDetector";
 
 const geistSans = Geist({
@@ -76,6 +77,7 @@ export default function RootLayout({
         <InAppBrowserDetector />
         <SecurityWrapper>
           <SmoothScrolling>
+            <ScrollToTop />
             <Preloader />
             <StickyHeader />
             {children}
