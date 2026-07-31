@@ -887,6 +887,7 @@ export class SamsungHeroApp {
     };
 
     this.gui = new GUI({ title: 'Samsung Config' });
+    this.gui.hide(); // Hide GUI for production
     this.gui.add(this.params, 'copyConfig').name('📋 Copy Config for AI');
     
     this.gui.domElement.style.position = 'absolute';
