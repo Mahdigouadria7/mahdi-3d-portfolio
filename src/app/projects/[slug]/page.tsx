@@ -39,7 +39,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
     }
 
     return (
-        <main className="min-h-screen bg-[#f5f4ef] text-[#191919] selection:bg-[#ffff7b] selection:text-[#191919] pb-32 relative overflow-hidden">
+        <main className={`min-h-screen selection:bg-[#00f0ff]/30 selection:text-white pb-32 relative overflow-hidden ${project.slug === 'samsung-s22-ultra-3d-hero' ? 'bg-[#08081e] text-white' : 'bg-[#f5f4ef] text-[#191919]'}`}>
 
             {/* Top Navigation Bar */}
             <nav className="fixed top-0 left-0 w-full z-50 p-4 md:px-10 md:py-5 flex justify-between items-start pointer-events-none gap-4">
@@ -69,120 +69,202 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                 <AnimatedProjectHero project={project} index={projects.findIndex(p => p.slug === project.slug)} />
             )}
 
-            {/* ── 2. Floating Metadata Bar (Nico Studio High-Contrast Dark Bar) ── */}
-            <div className="w-full relative z-40 -mt-[48px] bg-[#191919] text-white border-y border-white/10 shadow-[0_-20px_40px_rgba(0,0,0,0.6)] py-8 pointer-events-auto">
-                <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-8 md:gap-4">
-                    <div className="flex-1 border-l-2 border-[#ffff7b] pl-6 hover:border-white transition-colors duration-500">
-                        <p className="font-mono text-[10px] md:text-xs tracking-[0.3em] uppercase mb-1.5 text-[#ffff7b] font-bold">Client</p>
-                        <h4 className="font-sans font-bold text-base md:text-xl text-white tracking-tight uppercase">{project.client}</h4>
+            {/* ── 2. Metadata Bar ── */}
+            {project.slug === 'samsung-s22-ultra-3d-hero' ? (
+                /* Samsung: Deep blue glassmorphism metadata strip */
+                <div className="w-full relative z-40 -mt-[48px] border-y border-white/10 shadow-[0_-20px_60px_rgba(0,0,0,0.8)] py-8 pointer-events-auto"
+                    style={{ background: 'rgba(10,10,46,0.85)', backdropFilter: 'blur(24px)' }}>
+                    <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-8 md:gap-4">
+                        <div className="flex-1 border-l-2 border-[#00f0ff]/60 pl-6 hover:border-[#00f0ff] transition-colors duration-500">
+                            <p className="font-mono text-[10px] md:text-xs tracking-[0.3em] uppercase mb-1.5 text-[#00f0ff] font-bold">Client</p>
+                            <h4 className="font-sans font-bold text-base md:text-xl text-white tracking-tight uppercase">{project.client}</h4>
+                        </div>
+                        <div className="flex-1 border-l-2 border-[#00f0ff]/60 pl-6 hover:border-[#00f0ff] transition-colors duration-500">
+                            <p className="font-mono text-[10px] md:text-xs tracking-[0.3em] uppercase mb-1.5 text-[#00f0ff] font-bold">Role</p>
+                            <div className="font-sans font-bold text-base md:text-xl text-white tracking-tight uppercase">{project.role}</div>
+                        </div>
+                        <div className="flex-1 border-l-2 border-[#00f0ff]/60 pl-6 hover:border-[#00f0ff] transition-colors duration-500">
+                            <p className="font-mono text-[10px] md:text-xs tracking-[0.3em] uppercase mb-1.5 text-[#00f0ff] font-bold">Timeline</p>
+                            <h4 className="font-sans font-bold text-base md:text-xl text-white tracking-tight uppercase">{project.timeline}</h4>
+                        </div>
+                        <div className="flex-1 border-l-2 border-[#00f0ff]/60 pl-6 hover:border-[#00f0ff] transition-colors duration-500">
+                            <p className="font-mono text-[10px] md:text-xs tracking-[0.3em] uppercase mb-1.5 text-[#00f0ff] font-bold">Stack</p>
+                            <div className="flex flex-wrap gap-1 mt-1">
+                                {project.techStack.slice(0, 4).map(t => (
+                                    <span key={t} className="font-mono text-[10px] uppercase tracking-widest text-white/70 border border-white/20 rounded-full px-2.5 py-0.5">{t}</span>
+                                ))}
+                            </div>
+                        </div>
                     </div>
-                    <div className="flex-1 border-l-2 border-[#ffff7b] pl-6 hover:border-white transition-colors duration-500">
-                        <p className="font-mono text-[10px] md:text-xs tracking-[0.3em] uppercase mb-1.5 text-[#ffff7b] font-bold">Role</p>
-                        <div className="font-sans font-bold text-base md:text-xl text-white tracking-tight uppercase">
-                            {project.slug === "danup-x-ala" ? (
-                                <span className="flex flex-wrap items-center gap-x-2 gap-y-1">
-                                    <span>
-                                        3D Artist:{" "}
-                                        <a
-                                            href="https://www.behance.net/mahdigouadria"
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="text-[#ffff7b] underline hover:text-white transition-colors"
-                                        >
-                                            Mahdi Gouadria
-                                        </a>
+                </div>
+            ) : (
+                /* Default: warm dark bar */
+                <div className="w-full relative z-40 -mt-[48px] bg-[#191919] text-white border-y border-white/10 shadow-[0_-20px_40px_rgba(0,0,0,0.6)] py-8 pointer-events-auto">
+                    <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-8 md:gap-4">
+                        <div className="flex-1 border-l-2 border-[#ffff7b] pl-6 hover:border-white transition-colors duration-500">
+                            <p className="font-mono text-[10px] md:text-xs tracking-[0.3em] uppercase mb-1.5 text-[#ffff7b] font-bold">Client</p>
+                            <h4 className="font-sans font-bold text-base md:text-xl text-white tracking-tight uppercase">{project.client}</h4>
+                        </div>
+                        <div className="flex-1 border-l-2 border-[#ffff7b] pl-6 hover:border-white transition-colors duration-500">
+                            <p className="font-mono text-[10px] md:text-xs tracking-[0.3em] uppercase mb-1.5 text-[#ffff7b] font-bold">Role</p>
+                            <div className="font-sans font-bold text-base md:text-xl text-white tracking-tight uppercase">
+                                {project.slug === "danup-x-ala" ? (
+                                    <span className="flex flex-wrap items-center gap-x-2 gap-y-1">
+                                        <span>
+                                            3D Artist:{" "}
+                                            <a
+                                                href="https://www.behance.net/mahdigouadria"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="text-[#ffff7b] underline hover:text-white transition-colors"
+                                            >
+                                                Mahdi Gouadria
+                                            </a>
+                                        </span>
+                                        <span className="text-white/40">|</span>
+                                        <span>
+                                            Motion Designer:{" "}
+                                            <a
+                                                href="https://www.behance.net/MabroukAziz"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="text-[#ffff7b] underline hover:text-white transition-colors"
+                                            >
+                                                Mabrouk Aziz
+                                            </a>
+                                        </span>
                                     </span>
-                                    <span className="text-white/40">|</span>
-                                    <span>
-                                        Motion Designer:{" "}
-                                        <a
-                                            href="https://www.behance.net/MabroukAziz"
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="text-[#ffff7b] underline hover:text-white transition-colors"
-                                        >
-                                            Mabrouk Aziz
-                                        </a>
-                                    </span>
+                                ) : (
+                                    project.role
+                                )}
+                            </div>
+                        </div>
+                        <div className="flex-1 border-l-2 border-[#ffff7b] pl-6 hover:border-white transition-colors duration-500">
+                            <p className="font-mono text-[10px] md:text-xs tracking-[0.3em] uppercase mb-1.5 text-[#ffff7b] font-bold">Timeline</p>
+                            <h4 className="font-sans font-bold text-base md:text-xl text-white tracking-tight uppercase">{project.timeline}</h4>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* ── 3. Main Project Overview & Challenge/Solution ── */}
+            {project.slug === 'samsung-s22-ultra-3d-hero' ? (
+                /* ── Samsung: Full dark-blue overview section ── */
+                <section className="relative z-20" style={{ background: 'linear-gradient(180deg, #08081e 0%, #0a0a2e 100%)' }}>
+                    {/* Subtle cyan glow top */}
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80vw] h-[2px] bg-gradient-to-r from-transparent via-[#00f0ff]/30 to-transparent" />
+
+                    <div className="max-w-7xl mx-auto px-6 md:px-12 py-16 md:py-24 space-y-16">
+
+                        {/* Brief overview — left-right split */}
+                        <ScrollReveal direction="up" delay={0.1}>
+                            <div className="flex flex-col md:flex-row gap-10 md:gap-20 items-start border-b border-white/10 pb-16">
+                                <div className="md:w-1/3 shrink-0">
+                                    <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#00f0ff] font-bold mb-3">Overview</p>
+                                    <h2 className="font-sans text-3xl md:text-4xl font-black text-white uppercase leading-tight tracking-tight">
+                                        CGI &amp;<br /><span className="text-[#00f0ff]">Interactive</span><br />3D
+                                    </h2>
+                                </div>
+                                <div className="md:w-2/3 flex flex-col gap-6">
+                                    <p className="font-sans text-white/70 text-base md:text-lg leading-relaxed">
+                                        Two cinematic Samsung productions in Blender 3D, powered by Geometry Nodes VFX — plus a real-time WebGL interactive 3D hero built in Three.js.
+                                    </p>
+                                    <div className="flex flex-wrap gap-2">
+                                        {project.techStack.map(t => (
+                                            <span key={t} className="font-mono text-[10px] uppercase tracking-widest text-[#00f0ff]/80 border border-[#00f0ff]/20 rounded-full px-3.5 py-1.5 hover:border-[#00f0ff]/60 hover:text-[#00f0ff] transition-colors">{t}</span>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        </ScrollReveal>
+
+                        {/* Challenge / Solution — blue glassmorphism cards */}
+                        <div className="grid md:grid-cols-2 gap-6">
+                            <ScrollReveal direction="left" delay={0.1}>
+                                <div className="h-full p-8 rounded-2xl border border-white/10 hover:border-[#00f0ff]/30 transition-all duration-500 flex flex-col gap-5"
+                                    style={{ background: 'rgba(255,255,255,0.04)', backdropFilter: 'blur(12px)' }}>
+                                    <div className="flex items-center gap-3">
+                                        <span className="font-mono text-xs font-bold tracking-widest text-black bg-[#00f0ff] px-3 py-1 rounded-full">01</span>
+                                        <h3 className="font-sans text-xl md:text-2xl text-white font-black uppercase tracking-tight">The Challenge</h3>
+                                    </div>
+                                    <p className="font-sans text-white/60 text-sm md:text-base leading-relaxed">{project.challenge}</p>
+                                </div>
+                            </ScrollReveal>
+                            <ScrollReveal direction="right" delay={0.2}>
+                                <div className="h-full p-8 rounded-2xl border border-[#00f0ff]/20 hover:border-[#00f0ff]/50 transition-all duration-500 flex flex-col gap-5"
+                                    style={{ background: 'rgba(0,240,255,0.04)', backdropFilter: 'blur(12px)' }}>
+                                    <div className="flex items-center gap-3">
+                                        <span className="font-mono text-xs font-bold tracking-widest text-black bg-[#00f0ff] px-3 py-1 rounded-full">02</span>
+                                        <h3 className="font-sans text-xl md:text-2xl text-[#00f0ff] font-black uppercase tracking-tight">The Solution</h3>
+                                    </div>
+                                    <p className="font-sans text-white/60 text-sm md:text-base leading-relaxed">{project.solution}</p>
+                                </div>
+                            </ScrollReveal>
+                        </div>
+                    </div>
+                </section>
+            ) : (
+                /* ── Default: warm cream editorial section ── */
+                <section className="max-w-7xl mx-auto px-6 md:px-12 py-16 md:py-24 space-y-20 relative z-20">
+
+                    {/* Editorial Overview Quote */}
+                    <div className="relative z-10 pt-4 md:pt-8 mb-16">
+                        <ScrollReveal direction="up" delay={0.2}>
+                            <div className="w-full flex items-center gap-4 mb-8">
+                                <span className="font-mono text-xs font-bold tracking-widest text-[#191919] bg-[#ffff7b] px-3.5 py-1 rounded-full shadow-xs border border-black/10">
+                                    01
                                 </span>
-                            ) : (
-                                project.role
-                            )}
-                        </div>
-                    </div>
-                    <div className="flex-1 border-l-2 border-[#ffff7b] pl-6 hover:border-white transition-colors duration-500">
-                        <p className="font-mono text-[10px] md:text-xs tracking-[0.3em] uppercase mb-1.5 text-[#ffff7b] font-bold">Timeline</p>
-                        <h4 className="font-sans font-bold text-base md:text-xl text-white tracking-tight uppercase">{project.timeline}</h4>
-                    </div>
-                </div>
-            </div>
-
-            {/* ── 3. Main Project Overview Section (Warm Cream Editorial Surface) ── */}
-            <section className="max-w-7xl mx-auto px-6 md:px-12 py-16 md:py-24 space-y-20 relative z-20">
-
-                {/* Editorial Overview Quote */}
-                <div className="relative z-10 pt-4 md:pt-8 mb-16">
-                    <ScrollReveal direction="up" delay={0.2}>
-                        <div className="w-full flex items-center gap-4 mb-8">
-                            <span className="font-mono text-xs font-bold tracking-widest text-[#191919] bg-[#ffff7b] px-3.5 py-1 rounded-full shadow-xs border border-black/10">
-                                01
-                            </span>
-                            <div className="flex items-center gap-1">
-                                <div className="w-8 h-[2px] bg-[#191919]" />
-                                <div className="w-8 h-[2px] bg-[#191919]/30" />
-                            </div>
-                            <h2 className="font-mono text-xs font-bold uppercase tracking-[0.3em] text-[#191919]/60">
-                                Project Overview
-                            </h2>
-                        </div>
-                        <div className="pl-4 md:pl-16 max-w-5xl border-l-2 border-[#191919]">
-                            <p className="font-playfair text-3xl md:text-5xl lg:text-6xl text-[#191919] leading-[1.16] font-bold tracking-tight">
-                                {project.fullDescription}
-                            </p>
-                        </div>
-                    </ScrollReveal>
-                </div>
-
-
-
-                {/* ── 4. Challenge & Solution Grid (Alternating Nico Studio Surface Cards) ── */}
-                <div className="relative z-10 pt-4 pb-12">
-                    <div className="flex flex-col md:flex-row items-stretch justify-center gap-8 md:gap-12">
-                        {/* Challenge Card (Warm Pure White Card) */}
-                        <ScrollReveal direction="left" delay={0.1} className="w-full md:w-1/2 relative z-20">
-                            <div className="w-full h-full bg-white border border-black/10 rounded-2xl p-8 md:p-12 shadow-[0_8px_30px_rgba(0,0,0,0.04)] group transition-all duration-500 hover:-translate-y-1 hover:shadow-lg">
-                                <div className="flex items-center gap-4 mb-6">
-                                    <span className="font-mono text-xs font-bold tracking-widest text-[#191919] bg-[#ffff7b] px-3.5 py-1 rounded-full border border-black/10">
-                                        01
-                                    </span>
-                                    <h3 className="font-playfair text-2xl md:text-3xl text-[#191919] font-bold uppercase tracking-wide">
-                                        The <em className="font-playfair italic font-normal">Challenge</em>
-                                    </h3>
+                                <div className="flex items-center gap-1">
+                                    <div className="w-8 h-[2px] bg-[#191919]" />
+                                    <div className="w-8 h-[2px] bg-[#191919]/30" />
                                 </div>
-                                <p className="font-sans text-[#444444] text-base md:text-lg leading-relaxed font-normal">
-                                    {project.challenge}
-                                </p>
+                                <h2 className="font-mono text-xs font-bold uppercase tracking-[0.3em] text-[#191919]/60">
+                                    Project Overview
+                                </h2>
                             </div>
-                        </ScrollReveal>
-
-                        {/* Solution Card (Nico Dark High-Contrast Card) */}
-                        <ScrollReveal direction="right" delay={0.3} className="w-full md:w-1/2 relative z-30">
-                            <div className="w-full h-full bg-[#191919] text-white border border-black/10 rounded-2xl p-8 md:p-12 shadow-2xl group transition-all duration-500 hover:-translate-y-1 hover:border-[#ffff7b]/50">
-                                <div className="flex items-center gap-4 mb-6">
-                                    <span className="font-mono text-xs font-bold tracking-widest text-[#191919] bg-[#ffff7b] px-3.5 py-1 rounded-full">
-                                        02
-                                    </span>
-                                    <h3 className="font-playfair text-2xl md:text-3xl text-white font-bold uppercase tracking-wide">
-                                        The <em className="font-playfair italic font-normal text-[#ffff7b]">Solution</em>
-                                    </h3>
-                                </div>
-                                <p className="font-sans text-white/70 text-base md:text-lg leading-relaxed font-normal">
-                                    {project.solution}
+                            <div className="pl-4 md:pl-16 max-w-5xl border-l-2 border-[#191919]">
+                                <p className="font-playfair text-3xl md:text-5xl lg:text-6xl text-[#191919] leading-[1.16] font-bold tracking-tight">
+                                    {project.fullDescription}
                                 </p>
                             </div>
                         </ScrollReveal>
                     </div>
-                </div>
+
+                    {/* ── 4. Challenge & Solution Grid ── */}
+                    <div className="relative z-10 pt-4 pb-12">
+                        <div className="flex flex-col md:flex-row items-stretch justify-center gap-8 md:gap-12">
+                            <ScrollReveal direction="left" delay={0.1} className="w-full md:w-1/2 relative z-20">
+                                <div className="w-full h-full bg-white border border-black/10 rounded-2xl p-8 md:p-12 shadow-[0_8px_30px_rgba(0,0,0,0.04)] group transition-all duration-500 hover:-translate-y-1 hover:shadow-lg">
+                                    <div className="flex items-center gap-4 mb-6">
+                                        <span className="font-mono text-xs font-bold tracking-widest text-[#191919] bg-[#ffff7b] px-3.5 py-1 rounded-full border border-black/10">
+                                            01
+                                        </span>
+                                        <h3 className="font-playfair text-2xl md:text-3xl text-[#191919] font-bold uppercase tracking-wide">
+                                            The <em className="font-playfair italic font-normal">Challenge</em>
+                                        </h3>
+                                    </div>
+                                    <p className="font-sans text-[#444444] text-base md:text-lg leading-relaxed font-normal">
+                                        {project.challenge}
+                                    </p>
+                                </div>
+                            </ScrollReveal>
+                            <ScrollReveal direction="right" delay={0.3} className="w-full md:w-1/2 relative z-30">
+                                <div className="w-full h-full bg-[#191919] text-white border border-black/10 rounded-2xl p-8 md:p-12 shadow-2xl group transition-all duration-500 hover:-translate-y-1 hover:border-[#ffff7b]/50">
+                                    <div className="flex items-center gap-4 mb-6">
+                                        <span className="font-mono text-xs font-bold tracking-widest text-[#191919] bg-[#ffff7b] px-3.5 py-1 rounded-full">
+                                            02
+                                        </span>
+                                        <h3 className="font-playfair text-2xl md:text-3xl text-white font-bold uppercase tracking-wide">
+                                            The <em className="font-playfair italic font-normal text-[#ffff7b]">Solution</em>
+                                        </h3>
+                                    </div>
+                                    <p className="font-sans text-white/70 text-base md:text-lg leading-relaxed font-normal">
+                                        {project.solution}
+                                    </p>
+                                </div>
+                            </ScrollReveal>
+                        </div>
+                    </div>
 
                 {/* ── 5. Project-Specific Deep Dives (Red Bull Gold / Trionda) ── */}
                 {project.slug === "redbull-gold-concept" ? (
