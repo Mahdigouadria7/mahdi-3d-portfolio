@@ -9,15 +9,54 @@ import { RaycasterManager } from '../utils/RaycasterManager';
 const PHONE_MODEL_URL = "https://res.cloudinary.com/zu63qo7h/raw/upload/v1785506810/portfolio/samsung/models/s25_ultra_separated.glb";
 const SPEN_MODEL_URL = "https://res.cloudinary.com/zu63qo7h/raw/upload/v1785506811/portfolio/samsung/models/spen_separated.glb";
 
+export const PEN_COLOR_PALETTES = [
+  {
+    id: 'cyan-glow',
+    name: 'Cyan Glow',
+    primaryColor: '#38bdf8',
+    gradientCss: 'from-sky-400 via-cyan-400 to-blue-500',
+    threeColors: [new THREE.Color(0x38bdf8), new THREE.Color(0x06b6d4), new THREE.Color(0x3b82f6)]
+  },
+  {
+    id: 'neon-purple',
+    name: 'Neon Violet',
+    primaryColor: '#c084fc',
+    gradientCss: 'from-purple-400 via-fuchsia-500 to-pink-500',
+    threeColors: [new THREE.Color(0xc084fc), new THREE.Color(0xd946ef), new THREE.Color(0xec4899)]
+  },
+  {
+    id: 'emerald-neon',
+    name: 'Emerald Neon',
+    primaryColor: '#34d399',
+    gradientCss: 'from-emerald-400 via-teal-400 to-cyan-500',
+    threeColors: [new THREE.Color(0x34d399), new THREE.Color(0x2dd4bf), new THREE.Color(0x06b6d4)]
+  },
+  {
+    id: 'sunset-gold',
+    name: 'Sunset Gold',
+    primaryColor: '#fbbf24',
+    gradientCss: 'from-amber-300 via-orange-400 to-rose-500',
+    threeColors: [new THREE.Color(0xfbbf24), new THREE.Color(0xf97316), new THREE.Color(0xf43f5e)]
+  },
+  {
+    id: 'platinum-white',
+    name: 'Pure White',
+    primaryColor: '#ffffff',
+    gradientCss: 'from-white via-slate-200 to-sky-200',
+    threeColors: [new THREE.Color(0xffffff), new THREE.Color(0xe2e8f0), new THREE.Color(0xbae6fd)]
+  }
+];
+
 /**
  * Main application controller.
- * Completely refactored to remove all physics and prepare for clean GSAP animations
- * using standalone S25 Ultra and S-Pen models.
  */
 export class SamsungHeroApp {
   constructor(canvasElement, onLoadProgress) {
     this.canvas = canvasElement;
     this.onLoadProgress = onLoadProgress;
+
+    // Active color palette
+    this.activePalette = PEN_COLOR_PALETTES[0];
 
     // 1. Core Three.js Scene Setup
     this.scene = new THREE.Scene();
@@ -32,22 +71,6 @@ export class SamsungHeroApp {
     // Camera positioning framing the phone directly in the center
     this.camera.position.set(0, 0, 2.5);
     this.camera.lookAt(0, 0, 0);
-
-    // Prevent mouse wheel zooming on 3D canvas from scrolling the web page
-    // Map scroll to Y-axis rotation for phone, or Z-axis for pen when tracking
-    this.onWheel = (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      if (this.isDisposed) return;
-      
-      if (this.isPenTracking) {
-        this.penScrollRotation += e.deltaY * (this.params ? this.params.penScrollSens : 0.005);
-      } else {
-        const sens = this.spenMesh && this.spenMesh.visible && !this.phoneMesh.visible ? (this.params ? this.params.penScrollSens : 0.005) : (this.params ? this.params.phoneScrollSens : 0.0005);
-        this.spinVelocity.y += e.deltaY * sens;
-      }
-    };
-    this.canvas.addEventListener('wheel', this.onWheel, { passive: false });
 
     this.isDragging = false;
     this.spinVelocity = new THREE.Vector2(0, 0);
@@ -168,10 +191,12 @@ export class SamsungHeroApp {
     this.trailPoints = [];
     this.trailIdx = 0;
     this.trailCount = 800; // Increased count for much longer trail
+    this.posHistory = [];
+    this.strokeStepCount = 0;
     
     const trailMat = new THREE.SpriteMaterial({ 
       map: glowTexture,
-      color: 0xffffff, // Pure white
+      color: 0xffffff,
       transparent: true, 
       blending: THREE.AdditiveBlending,
       depthWrite: false,
@@ -179,10 +204,11 @@ export class SamsungHeroApp {
     });
     
     for(let i = 0; i < this.trailCount; i++) {
-      const sprite = new THREE.Sprite(trailMat);
+      const mat = trailMat.clone();
+      const sprite = new THREE.Sprite(mat);
       sprite.visible = false;
       this.scene.add(sprite);
-      this.trailPoints.push({ mesh: sprite, age: 0 });
+      this.trailPoints.push({ mesh: sprite, mat: mat, age: 0 });
     }
     this.lastTrailPos = null;
 
@@ -685,52 +711,89 @@ export class SamsungHeroApp {
           const isDrawing = this.isLeftMouseDown || this.isContinuousDrawing;
           
           if (isDrawing) {
-            if (!this.lastTrailPos) {
-              this.lastTrailPos = currentPos.clone();
+            if (!this.posHistory) this.posHistory = [];
+            this.posHistory.push(currentPos.clone());
+            if (this.posHistory.length > 5) this.posHistory.shift();
+
+            let pointsToSample = [];
+            if (this.posHistory.length >= 3) {
+              const curve = new THREE.CatmullRomCurve3(this.posHistory, false, 'centripetal', 0.5);
+              pointsToSample = curve.getPoints(24);
+            } else if (this.posHistory.length === 2) {
+              const p1 = this.posHistory[0];
+              const p2 = this.posHistory[1];
+              for (let s = 0; s <= 16; s++) {
+                pointsToSample.push(new THREE.Vector3().lerpVectors(p1, p2, s / 16));
+              }
+            } else {
+              pointsToSample.push(currentPos.clone());
             }
 
-            const dist = this.lastTrailPos.distanceTo(currentPos);
-            // Spawn a particle every 0.005 units of movement to make a continuous solid line
-            const steps = Math.min(Math.max(1, Math.ceil(dist / 0.005)), 100); 
-            
-            for(let i = 1; i <= steps; i++) {
-               const pt = this.trailPoints[this.trailIdx];
-               pt.mesh.position.lerpVectors(this.lastTrailPos, currentPos, i / steps);
-               pt.age = 1.0;
-               pt.mesh.visible = true;
-               this.trailIdx = (this.trailIdx + 1) % this.trailCount;
+            const colors = (this.activePalette && this.activePalette.threeColors) ? this.activePalette.threeColors : PEN_COLOR_PALETTES[0].threeColors;
+            const numColors = colors.length;
+
+            for (let i = 0; i < pointsToSample.length; i++) {
+              const pt = this.trailPoints[this.trailIdx];
+              pt.mesh.position.copy(pointsToSample[i]);
+              pt.age = 1.0;
+              pt.mesh.visible = true;
+
+              // Smooth gradient color interpolation along the stroke progression
+              this.strokeStepCount = (this.strokeStepCount + 1) % 120;
+              const colorProgress = (this.strokeStepCount / 120) * (numColors - 1);
+              const idx0 = Math.floor(colorProgress);
+              const idx1 = Math.min(numColors - 1, idx0 + 1);
+              const factor = colorProgress - idx0;
+
+              if (pt.mat) {
+                pt.mat.color.copy(colors[idx0]).lerp(colors[idx1], factor);
+              }
+
+              this.trailIdx = (this.trailIdx + 1) % this.trailCount;
             }
-            this.lastTrailPos.copy(currentPos);
+
+            this.lastTrailPos = currentPos.clone();
           } else {
             this.lastTrailPos = null;
+            this.posHistory = [];
           }
         }
       } else {
         this.lastTrailPos = null;
+        this.posHistory = [];
       }
 
       // Update and fade all trail particles
       for(let i = 0; i < this.trailCount; i++) {
         const pt = this.trailPoints[i];
         if (pt.age > 0) {
-          pt.age -= 0.006; // Much slower fade for a longer lasting trail
+          pt.age -= 0.006; // Slower fade for smooth lasting arc trail
           if (pt.age <= 0) {
             pt.mesh.visible = false;
           } else {
-            // Increased scale for a thicker, more visible drawing line
-            const scale = pt.age * 0.05; 
+            const scale = pt.age * 0.055; 
             pt.mesh.scale.setScalar(scale);
           }
         }
       }
 
-      // Clean render pass, physics completely removed
+      // Clean render pass
       this.renderer.render(this.scene, this.camera);
 
       this.animationFrameId = requestAnimationFrame(animate);
     };
 
     animate();
+  }
+
+  setPenColorPalette(paletteId) {
+    const found = PEN_COLOR_PALETTES.find(p => p.id === paletteId);
+    if (found) {
+      this.activePalette = found;
+      if (this.drawingCanvas) {
+        this.drawingCanvas.setStrokeColor(found.primaryColor);
+      }
+    }
   }
 
   setRenderMode(mode) {

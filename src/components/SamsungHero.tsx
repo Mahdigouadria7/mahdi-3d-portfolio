@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { SamsungHeroApp } from "./SamsungHeroApp";
+import { SamsungHeroApp, PEN_COLOR_PALETTES } from "./SamsungHeroApp";
 import gsap from "gsap";
 
 export default function SamsungHero() {
@@ -11,6 +11,7 @@ export default function SamsungHero() {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [renderMode, setRenderMode] = useState<'phone' | 'pen'>('phone');
   const [isPenActive, setIsPenActive] = useState<boolean>(false);
+  const [activePaletteId, setActivePaletteId] = useState<string>('cyan-glow');
 
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -55,6 +56,13 @@ export default function SamsungHero() {
     setIsPenActive(newState);
     if (appRef.current) {
       appRef.current.togglePenActive(newState);
+    }
+  };
+
+  const handleSelectPalette = (paletteId: string) => {
+    setActivePaletteId(paletteId);
+    if (appRef.current) {
+      appRef.current.setPenColorPalette(paletteId);
     }
   };
 
@@ -114,7 +122,7 @@ export default function SamsungHero() {
         </div>
       )}
 
-      {/* Floating 3D Control Bar — Sharp, confident architectural styling */}
+      {/* Floating 3D Control Bar & Color Palette Selector */}
       {isLoaded && (
         <div className="samsung-ui-anim absolute top-20 md:top-24 right-6 md:right-12 z-30 flex flex-col items-end gap-3 pointer-events-auto">
           <div className="flex items-center gap-1.5 p-1.5 rounded-lg bg-slate-900/85 backdrop-blur-2xl border border-white/15 shadow-2xl">
@@ -145,17 +153,53 @@ export default function SamsungHero() {
 
           {/* S-Pen Free Draw Toggle Button */}
           {renderMode === 'pen' && (
-            <button
-              onClick={handleTogglePenActive}
-              className={`px-4 py-2 rounded-md transition-all duration-300 text-xs font-sans font-bold uppercase tracking-wider flex items-center gap-2 border backdrop-blur-2xl shadow-2xl ${
-                isPenActive
-                  ? 'bg-gradient-to-r from-sky-400 to-teal-400 text-slate-950 border-sky-300 shadow-sky-400/50 font-black animate-pulse'
-                  : 'bg-slate-900/90 text-sky-300 border-sky-500/40 hover:bg-sky-500/20'
-              }`}
-            >
-              <span>{isPenActive ? '🎯' : '🖋️'}</span>
-              <span>{isPenActive ? 'Draw Mode: ON' : 'Free Pen Use: OFF'}</span>
-            </button>
+            <div className="flex flex-col items-end gap-2 w-full">
+              <button
+                onClick={handleTogglePenActive}
+                className={`px-4 py-2 rounded-md transition-all duration-300 text-xs font-sans font-bold uppercase tracking-wider flex items-center gap-2 border backdrop-blur-2xl shadow-2xl ${
+                  isPenActive
+                    ? 'bg-gradient-to-r from-sky-400 to-teal-400 text-slate-950 border-sky-300 shadow-sky-400/50 font-black animate-pulse'
+                    : 'bg-slate-900/90 text-sky-300 border-sky-500/40 hover:bg-cyan-500/20'
+                }`}
+              >
+                <span>{isPenActive ? '🎯' : '🖋️'}</span>
+                <span>{isPenActive ? 'Draw Mode: ON' : 'Free Pen Use: OFF'}</span>
+              </button>
+
+              {/* Color Gradient Palette Drawer — Smooth sliding & fading transition */}
+              <div
+                className={`transition-all duration-500 ease-in-out transform origin-top-right ${
+                  isPenActive
+                    ? 'opacity-100 translate-y-0 scale-100 max-h-48 pointer-events-auto'
+                    : 'opacity-0 -translate-y-2 scale-95 max-h-0 overflow-hidden pointer-events-none'
+                }`}
+              >
+                <div className="p-2.5 rounded-lg bg-slate-900/90 backdrop-blur-2xl border border-white/15 shadow-2xl flex flex-col gap-2 min-w-[200px]">
+                  <span className="font-mono text-[10px] uppercase font-bold text-white/50 tracking-wider text-left px-1">
+                    Ink Gradient Palette
+                  </span>
+                  <div className="grid grid-cols-5 gap-1.5">
+                    {PEN_COLOR_PALETTES.map((pal) => {
+                      const isSelected = activePaletteId === pal.id;
+                      return (
+                        <button
+                          key={pal.id}
+                          onClick={() => handleSelectPalette(pal.id)}
+                          title={pal.name}
+                          className={`w-7 h-7 rounded-md bg-gradient-to-br ${pal.gradientCss} transition-all duration-300 flex items-center justify-center border shadow-md relative group hover:scale-110 ${
+                            isSelected
+                              ? 'border-white scale-110 shadow-sky-400/50 ring-2 ring-sky-400/40'
+                              : 'border-white/20 opacity-70 hover:opacity-100'
+                          }`}
+                        >
+                          {isSelected && <span className="w-1.5 h-1.5 rounded-full bg-slate-950 shadow-sm" />}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            </div>
           )}
         </div>
       )}
