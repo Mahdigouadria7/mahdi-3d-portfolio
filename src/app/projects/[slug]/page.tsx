@@ -71,31 +71,23 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
             {/* ── 2. Metadata Bar ── */}
             {project.slug === 'samsung-s22-ultra-3d-hero' ? (
-                /* Samsung: Deep blue glassmorphism metadata strip */
-                <div className="w-full relative z-40 -mt-[48px] border-y border-white/10 shadow-[0_-20px_60px_rgba(0,0,0,0.8)] py-8 pointer-events-auto"
-                    style={{ background: 'rgba(10,10,46,0.85)', backdropFilter: 'blur(24px)' }}>
-                    <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-8 md:gap-4">
-                        <div className="flex-1 border-l-2 border-[#00f0ff]/60 pl-6 hover:border-[#00f0ff] transition-colors duration-500">
-                            <p className="font-mono text-[10px] md:text-xs tracking-[0.3em] uppercase mb-1.5 text-[#00f0ff] font-bold">Client</p>
-                            <h4 className="font-sans font-bold text-base md:text-xl text-white tracking-tight uppercase">{project.client}</h4>
-                        </div>
-                        <div className="flex-1 border-l-2 border-[#00f0ff]/60 pl-6 hover:border-[#00f0ff] transition-colors duration-500">
-                            <p className="font-mono text-[10px] md:text-xs tracking-[0.3em] uppercase mb-1.5 text-[#00f0ff] font-bold">Role</p>
-                            <div className="font-sans font-bold text-base md:text-xl text-white tracking-tight uppercase">{project.role}</div>
-                        </div>
-                        <div className="flex-1 border-l-2 border-[#00f0ff]/60 pl-6 hover:border-[#00f0ff] transition-colors duration-500">
-                            <p className="font-mono text-[10px] md:text-xs tracking-[0.3em] uppercase mb-1.5 text-[#00f0ff] font-bold">Timeline</p>
-                            <h4 className="font-sans font-bold text-base md:text-xl text-white tracking-tight uppercase">{project.timeline}</h4>
-                        </div>
-                        <div className="flex-1 border-l-2 border-[#00f0ff]/60 pl-6 hover:border-[#00f0ff] transition-colors duration-500">
-                            <p className="font-mono text-[10px] md:text-xs tracking-[0.3em] uppercase mb-1.5 text-[#00f0ff] font-bold">Stack</p>
-                            <div className="flex flex-wrap gap-1 mt-1">
-                                {project.techStack.slice(0, 4).map(t => (
-                                    <span key={t} className="font-mono text-[10px] uppercase tracking-widest text-white/70 border border-white/20 rounded-full px-2.5 py-0.5">{t}</span>
-                                ))}
+                /* Samsung: clean white-on-blue bar — samsung.com style */
+                <div className="w-full relative z-40" style={{ background: '#1428A0' }}>
+                    <div className="w-full h-px bg-white/20" />
+                    <div className="max-w-7xl mx-auto px-6 md:px-12 py-6 md:py-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 md:gap-0">
+                        {[
+                            { label: 'Client', value: project.client },
+                            { label: 'Role', value: project.role },
+                            { label: 'Year', value: project.timeline },
+                            { label: 'Medium', value: 'CGI · 3D · WebGL' },
+                        ].map((item, i) => (
+                            <div key={item.label} className={`flex-1 ${i > 0 ? 'md:border-l md:border-white/20 md:pl-8' : ''}`}>
+                                <p className="font-sans text-[10px] font-semibold tracking-[0.35em] uppercase text-white/40 mb-1.5">{item.label}</p>
+                                <p className="font-sans font-bold text-sm md:text-base text-white uppercase tracking-wide">{item.value}</p>
                             </div>
-                        </div>
+                        ))}
                     </div>
+                    <div className="w-full h-px bg-white/20" />
                 </div>
             ) : (
                 /* Default: warm dark bar */
@@ -112,31 +104,15 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                     <span className="flex flex-wrap items-center gap-x-2 gap-y-1">
                                         <span>
                                             3D Artist:{" "}
-                                            <a
-                                                href="https://www.behance.net/mahdigouadria"
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="text-[#ffff7b] underline hover:text-white transition-colors"
-                                            >
-                                                Mahdi Gouadria
-                                            </a>
+                                            <a href="https://www.behance.net/mahdigouadria" target="_blank" rel="noopener noreferrer" className="text-[#ffff7b] underline hover:text-white transition-colors">Mahdi Gouadria</a>
                                         </span>
                                         <span className="text-white/40">|</span>
                                         <span>
                                             Motion Designer:{" "}
-                                            <a
-                                                href="https://www.behance.net/MabroukAziz"
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="text-[#ffff7b] underline hover:text-white transition-colors"
-                                            >
-                                                Mabrouk Aziz
-                                            </a>
+                                            <a href="https://www.behance.net/MabroukAziz" target="_blank" rel="noopener noreferrer" className="text-[#ffff7b] underline hover:text-white transition-colors">Mabrouk Aziz</a>
                                         </span>
                                     </span>
-                                ) : (
-                                    project.role
-                                )}
+                                ) : (project.role)}
                             </div>
                         </div>
                         <div className="flex-1 border-l-2 border-[#ffff7b] pl-6 hover:border-white transition-colors duration-500">
@@ -147,61 +123,61 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                 </div>
             )}
 
-            {/* ── 3. Main Project Overview & Challenge/Solution ── */}
+            {/* ── 3. Samsung Overview + Challenge/Solution ── */}
             {project.slug === 'samsung-s22-ultra-3d-hero' ? (
-                /* ── Samsung: Full dark-blue overview section ── */
-                <section className="relative z-20" style={{ background: 'linear-gradient(180deg, #08081e 0%, #0a0a2e 100%)' }}>
-                    {/* Subtle cyan glow top */}
-                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80vw] h-[2px] bg-gradient-to-r from-transparent via-[#00f0ff]/30 to-transparent" />
+                /* Samsung: clean blue overview in samsung.com style */
+                <section className="relative z-20" style={{ background: '#1428A0' }}>
 
-                    <div className="max-w-7xl mx-auto px-6 md:px-12 py-16 md:py-24 space-y-16">
-
-                        {/* Brief overview — left-right split */}
+                    {/* Overview — big editorial type on blue */}
+                    <div className="max-w-7xl mx-auto px-6 md:px-12 pt-20 md:pt-28 pb-16 md:pb-20">
                         <ScrollReveal direction="up" delay={0.1}>
-                            <div className="flex flex-col md:flex-row gap-10 md:gap-20 items-start border-b border-white/10 pb-16">
-                                <div className="md:w-1/3 shrink-0">
-                                    <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#00f0ff] font-bold mb-3">Overview</p>
-                                    <h2 className="font-sans text-3xl md:text-4xl font-black text-white uppercase leading-tight tracking-tight">
-                                        CGI &amp;<br /><span className="text-[#00f0ff]">Interactive</span><br />3D
+                            <div className="flex flex-col lg:flex-row items-start gap-8 lg:gap-20">
+                                <div className="lg:w-1/2">
+                                    <p className="font-sans text-[10px] font-bold tracking-[0.4em] uppercase text-white/50 mb-6">Overview</p>
+                                    <h2 className="font-sans font-black text-white uppercase leading-[0.92] tracking-tight"
+                                        style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)' }}>
+                                        CGI &amp;<br />3D
                                     </h2>
                                 </div>
-                                <div className="md:w-2/3 flex flex-col gap-6">
-                                    <p className="font-sans text-white/70 text-base md:text-lg leading-relaxed">
-                                        Two cinematic Samsung productions in Blender 3D, powered by Geometry Nodes VFX — plus a real-time WebGL interactive 3D hero built in Three.js.
+                                <div className="lg:w-1/2 flex flex-col gap-6 lg:pt-16">
+                                    <p className="font-sans text-white/80 text-base md:text-lg leading-relaxed">
+                                        Two cinematic productions for Samsung — built in Blender 3D with Geometry Nodes VFX, graded in DaVinci Resolve. Plus a real-time WebGL 3D interactive hero in Three.js.
                                     </p>
                                     <div className="flex flex-wrap gap-2">
                                         {project.techStack.map(t => (
-                                            <span key={t} className="font-mono text-[10px] uppercase tracking-widest text-[#00f0ff]/80 border border-[#00f0ff]/20 rounded-full px-3.5 py-1.5 hover:border-[#00f0ff]/60 hover:text-[#00f0ff] transition-colors">{t}</span>
+                                            <span key={t}
+                                                className="font-sans text-[10px] font-semibold uppercase tracking-[0.2em] text-white border border-white/40 px-4 py-1.5 hover:bg-white hover:text-[#1428A0] transition-colors duration-200">
+                                                {t}
+                                            </span>
                                         ))}
                                     </div>
                                 </div>
                             </div>
                         </ScrollReveal>
+                    </div>
 
-                        {/* Challenge / Solution — blue glassmorphism cards */}
-                        <div className="grid md:grid-cols-2 gap-6">
-                            <ScrollReveal direction="left" delay={0.1}>
-                                <div className="h-full p-8 rounded-2xl border border-white/10 hover:border-[#00f0ff]/30 transition-all duration-500 flex flex-col gap-5"
-                                    style={{ background: 'rgba(255,255,255,0.04)', backdropFilter: 'blur(12px)' }}>
-                                    <div className="flex items-center gap-3">
-                                        <span className="font-mono text-xs font-bold tracking-widest text-black bg-[#00f0ff] px-3 py-1 rounded-full">01</span>
-                                        <h3 className="font-sans text-xl md:text-2xl text-white font-black uppercase tracking-tight">The Challenge</h3>
-                                    </div>
-                                    <p className="font-sans text-white/60 text-sm md:text-base leading-relaxed">{project.challenge}</p>
+                    <div className="w-full h-px bg-white/20" />
+
+                    {/* Challenge / Solution — white cards on blue */}
+                    <div className="max-w-7xl mx-auto px-6 md:px-12 py-16 md:py-20">
+                        <div className="grid md:grid-cols-2 gap-px bg-white/20">
+                            <ScrollReveal direction="up" delay={0.1}>
+                                <div className="bg-[#1428A0] p-10 md:p-14 flex flex-col gap-6">
+                                    <p className="font-sans text-[10px] font-bold tracking-[0.4em] uppercase text-white/50">01 — Challenge</p>
+                                    <h3 className="font-sans font-black text-white uppercase text-2xl md:text-3xl leading-tight">The<br />Challenge</h3>
+                                    <p className="font-sans text-white/70 text-sm md:text-base leading-relaxed">{project.challenge}</p>
                                 </div>
                             </ScrollReveal>
-                            <ScrollReveal direction="right" delay={0.2}>
-                                <div className="h-full p-8 rounded-2xl border border-[#00f0ff]/20 hover:border-[#00f0ff]/50 transition-all duration-500 flex flex-col gap-5"
-                                    style={{ background: 'rgba(0,240,255,0.04)', backdropFilter: 'blur(12px)' }}>
-                                    <div className="flex items-center gap-3">
-                                        <span className="font-mono text-xs font-bold tracking-widest text-black bg-[#00f0ff] px-3 py-1 rounded-full">02</span>
-                                        <h3 className="font-sans text-xl md:text-2xl text-[#00f0ff] font-black uppercase tracking-tight">The Solution</h3>
-                                    </div>
-                                    <p className="font-sans text-white/60 text-sm md:text-base leading-relaxed">{project.solution}</p>
+                            <ScrollReveal direction="up" delay={0.2}>
+                                <div className="bg-white p-10 md:p-14 flex flex-col gap-6">
+                                    <p className="font-sans text-[10px] font-bold tracking-[0.4em] uppercase text-[#1428A0]/60">02 — Solution</p>
+                                    <h3 className="font-sans font-black text-[#1428A0] uppercase text-2xl md:text-3xl leading-tight">The<br />Solution</h3>
+                                    <p className="font-sans text-[#1428A0]/80 text-sm md:text-base leading-relaxed">{project.solution}</p>
                                 </div>
                             </ScrollReveal>
                         </div>
                     </div>
+
                 </section>
             ) : (
                 /* ── Default: warm cream editorial section ── */

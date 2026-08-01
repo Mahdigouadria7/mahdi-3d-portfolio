@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import { SamsungHeroApp } from "./SamsungHeroApp";
-import { projects } from "@/data/projects";
 import gsap from "gsap";
 
 export default function SamsungHero() {
@@ -11,7 +10,6 @@ export default function SamsungHero() {
   const [loadProgress, setLoadProgress] = useState<number>(0);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [renderMode, setRenderMode] = useState<'phone' | 'pen'>('phone');
-  const [isPenActive, setIsPenActive] = useState<boolean>(false);
 
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -21,26 +19,16 @@ export default function SamsungHero() {
       if (progress >= 1.0) {
         setTimeout(() => {
           setIsLoaded(true);
-          
-          // Animate text in after load
-          const ctx = gsap.context(() => {
-            gsap.fromTo(".hero-text-anim",
-              { opacity: 0, x: -50 },
-              { opacity: 1, x: 0, duration: 1.5, ease: "power3.out", stagger: 0.1 }
-            );
-            gsap.fromTo(".hero-tech-anim",
-              { opacity: 0, x: 50 },
-              { opacity: 1, x: 0, duration: 1.5, ease: "power3.out", stagger: 0.1, delay: 0.2 }
-            );
-          });
+          gsap.fromTo(".samsung-ui-anim",
+            { opacity: 0, y: 20 },
+            { opacity: 1, y: 0, duration: 1, ease: "power3.out", stagger: 0.08 }
+          );
         }, 300);
       }
     });
 
     appRef.current = app;
-
-    // Fallback timer to mark loaded if progress finishes
-    const timer = setTimeout(() => setIsLoaded(true), 2000);
+    const timer = setTimeout(() => setIsLoaded(true), 2500);
 
     return () => {
       clearTimeout(timer);
@@ -51,115 +39,108 @@ export default function SamsungHero() {
     };
   }, []);
 
-  const handleRenderModeChange = (mode: 'phone' | 'pen') => {
+  const handleMode = (mode: 'phone' | 'pen') => {
     setRenderMode(mode);
-    if (appRef.current) {
-      appRef.current.setRenderMode(mode);
-      if (mode === 'pen') {
-        appRef.current.togglePenActive(isPenActive);
-      }
-    }
+    if (appRef.current) appRef.current.setRenderMode(mode);
   };
 
-  const project = projects[0]; // S22 Ultra 3D Hero data
-
   return (
-    <div className="relative w-full h-[100dvh] bg-black overflow-hidden select-none">
-      {/* 3D WebGL Canvas */}
+    <div className="relative w-full h-[100dvh] overflow-hidden select-none" style={{ background: '#1428A0' }}>
+
+      {/* 3D WebGL Canvas — fills entire hero */}
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 w-full h-full object-cover z-0 cursor-grab active:cursor-grabbing touch-none"
+        className="absolute inset-0 w-full h-full z-0 cursor-grab active:cursor-grabbing touch-none"
         style={{ touchAction: "none" }}
       />
 
-      {/* Loading Overlay */}
+      {/* Samsung Blue loading screen */}
       {!isLoaded && (
-        <div className="absolute inset-0 bg-black z-50 flex flex-col items-center justify-center gap-4 transition-opacity duration-700">
-          <div className="w-12 h-12 border-2 border-[#00f0ff] border-t-transparent rounded-full animate-spin" />
-          <div className="font-mono text-sm tracking-widest text-white/80 uppercase">
-            LOADING EXPERIENCE {loadProgress}%
+        <div className="absolute inset-0 z-50 flex flex-col items-center justify-center gap-6" style={{ background: '#1428A0' }}>
+          {/* Samsung wordmark */}
+          <div className="font-sans font-black text-white text-2xl tracking-[0.15em] uppercase mb-4">SAMSUNG</div>
+          {/* Progress bar */}
+          <div className="w-48 h-[2px] bg-white/20 rounded-full overflow-hidden">
+            <div
+              className="h-full bg-white rounded-full transition-all duration-300"
+              style={{ width: `${loadProgress}%` }}
+            />
           </div>
+          <div className="font-sans text-xs tracking-[0.3em] text-white/50 uppercase">{loadProgress}%</div>
         </div>
       )}
 
-      {/* Architectural Grid Lines Overlay */}
-      <div className="absolute inset-0 z-0 pointer-events-none opacity-20"
-          style={{
-              backgroundImage: `linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)`,
-              backgroundSize: '50px 50px'
-          }}
-      ></div>
+      {/* Top thin rule */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-white/20 z-20" />
 
-      {/* Subtle Vignette Overlay for Text Readability */}
-      <div className={`absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_20%,_#141414_100%)] z-10 pointer-events-none transition-opacity duration-[1500ms] ${isLoaded ? 'opacity-80' : 'opacity-0'}`}></div>
+      {/* Bottom thin rule */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-white/20 z-20" />
 
-      {/* Foreground DOM layer */}
-      <div className="relative z-30 w-full h-[100dvh] pointer-events-none flex flex-col md:flex-row px-6 md:px-12 lg:px-24 pt-24 md:pt-32 pb-8 overflow-hidden">
-          
-          {/* Left Side: Main Typography & Metadata */}
-          <div className="w-full md:w-1/2 flex flex-col justify-start md:justify-center h-auto md:h-full relative z-10 min-h-[30vh] md:min-h-0">
-              {/* Title block */}
-              {isLoaded && (
-                <div className="mt-16 md:-mt-8 space-y-4">
-                    <div className="hero-text-anim inline-flex items-center gap-2 bg-[#00f0ff] text-[#141414] font-mono text-xs font-bold px-4 py-1.5 rounded-full shadow-sm pointer-events-auto">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#141414] animate-ping" />
-                        <span className="uppercase tracking-widest">{project.category}</span>
-                    </div>
+      {/* Top-left brand label */}
+      {isLoaded && (
+        <div className="samsung-ui-anim absolute top-6 left-6 md:left-12 z-30 flex items-center gap-3">
+          <span className="font-sans font-black text-white text-sm tracking-[0.2em] uppercase">SAMSUNG</span>
+          <div className="w-px h-4 bg-white/30" />
+          <span className="font-sans text-white/50 text-xs tracking-[0.2em] uppercase">Galaxy S22 Ultra</span>
+        </div>
+      )}
 
-                    <h1 className="hero-text-anim font-playfair text-4xl sm:text-6xl md:text-7xl lg:text-[84px] font-bold uppercase leading-[1.05] tracking-tight text-white mb-4 max-w-2xl" style={{ textShadow: "0 4px 30px rgba(0,0,0,0.9)" }}>
-                        SAMSUNG{" "}
-                        <em className="font-playfair italic font-normal text-[#00f0ff]">
-                            CGI &amp; 3D
-                        </em>
-                    </h1>
+      {/* Bottom-left — large editorial headline overlay */}
+      {isLoaded && (
+        <div className="absolute bottom-12 left-6 md:left-12 z-30 max-w-xl">
+          <p className="samsung-ui-anim font-sans text-[10px] md:text-xs tracking-[0.4em] uppercase text-white/50 mb-3 font-semibold">
+            CGI · Blender 3D · Three.js WebGL
+          </p>
+          <h1 className="samsung-ui-anim font-sans font-black text-white uppercase leading-[0.92] tracking-tight"
+              style={{ fontSize: 'clamp(2.8rem, 8vw, 6rem)' }}>
+            CGI &amp;<br />3D
+          </h1>
+        </div>
+      )}
 
+      {/* Bottom-right — mode toggles */}
+      {isLoaded && (
+        <div className="samsung-ui-anim absolute bottom-12 right-6 md:right-12 z-30 flex flex-col gap-2">
+          <button
+            onClick={() => handleMode('phone')}
+            className={`px-6 py-2.5 text-xs font-sans font-bold uppercase tracking-[0.15em] border transition-all duration-200 ${
+              renderMode === 'phone'
+                ? 'bg-white text-[#1428A0] border-white'
+                : 'bg-transparent text-white border-white/40 hover:border-white hover:bg-white/10'
+            }`}
+          >
+            Phone
+          </button>
+          <button
+            onClick={() => handleMode('pen')}
+            className={`px-6 py-2.5 text-xs font-sans font-bold uppercase tracking-[0.15em] border transition-all duration-200 ${
+              renderMode === 'pen'
+                ? 'bg-white text-[#1428A0] border-white'
+                : 'bg-transparent text-white border-white/40 hover:border-white hover:bg-white/10'
+            }`}
+          >
+            S‑Pen
+          </button>
+        </div>
+      )}
 
-                </div>
-              )}
-          </div>
+      {/* Year stamp — top right */}
+      {isLoaded && (
+        <div className="samsung-ui-anim absolute top-6 right-6 md:right-12 z-30">
+          <span className="font-sans text-xs text-white/40 tracking-[0.3em] uppercase font-semibold">2025</span>
+        </div>
+      )}
 
-          {/* Right Side: Rendering Mode Toggles */}
-          {isLoaded && (
-            <div className="relative md:absolute md:right-12 lg:right-24 md:top-1/2 md:-translate-y-1/2 flex flex-row flex-wrap justify-start md:flex-col md:items-start gap-3 pointer-events-auto">
-                <button
-                  onClick={() => handleRenderModeChange('phone')}
-                  className={`px-5 py-2.5 rounded-full transition-all duration-300 text-xs font-semibold uppercase tracking-wider border backdrop-blur-md cursor-pointer ${
-                    renderMode === 'phone' 
-                      ? 'bg-white text-black border-white' 
-                      : 'bg-white/5 text-white/70 border-white/10 hover:bg-white/20'
-                  }`}
-                >
-                  📱 Phone Only
-                </button>
-                <button
-                  onClick={() => handleRenderModeChange('pen')}
-                  className={`px-5 py-2.5 rounded-full transition-all duration-300 text-xs font-semibold uppercase tracking-wider border backdrop-blur-md cursor-pointer ${
-                    renderMode === 'pen' 
-                      ? 'bg-[#00f0ff] text-black border-[#00f0ff]' 
-                      : 'bg-white/5 text-white/70 border-white/10 hover:bg-white/20'
-                  }`}
-                >
-                  ✒️ Pen Only
-                </button>
-                {renderMode === 'pen' && (
-                  <button
-                    onClick={() => {
-                      const newState = !isPenActive;
-                      setIsPenActive(newState);
-                      if (appRef.current) appRef.current.togglePenActive(newState);
-                    }}
-                    className={`mt-2 px-5 py-2.5 rounded-full transition-all duration-300 text-xs font-semibold uppercase tracking-wider border backdrop-blur-md cursor-pointer ${
-                      isPenActive 
-                        ? 'bg-[#00f0ff]/20 text-[#00f0ff] border-[#00f0ff]' 
-                        : 'bg-white/5 text-white/70 border-white/10 hover:bg-white/20'
-                    }`}
-                  >
-                    {isPenActive ? '🎯 Use Pen: ON' : '🔄 Float Pen: OFF'}
-                  </button>
-                )}
-            </div>
-          )}
-      </div>
+      {/* Thin vertical center rule — decorative, samsung.com style */}
+      <div className="absolute left-1/2 top-8 bottom-8 w-px bg-white/10 z-10 pointer-events-none hidden lg:block" />
+
+      {/* Scroll hint */}
+      {isLoaded && (
+        <div className="samsung-ui-anim absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2">
+          <div className="w-px h-8 bg-white/30 animate-pulse" />
+          <span className="font-sans text-[9px] tracking-[0.4em] uppercase text-white/30">Scroll</span>
+        </div>
+      )}
     </div>
   );
 }
