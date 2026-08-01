@@ -373,6 +373,173 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                             </div>
                         </div>
 
+                        {/* ── PROCEDURAL VFX & SHADER NODE TREE BREAKDOWN ── */}
+                        <div className="space-y-12 pt-8 border-t border-white/15">
+                            <ScrollReveal direction="up">
+                                <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-white/15 pb-6">
+                                    <div>
+                                        <span className="font-mono text-xs font-bold text-sky-400 uppercase tracking-widest">⚡ Technical Breakdown</span>
+                                        <h3 className="font-sans text-3xl md:text-5xl font-black text-white uppercase tracking-tight mt-1">
+                                            Procedural <span className="bg-gradient-to-r from-white via-slate-100 to-sky-300 bg-clip-text text-transparent">Emission Trail Nodes</span>
+                                        </h3>
+                                    </div>
+                                    <p className="font-sans text-slate-400 text-sm max-w-md">
+                                        Architectural breakdown of the Blender 3D Geometry Nodes simulation loop and 12000K Blackbody emission shader tree.
+                                    </p>
+                                </div>
+                            </ScrollReveal>
+
+                            {/* 1. Geometry Nodes Tree Breakdown */}
+                            <ScrollReveal direction="up" delay={0.1}>
+                                <div className="p-6 md:p-10 rounded-xl bg-slate-900/85 border border-sky-500/30 backdrop-blur-2xl shadow-2xl space-y-6">
+                                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-4">
+                                        <div>
+                                            <span className="font-mono text-xs font-bold text-sky-400 uppercase tracking-wider">Node System 01</span>
+                                            <h4 className="font-sans text-2xl font-black text-white uppercase tracking-tight">Geometry Nodes Simulation Tree</h4>
+                                        </div>
+                                        <div className="flex flex-wrap gap-2">
+                                            {['Simulation Zone', 'NURBS Splines', 'Curve to Mesh', 'Store Attribute'].map(badge => (
+                                                <span key={badge} className="font-mono text-[10px] text-sky-300 bg-sky-500/15 border border-sky-400/30 rounded-md px-3 py-1 font-semibold uppercase">
+                                                    {badge}
+                                                </span>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    {/* Cropped Node Tree Image */}
+                                    <div className="w-full bg-black/80 rounded-lg overflow-hidden border border-white/15 p-2 shadow-inner">
+                                        <LightboxImage
+                                            src="/projects/samsung/nodes/samsung_geonodes_tree.png"
+                                            alt="Blender Geometry Nodes Tree Architecture"
+                                            className="w-full h-auto object-contain rounded-md"
+                                        />
+                                    </div>
+
+                                    {/* Detailed Analytical Breakdown */}
+                                    <div className="grid md:grid-cols-3 gap-6 pt-2">
+                                        <div className="p-4 rounded-md bg-white/5 border border-white/10 space-y-2">
+                                            <h5 className="font-mono text-xs font-bold text-sky-300 uppercase">01 · Simulation Zone</h5>
+                                            <p className="font-sans text-slate-300 text-xs leading-relaxed">
+                                                Instantiates point emitters per frame inside a persistent simulation loop, continuously incrementing the <code className="text-sky-200">trail_age</code> attribute while auto-deleting points exceeding max lifetime.
+                                            </p>
+                                        </div>
+                                        <div className="p-4 rounded-md bg-white/5 border border-white/10 space-y-2">
+                                            <h5 className="font-mono text-xs font-bold text-sky-300 uppercase">02 · NURBS Spline Conversion</h5>
+                                            <p className="font-sans text-slate-300 text-xs leading-relaxed">
+                                                Converts point trajectories into continuous curves via <code className="text-sky-200">Points to Curves</code> and upgrades spline interpolation to <code className="text-sky-200">NURBS</code> for seamless organic motion arcs.
+                                            </p>
+                                        </div>
+                                        <div className="p-4 rounded-md bg-white/5 border border-white/10 space-y-2">
+                                            <h5 className="font-mono text-xs font-bold text-sky-300 uppercase">03 · Dynamic Radius Tapering</h5>
+                                            <p className="font-sans text-slate-300 text-xs leading-relaxed">
+                                                Evaluates <code className="text-sky-200">Spline Parameter</code> factor to procedurally scale curve radius from a prominent head down to a razor-sharp tail, sweeping a circular profile into renderable geometry.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ScrollReveal>
+
+                            {/* 2. Shader Node Tree Breakdown */}
+                            <ScrollReveal direction="up" delay={0.2}>
+                                <div className="p-6 md:p-10 rounded-xl bg-slate-900/85 border border-blue-500/30 backdrop-blur-2xl shadow-2xl space-y-6">
+                                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-4">
+                                        <div>
+                                            <span className="font-mono text-xs font-bold text-blue-400 uppercase tracking-wider">Node System 02</span>
+                                            <h4 className="font-sans text-2xl font-black text-white uppercase tracking-tight">Emission &amp; Refractive Shader Tree</h4>
+                                        </div>
+                                        <div className="flex flex-wrap gap-2">
+                                            {['Blackbody 12000K', 'Color Ramp Gradient', 'Glass BSDF Hybrid', 'Add Shader'].map(badge => (
+                                                <span key={badge} className="font-mono text-[10px] text-blue-300 bg-blue-500/15 border border-blue-400/30 rounded-md px-3 py-1 font-semibold uppercase">
+                                                    {badge}
+                                                </span>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    {/* Cropped Shader Tree Image */}
+                                    <div className="w-full bg-black/80 rounded-lg overflow-hidden border border-white/15 p-2 shadow-inner">
+                                        <LightboxImage
+                                            src="/projects/samsung/nodes/samsung_shader_tree.png"
+                                            alt="Blender Emission Trail Shader Tree"
+                                            className="w-full h-auto object-contain rounded-md"
+                                        />
+                                    </div>
+
+                                    {/* Detailed Analytical Breakdown */}
+                                    <div className="grid md:grid-cols-3 gap-6 pt-2">
+                                        <div className="p-4 rounded-md bg-white/5 border border-white/10 space-y-2">
+                                            <h5 className="font-mono text-xs font-bold text-blue-300 uppercase">01 · Attribute Gradient</h5>
+                                            <p className="font-sans text-slate-300 text-xs leading-relaxed">
+                                                Imports the named <code className="text-blue-200">gradient</code> attribute stored by Geometry Nodes into dual <code className="text-blue-200">Color Ramp</code> maps to drive thermal intensity &amp; opacity.
+                                            </p>
+                                        </div>
+                                        <div className="p-4 rounded-md bg-white/5 border border-white/10 space-y-2">
+                                            <h5 className="font-mono text-xs font-bold text-blue-300 uppercase">02 · 12000K Blackbody Emission</h5>
+                                            <p className="font-sans text-slate-300 text-xs leading-relaxed">
+                                                Feeds into a <code className="text-blue-200">Blackbody</code> temperature node set to 12,000 Kelvin (hyper-intense blue-white luminance) multiplied by an emission strength factor (&gt;90.0) for bloom.
+                                            </p>
+                                        </div>
+                                        <div className="p-4 rounded-md bg-white/5 border border-white/10 space-y-2">
+                                            <h5 className="font-mono text-xs font-bold text-blue-300 uppercase">03 · Glass BSDF Add-Shader</h5>
+                                            <p className="font-sans text-slate-300 text-xs leading-relaxed">
+                                                Blends the luminous core with a <code className="text-blue-200">Glass BSDF</code> via an <code className="text-blue-200">Add Shader</code> node, simulating internal glass refraction and edge highlights.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ScrollReveal>
+
+                            {/* 3. Viewport Geometry vs Render View Comparison */}
+                            <ScrollReveal direction="up" delay={0.3}>
+                                <div className="p-6 md:p-10 rounded-xl bg-slate-900/85 border border-white/15 backdrop-blur-2xl shadow-2xl space-y-6">
+                                    <div className="border-b border-white/10 pb-4">
+                                        <span className="font-mono text-xs font-bold text-sky-400 uppercase tracking-wider">Visual Verification</span>
+                                        <h4 className="font-sans text-2xl font-black text-white uppercase tracking-tight">Procedural Mesh vs Cycles Render View</h4>
+                                    </div>
+
+                                    <div className="grid md:grid-cols-2 gap-8">
+                                        
+                                        {/* Viewport View */}
+                                        <div className="space-y-3">
+                                            <div className="flex items-center justify-between">
+                                                <span className="font-mono text-xs font-bold text-slate-300 uppercase tracking-wider">Viewport Solid View</span>
+                                                <span className="font-mono text-[10px] text-slate-400 uppercase">Raw Mesh Geometry</span>
+                                            </div>
+                                            <div className="aspect-[4/5] bg-black rounded-lg overflow-hidden border border-white/15 shadow-xl">
+                                                <LightboxImage
+                                                    src="/projects/samsung/nodes/samsung_trail_viewport_view.png"
+                                                    alt="Blender Viewport Solid View Geometry Curve Arc"
+                                                    className="w-full h-full object-cover"
+                                                />
+                                            </div>
+                                            <p className="font-sans text-slate-400 text-xs leading-relaxed">
+                                                Solid viewport preview displaying the exact swept 3D mesh geometry procedurally constructed by the Geometry Nodes modifier loop.
+                                            </p>
+                                        </div>
+
+                                        {/* Render View */}
+                                        <div className="space-y-3">
+                                            <div className="flex items-center justify-between">
+                                                <span className="font-mono text-xs font-bold text-sky-300 uppercase tracking-wider">Cycles Final Render</span>
+                                                <span className="font-mono text-[10px] text-sky-400 uppercase">12000K Emissive Glow</span>
+                                            </div>
+                                            <div className="aspect-[4/5] bg-black rounded-lg overflow-hidden border border-sky-500/30 shadow-xl">
+                                                <LightboxImage
+                                                    src="/projects/samsung/nodes/samsung_trail_render_view.png"
+                                                    alt="Blender Cycles Final Render View 12000K Glowing Arc"
+                                                    className="w-full h-full object-cover"
+                                                />
+                                            </div>
+                                            <p className="font-sans text-slate-400 text-xs leading-relaxed">
+                                                Cycles render output showcasing the high-energy emissive glow, 12,000K color temperature, and gradual light falloff into dark space.
+                                            </p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </ScrollReveal>
+                        </div>
+
                     </div>
                 </section>
             ) : (
