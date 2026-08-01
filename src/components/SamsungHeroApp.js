@@ -338,7 +338,7 @@ export class SamsungHeroApp {
     // the user's custom scale parameters by moving the camera away.
     // Instead, we lock the camera to a fixed Z distance.
     const isMobile = window.innerWidth <= 768;
-    const targetScale = isMobile ? 0.65 : 1.0; // Scale down 3D content on mobile
+    const targetScale = isMobile ? 0.39 : 0.6; // Base scale is 0.6, scale down further on mobile
     const cameraY = isMobile ? 1.0 : 0; // Pan camera up so model moves down on mobile screen
     
     if (this.sceneGroup) {
