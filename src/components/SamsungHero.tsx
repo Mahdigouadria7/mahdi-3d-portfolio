@@ -107,9 +107,9 @@ export default function SamsungHero() {
                     </div>
 
                     <h1 className="hero-text-anim font-playfair text-4xl sm:text-6xl md:text-7xl lg:text-[84px] font-bold uppercase leading-[1.05] tracking-tight text-white mb-4 max-w-2xl" style={{ textShadow: "0 4px 30px rgba(0,0,0,0.9)" }}>
-                        {project.title.split(" ")[0]}{" "}
+                        SAMSUNG{" "}
                         <em className="font-playfair italic font-normal text-[#00f0ff]">
-                            {project.title.split(" ").slice(1).join(" ")}
+                            CGI &amp; 3D
                         </em>
                     </h1>
 

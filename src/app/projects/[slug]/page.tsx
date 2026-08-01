@@ -880,43 +880,265 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                         </div>
                     </div>
                 ) : project.slug === "samsung-s22-ultra-3d-hero" ? (
-                    <div className="space-y-16 mt-8 relative z-10">
-                        {/* 1. Samsung Videos */}
-                        <div className="relative z-10 py-8">
-                            <ScrollReveal direction="up">
-                                <div className="w-full max-w-6xl mx-auto flex items-center gap-4 mb-12">
-                                    <span className="font-mono text-xs font-bold tracking-widest text-[#191919] bg-[#ffff7b] px-3.5 py-1 rounded-full border border-black/10">01</span>
-                                    <div className="flex items-center gap-1">
-                                        <div className="w-8 h-[2px] bg-[#191919]" />
-                                        <div className="w-8 h-[2px] bg-[#191919]/30" />
+                    <div className="space-y-0 relative z-10 -mx-6 md:-mx-12">
+
+                        {/* ── SECTION A: Full-bleed Blue Hero Banner (Reference Style) ── */}
+                        <div className="relative w-full overflow-hidden"
+                            style={{
+                                background: "linear-gradient(135deg, #0a0a2e 0%, #0d1a6e 30%, #1a3aad 60%, #0a1a80 100%)",
+                                minHeight: "80vh"
+                            }}>
+                            {/* Radial glow blobs */}
+                            <div className="absolute inset-0 pointer-events-none">
+                                <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] rounded-full"
+                                    style={{ background: "radial-gradient(circle, rgba(0,200,255,0.18) 0%, transparent 70%)" }} />
+                                <div className="absolute bottom-0 right-0 w-[40vw] h-[40vw] rounded-full"
+                                    style={{ background: "radial-gradient(circle, rgba(0,100,255,0.15) 0%, transparent 70%)" }} />
+                            </div>
+
+                            {/* Fine grid overlay */}
+                            <div className="absolute inset-0 opacity-10 pointer-events-none"
+                                style={{
+                                    backgroundImage: "linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)",
+                                    backgroundSize: "60px 60px"
+                                }} />
+
+                            <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 pt-24 pb-20 md:pt-32 md:pb-28 flex flex-col justify-between gap-16">
+
+                                {/* Top tag row */}
+                                <ScrollReveal direction="up" delay={0.1}>
+                                    <div className="flex flex-wrap items-center gap-3">
+                                        <span className="font-mono text-[10px] font-bold tracking-[0.3em] uppercase text-white/60">
+                                            CGI · Blender 3D · DaVinci Resolve
+                                        </span>
+                                        <div className="w-12 h-[1px] bg-white/20" />
+                                        <span className="font-mono text-[10px] font-bold tracking-[0.3em] uppercase text-[#00f0ff]">
+                                            2025
+                                        </span>
                                     </div>
-                                    <h3 className="font-mono text-xs font-bold uppercase tracking-[0.3em] text-[#191919]/60">
-                                        Samsung S22 Ultra 3D Showcase &amp; Animation
-                                    </h3>
+                                </ScrollReveal>
+
+                                {/* Main hero type */}
+                                <ScrollReveal direction="up" delay={0.2}>
+                                    <h2 className="font-playfair text-[clamp(3rem,9vw,8rem)] font-bold leading-[0.95] tracking-tight text-white uppercase">
+                                        CGI <em className="font-playfair italic font-normal text-[#00f0ff]">Production</em><br />
+                                        <span className="text-white/30">for</span> Samsung
+                                    </h2>
+                                </ScrollReveal>
+
+                                {/* Bottom row: description + floating feature tags */}
+                                <div className="flex flex-col md:flex-row items-end justify-between gap-10">
+                                    <ScrollReveal direction="up" delay={0.3} className="md:max-w-sm">
+                                        <p className="font-sans text-white/60 text-sm md:text-base leading-relaxed">
+                                            Two cinematic productions crafted entirely in Blender — from modelling and lighting to procedural VFX with Geometry Nodes. Colour-graded in DaVinci Resolve for Samsung's signature deep cyan aesthetic.
+                                        </p>
+                                    </ScrollReveal>
+
+                                    {/* Floating feature chips */}
+                                    <ScrollReveal direction="up" delay={0.4}>
+                                        <div className="flex flex-wrap gap-3">
+                                            {[
+                                                { icon: "📱", label: "Interactive 3D" },
+                                                { icon: "✒️", label: "S‑Pen WebGL" },
+                                                { icon: "🎬", label: "2 CGI Films" },
+                                                { icon: "🌊", label: "Geo Nodes VFX" },
+                                                { icon: "🎨", label: "DaVinci Grade" },
+                                            ].map((chip) => (
+                                                <div key={chip.label}
+                                                    className="flex items-center gap-2 bg-white/10 border border-white/20 backdrop-blur-sm rounded-full px-4 py-2 text-white text-xs font-mono font-bold uppercase tracking-wider hover:bg-[#00f0ff]/20 hover:border-[#00f0ff]/50 transition-all duration-300 cursor-default">
+                                                    <span>{chip.icon}</span>
+                                                    <span>{chip.label}</span>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </ScrollReveal>
                                 </div>
-                            </ScrollReveal>
+                            </div>
+                        </div>
 
-                            <div className="flex flex-col md:flex-row justify-center items-center gap-8 max-w-4xl mx-auto mb-12">
-                                <ScrollReveal direction="left" delay={0.1} className="relative h-full w-full max-w-sm">
-                                    <div className="w-full aspect-[9/16] bg-[#191919] border border-white/10 rounded-3xl overflow-hidden relative shadow-2xl hover:border-[#ffff7b] hover:shadow-[0_0_30px_rgba(255,255,123,0.3)] transition-all duration-500 group">
-                                        <LazyVideo
-                                            src="https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/samsung/videos/samsung_3d_zflip_6.mp4"
-                                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
-                                        />
+                        {/* ── SECTION B: Interactive 3D Feature Callout ── */}
+                        <div className="relative w-full bg-[#0d0d0d] border-y border-white/5">
+                            <div className="max-w-7xl mx-auto px-6 md:px-12 py-16 md:py-24">
+                                <ScrollReveal direction="up">
+                                    <div className="flex items-center gap-4 mb-12">
+                                        <span className="font-mono text-xs font-bold tracking-widest text-black bg-[#00f0ff] px-3.5 py-1 rounded-full">01</span>
+                                        <div className="flex items-center gap-1">
+                                            <div className="w-8 h-[2px] bg-white/30" />
+                                            <div className="w-8 h-[2px] bg-white/10" />
+                                        </div>
+                                        <h3 className="font-mono text-xs font-bold uppercase tracking-[0.3em] text-white/40">Interactive 3D Experience</h3>
                                     </div>
                                 </ScrollReveal>
 
-                                <ScrollReveal direction="right" delay={0.2} className="relative h-full w-full max-w-sm">
-                                    <div className="w-full aspect-[9/16] bg-[#191919] border border-white/10 rounded-3xl overflow-hidden relative shadow-2xl hover:border-[#ffff7b] hover:shadow-[0_0_30px_rgba(255,255,123,0.3)] transition-all duration-500 group">
-                                        <LazyVideo
-                                            src="https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/samsung/videos/samsung_cgi_final.mp4"
-                                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
-                                        />
+                                <div className="grid md:grid-cols-2 gap-12 items-center">
+                                    {/* Left: description */}
+                                    <ScrollReveal direction="left" delay={0.1}>
+                                        <div className="space-y-6">
+                                            <h3 className="font-playfair text-3xl md:text-5xl font-bold text-white leading-tight uppercase">
+                                                The <em className="font-playfair italic font-normal text-[#00f0ff]">Interactive</em><br />3D Hero
+                                            </h3>
+                                            <p className="font-sans text-white/60 text-base md:text-lg leading-relaxed">
+                                                The 3D scene above this page is a fully interactive WebGL experience built with Three.js. You can rotate both the S22 Ultra phone and the S-Pen in real-time — dragging to spin, scrolling to orbit, and toggling between Phone-Only and Pen-Only modes using the buttons in the hero.
+                                            </p>
+                                            <div className="space-y-3">
+                                                {[
+                                                    { label: "Phone Mode", desc: "Drag to rotate the S22 Ultra in 3D" },
+                                                    { label: "Pen Mode", desc: "Spin the S-Pen with full inertia" },
+                                                    { label: "Glow Trail", desc: "The S-Pen tip emits a real-time additive glow as it moves" },
+                                                ].map((feat) => (
+                                                    <div key={feat.label} className="flex items-start gap-4 p-4 rounded-xl bg-white/5 border border-white/10 hover:border-[#00f0ff]/40 transition-colors duration-300">
+                                                        <div className="w-2 h-2 rounded-full bg-[#00f0ff] mt-1.5 shrink-0" />
+                                                        <div>
+                                                            <p className="font-mono text-xs font-bold uppercase tracking-widest text-[#00f0ff]">{feat.label}</p>
+                                                            <p className="font-sans text-white/50 text-sm mt-0.5">{feat.desc}</p>
+                                                        </div>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </ScrollReveal>
+
+                                    {/* Right: tool stack grid */}
+                                    <ScrollReveal direction="right" delay={0.2}>
+                                        <div className="grid grid-cols-2 gap-4">
+                                            {[
+                                                { icon: "🔷", tool: "Three.js", role: "3D WebGL Engine" },
+                                                { icon: "⚡", tool: "GSAP", role: "Animations & Intro" },
+                                                { icon: "🎨", tool: "Blender 3D", role: "Model Source" },
+                                                { icon: "☁️", tool: "Cloudinary", role: "Model CDN" },
+                                            ].map((item) => (
+                                                <div key={item.tool}
+                                                    className="p-5 rounded-2xl bg-white/5 border border-white/10 flex flex-col gap-2 hover:bg-[#00f0ff]/5 hover:border-[#00f0ff]/30 transition-all duration-300 group">
+                                                    <span className="text-2xl">{item.icon}</span>
+                                                    <p className="font-mono text-sm font-bold text-white uppercase tracking-wide group-hover:text-[#00f0ff] transition-colors">{item.tool}</p>
+                                                    <p className="font-sans text-white/40 text-xs leading-snug">{item.role}</p>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </ScrollReveal>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* ── SECTION C: CGI Film Showcase ── */}
+                        <div className="relative w-full"
+                            style={{ background: "linear-gradient(180deg, #090918 0%, #0a0a2e 100%)" }}>
+                            <div className="max-w-7xl mx-auto px-6 md:px-12 py-16 md:py-24">
+                                <ScrollReveal direction="up">
+                                    <div className="flex items-center gap-4 mb-4">
+                                        <span className="font-mono text-xs font-bold tracking-widest text-black bg-[#00f0ff] px-3.5 py-1 rounded-full">02</span>
+                                        <div className="flex items-center gap-1">
+                                            <div className="w-8 h-[2px] bg-white/30" />
+                                            <div className="w-8 h-[2px] bg-white/10" />
+                                        </div>
+                                        <h3 className="font-mono text-xs font-bold uppercase tracking-[0.3em] text-white/40">CGI Film Showcase</h3>
+                                    </div>
+                                    <h3 className="font-playfair text-3xl md:text-5xl font-bold text-white mb-12 uppercase">
+                                        Two <em className="font-playfair italic font-normal text-[#00f0ff]">Cinematic</em> Films
+                                    </h3>
+                                </ScrollReveal>
+
+                                <div className="flex flex-col md:flex-row gap-8 justify-center items-stretch">
+                                    {/* Film 1 */}
+                                    <ScrollReveal direction="left" delay={0.1} className="w-full md:w-1/2 flex flex-col gap-4">
+                                        <div className="w-full aspect-[9/16] bg-[#0a0a2e] border border-white/10 rounded-3xl overflow-hidden relative group hover:border-[#00f0ff]/50 hover:shadow-[0_0_40px_rgba(0,240,255,0.15)] transition-all duration-500">
+                                            <LazyVideo
+                                                src="https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/samsung/videos/samsung_3d_zflip_6.mp4"
+                                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
+                                            />
+                                            {/* Overlay label */}
+                                            <div className="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-black/80 to-transparent">
+                                                <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#00f0ff] font-bold mb-1">Film 01</p>
+                                                <p className="font-playfair text-lg text-white font-bold">Samsung Z Flip 6 — Lifestyle CGI</p>
+                                            </div>
+                                        </div>
+                                        <div className="flex flex-wrap gap-2">
+                                            {["Blender Cycles", "HDRI Studio", "Geo Nodes Particles"].map(t => (
+                                                <span key={t} className="font-mono text-[10px] uppercase tracking-widest text-[#00f0ff]/70 border border-[#00f0ff]/20 rounded-full px-3 py-1">{t}</span>
+                                            ))}
+                                        </div>
+                                    </ScrollReveal>
+
+                                    {/* Film 2 */}
+                                    <ScrollReveal direction="right" delay={0.2} className="w-full md:w-1/2 flex flex-col gap-4">
+                                        <div className="w-full aspect-[9/16] bg-[#0a0a2e] border border-white/10 rounded-3xl overflow-hidden relative group hover:border-[#00f0ff]/50 hover:shadow-[0_0_40px_rgba(0,240,255,0.15)] transition-all duration-500">
+                                            <LazyVideo
+                                                src="https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/samsung/videos/samsung_cgi_final.mp4"
+                                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
+                                            />
+                                            {/* Overlay label */}
+                                            <div className="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-black/80 to-transparent">
+                                                <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#00f0ff] font-bold mb-1">Film 02</p>
+                                                <p className="font-playfair text-lg text-white font-bold">Samsung Full CGI — Product Showcase</p>
+                                            </div>
+                                        </div>
+                                        <div className="flex flex-wrap gap-2">
+                                            {["DaVinci Resolve", "Colour Grade", "Post Production"].map(t => (
+                                                <span key={t} className="font-mono text-[10px] uppercase tracking-widest text-[#00f0ff]/70 border border-[#00f0ff]/20 rounded-full px-3 py-1">{t}</span>
+                                            ))}
+                                        </div>
+                                    </ScrollReveal>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* ── SECTION D: Production Pipeline ── */}
+                        <div className="relative w-full bg-[#191919] border-t border-white/5">
+                            <div className="max-w-7xl mx-auto px-6 md:px-12 py-16 md:py-24">
+                                <ScrollReveal direction="up">
+                                    <div className="flex items-center gap-4 mb-12">
+                                        <span className="font-mono text-xs font-bold tracking-widest text-black bg-[#00f0ff] px-3.5 py-1 rounded-full">03</span>
+                                        <div className="flex items-center gap-1">
+                                            <div className="w-8 h-[2px] bg-white/30" />
+                                            <div className="w-8 h-[2px] bg-white/10" />
+                                        </div>
+                                        <h3 className="font-mono text-xs font-bold uppercase tracking-[0.3em] text-white/40">Production Pipeline</h3>
                                     </div>
                                 </ScrollReveal>
+
+                                <div className="grid md:grid-cols-3 gap-6">
+                                    {[
+                                        {
+                                            step: "01",
+                                            phase: "3D Modelling & Lighting",
+                                            tool: "Blender 3D",
+                                            desc: "High-fidelity Samsung device modelling with physically-accurate glass, titanium and matte materials. Studio HDRI lighting rigs capturing the brand's signature deep shadows and cyan rim highlights.",
+                                            icon: "🔷"
+                                        },
+                                        {
+                                            step: "02",
+                                            phase: "VFX — Geometry Nodes",
+                                            tool: "Blender Geometry Nodes",
+                                            desc: "Procedural particle systems and displacement VFX built entirely inside Geometry Nodes — no third-party simulations. Allowed real-time art direction and rapid iteration of the Samsung S-Pen glow and fluid trails.",
+                                            icon: "🌊"
+                                        },
+                                        {
+                                            step: "03",
+                                            phase: "Colour Grade & Post",
+                                            tool: "DaVinci Resolve",
+                                            desc: "Multi-pass compositing and professional colour grading in DaVinci Resolve. LUT design to push the Samsung brand's deep navy-to-cyan palette, contrast enhancement, and final export to 4K.",
+                                            icon: "🎬"
+                                        },
+                                    ].map((item) => (
+                                        <ScrollReveal key={item.step} direction="up" delay={Number(item.step) * 0.1}>
+                                            <div className="h-full p-7 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/8 hover:border-[#00f0ff]/30 transition-all duration-500 flex flex-col gap-5">
+                                                <div className="flex items-center justify-between">
+                                                    <span className="text-3xl">{item.icon}</span>
+                                                    <span className="font-mono text-xs font-bold tracking-widest text-[#00f0ff] opacity-40">{item.step}</span>
+                                                </div>
+                                                <div>
+                                                    <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#00f0ff] font-bold mb-1">{item.tool}</p>
+                                                    <h4 className="font-playfair text-xl font-bold text-white uppercase">{item.phase}</h4>
+                                                </div>
+                                                <p className="font-sans text-white/50 text-sm leading-relaxed flex-1">{item.desc}</p>
+                                            </div>
+                                        </ScrollReveal>
+                                    ))}
+                                </div>
                             </div>
                         </div>
                     </div>
+
                 ) : project.slug !== "trionda-ball-wc-2026" ? (
                     <div className="grid md:grid-cols-2 gap-8 relative z-10">
                         <div className="w-full aspect-[4/5] bg-white border border-black/10 rounded-2xl relative flex flex-col items-center justify-center shadow-md hover:border-[#ffff7b] transition-colors duration-500">

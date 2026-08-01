@@ -18,20 +18,22 @@ export const projects: Project[] = [
     {
         slug: "samsung-s22-ultra-3d-hero",
         accent: "cyan",
-        title: "SAMSUNG S22 ULTRA — 3D INTERACTIVE",
-        category: "Interactive 3D & WebGL",
-        description: "Physically simulated hanging Samsung Galaxy S22 Ultra phone with Rapier physics, bone chain deformation, S-Pen extraction, and real-time screen vector drawing.",
-        client: "Samsung Showcase Concept",
-        role: "Senior Graphics Engineer & Physics Programmer",
-        timeline: "2026",
-        techStack: ["Three.js", "Rapier Physics", "GSAP", "WebGL", "TypeScript", "Canvas API"],
-        fullDescription: "A production-ready, physically simulated interactive hero showcase featuring a suspended Samsung S22 Ultra phone on a metallic chain. Built with Rapier 3D physics, real-time bone armature binding, S-Pen GSAP extraction, and an offscreen vector drawing canvas texture system.",
-        challenge: "Simulating realistic multi-body pendulum dynamics and multi-material reflection rendering while driving skinned mesh chain deformation and real-time screen UV stroke rendering at a fluid 60+ FPS.",
-        solution: "Decoupled Rapier rigid body chain simulation mapped directly to armature bones, zero-allocation vector raycasting, offscreen HTML canvas texture updates, and ACES Filmic tone mapping with PMREM reflections.",
+        title: "SAMSUNG S22 ULTRA — CGI & INTERACTIVE",
+        category: "CGI & Interactive 3D",
+        description: "Two cinematic CGI videos and high-fidelity still renders for Samsung, crafted in Blender 3D with Geometry Nodes for procedural VFX, and colour-graded in DaVinci Resolve.",
+        client: "Samsung (Personal Concept)",
+        role: "3D CGI Artist & Motion Designer",
+        timeline: "2025",
+        techStack: ["Blender 3D", "Geometry Nodes", "HDRI Lighting", "DaVinci Resolve", "Cycles Render", "Three.js", "WebGL"],
+        fullDescription: "Two cinematic Samsung CGI productions — a Z Flip 6 lifestyle piece and a full CGI product showcase — built from scratch in Blender 3D. Geometry Nodes powered all procedural VFX particle and displacement effects, while DaVinci Resolve handled the final colour grade and post-production. The interactive 3D hero on this page is built with Three.js & WebGL.",
+        challenge: "Capturing the hyper-reflective glass and titanium surfaces of Samsung devices under cinematic lighting while simultaneously running procedural VFX simulations in Geometry Nodes — all within a render pipeline that had to stay manageable for solo production.",
+        solution: "Shot each scene with a multi-layer approach: a clean beauty pass for the device, a separate Geometry Nodes particle layer for VFX trails and displacement, and a final composite + colour grade in DaVinci Resolve to achieve the deep cyan highlights and dark atmospheric look Samsung's brand demands.",
         media: [
-            { type: 'image', url: 'https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&w=1200&q=80', alt: 'Samsung Galaxy S22 Ultra Showcase' }
+            { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/samsung/videos/samsung_3d_zflip_6.mp4', alt: 'Samsung Z Flip 6 CGI Film' },
+            { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/samsung/videos/samsung_cgi_final.mp4', alt: 'Samsung Full CGI Showcase' }
         ]
     },
+
     {
         slug: "trionda-ball-wc-2026",
         accent: "fuchsia",
