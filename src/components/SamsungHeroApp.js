@@ -763,15 +763,20 @@ export class SamsungHeroApp {
         this.posHistory = [];
       }
 
-      // Update and fade all trail particles
+      // Update and fade all trail particles smoothly via opacity, maintaining overlapping particle scale
       for(let i = 0; i < this.trailCount; i++) {
         const pt = this.trailPoints[i];
         if (pt.age > 0) {
-          pt.age -= 0.006; // Slower fade for smooth lasting arc trail
+          pt.age -= 0.007; // Smooth natural decay rate
           if (pt.age <= 0) {
             pt.mesh.visible = false;
           } else {
-            const scale = pt.age * 0.055; 
+            // Smooth opacity falloff so light dissolves seamlessly into background without dot separation
+            const opacity = Math.pow(pt.age, 1.3);
+            pt.mat.opacity = opacity;
+
+            // Soft scale tapering (from 0.08 down to 0.05) so neighboring points always overlap seamlessly
+            const scale = 0.05 + (pt.age * 0.035); 
             pt.mesh.scale.setScalar(scale);
           }
         }
