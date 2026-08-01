@@ -938,195 +938,198 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                         </div>
                     </div>
                 ) : project.slug === "samsung-s22-ultra-3d-hero" ? (
-                    <div className="relative z-10 -mx-6 md:-mx-12" style={{ background: '#000' }}>
+                    <div className="relative z-10 -mx-6 md:-mx-12 bg-gradient-to-b from-[#050c1f] via-[#081536] to-[#040919] overflow-hidden py-16 md:py-24">
+                        
+                        {/* Background Ambient Light Orbs */}
+                        <div className="absolute inset-0 pointer-events-none">
+                            <div className="absolute top-1/4 left-1/3 w-[60vw] h-[60vw] rounded-full bg-blue-600/10 blur-[160px]" />
+                            <div className="absolute bottom-1/3 right-1/3 w-[50vw] h-[50vw] rounded-full bg-cyan-500/10 blur-[150px]" />
+                        </div>
 
-                        {/* ── FILM 01 — Full-bleed vertical video, pinned left ── */}
-                        <ScrollReveal direction="up" delay={0.1}>
-                            <div className="w-full" style={{ background: '#000' }}>
-                                <div className="max-w-7xl mx-auto px-6 md:px-16 pt-20 md:pt-28 pb-12">
-                                    <p className="font-sans text-xs font-semibold tracking-[0.4em] uppercase text-[#1428A0] mb-3">Film 01 · Samsung Z Flip 6</p>
-                                    <h2 className="font-sans text-[clamp(2.5rem,7vw,6rem)] font-black text-white uppercase leading-[0.9] tracking-tight">
-                                        LIFESTYLE<br /><span className="text-white/20">CGI</span>
+                        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 space-y-24">
+
+                            {/* Section Header */}
+                            <ScrollReveal direction="up">
+                                <div className="text-center max-w-3xl mx-auto space-y-4">
+                                    <span className="inline-block px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-400/30 text-cyan-300 font-mono text-xs font-semibold uppercase tracking-widest">
+                                        🎬 3D CGI Productions
+                                    </span>
+                                    <h2 className="font-sans text-4xl md:text-6xl font-black text-white uppercase tracking-tight leading-tight">
+                                        Cinematic <span className="bg-gradient-to-r from-cyan-300 via-blue-400 to-indigo-300 bg-clip-text text-transparent">CGI Showcase</span>
                                     </h2>
+                                    <p className="font-sans text-white/70 text-base md:text-lg">
+                                        Two full CGI video commercials rendered in Blender Cycles, powered by Geometry Nodes VFX &amp; graded in DaVinci Resolve.
+                                    </p>
                                 </div>
+                            </ScrollReveal>
 
-                                {/* Full-width video with side description */}
-                                <div className="flex flex-col lg:flex-row items-stretch gap-0">
-                                    {/* Video — dominant */}
-                                    <div className="lg:w-[60%] w-full aspect-[9/16] lg:aspect-auto lg:min-h-[90vh] relative overflow-hidden group">
-                                        <video
-                                            src="https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/samsung/videos/samsung_3d_zflip_6.mp4"
-                                            autoPlay
-                                            muted
-                                            loop
-                                            playsInline
-                                            className="w-full h-full object-cover"
-                                        />
-                                        {/* Play indicator */}
-                                        <div className="absolute top-6 right-6 flex items-center gap-2 bg-black/50 backdrop-blur-sm rounded-full px-4 py-2 border border-white/10">
-                                            <div className="w-1.5 h-1.5 rounded-full bg-[#1428A0] animate-pulse" />
-                                            <span className="font-sans text-[10px] uppercase tracking-widest text-white/60 font-semibold">AUTOPLAY</span>
-                                        </div>
-                                    </div>
-
-                                    {/* Right: description panel */}
-                                    <div className="lg:w-[40%] flex flex-col justify-center px-8 md:px-14 py-16 lg:py-0 border-l border-white/5">
-                                        <div className="space-y-8 max-w-sm">
-                                            <div>
-                                                <p className="font-sans text-xs tracking-[0.3em] uppercase text-[#1428A0] font-bold mb-4">About this film</p>
-                                                <p className="font-sans text-white/70 text-base leading-relaxed">
-                                                    A cinematic lifestyle spot for the Samsung Galaxy Z Flip 6 — built entirely in Blender 3D. Hyper-reflective glass and metallic hinge surfaces lit with a multi-point HDRI studio rig.
-                                                </p>
+                            {/* ── FILM 01: Samsung Z Flip 6 ── */}
+                            <ScrollReveal direction="up" delay={0.1}>
+                                <div className="p-6 md:p-10 rounded-3xl bg-slate-900/60 border border-cyan-500/20 backdrop-blur-2xl shadow-2xl relative overflow-hidden group hover:border-cyan-400/40 transition-all duration-500">
+                                    <div className="grid lg:grid-cols-12 gap-8 items-center">
+                                        
+                                        {/* Video Player Box */}
+                                        <div className="lg:col-span-7 relative aspect-[9/16] sm:aspect-video rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-black">
+                                            <video
+                                                src="https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/samsung/videos/samsung_3d_zflip_6.mp4"
+                                                autoPlay
+                                                muted
+                                                loop
+                                                playsInline
+                                                controls
+                                                className="w-full h-full object-cover"
+                                            />
+                                            <div className="absolute top-4 left-4 flex items-center gap-2 bg-slate-950/80 backdrop-blur-md rounded-full px-3.5 py-1.5 border border-white/15 pointer-events-none">
+                                                <div className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+                                                <span className="font-mono text-[10px] font-bold text-white uppercase tracking-wider">FILM 01 · Z FLIP 6</span>
                                             </div>
-                                            <div className="space-y-3">
+                                        </div>
+
+                                        {/* Content & Specs */}
+                                        <div className="lg:col-span-5 space-y-6">
+                                            <div className="space-y-2">
+                                                <span className="font-mono text-xs font-bold text-cyan-400 uppercase tracking-widest">Commercial Spot</span>
+                                                <h3 className="font-sans text-2xl md:text-4xl font-black text-white uppercase tracking-tight">
+                                                    Samsung Z Flip 6 <br />
+                                                    <span className="text-cyan-300 font-normal italic">Lifestyle CGI</span>
+                                                </h3>
+                                            </div>
+
+                                            <p className="font-sans text-white/70 text-sm md:text-base leading-relaxed">
+                                                A cinematic lifestyle spot for the Samsung Galaxy Z Flip 6. Hyper-reflective glass and metallic hinge surfaces rendered with physically accurate material shading in Blender Cycles.
+                                            </p>
+
+                                            <div className="grid grid-cols-2 gap-3 pt-2">
                                                 {[
-                                                    ["Software", "Blender 3D"],
-                                                    ["Render", "Cycles X — Filmic"],
-                                                    ["VFX", "Geometry Nodes"],
-                                                    ["Post", "DaVinci Resolve"],
-                                                ].map(([label, val]) => (
-                                                    <div key={label} className="flex justify-between items-center py-3 border-b border-white/5">
-                                                        <span className="font-sans text-xs uppercase tracking-widest text-white/30 font-semibold">{label}</span>
-                                                        <span className="font-sans text-sm text-white font-semibold">{val}</span>
+                                                    { label: "Render Engine", val: "Blender Cycles X" },
+                                                    { label: "Lighting", val: "Multi-HDRI Studio" },
+                                                    { label: "Shading", val: "Filmic PBR Materials" },
+                                                    { label: "Color Grading", val: "DaVinci Resolve" },
+                                                ].map((spec) => (
+                                                    <div key={spec.label} className="p-3 rounded-xl bg-white/5 border border-white/10">
+                                                        <p className="font-mono text-[10px] uppercase text-white/40 font-semibold">{spec.label}</p>
+                                                        <p className="font-sans text-xs font-bold text-cyan-200 mt-0.5">{spec.val}</p>
                                                     </div>
                                                 ))}
                                             </div>
                                         </div>
+
                                     </div>
                                 </div>
-                            </div>
-                        </ScrollReveal>
+                            </ScrollReveal>
 
-                        {/* ── DIVIDER ── */}
-                        <div className="w-full h-px bg-white/5" />
-
-                        {/* ── FILM 02 — Full-bleed vertical video, pinned right ── */}
-                        <ScrollReveal direction="up" delay={0.1}>
-                            <div className="w-full" style={{ background: '#080808' }}>
-                                <div className="max-w-7xl mx-auto px-6 md:px-16 pt-20 md:pt-28 pb-12">
-                                    <p className="font-sans text-xs font-semibold tracking-[0.4em] uppercase text-[#1428A0] mb-3">Film 02 · Full CGI Showcase</p>
-                                    <h2 className="font-sans text-[clamp(2.5rem,7vw,6rem)] font-black text-white uppercase leading-[0.9] tracking-tight">
-                                        PRODUCT<br /><span className="text-white/20">REVEAL</span>
-                                    </h2>
-                                </div>
-
-                                {/* Reversed: description left, video right */}
-                                <div className="flex flex-col lg:flex-row-reverse items-stretch gap-0">
-                                    {/* Video — dominant */}
-                                    <div className="lg:w-[60%] w-full aspect-[9/16] lg:aspect-auto lg:min-h-[90vh] relative overflow-hidden">
-                                        <video
-                                            src="https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/samsung/videos/samsung_cgi_final.mp4"
-                                            autoPlay
-                                            muted
-                                            loop
-                                            playsInline
-                                            className="w-full h-full object-cover"
-                                        />
-                                        <div className="absolute top-6 left-6 flex items-center gap-2 bg-black/50 backdrop-blur-sm rounded-full px-4 py-2 border border-white/10">
-                                            <div className="w-1.5 h-1.5 rounded-full bg-[#1428A0] animate-pulse" />
-                                            <span className="font-sans text-[10px] uppercase tracking-widest text-white/60 font-semibold">AUTOPLAY</span>
-                                        </div>
-                                    </div>
-
-                                    {/* Left: description panel */}
-                                    <div className="lg:w-[40%] flex flex-col justify-center px-8 md:px-14 py-16 lg:py-0 border-r border-white/5">
-                                        <div className="space-y-8 max-w-sm">
-                                            <div>
-                                                <p className="font-sans text-xs tracking-[0.3em] uppercase text-[#1428A0] font-bold mb-4">About this film</p>
-                                                <p className="font-sans text-white/70 text-base leading-relaxed">
-                                                    A full CGI product reveal for Samsung — featuring particle VFX from Blender Geometry Nodes and a premium colour grade from DaVinci Resolve pushing Samsung's iconic deep navy-to-indigo palette.
-                                                </p>
+                            {/* ── FILM 02: Full CGI Product Showcase ── */}
+                            <ScrollReveal direction="up" delay={0.2}>
+                                <div className="p-6 md:p-10 rounded-3xl bg-slate-900/60 border border-blue-500/20 backdrop-blur-2xl shadow-2xl relative overflow-hidden group hover:border-blue-400/40 transition-all duration-500">
+                                    <div className="grid lg:grid-cols-12 gap-8 items-center">
+                                        
+                                        {/* Content & Specs */}
+                                        <div className="lg:col-span-5 space-y-6 lg:order-1 order-2">
+                                            <div className="space-y-2">
+                                                <span className="font-mono text-xs font-bold text-blue-400 uppercase tracking-widest">Product Reveal</span>
+                                                <h3 className="font-sans text-2xl md:text-4xl font-black text-white uppercase tracking-tight">
+                                                    Samsung CGI <br />
+                                                    <span className="text-blue-300 font-normal italic">Product Reveal</span>
+                                                </h3>
                                             </div>
-                                            <div className="space-y-3">
+
+                                            <p className="font-sans text-white/70 text-sm md:text-base leading-relaxed">
+                                                Full CGI product reveal featuring procedural particle simulation built inside Blender Geometry Nodes and a custom DaVinci Resolve color grade highlighting Samsung&apos;s deep cyan and indigo palette.
+                                            </p>
+
+                                            <div className="grid grid-cols-2 gap-3 pt-2">
                                                 {[
-                                                    ["Software", "Blender 3D"],
-                                                    ["VFX Engine", "Geometry Nodes"],
-                                                    ["Grade", "DaVinci Resolve"],
-                                                    ["Output", "4K / 60fps"],
-                                                ].map(([label, val]) => (
-                                                    <div key={label} className="flex justify-between items-center py-3 border-b border-white/5">
-                                                        <span className="font-sans text-xs uppercase tracking-widest text-white/30 font-semibold">{label}</span>
-                                                        <span className="font-sans text-sm text-white font-semibold">{val}</span>
+                                                    { label: "VFX Simulation", val: "Geometry Nodes" },
+                                                    { label: "Resolution", val: "4K UHD / 60 FPS" },
+                                                    { label: "Post Production", val: "Multi-Pass Grade" },
+                                                    { label: "Software", val: "Blender 3D" },
+                                                ].map((spec) => (
+                                                    <div key={spec.label} className="p-3 rounded-xl bg-white/5 border border-white/10">
+                                                        <p className="font-mono text-[10px] uppercase text-white/40 font-semibold">{spec.label}</p>
+                                                        <p className="font-sans text-xs font-bold text-blue-200 mt-0.5">{spec.val}</p>
                                                     </div>
                                                 ))}
                                             </div>
                                         </div>
+
+                                        {/* Video Player Box */}
+                                        <div className="lg:col-span-7 lg:order-2 order-1 relative aspect-[9/16] sm:aspect-video rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-black">
+                                            <video
+                                                src="https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/samsung/videos/samsung_cgi_final.mp4"
+                                                autoPlay
+                                                muted
+                                                loop
+                                                playsInline
+                                                controls
+                                                className="w-full h-full object-cover"
+                                            />
+                                            <div className="absolute top-4 right-4 flex items-center gap-2 bg-slate-950/80 backdrop-blur-md rounded-full px-3.5 py-1.5 border border-white/15 pointer-events-none">
+                                                <div className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
+                                                <span className="font-mono text-[10px] font-bold text-white uppercase tracking-wider">FILM 02 · CGI REVEAL</span>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
-                            </div>
-                        </ScrollReveal>
+                            </ScrollReveal>
 
-                        {/* ── PRODUCTION PROCESS ── Samsung.com clean spec grid ── */}
-                        <div className="w-full py-24 md:py-32 border-t border-white/5" style={{ background: '#0a0a0a' }}>
-                            <div className="max-w-7xl mx-auto px-6 md:px-16">
+                            {/* ── PRODUCTION PIPELINE & 3D INTERACTIVE CARDS ── */}
+                            <div className="space-y-8">
                                 <ScrollReveal direction="up">
-                                    <div className="flex flex-col md:flex-row gap-4 md:gap-0 md:items-end justify-between mb-20">
+                                    <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-white/10 pb-6">
                                         <div>
-                                            <p className="font-sans text-xs font-bold tracking-[0.4em] uppercase text-[#1428A0] mb-4">Production Pipeline</p>
-                                            <h3 className="font-sans text-4xl md:text-6xl font-black text-white uppercase leading-tight">
-                                                HOW IT<br />WAS MADE
-                                            </h3>
+                                            <span className="font-mono text-xs font-bold text-cyan-400 uppercase tracking-widest">Workflow</span>
+                                            <h3 className="font-sans text-3xl md:text-4xl font-black text-white uppercase tracking-tight">Production Pipeline</h3>
                                         </div>
-                                        <p className="font-sans text-white/40 text-sm max-w-xs leading-relaxed">
-                                            A three-phase pipeline — modelling, VFX simulation, and colour science — all executed solo.
+                                        <p className="font-sans text-white/60 text-sm max-w-md">
+                                            3D Modeling, Procedural VFX &amp; WebGL interactive engine integration.
                                         </p>
                                     </div>
                                 </ScrollReveal>
 
-                                <div className="grid md:grid-cols-3 gap-px bg-white/5">
+                                <div className="grid md:grid-cols-3 gap-6">
                                     {[
                                         {
-                                            num: "01",
-                                            title: "3D Modelling\n& Lighting",
+                                            step: "01",
+                                            title: "3D Modeling & Lighting",
                                             tool: "Blender 3D",
-                                            desc: "Physically accurate glass, titanium and matte Samsung materials. Multi-point HDRI studio lighting designed to match Samsung's marketing aesthetic.",
+                                            desc: "Precision device modeling for Samsung Galaxy devices with PBR glass, titanium, and matte metallic shading.",
+                                            badge: "Blender Cycles"
                                         },
                                         {
-                                            num: "02",
+                                            step: "02",
                                             title: "Procedural VFX",
                                             tool: "Geometry Nodes",
-                                            desc: "All particle effects and displacement simulations built in Blender Geometry Nodes — zero third-party plugins, full parametric control.",
+                                            desc: "Custom procedural particle streams and displacement effects generated entirely in Geometry Nodes.",
+                                            badge: "Geo Nodes VFX"
                                         },
                                         {
-                                            num: "03",
-                                            title: "Colour Grade\n& Post",
+                                            step: "03",
+                                            title: "Color Science",
                                             tool: "DaVinci Resolve",
-                                            desc: "Multi-pass composite and professional grade in DaVinci. Custom LUT push to Samsung's deep navy-indigo palette. 4K export.",
+                                            desc: "Multi-pass composite and professional color grading enhancing deep cyan highlights and deep navy contrast.",
+                                            badge: "DaVinci Grade"
                                         },
-                                    ].map((item) => (
-                                        <ScrollReveal key={item.num} direction="up" delay={Number(item.num) * 0.08}>
-                                            <div className="p-10 flex flex-col gap-8 bg-[#0a0a0a] hover:bg-white/[0.02] transition-colors duration-500 group min-h-[320px]">
-                                                <div className="flex items-start justify-between">
-                                                    <span className="font-sans text-[10px] font-bold tracking-[0.3em] uppercase text-[#1428A0]">{item.tool}</span>
-                                                    <span className="font-sans text-5xl font-black text-white/5 leading-none">{item.num}</span>
+                                    ].map((pipeline) => (
+                                        <ScrollReveal key={pipeline.step} direction="up" delay={Number(pipeline.step) * 0.1}>
+                                            <div className="p-8 rounded-3xl bg-slate-900/50 border border-white/10 backdrop-blur-xl hover:border-cyan-400/40 transition-all duration-300 flex flex-col justify-between h-full group">
+                                                <div className="space-y-4">
+                                                    <div className="flex items-center justify-between">
+                                                        <span className="font-mono text-xs font-bold text-cyan-400 bg-cyan-500/10 px-3 py-1 rounded-full border border-cyan-500/20">{pipeline.step}</span>
+                                                        <span className="font-mono text-[10px] uppercase text-white/40 font-semibold">{pipeline.tool}</span>
+                                                    </div>
+                                                    <h4 className="font-sans text-xl font-bold text-white uppercase group-hover:text-cyan-300 transition-colors">{pipeline.title}</h4>
+                                                    <p className="font-sans text-white/60 text-sm leading-relaxed">{pipeline.desc}</p>
                                                 </div>
-                                                <div className="mt-auto space-y-4">
-                                                    <h4 className="font-sans text-2xl font-black text-white uppercase leading-tight whitespace-pre-line">{item.title}</h4>
-                                                    <p className="font-sans text-white/40 text-sm leading-relaxed">{item.desc}</p>
+                                                <div className="pt-6 border-t border-white/5 mt-6">
+                                                    <span className="font-mono text-[11px] text-cyan-300">{pipeline.badge}</span>
                                                 </div>
                                             </div>
                                         </ScrollReveal>
                                     ))}
                                 </div>
-
-                                {/* Interactive 3D callout — minimal strip */}
-                                <ScrollReveal direction="up" delay={0.1}>
-                                    <div className="mt-px bg-[#0a0a0a] border border-white/5 flex flex-col md:flex-row items-center justify-between gap-6 p-10">
-                                        <div>
-                                            <p className="font-sans text-xs font-bold tracking-[0.4em] uppercase text-[#1428A0] mb-2">Bonus</p>
-                                            <h4 className="font-sans text-2xl md:text-3xl font-black text-white uppercase">Interactive WebGL 3D Hero</h4>
-                                            <p className="font-sans text-white/40 text-sm mt-2">Three.js · GSAP · Real-time physics · S-Pen glow trail</p>
-                                        </div>
-                                        <a
-                                            href="#"
-                                            onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-                                            className="shrink-0 flex items-center gap-3 bg-[#1428A0] hover:bg-[#1e3bb5] text-white font-sans font-bold text-sm uppercase tracking-widest px-8 py-4 transition-colors duration-300"
-                                        >
-                                            <span>↑ Back to 3D Scene</span>
-                                        </a>
-                                    </div>
-                                </ScrollReveal>
                             </div>
+
                         </div>
                     </div>
 

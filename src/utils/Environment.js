@@ -31,8 +31,8 @@ export class Environment {
     this.renderer.shadowMap.enabled = true;
     this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
-    // Samsung vivid blue background — matches samsung.com flagship page aesthetic
-    const studioBgColor = new THREE.Color(0x1428A0);
+    // Deep dark navy — phone pops with blue rim
+    const studioBgColor = new THREE.Color(0x050c1f);
     this.renderer.setClearColor(studioBgColor, 1.0);
     this.scene.background = studioBgColor;
   }
@@ -71,8 +71,8 @@ export class Environment {
     this.keyLight.shadow.bias = -0.0001;
     this.scene.add(this.keyLight);
 
-    // 3. Samsung Blue Rim Light to outline phone edges
-    this.rimLight = new THREE.DirectionalLight(0x4477ff, 3.5);
+    // 3. Samsung Blue-Cyan Rim Light for phone edge glow
+    this.rimLight = new THREE.DirectionalLight(0x3366ff, 3.5);
     this.rimLight.position.set(-4, 3, -3);
     this.scene.add(this.rimLight);
 
