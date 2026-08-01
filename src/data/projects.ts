@@ -20,17 +20,17 @@ export const projects: Project[] = [
         accent: "cyan",
         title: "SAMSUNG S22 ULTRA — CGI & INTERACTIVE",
         category: "CGI & Interactive 3D",
-        description: "Two cinematic CGI videos and high-fidelity still renders for Samsung, crafted in Blender 3D with Geometry Nodes for procedural VFX, and colour-graded in DaVinci Resolve.",
+        description: "Two cinematic CGI videos and high-fidelity still renders for Samsung, crafted in Blender 3D with Geometry Nodes for procedural VFX, composited in After Effects, and colour-graded in DaVinci Resolve.",
         client: "Samsung (Personal Concept)",
         role: "3D CGI Artist & Motion Designer",
         timeline: "2025",
-        techStack: ["Blender 3D", "Geometry Nodes", "HDRI Lighting", "DaVinci Resolve", "Cycles Render", "Three.js", "WebGL"],
-        fullDescription: "Two cinematic Samsung CGI productions — a Z Flip 6 lifestyle piece and a full CGI product showcase — built from scratch in Blender 3D. Geometry Nodes powered all procedural VFX particle and displacement effects, while DaVinci Resolve handled the final colour grade and post-production. The interactive 3D hero on this page is built with Three.js & WebGL.",
+        techStack: ["Blender 3D", "Geometry Nodes", "After Effects", "DaVinci Resolve", "Cycles Render", "Three.js", "WebGL"],
+        fullDescription: "Two cinematic Samsung CGI productions — a Z Flip 6 lifestyle piece and a full CGI product showcase — built from scratch in Blender 3D. Geometry Nodes powered all procedural VFX particle and displacement effects, composited in After Effects, while DaVinci Resolve handled the final colour grade and post-production. The interactive 3D hero on this page is built with Three.js & WebGL.",
         challenge: "Capturing the hyper-reflective glass and titanium surfaces of Samsung devices under cinematic lighting while simultaneously running procedural VFX simulations in Geometry Nodes — all within a render pipeline that had to stay manageable for solo production.",
-        solution: "Shot each scene with a multi-layer approach: a clean beauty pass for the device, a separate Geometry Nodes particle layer for VFX trails and displacement, and a final composite + colour grade in DaVinci Resolve to achieve the deep cyan highlights and dark atmospheric look Samsung's brand demands.",
+        solution: "Shot each scene with a multi-layer approach: a clean beauty pass for the device, a separate Geometry Nodes particle layer for VFX trails and displacement, After Effects compositing, and a final composite + colour grade in DaVinci Resolve to achieve the deep cyan highlights and dark atmospheric look Samsung's brand demands.",
         media: [
-            { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/samsung/videos/samsung_3d_zflip_6.mp4', alt: 'Samsung Z Flip 6 CGI Film' },
-            { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/portfolio/samsung/videos/samsung_cgi_final.mp4', alt: 'Samsung Full CGI Showcase' }
+            { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/v1785516657/portfolio/samsung/videos/samsung_3d_zflip_6.mp4', alt: 'Samsung Z Flip 6 CGI Film' },
+            { type: 'video', url: 'https://res.cloudinary.com/zu63qo7h/video/upload/v1785516709/portfolio/samsung/videos/samsung_cgi_final.mp4', alt: 'Samsung Full CGI Showcase' }
         ]
     },
 
