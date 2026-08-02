@@ -360,12 +360,11 @@ export class SamsungHeroApp {
    * Guarantees object occupies targetCoverage (e.g. 65%) of viewport height across resolutions.
    */
   fitCameraToObject() {
-    // We disable dynamic bounding-box camera framing because it cancels out 
-    // the user's custom scale parameters by moving the camera away.
-    // Instead, we lock the camera to a fixed Z distance.
     const isMobile = window.innerWidth <= 768;
-    const targetScale = isMobile ? 0.39 : 0.6; // Base scale is 0.6, scale down further on mobile
-    const cameraY = isMobile ? 1.0 : 0; // Pan camera up so model moves down on mobile screen
+    // On mobile: smaller scale so the full phone fits without clipping
+    const targetScale = isMobile ? 0.42 : 0.6;
+    // Bring camera closer on mobile for better fill, keep model centered vertically
+    const cameraZ = isMobile ? 4.8 : 5.5;
     
     if (this.sceneGroup) {
       gsap.to(this.sceneGroup.scale, {
@@ -379,12 +378,12 @@ export class SamsungHeroApp {
 
     gsap.to(this.camera.position, {
       x: 0,
-      y: cameraY,
-      z: 5.5,
+      y: 0,
+      z: cameraZ,
       duration: 1.2,
       ease: "power2.out",
       onUpdate: () => {
-        this.camera.lookAt(0, cameraY, 0);
+        this.camera.lookAt(0, 0, 0);
       }
     });
   }
@@ -900,13 +899,20 @@ export class SamsungHeroApp {
     const width = window.innerWidth;
     const height = window.innerHeight;
 
-    this.phoneHomeX = width > 768 ? 1.0 : 0;
+    const isMobile = width <= 768;
+    this.phoneHomeX = isMobile ? 0 : 1.0;
     
     this.camera.aspect = width / height;
     this.camera.updateProjectionMatrix();
 
     this.renderer.setSize(width, height);
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    // Move model group to correct home position for new viewport
+    if (this.modelGroup) {
+      const pX = this.params ? (this.renderMode === 'phone' ? this.params.phonePosX : this.params.penPosX) : 0;
+      this.modelGroup.position.x = this.phoneHomeX + pX;
+    }
 
     // Dynamic reframing on resize
     this.fitCameraToObject();

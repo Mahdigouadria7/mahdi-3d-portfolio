@@ -39,7 +39,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
     }
 
     return (
-        <main className={`min-h-screen selection:bg-[#00f0ff]/30 selection:text-white pb-32 relative overflow-hidden ${project.slug === 'samsung-s22-ultra-3d-hero' ? 'bg-[#08081e] text-white' : 'bg-[#f5f4ef] text-[#191919]'}`}>
+        <main className={`min-h-screen selection:bg-[#d4cfc9]/20 selection:text-white pb-32 relative overflow-hidden ${project.slug === 'samsung-s22-ultra-3d-hero' ? 'bg-[#0c0c0e] text-white' : 'bg-[#f5f4ef] text-[#191919]'}`}>
 
             {/* Top Navigation Bar */}
             <nav className="fixed top-0 left-0 w-full z-50 p-4 md:px-10 md:py-5 flex justify-between items-start pointer-events-none gap-4">
@@ -71,23 +71,23 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
             {/* ── 2. Metadata Bar ── */}
             {project.slug === 'samsung-s22-ultra-3d-hero' ? (
-                /* Samsung: clean white-on-blue bar — samsung.com style */
-                <div className="w-full relative z-40" style={{ background: '#1428A0' }}>
-                    <div className="w-full h-px bg-white/20" />
-                    <div className="max-w-7xl mx-auto px-6 md:px-12 py-6 md:py-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 md:gap-0">
+                /* Samsung: studio-minimal metadata strip */
+                <div className="w-full relative z-40" style={{ background: '#0c0c0e' }}>
+                    <div style={{ height: '1px', background: 'rgba(255,255,255,0.07)' }} />
+                    <div className="max-w-[1280px] mx-auto px-14 py-7 flex flex-wrap gap-x-16 gap-y-5 items-start">
                         {[
                             { label: 'Client', value: project.client },
                             { label: 'Role', value: project.role },
                             { label: 'Year', value: project.timeline },
                             { label: 'Medium', value: 'CGI · 3D · WebGL' },
-                        ].map((item, i) => (
-                            <div key={item.label} className={`flex-1 ${i > 0 ? 'md:border-l md:border-white/20 md:pl-8' : ''}`}>
-                                <p className="font-sans text-[10px] font-semibold tracking-[0.35em] uppercase text-white/40 mb-1.5">{item.label}</p>
-                                <p className="font-sans font-bold text-sm md:text-base text-white uppercase tracking-wide">{item.value}</p>
+                        ].map((item) => (
+                            <div key={item.label}>
+                                <p style={{ color: '#3a3836', fontSize: '9px', letterSpacing: '0.3em', textTransform: 'uppercase', marginBottom: '5px', fontFamily: 'system-ui' }}>{item.label}</p>
+                                <p style={{ color: '#9a9490', fontSize: '13px', fontFamily: 'system-ui', letterSpacing: '0.01em', fontWeight: 400 }}>{item.value}</p>
                             </div>
                         ))}
                     </div>
-                    <div className="w-full h-px bg-white/20" />
+                    <div style={{ height: '1px', background: 'rgba(255,255,255,0.07)' }} />
                 </div>
             ) : (
                 /* Default: warm dark bar */
@@ -123,102 +123,159 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                 </div>
             )}
 
-            {/* ── 3. Samsung Complete Project Presentation ── */}
+            {/* ── 3. Samsung Cinematic Project Experience ── */}
             {project.slug === 'samsung-s22-ultra-3d-hero' ? (
-                <section className="relative z-20 overflow-hidden bg-gradient-to-b from-[#03081a] via-[#08173d] to-[#03081a] py-16 md:py-24">
-                    
-                    {/* Ambient Glow Orbs with smooth transition */}
-                    <div className="absolute inset-0 pointer-events-none">
-                        <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[75vw] h-[40vw] rounded-full bg-blue-600/20 blur-[160px] animate-pulse" />
-                        <div className="absolute bottom-10 right-10 w-[55vw] h-[55vw] rounded-full bg-indigo-600/20 blur-[170px]" />
-                        <div className="absolute top-1/2 left-1/4 w-[65vw] h-[65vw] rounded-full bg-sky-500/15 blur-[190px] animate-pulse" style={{ animationDelay: '2s' }} />
-                    </div>
+                <section
+                    className="relative z-20"
+                    style={{ background: '#0c0c0e', fontFamily: 'system-ui, -apple-system, sans-serif' }}
+                >
 
-                    <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 space-y-20">
+                    {/* ════════════════════════════════════════════════
+                        SCENE 01 — PROJECT STATEMENT
+                        Editorial asymmetric. Ghost numbers. Open space.
+                    ════════════════════════════════════════════════ */}
+                    <div className="max-w-[1280px] mx-auto px-6 md:px-14 pt-28 pb-24">
+                        <div className="grid md:grid-cols-[1fr_2fr] gap-8 md:gap-20 items-start">
 
-                        {/* Brief Overview card — Confident sharp corners */}
-                        <ScrollReveal direction="up" delay={0.1}>
-                            <div className="p-8 md:p-12 rounded-xl bg-slate-900/80 border border-white/15 backdrop-blur-2xl shadow-2xl relative overflow-hidden">
-                                <div className="absolute top-0 right-0 w-80 h-80 bg-sky-500/10 rounded-full blur-3xl pointer-events-none" />
-                                
-                                <div className="flex flex-col lg:flex-row items-start gap-8 lg:gap-16">
-                                    <div className="lg:w-1/3">
-                                        <span className="inline-block px-4 py-1.5 rounded-md bg-sky-500/15 border border-sky-400/30 text-sky-200 font-mono text-xs font-semibold uppercase tracking-wider mb-4 shadow-md">
-                                            Project Overview
-                                        </span>
-                                        <h2 className="font-sans text-3xl md:text-5xl font-black text-white uppercase leading-tight tracking-tight">
-                                            CGI &amp; <br />
-                                            <span className="bg-gradient-to-r from-white via-slate-100 to-sky-300 bg-clip-text text-transparent">
-                                                3D Showcase
-                                            </span>
-                                        </h2>
-                                    </div>
-                                    <div className="lg:w-2/3 flex flex-col gap-6">
-                                        <p className="font-sans text-slate-200 text-base md:text-lg leading-relaxed font-normal">
-                                            Two full CGI video productions crafted for Samsung — from 3D device modeling and realistic lighting in Blender 3D, to procedural particle VFX with Geometry Nodes, composited in After Effects &amp; color-graded in DaVinci Resolve. Combined with an interactive WebGL 3D experience built in Three.js.
-                                        </p>
-                                        <div className="flex flex-wrap gap-2 pt-2">
-                                            {['Blender 3D', 'Geometry Nodes', 'After Effects', 'DaVinci Resolve', 'Three.js WebGL'].map(t => (
-                                                <span key={t}
-                                                    className="font-mono text-xs font-semibold uppercase tracking-wider text-sky-200 bg-sky-500/15 border border-sky-400/30 rounded-md px-3.5 py-1.5 hover:bg-sky-500/25 transition-all duration-300 shadow-md">
-                                                    {t}
-                                                </span>
-                                            ))}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </ScrollReveal>
-
-                        {/* Challenge / Solution — Confident sharp corners */}
-                        <div className="grid md:grid-cols-2 gap-8">
-                            <ScrollReveal direction="left" delay={0.1}>
-                                <div className="h-full p-8 md:p-10 rounded-xl bg-slate-900/80 border border-blue-500/30 backdrop-blur-2xl hover:border-blue-400/60 transition-all duration-500 flex flex-col gap-6 relative group overflow-hidden shadow-2xl">
-                                    <div className="absolute top-0 right-0 w-48 h-48 bg-blue-600/15 rounded-full blur-2xl pointer-events-none group-hover:bg-blue-600/25 transition-colors" />
-                                    <div className="flex items-center gap-3">
-                                        <span className="font-mono text-xs font-bold tracking-widest text-slate-950 bg-sky-300 px-3 py-1 rounded-md shadow-md">01</span>
-                                        <h3 className="font-sans text-2xl md:text-3xl text-white font-black uppercase tracking-tight">The Challenge</h3>
-                                    </div>
-                                    <p className="font-sans text-slate-300 text-base md:text-lg leading-relaxed">{project.challenge}</p>
+                            {/* Ghost chapter number */}
+                            <ScrollReveal direction="up" delay={0.05}>
+                                <div
+                                    style={{
+                                        fontSize: 'clamp(7rem, 15vw, 17rem)',
+                                        fontWeight: 300,
+                                        color: 'rgba(255,255,255,0.03)',
+                                        lineHeight: 0.85,
+                                        letterSpacing: '-0.05em',
+                                        userSelect: 'none',
+                                        marginTop: '-1.5rem',
+                                    }}
+                                >
+                                    01
                                 </div>
                             </ScrollReveal>
 
-                            <ScrollReveal direction="right" delay={0.2}>
-                                <div className="h-full p-8 md:p-10 rounded-xl bg-slate-900/80 border border-sky-500/30 backdrop-blur-2xl hover:border-sky-400/60 transition-all duration-500 flex flex-col gap-6 relative group overflow-hidden shadow-2xl">
-                                    <div className="absolute top-0 right-0 w-48 h-48 bg-sky-500/15 rounded-full blur-2xl pointer-events-none group-hover:bg-sky-500/25 transition-colors" />
-                                    <div className="flex items-center gap-3">
-                                        <span className="font-mono text-xs font-bold tracking-widest text-slate-950 bg-sky-300 px-3 py-1 rounded-md shadow-md">02</span>
-                                        <h3 className="font-sans text-2xl md:text-3xl text-white font-black uppercase tracking-tight">The Solution</h3>
+                            {/* Statement content */}
+                            <ScrollReveal direction="up" delay={0.15}>
+                                <div>
+                                    <div style={{ color: '#5a5654', fontSize: '9px', letterSpacing: '0.35em', textTransform: 'uppercase', marginBottom: '28px' }}>
+                                        Project Statement
                                     </div>
-                                    <p className="font-sans text-slate-300 text-base md:text-lg leading-relaxed">{project.solution}</p>
+
+                                    <p style={{ color: '#9a9490', fontSize: '1.1rem', lineHeight: 1.9, letterSpacing: '0.005em', maxWidth: '540px', marginBottom: '36px', fontWeight: 400 }}>
+                                        {project.description}
+                                    </p>
+
+                                    {/* Challenge */}
+                                    <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '28px', marginBottom: '28px' }}>
+                                        <div style={{ color: '#3a3836', fontSize: '9px', letterSpacing: '0.3em', textTransform: 'uppercase', marginBottom: '10px' }}>Challenge</div>
+                                        <p style={{ color: '#6b6b6e', fontSize: '0.9375rem', lineHeight: 1.85, maxWidth: '500px' }}>{project.challenge}</p>
+                                    </div>
+
+                                    {/* Approach */}
+                                    <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '28px', marginBottom: '40px' }}>
+                                        <div style={{ color: '#3a3836', fontSize: '9px', letterSpacing: '0.3em', textTransform: 'uppercase', marginBottom: '10px' }}>Approach</div>
+                                        <p style={{ color: '#6b6b6e', fontSize: '0.9375rem', lineHeight: 1.85, maxWidth: '500px' }}>{project.solution}</p>
+                                    </div>
+
+                                    {/* Tech stack — hairline-separated */}
+                                    <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '24px', display: 'flex', flexWrap: 'wrap' }}>
+                                        {['Blender 3D', 'Geometry Nodes', 'After Effects', 'DaVinci Resolve', 'Three.js'].map((t, i, arr) => (
+                                            <span
+                                                key={t}
+                                                style={{
+                                                    color: '#3a3836',
+                                                    fontSize: '9px',
+                                                    letterSpacing: '0.22em',
+                                                    textTransform: 'uppercase',
+                                                    paddingRight: i < arr.length - 1 ? '18px' : '0',
+                                                    marginRight: i < arr.length - 1 ? '18px' : '0',
+                                                    borderRight: i < arr.length - 1 ? '1px solid rgba(255,255,255,0.07)' : 'none',
+                                                    lineHeight: 2.2,
+                                                }}
+                                            >
+                                                {t}
+                                            </span>
+                                        ))}
+                                    </div>
                                 </div>
                             </ScrollReveal>
                         </div>
+                    </div>
 
-                        {/* ── 2-COLUMN VERTICAL REEL SHOWCASE (9:16 PORTRAIT FORMAT) ── */}
-                        <div className="space-y-8 pt-4">
-                            <ScrollReveal direction="up">
-                                <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-white/15 pb-6">
-                                    <div>
-                                        <span className="font-mono text-xs font-bold text-sky-400 uppercase tracking-widest">CGI Reels</span>
-                                        <h3 className="font-sans text-3xl md:text-5xl font-black text-white uppercase tracking-tight">
-                                            Cinematic <span className="bg-gradient-to-r from-white via-slate-100 to-sky-300 bg-clip-text text-transparent">Vertical Productions</span>
-                                        </h3>
-                                    </div>
-                                    <p className="font-sans text-slate-400 text-sm max-w-md">
-                                        Rendered in 9:16 vertical orientation for mobile and high-impact social delivery.
-                                    </p>
+                    {/* Full-width hairline */}
+                    <div style={{ height: '1px', background: 'rgba(255,255,255,0.06)' }} />
+
+                    {/* ════════════════════════════════════════════════
+                        SCENE 02 — CINEMATIC PRODUCTIONS
+                        Two portrait films. Asymmetric editorial layout.
+                    ════════════════════════════════════════════════ */}
+                    <div className="max-w-[1280px] mx-auto px-6 md:px-14 py-24">
+
+                        <ScrollReveal direction="up" delay={0.1}>
+                            <div style={{ marginBottom: '56px' }}>
+                                <div style={{ color: '#5a5654', fontSize: '9px', letterSpacing: '0.35em', textTransform: 'uppercase', marginBottom: '18px' }}>
+                                    02 — Cinematic Productions
                                 </div>
-                            </ScrollReveal>
+                                <h2 style={{
+                                    color: '#f2ede8',
+                                    fontSize: 'clamp(2.2rem, 4.5vw, 4rem)',
+                                    fontWeight: 300,
+                                    letterSpacing: '-0.025em',
+                                    lineHeight: 1.05,
+                                    margin: 0,
+                                }}>
+                                    Two films. One product story.
+                                </h2>
+                            </div>
+                        </ScrollReveal>
 
-                            <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
-                                
-                                {/* ── FILM 01: Samsung Z Flip 6 Vertical Reel Card ── */}
-                                <ScrollReveal direction="up" delay={0.1}>
-                                    <div className="p-6 md:p-8 rounded-xl bg-slate-900/80 border border-sky-500/30 backdrop-blur-2xl shadow-2xl flex flex-col gap-6 group hover:border-sky-400/60 transition-all duration-500">
-                                        
-                                        {/* Vertical Reel Video Box (9:16 Portrait Aspect Ratio) */}
-                                        <div className="relative aspect-[9/16] w-full max-w-md mx-auto rounded-lg overflow-hidden border border-white/15 shadow-2xl bg-black">
+                        {/* ── Films: height-driven, viewport-fitted portrait layout ── */}
+
+                        {/* Cinematic wash behind both videos */}
+                        <div style={{ position: 'relative', overflow: 'hidden' }}>
+                            <div style={{
+                                position: 'absolute', inset: '-40px -60px',
+                                background: 'radial-gradient(ellipse 70% 60% at 50% 50%, rgba(20,20,26,0.9) 0%, transparent 100%)',
+                                pointerEvents: 'none',
+                                zIndex: 0,
+                            }} />
+
+                            <div style={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                flexWrap: 'wrap',
+                                justifyContent: 'center',
+                                alignItems: 'flex-start',
+                                gap: '32px',
+                                position: 'relative',
+                                zIndex: 1,
+                            }}>
+
+                                {/* ── Film 01 ── */}
+                                <ScrollReveal direction="up" delay={0.15}>
+                                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+                                        {/* Caption above */}
+                                        <div style={{
+                                            color: '#3a3836',
+                                            fontSize: '9px',
+                                            letterSpacing: '0.32em',
+                                            textTransform: 'uppercase',
+                                            marginBottom: '14px',
+                                            paddingLeft: '2px',
+                                        }}>
+                                            Film 01 — Z Flip 6 Lifestyle Reel
+                                        </div>
+
+                                        {/* Video container: height drives width */}
+                                        <div style={{
+                                            height: 'min(78vh, 660px)',
+                                            aspectRatio: '9 / 16',
+                                            background: '#000',
+                                            border: '1px solid rgba(255,255,255,0.09)',
+                                            overflow: 'hidden',
+                                            position: 'relative',
+                                            flexShrink: 0,
+                                        }}>
                                             <video
                                                 src="https://res.cloudinary.com/zu63qo7h/video/upload/v1785516657/portfolio/samsung/videos/samsung_3d_zflip_6.mp4"
                                                 autoPlay
@@ -226,49 +283,60 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                                 loop
                                                 playsInline
                                                 controls
-                                                className="w-full h-full object-cover"
+                                                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                                             />
-                                            <div className="absolute top-4 left-4 flex items-center gap-2 bg-slate-950/90 backdrop-blur-md rounded-md px-3 py-1.5 border border-white/15 pointer-events-none">
-                                                <div className="w-2 h-2 rounded-full bg-sky-400 animate-pulse" />
-                                                <span className="font-mono text-[11px] font-bold text-white uppercase tracking-wider">FILM 01 · Z FLIP 6 REEL</span>
-                                            </div>
                                         </div>
 
-                                        {/* Meta & Description */}
-                                        <div className="space-y-4 pt-2">
-                                            <div>
-                                                <span className="font-mono text-xs font-bold text-sky-400 uppercase tracking-widest">Lifestyle Commercial</span>
-                                                <h4 className="font-sans text-2xl font-black text-white uppercase tracking-tight mt-1">
-                                                    Samsung Z Flip 6 <span className="text-slate-300 font-normal italic">CGI Spot</span>
-                                                </h4>
-                                            </div>
-                                            <p className="font-sans text-slate-300 text-sm leading-relaxed">
-                                                A cinematic 9:16 vertical lifestyle commercial for Samsung Galaxy Z Flip 6. Hyper-reflective glass surfaces and metallic hinge mechanics rendered in Blender Cycles.
-                                            </p>
-                                            <div className="grid grid-cols-2 gap-2.5 pt-2">
-                                                {[
-                                                    { label: "3D Engine", val: "Blender 3D" },
-                                                    { label: "VFX", val: "Geometry Nodes" },
-                                                    { label: "Compositing", val: "After Effects" },
-                                                    { label: "Grading", val: "DaVinci Resolve" },
-                                                ].map(s => (
-                                                    <div key={s.label} className="p-2.5 rounded-md bg-white/5 border border-white/10">
-                                                        <p className="font-mono text-[10px] uppercase text-white/40 font-semibold">{s.label}</p>
-                                                        <p className="font-sans text-xs font-bold text-sky-200 mt-0.5">{s.val}</p>
-                                                    </div>
-                                                ))}
-                                            </div>
+                                        {/* Meta below */}
+                                        <div style={{
+                                            marginTop: '18px',
+                                            borderTop: '1px solid rgba(255,255,255,0.06)',
+                                            paddingTop: '18px',
+                                            display: 'grid',
+                                            gridTemplateColumns: '1fr 1fr',
+                                            gap: '12px',
+                                            width: '100%',
+                                        }}>
+                                            {[
+                                                { label: '3D Engine', val: 'Blender' },
+                                                { label: 'VFX', val: 'Geo Nodes' },
+                                                { label: 'Composite', val: 'After Effects' },
+                                                { label: 'Grade', val: 'DaVinci' },
+                                            ].map(s => (
+                                                <div key={s.label}>
+                                                    <div style={{ color: '#3a3836', fontSize: '8px', letterSpacing: '0.22em', textTransform: 'uppercase', marginBottom: '3px' }}>{s.label}</div>
+                                                    <div style={{ color: '#9a9490', fontSize: '11px' }}>{s.val}</div>
+                                                </div>
+                                            ))}
                                         </div>
-
                                     </div>
                                 </ScrollReveal>
 
-                                {/* ── FILM 02: Full CGI Product Reveal Vertical Reel Card ── */}
-                                <ScrollReveal direction="up" delay={0.2}>
-                                    <div className="p-6 md:p-8 rounded-xl bg-slate-900/80 border border-blue-500/30 backdrop-blur-2xl shadow-2xl flex flex-col gap-6 group hover:border-blue-400/60 transition-all duration-500">
-                                        
-                                        {/* Vertical Reel Video Box (9:16 Portrait Aspect Ratio) */}
-                                        <div className="relative aspect-[9/16] w-full max-w-md mx-auto rounded-lg overflow-hidden border border-white/15 shadow-2xl bg-black">
+                                {/* ── Film 02 — vertically offset for editorial rhythm ── */}
+                                <ScrollReveal direction="up" delay={0.28}>
+                                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', marginTop: '80px' }}>
+                                        {/* Caption above */}
+                                        <div style={{
+                                            color: '#3a3836',
+                                            fontSize: '9px',
+                                            letterSpacing: '0.32em',
+                                            textTransform: 'uppercase',
+                                            marginBottom: '14px',
+                                            paddingLeft: '2px',
+                                        }}>
+                                            Film 02 — CGI Product Reveal
+                                        </div>
+
+                                        {/* Video container: height drives width */}
+                                        <div style={{
+                                            height: 'min(78vh, 660px)',
+                                            aspectRatio: '9 / 16',
+                                            background: '#000',
+                                            border: '1px solid rgba(255,255,255,0.09)',
+                                            overflow: 'hidden',
+                                            position: 'relative',
+                                            flexShrink: 0,
+                                        }}>
                                             <video
                                                 src="https://res.cloudinary.com/zu63qo7h/video/upload/v1785516709/portfolio/samsung/videos/samsung_cgi_final.mp4"
                                                 autoPlay
@@ -276,271 +344,291 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                                 loop
                                                 playsInline
                                                 controls
-                                                className="w-full h-full object-cover"
+                                                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                                             />
-                                            <div className="absolute top-4 right-4 flex items-center gap-2 bg-slate-950/90 backdrop-blur-md rounded-md px-3 py-1.5 border border-white/15 pointer-events-none">
-                                                <div className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
-                                                <span className="font-mono text-[11px] font-bold text-white uppercase tracking-wider">FILM 02 · CGI REVEAL</span>
-                                            </div>
                                         </div>
 
-                                        {/* Meta & Description */}
-                                        <div className="space-y-4 pt-2">
-                                            <div>
-                                                <span className="font-mono text-xs font-bold text-blue-400 uppercase tracking-widest">Product Reveal</span>
-                                                <h4 className="font-sans text-2xl font-black text-white uppercase tracking-tight mt-1">
-                                                    Samsung CGI <span className="text-slate-300 font-normal italic">Product Reveal</span>
-                                                </h4>
-                                            </div>
-                                            <p className="font-sans text-slate-300 text-sm leading-relaxed">
-                                                Full CGI product reveal featuring procedural particle simulation built inside Blender Geometry Nodes, composited in After Effects, and color-graded in DaVinci Resolve.
-                                            </p>
-                                            <div className="grid grid-cols-2 gap-2.5 pt-2">
-                                                {[
-                                                    { label: "VFX System", val: "Geometry Nodes" },
-                                                    { label: "Resolution", val: "4K UHD / 60 FPS" },
-                                                    { label: "Post Prod", val: "DaVinci & AE" },
-                                                    { label: "Rendering", val: "Cycles Engine" },
-                                                ].map(s => (
-                                                    <div key={s.label} className="p-2.5 rounded-md bg-white/5 border border-white/10">
-                                                        <p className="font-mono text-[10px] uppercase text-white/40 font-semibold">{s.label}</p>
-                                                        <p className="font-sans text-xs font-bold text-sky-200 mt-0.5">{s.val}</p>
-                                                    </div>
-                                                ))}
-                                            </div>
+                                        {/* Meta below */}
+                                        <div style={{
+                                            marginTop: '18px',
+                                            borderTop: '1px solid rgba(255,255,255,0.06)',
+                                            paddingTop: '18px',
+                                            display: 'grid',
+                                            gridTemplateColumns: '1fr 1fr',
+                                            gap: '12px',
+                                            width: '100%',
+                                        }}>
+                                            {[
+                                                { label: 'VFX System', val: 'Geo Nodes' },
+                                                { label: 'Resolution', val: '4K · 60FPS' },
+                                                { label: 'Post', val: 'DaVinci + AE' },
+                                                { label: 'Render', val: 'Cycles' },
+                                            ].map(s => (
+                                                <div key={s.label}>
+                                                    <div style={{ color: '#3a3836', fontSize: '8px', letterSpacing: '0.22em', textTransform: 'uppercase', marginBottom: '3px' }}>{s.label}</div>
+                                                    <div style={{ color: '#9a9490', fontSize: '11px' }}>{s.val}</div>
+                                                </div>
+                                            ))}
                                         </div>
-
                                     </div>
                                 </ScrollReveal>
 
                             </div>
                         </div>
+                    </div>
 
-                        {/* ── PRODUCTION PIPELINE CARDS (SHARP CORNERS) ── */}
-                        <div className="space-y-8 pt-4">
-                            <ScrollReveal direction="up">
-                                <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-white/15 pb-6">
-                                    <div>
-                                        <span className="font-mono text-xs font-bold text-sky-400 uppercase tracking-widest">Workflow</span>
-                                        <h3 className="font-sans text-3xl md:text-4xl font-black text-white uppercase tracking-tight">Production Pipeline</h3>
-                                    </div>
-                                    <p className="font-sans text-slate-400 text-sm max-w-md">
-                                        3D Modeling, Procedural VFX, After Effects Compositing &amp; DaVinci Color Science.
-                                    </p>
+                    {/* Full-width hairline */}
+                    <div style={{ height: '1px', background: 'rgba(255,255,255,0.06)' }} />
+
+                    {/* ════════════════════════════════════════════════
+                        SCENE 03 — PRODUCTION PIPELINE
+                        Horizontal hairline columns. No cards.
+                    ════════════════════════════════════════════════ */}
+                    <div className="max-w-[1280px] mx-auto px-6 md:px-14 py-24">
+
+                        <ScrollReveal direction="up" delay={0.1}>
+                            <div style={{ marginBottom: '56px' }}>
+                                <div style={{ color: '#5a5654', fontSize: '9px', letterSpacing: '0.35em', textTransform: 'uppercase', marginBottom: '18px' }}>
+                                    03 — Production Pipeline
                                 </div>
-                            </ScrollReveal>
-
-                            <div className="grid md:grid-cols-3 gap-6">
-                                {[
-                                    {
-                                        step: "01",
-                                        title: "3D Modeling & Lighting",
-                                        tool: "Blender 3D",
-                                        desc: "Precision device modeling for Samsung Galaxy devices with PBR glass, titanium, and matte metallic shading.",
-                                        badge: "Blender Cycles"
-                                    },
-                                    {
-                                        step: "02",
-                                        title: "Procedural VFX & Motion",
-                                        tool: "Geometry Nodes & AE",
-                                        desc: "Custom procedural particle streams in Geometry Nodes composited in After Effects.",
-                                        badge: "Geo Nodes + AE"
-                                    },
-                                    {
-                                        step: "03",
-                                        title: "Color Science",
-                                        tool: "DaVinci Resolve",
-                                        desc: "Multi-pass composite and professional color grading enhancing deep cyan highlights and deep navy contrast.",
-                                        badge: "DaVinci Grade"
-                                    },
-                                ].map((pipeline) => (
-                                    <ScrollReveal key={pipeline.step} direction="up" delay={Number(pipeline.step) * 0.1}>
-                                        <div className="p-8 rounded-xl bg-slate-900/70 border border-white/15 backdrop-blur-2xl hover:border-sky-400/50 transition-all duration-300 flex flex-col justify-between h-full group shadow-xl">
-                                            <div className="space-y-4">
-                                                <div className="flex items-center justify-between">
-                                                    <span className="font-mono text-xs font-bold text-sky-300 bg-sky-500/15 px-3 py-1 rounded-md border border-sky-500/30">{pipeline.step}</span>
-                                                    <span className="font-mono text-[10px] uppercase text-white/50 font-semibold">{pipeline.tool}</span>
-                                                </div>
-                                                <h4 className="font-sans text-xl font-bold text-white uppercase group-hover:text-sky-300 transition-colors">{pipeline.title}</h4>
-                                                <p className="font-sans text-slate-300 text-sm leading-relaxed">{pipeline.desc}</p>
-                                            </div>
-                                            <div className="pt-6 border-t border-white/10 mt-6">
-                                                <span className="font-mono text-[11px] text-sky-300 font-semibold">{pipeline.badge}</span>
-                                            </div>
-                                        </div>
-                                    </ScrollReveal>
-                                ))}
+                                <h2 style={{
+                                    color: '#f2ede8',
+                                    fontSize: 'clamp(2rem, 3.2vw, 3.2rem)',
+                                    fontWeight: 300,
+                                    letterSpacing: '-0.02em',
+                                    lineHeight: 1.1,
+                                    margin: 0,
+                                }}>
+                                    Craft in every layer.
+                                </h2>
                             </div>
+                        </ScrollReveal>
+
+                        <div
+                            className="grid md:grid-cols-3"
+                            style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}
+                        >
+                            {[
+                                {
+                                    num: '01',
+                                    title: '3D Modeling & Lighting',
+                                    tool: 'Blender 3D',
+                                    desc: 'Precision device modeling with PBR materials — glass, titanium frame, and matte surfaces rendered under studio area lighting.',
+                                },
+                                {
+                                    num: '02',
+                                    title: 'Procedural VFX',
+                                    tool: 'Geometry Nodes + After Effects',
+                                    desc: 'Custom simulation-based particle trail built in Geometry Nodes. Composited and motion-designed in After Effects.',
+                                },
+                                {
+                                    num: '03',
+                                    title: 'Color Science',
+                                    tool: 'DaVinci Resolve',
+                                    desc: 'Multi-pass composite with professional color grading. Controlled contrast, deep shadows, natural highlights.',
+                                },
+                            ].map((step, i) => (
+                                <ScrollReveal key={step.num} direction="up" delay={i * 0.08}>
+                                    <div style={{
+                                        padding: '40px 36px 40px 0',
+                                        borderRight: i < 2 ? '1px solid rgba(255,255,255,0.07)' : 'none',
+                                        paddingLeft: i > 0 ? '36px' : '0',
+                                    }}>
+                                        <div style={{ color: '#3a3836', fontSize: '9px', letterSpacing: '0.25em', textTransform: 'uppercase', marginBottom: '28px' }}>
+                                            {step.num}
+                                        </div>
+                                        <div style={{ color: '#f2ede8', fontSize: '1rem', fontWeight: 400, letterSpacing: '-0.01em', marginBottom: '8px', lineHeight: 1.4 }}>
+                                            {step.title}
+                                        </div>
+                                        <div style={{ color: '#3a3836', fontSize: '9px', letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: '18px' }}>
+                                            {step.tool}
+                                        </div>
+                                        <p style={{ color: '#6b6b6e', fontSize: '0.875rem', lineHeight: 1.85 }}>
+                                            {step.desc}
+                                        </p>
+                                    </div>
+                                </ScrollReveal>
+                            ))}
                         </div>
+                    </div>
 
-                        {/* ── PROCEDURAL VFX & SHADER NODE TREE BREAKDOWN ── */}
-                        <div className="space-y-12 pt-8 border-t border-white/15">
-                            <ScrollReveal direction="up">
-                                <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-white/15 pb-6">
-                                    <div>
-                                        <span className="font-mono text-xs font-bold text-sky-400 uppercase tracking-widest">⚡ Technical Breakdown</span>
-                                        <h3 className="font-sans text-3xl md:text-5xl font-black text-white uppercase tracking-tight mt-1">
-                                            Procedural <span className="bg-gradient-to-r from-white via-slate-100 to-sky-300 bg-clip-text text-transparent">Emission Trail Nodes</span>
-                                        </h3>
-                                    </div>
-                                    <p className="font-sans text-slate-400 text-sm max-w-md">
-                                        Architectural breakdown of the Blender 3D Geometry Nodes simulation loop and 12000K Blackbody emission shader tree.
-                                    </p>
+                    {/* Full-width hairline */}
+                    <div style={{ height: '1px', background: 'rgba(255,255,255,0.06)' }} />
+
+                    {/* ════════════════════════════════════════════════
+                        SCENE 04 — ENGINEERING BREAKDOWN
+                        Full-bleed node tree images. Gallery-style.
+                    ════════════════════════════════════════════════ */}
+                    <div className="max-w-[1280px] mx-auto px-6 md:px-14 py-24">
+
+                        <ScrollReveal direction="up" delay={0.1}>
+                            <div style={{ marginBottom: '56px' }}>
+                                <div style={{ color: '#5a5654', fontSize: '9px', letterSpacing: '0.35em', textTransform: 'uppercase', marginBottom: '18px' }}>
+                                    04 — Engineering Breakdown
                                 </div>
-                            </ScrollReveal>
+                                <h2 style={{
+                                    color: '#f2ede8',
+                                    fontSize: 'clamp(2rem, 3.2vw, 3.2rem)',
+                                    fontWeight: 300,
+                                    letterSpacing: '-0.02em',
+                                    lineHeight: 1.1,
+                                    margin: 0,
+                                }}>
+                                    Procedural emission trail system.
+                                </h2>
+                            </div>
+                        </ScrollReveal>
 
-                            {/* 1. Geometry Nodes Tree Breakdown */}
+                        {/* Geometry Nodes */}
+                        <ScrollReveal direction="up" delay={0.12}>
+                            <div style={{ marginBottom: '72px' }}>
+                                <div style={{ color: '#3a3836', fontSize: '9px', letterSpacing: '0.3em', textTransform: 'uppercase', marginBottom: '16px' }}>
+                                    Node System — Geometry Nodes
+                                </div>
+                                <div style={{ background: '#080809', border: '1px solid rgba(255,255,255,0.07)', padding: '3px', overflow: 'hidden' }}>
+                                    <LightboxImage
+                                        src="/projects/samsung/nodes/samsung_geonodes_tree.png"
+                                        alt="Blender Geometry Nodes Architecture"
+                                        className="w-full h-auto object-contain block"
+                                    />
+                                </div>
+                                <div
+                                    className="grid md:grid-cols-3"
+                                    style={{ marginTop: '24px', borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '24px' }}
+                                >
+                                    {[
+                                        { label: 'Simulation Zone', desc: 'Point emitters spawned per frame inside a persistent loop. Continuously increments trail_age attribute, auto-deletes expired points.' },
+                                        { label: 'NURBS Spline Conversion', desc: 'Point trajectories converted to continuous curves via Points to Curves, upgraded to NURBS for smooth organic arc interpolation.' },
+                                        { label: 'Dynamic Radius Tapering', desc: 'Spline Parameter factor drives curve radius procedurally — prominent emissive head tapers to razor-sharp tail via Curve to Mesh.' },
+                                    ].map((item, i) => (
+                                        <div
+                                            key={item.label}
+                                            style={{
+                                                padding: i === 0 ? '0 28px 0 0' : i === 2 ? '0 0 0 28px' : '0 28px',
+                                                borderRight: i < 2 ? '1px solid rgba(255,255,255,0.06)' : 'none',
+                                            }}
+                                        >
+                                            <div style={{ color: '#9a9490', fontSize: '11px', letterSpacing: '0.08em', marginBottom: '8px' }}>{item.label}</div>
+                                            <p style={{ color: '#5a5654', fontSize: '12px', lineHeight: 1.85 }}>{item.desc}</p>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </ScrollReveal>
+
+                        {/* Shader Tree */}
+                        <ScrollReveal direction="up" delay={0.15}>
+                            <div style={{ marginBottom: '72px' }}>
+                                <div style={{ color: '#3a3836', fontSize: '9px', letterSpacing: '0.3em', textTransform: 'uppercase', marginBottom: '16px' }}>
+                                    Node System — Shader Tree
+                                </div>
+                                <div style={{ background: '#080809', border: '1px solid rgba(255,255,255,0.07)', padding: '3px', overflow: 'hidden' }}>
+                                    <LightboxImage
+                                        src="/projects/samsung/nodes/samsung_shader_tree.png"
+                                        alt="Blender Emission Trail Shader Tree"
+                                        className="w-full h-auto object-contain block"
+                                    />
+                                </div>
+                                <div
+                                    className="grid md:grid-cols-3"
+                                    style={{ marginTop: '24px', borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '24px' }}
+                                >
+                                    {[
+                                        { label: 'Attribute Gradient', desc: 'Procedural gradient attribute from Geometry Nodes feeds dual Color Ramp maps — drives thermal intensity and alpha falloff.' },
+                                        { label: '12,000K Blackbody Emission', desc: 'Blackbody node at 12,000K generates hyper-intense blue-white luminance. Multiplied by emission strength > 90 for physical bloom.' },
+                                        { label: 'Glass BSDF Hybrid', desc: 'Emissive core blended with Glass BSDF via Add Shader — simulates internal glass refraction and soft edge caustics.' },
+                                    ].map((item, i) => (
+                                        <div
+                                            key={item.label}
+                                            style={{
+                                                padding: i === 0 ? '0 28px 0 0' : i === 2 ? '0 0 0 28px' : '0 28px',
+                                                borderRight: i < 2 ? '1px solid rgba(255,255,255,0.06)' : 'none',
+                                            }}
+                                        >
+                                            <div style={{ color: '#9a9490', fontSize: '11px', letterSpacing: '0.08em', marginBottom: '8px' }}>{item.label}</div>
+                                            <p style={{ color: '#5a5654', fontSize: '12px', lineHeight: 1.85 }}>{item.desc}</p>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </ScrollReveal>
+                    </div>
+
+                    {/* Full-width hairline */}
+                    <div style={{ height: '1px', background: 'rgba(255,255,255,0.06)' }} />
+
+                    {/* ════════════════════════════════════════════════
+                        SCENE 05 — RENDER OUTPUT
+                        Split comparison. Edge-to-edge. Captions below.
+                    ════════════════════════════════════════════════ */}
+                    <div className="max-w-[1280px] mx-auto px-6 md:px-14 pt-24 pb-36">
+
+                        <ScrollReveal direction="up" delay={0.1}>
+                            <div style={{ marginBottom: '56px' }}>
+                                <div style={{ color: '#5a5654', fontSize: '9px', letterSpacing: '0.35em', textTransform: 'uppercase', marginBottom: '18px' }}>
+                                    05 — Render Output
+                                </div>
+                                <h2 style={{
+                                    color: '#f2ede8',
+                                    fontSize: 'clamp(2rem, 3.2vw, 3.2rem)',
+                                    fontWeight: 300,
+                                    letterSpacing: '-0.02em',
+                                    lineHeight: 1.1,
+                                    margin: 0,
+                                }}>
+                                    Mesh to light.
+                                </h2>
+                            </div>
+                        </ScrollReveal>
+
+                        {/* Split comparison — 1px gap between images */}
+                        <div
+                            className="grid md:grid-cols-2"
+                            style={{ gap: '1px', background: 'rgba(255,255,255,0.06)' }}
+                        >
                             <ScrollReveal direction="up" delay={0.1}>
-                                <div className="p-6 md:p-10 rounded-xl bg-slate-900/85 border border-sky-500/30 backdrop-blur-2xl shadow-2xl space-y-6">
-                                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-4">
-                                        <div>
-                                            <span className="font-mono text-xs font-bold text-sky-400 uppercase tracking-wider">Node System 01</span>
-                                            <h4 className="font-sans text-2xl font-black text-white uppercase tracking-tight">Geometry Nodes Simulation Tree</h4>
-                                        </div>
-                                        <div className="flex flex-wrap gap-2">
-                                            {['Simulation Zone', 'NURBS Splines', 'Curve to Mesh', 'Store Attribute'].map(badge => (
-                                                <span key={badge} className="font-mono text-[10px] text-sky-300 bg-sky-500/15 border border-sky-400/30 rounded-md px-3 py-1 font-semibold uppercase">
-                                                    {badge}
-                                                </span>
-                                            ))}
-                                        </div>
-                                    </div>
-
-                                    {/* Cropped Node Tree Image */}
-                                    <div className="w-full bg-black/80 rounded-lg overflow-hidden border border-white/15 p-2 shadow-inner">
+                                <div style={{ background: '#0c0c0e' }}>
+                                    <div style={{ aspectRatio: '4/5', overflow: 'hidden' }}>
                                         <LightboxImage
-                                            src="/projects/samsung/nodes/samsung_geonodes_tree.png"
-                                            alt="Blender Geometry Nodes Tree Architecture"
-                                            className="w-full h-auto object-contain rounded-md"
+                                            src="/projects/samsung/nodes/samsung_trail_viewport_view.png"
+                                            alt="Viewport Solid View — Procedural Geometry"
+                                            className="w-full h-full object-cover block"
                                         />
                                     </div>
-
-                                    {/* Detailed Analytical Breakdown */}
-                                    <div className="grid md:grid-cols-3 gap-6 pt-2">
-                                        <div className="p-4 rounded-md bg-white/5 border border-white/10 space-y-2">
-                                            <h5 className="font-mono text-xs font-bold text-sky-300 uppercase">01 · Simulation Zone</h5>
-                                            <p className="font-sans text-slate-300 text-xs leading-relaxed">
-                                                Instantiates point emitters per frame inside a persistent simulation loop, continuously incrementing the <code className="text-sky-200">trail_age</code> attribute while auto-deleting points exceeding max lifetime.
-                                            </p>
+                                    <div style={{ padding: '20px 0 0' }}>
+                                        <div style={{ color: '#3a3836', fontSize: '9px', letterSpacing: '0.3em', textTransform: 'uppercase', marginBottom: '6px' }}>
+                                            Viewport · Solid Mode
                                         </div>
-                                        <div className="p-4 rounded-md bg-white/5 border border-white/10 space-y-2">
-                                            <h5 className="font-mono text-xs font-bold text-sky-300 uppercase">02 · NURBS Spline Conversion</h5>
-                                            <p className="font-sans text-slate-300 text-xs leading-relaxed">
-                                                Converts point trajectories into continuous curves via <code className="text-sky-200">Points to Curves</code> and upgrades spline interpolation to <code className="text-sky-200">NURBS</code> for seamless organic motion arcs.
-                                            </p>
-                                        </div>
-                                        <div className="p-4 rounded-md bg-white/5 border border-white/10 space-y-2">
-                                            <h5 className="font-mono text-xs font-bold text-sky-300 uppercase">03 · Dynamic Radius Tapering</h5>
-                                            <p className="font-sans text-slate-300 text-xs leading-relaxed">
-                                                Evaluates <code className="text-sky-200">Spline Parameter</code> factor to procedurally scale curve radius from a prominent head down to a razor-sharp tail, sweeping a circular profile into renderable geometry.
-                                            </p>
-                                        </div>
+                                        <p style={{ color: '#5a5654', fontSize: '12px', lineHeight: 1.75 }}>
+                                            Procedural swept mesh geometry generated in realtime by the Geometry Nodes modifier stack.
+                                        </p>
                                     </div>
                                 </div>
                             </ScrollReveal>
 
-                            {/* 2. Shader Node Tree Breakdown */}
-                            <ScrollReveal direction="up" delay={0.2}>
-                                <div className="p-6 md:p-10 rounded-xl bg-slate-900/85 border border-blue-500/30 backdrop-blur-2xl shadow-2xl space-y-6">
-                                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-4">
-                                        <div>
-                                            <span className="font-mono text-xs font-bold text-blue-400 uppercase tracking-wider">Node System 02</span>
-                                            <h4 className="font-sans text-2xl font-black text-white uppercase tracking-tight">Emission &amp; Refractive Shader Tree</h4>
-                                        </div>
-                                        <div className="flex flex-wrap gap-2">
-                                            {['Blackbody 12000K', 'Color Ramp Gradient', 'Glass BSDF Hybrid', 'Add Shader'].map(badge => (
-                                                <span key={badge} className="font-mono text-[10px] text-blue-300 bg-blue-500/15 border border-blue-400/30 rounded-md px-3 py-1 font-semibold uppercase">
-                                                    {badge}
-                                                </span>
-                                            ))}
-                                        </div>
-                                    </div>
-
-                                    {/* Cropped Shader Tree Image */}
-                                    <div className="w-full bg-black/80 rounded-lg overflow-hidden border border-white/15 p-2 shadow-inner">
+                            <ScrollReveal direction="up" delay={0.18}>
+                                <div style={{ background: '#0c0c0e', paddingLeft: '28px' }}>
+                                    <div style={{ aspectRatio: '4/5', overflow: 'hidden' }}>
                                         <LightboxImage
-                                            src="/projects/samsung/nodes/samsung_shader_tree.png"
-                                            alt="Blender Emission Trail Shader Tree"
-                                            className="w-full h-auto object-contain rounded-md"
+                                            src="/projects/samsung/nodes/samsung_trail_render_view.png"
+                                            alt="Cycles Final Render — 12,000K Emissive Glow"
+                                            className="w-full h-full object-cover block"
                                         />
                                     </div>
-
-                                    {/* Detailed Analytical Breakdown */}
-                                    <div className="grid md:grid-cols-3 gap-6 pt-2">
-                                        <div className="p-4 rounded-md bg-white/5 border border-white/10 space-y-2">
-                                            <h5 className="font-mono text-xs font-bold text-blue-300 uppercase">01 · Attribute Gradient</h5>
-                                            <p className="font-sans text-slate-300 text-xs leading-relaxed">
-                                                Imports the named <code className="text-blue-200">gradient</code> attribute stored by Geometry Nodes into dual <code className="text-blue-200">Color Ramp</code> maps to drive thermal intensity &amp; opacity.
-                                            </p>
+                                    <div style={{ padding: '20px 0 0' }}>
+                                        <div style={{ color: '#3a3836', fontSize: '9px', letterSpacing: '0.3em', textTransform: 'uppercase', marginBottom: '6px' }}>
+                                            Cycles · Final Render
                                         </div>
-                                        <div className="p-4 rounded-md bg-white/5 border border-white/10 space-y-2">
-                                            <h5 className="font-mono text-xs font-bold text-blue-300 uppercase">02 · 12000K Blackbody Emission</h5>
-                                            <p className="font-sans text-slate-300 text-xs leading-relaxed">
-                                                Feeds into a <code className="text-blue-200">Blackbody</code> temperature node set to 12,000 Kelvin (hyper-intense blue-white luminance) multiplied by an emission strength factor (&gt;90.0) for bloom.
-                                            </p>
-                                        </div>
-                                        <div className="p-4 rounded-md bg-white/5 border border-white/10 space-y-2">
-                                            <h5 className="font-mono text-xs font-bold text-blue-300 uppercase">03 · Glass BSDF Add-Shader</h5>
-                                            <p className="font-sans text-slate-300 text-xs leading-relaxed">
-                                                Blends the luminous core with a <code className="text-blue-200">Glass BSDF</code> via an <code className="text-blue-200">Add Shader</code> node, simulating internal glass refraction and edge highlights.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </ScrollReveal>
-
-                            {/* 3. Viewport Geometry vs Render View Comparison */}
-                            <ScrollReveal direction="up" delay={0.3}>
-                                <div className="p-6 md:p-10 rounded-xl bg-slate-900/85 border border-white/15 backdrop-blur-2xl shadow-2xl space-y-6">
-                                    <div className="border-b border-white/10 pb-4">
-                                        <span className="font-mono text-xs font-bold text-sky-400 uppercase tracking-wider">Visual Verification</span>
-                                        <h4 className="font-sans text-2xl font-black text-white uppercase tracking-tight">Procedural Mesh vs Cycles Render View</h4>
-                                    </div>
-
-                                    <div className="grid md:grid-cols-2 gap-8">
-                                        
-                                        {/* Viewport View */}
-                                        <div className="space-y-3">
-                                            <div className="flex items-center justify-between">
-                                                <span className="font-mono text-xs font-bold text-slate-300 uppercase tracking-wider">Viewport Solid View</span>
-                                                <span className="font-mono text-[10px] text-slate-400 uppercase">Raw Mesh Geometry</span>
-                                            </div>
-                                            <div className="aspect-[4/5] bg-black rounded-lg overflow-hidden border border-white/15 shadow-xl">
-                                                <LightboxImage
-                                                    src="/projects/samsung/nodes/samsung_trail_viewport_view.png"
-                                                    alt="Blender Viewport Solid View Geometry Curve Arc"
-                                                    className="w-full h-full object-cover"
-                                                />
-                                            </div>
-                                            <p className="font-sans text-slate-400 text-xs leading-relaxed">
-                                                Solid viewport preview displaying the exact swept 3D mesh geometry procedurally constructed by the Geometry Nodes modifier loop.
-                                            </p>
-                                        </div>
-
-                                        {/* Render View */}
-                                        <div className="space-y-3">
-                                            <div className="flex items-center justify-between">
-                                                <span className="font-mono text-xs font-bold text-sky-300 uppercase tracking-wider">Cycles Final Render</span>
-                                                <span className="font-mono text-[10px] text-sky-400 uppercase">12000K Emissive Glow</span>
-                                            </div>
-                                            <div className="aspect-[4/5] bg-black rounded-lg overflow-hidden border border-sky-500/30 shadow-xl">
-                                                <LightboxImage
-                                                    src="/projects/samsung/nodes/samsung_trail_render_view.png"
-                                                    alt="Blender Cycles Final Render View 12000K Glowing Arc"
-                                                    className="w-full h-full object-cover"
-                                                />
-                                            </div>
-                                            <p className="font-sans text-slate-400 text-xs leading-relaxed">
-                                                Cycles render output showcasing the high-energy emissive glow, 12,000K color temperature, and gradual light falloff into dark space.
-                                            </p>
-                                        </div>
-
+                                        <p style={{ color: '#5a5654', fontSize: '12px', lineHeight: 1.75 }}>
+                                            12,000K Blackbody emission with Cycles multi-pass rendering and natural light falloff into deep space.
+                                        </p>
                                     </div>
                                 </div>
                             </ScrollReveal>
                         </div>
 
                     </div>
+
                 </section>
             ) : (
                 /* ── Default: warm cream editorial section ── */
