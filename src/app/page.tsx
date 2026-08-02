@@ -142,7 +142,7 @@ export default function Home() {
       <div className="flex flex-col w-full relative z-20">
 
         {/* 1. HERO — dark, 3D scroll animation */}
-        <HomeSection isDriving={false} onDriveStart={() => {}} />
+        <HomeSection />
 
         {/* 3. ABOUT — who I am, photo, stats */}
         <AboutSection />

@@ -4,12 +4,6 @@ import { useState } from "react";
 import CVModal from "@/components/ui/CVModal";
 import LogoMarquee from "@/components/ui/LogoMarquee";
 
-interface HomeSectionProps {
-    isDriving: boolean;
-    onDriveStart: () => void;
-}
-
-
 const SKILLS_BAR = [
     "3D Design",
     "CGI Renders",
@@ -33,11 +27,11 @@ function Stars({ count = 5 }: { count?: number }) {
     );
 }
 
-export default function HomeSection({ isDriving }: HomeSectionProps) {
+export default function HomeSection() {
     const [isCVOpen, setIsCVOpen] = useState(false);
 
     return (
-        <section className={`relative w-full min-h-[100dvh] bg-[#141414] flex flex-col justify-between pt-16 md:pt-20 pb-0 transition-opacity duration-1000 ${isDriving ? 'opacity-0' : 'opacity-100'}`}>
+        <section className="relative w-full min-h-[100dvh] bg-[#141414] flex flex-col justify-between pt-16 md:pt-20 pb-0">
 
             {/* Background subtle grid pattern */}
             <div className="absolute inset-0 pointer-events-none z-0 opacity-10">

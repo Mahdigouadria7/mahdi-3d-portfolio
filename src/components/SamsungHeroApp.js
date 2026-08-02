@@ -489,8 +489,8 @@ export class SamsungHeroApp {
     // Reparent S-Pen to gltf.scene dynamically when detaching so it can track mouse globally
     this.scene.attach(this.spenMesh);
 
-    // Reset drag rotation 
-    this.dragRotation.set(0, 0);
+    // Reset spin velocity so extracted pen doesn't carry momentum
+    this.spinVelocity.set(0, 0);
 
     // Stop group idle animations
     gsap.killTweensOf(this.modelGroup.position);
@@ -1135,7 +1135,7 @@ export class SamsungHeroApp {
     }
 
     window.removeEventListener('resize', this.handleResize);
-    window.removeEventListener('mousemove', this.onMouseMove);
+    window.removeEventListener('pointermove', this.onPointerMove);
     window.removeEventListener('pointerup', this.onPointerUp);
     
     if (this.canvas) {
