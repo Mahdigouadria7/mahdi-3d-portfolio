@@ -339,6 +339,11 @@ export class SamsungHeroApp {
             this.zflipFoldAction = this.zflipMixer.clipAction(foldClip);
             this.zflipFoldAction.setLoop(THREE.LoopOnce);
             this.zflipFoldAction.clampWhenFinished = true;
+            
+            // Set initial pose to closed (time = 0)
+            this.zflipFoldAction.play();
+            this.zflipFoldAction.paused = true;
+            this.zflipFoldAction.time = 0;
           }
         }
 
@@ -847,15 +852,20 @@ export class SamsungHeroApp {
     action.paused = false;
     action.enabled = true;
 
+    const duration = action.getClip().duration;
+
     if (isOpen) {
-      // Unfold / Open
+      // Unfold to Open pose (forward: 0 -> duration)
       action.timeScale = 1;
+      if (action.time >= duration - 0.02) {
+        action.time = 0;
+      }
       action.play();
     } else {
-      // Fold / Close
+      // Fold back to Closed pose (reverse: duration -> 0)
       action.timeScale = -1;
-      if (action.time === 0) {
-        action.time = action.getClip().duration;
+      if (action.time <= 0.02) {
+        action.time = duration;
       }
       action.play();
     }
