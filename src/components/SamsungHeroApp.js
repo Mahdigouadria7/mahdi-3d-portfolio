@@ -8,6 +8,7 @@ import { RaycasterManager } from '../utils/RaycasterManager';
 
 const PHONE_MODEL_URL = "https://res.cloudinary.com/zu63qo7h/raw/upload/v1785506810/portfolio/samsung/models/s25_ultra_separated.glb";
 const SPEN_MODEL_URL = "https://res.cloudinary.com/zu63qo7h/raw/upload/v1785506811/portfolio/samsung/models/spen_separated.glb";
+const ZFLIP_MODEL_URL = "https://res.cloudinary.com/zu63qo7h/raw/upload/v1785667996/portfolio/samsung/models/zflip6_model.glb";
 
 export const PEN_COLOR_PALETTES = [
   {
@@ -138,6 +139,10 @@ export class SamsungHeroApp {
     
     this.phoneMesh = null;
     this.spenMesh = null;
+    this.zflipMesh = null;
+    this.zflipMixer = null;
+    this.zflipFoldAction = null;
+    this.selectedPhoneModel = 's25'; // 's25' | 'zflip'
 
     // Home position (right side framing for hero composition on desktop)
     this.phoneHomeX = window.innerWidth > 768 ? 1.0 : 0;
@@ -281,9 +286,10 @@ export class SamsungHeroApp {
 
       // Load GLTF Assets from Cloudinary
       try {
-        const [phoneGltf, spenGltf] = await Promise.all([
+        const [phoneGltf, spenGltf, zflipGltf] = await Promise.all([
           this.gltfLoader.loadAsync(PHONE_MODEL_URL),
-          this.gltfLoader.loadAsync(SPEN_MODEL_URL)
+          this.gltfLoader.loadAsync(SPEN_MODEL_URL),
+          this.gltfLoader.loadAsync(ZFLIP_MODEL_URL)
         ]);
 
         if (this.isDisposed) return;
@@ -312,18 +318,35 @@ export class SamsungHeroApp {
 
         processGltf(phoneGltf);
         processGltf(spenGltf);
+        processGltf(zflipGltf);
 
-        // Scale the root scene group to prominent proportions (matching the old gltf.scene scale)
+        // Scale the root scene group to prominent proportions
         this.sceneGroup.scale.set(0.6, 0.6, 0.6);
 
         this.phoneMesh = phoneGltf.scene;
         this.spenMesh = spenGltf.scene;
+        this.zflipMesh = zflipGltf.scene;
         
-        // Scale down pen proportionally as requested
+        // Scale down pen proportionally
         this.spenMesh.scale.set(0.8, 0.8, 0.8);
+        this.zflipMesh.scale.set(2.4, 2.4, 2.4);
+
+        // Setup AnimationMixer for Z Flip 6 fold/unfold animation
+        if (zflipGltf.animations && zflipGltf.animations.length > 0) {
+          this.zflipMixer = new THREE.AnimationMixer(this.zflipMesh);
+          const foldClip = zflipGltf.animations.find(a => a.name === 'UnfoldFoldAction') || zflipGltf.animations[0];
+          if (foldClip) {
+            this.zflipFoldAction = this.zflipMixer.clipAction(foldClip);
+            this.zflipFoldAction.setLoop(THREE.LoopOnce);
+            this.zflipFoldAction.clampWhenFinished = true;
+          }
+        }
 
         this.modelGroup.add(this.phoneMesh);
         this.modelGroup.add(this.spenMesh);
+        this.modelGroup.add(this.zflipMesh);
+
+        this.zflipMesh.visible = false;
         
         this.setupGUI();
         
@@ -782,6 +805,12 @@ export class SamsungHeroApp {
         }
       }
 
+      // Update Z Flip 6 skeletal animation mixer
+      const delta = this.clock.getDelta();
+      if (this.zflipMixer) {
+        this.zflipMixer.update(delta);
+      }
+
       // Clean render pass
       this.renderer.render(this.scene, this.camera);
 
@@ -808,7 +837,33 @@ export class SamsungHeroApp {
     }
   }
 
+  setPhoneModel(modelKey) {
+    this.selectedPhoneModel = modelKey; // 's25' | 'zflip'
+    this.setRenderMode(this.renderMode || 'phone');
+  }
+
+  toggleZFlipFold(isOpen) {
+    if (!this.zflipFoldAction) return;
+    const action = this.zflipFoldAction;
+    action.paused = false;
+    action.enabled = true;
+
+    if (isOpen) {
+      // Unfold / Open
+      action.timeScale = 1;
+      action.play();
+    } else {
+      // Fold / Close
+      action.timeScale = -1;
+      if (action.time === 0) {
+        action.time = action.getClip().duration;
+      }
+      action.play();
+    }
+  }
+
   setRenderMode(mode) {
+    this.renderMode = mode;
     if (!this.phoneMesh || !this.spenMesh) return;
     
     // Reset any pen tracking state
@@ -833,25 +888,35 @@ export class SamsungHeroApp {
     });
 
     if (mode === 'phone') {
-      this.phoneMesh.visible = true;
-      this.spenMesh.visible = false;
-      
-      // Force mesh translation to 0 so it rotates in place (around local origin)
-      gsap.to(this.phoneMesh.position, { x: 0, y: 0, z: 0, duration: 0.8, ease: "power2.out" });
-      gsap.to(this.phoneMesh.rotation, {
-        x: this.params ? this.params.phoneRotX : 0,
-        y: this.params ? this.params.phoneRotY : 0,
-        z: this.params ? this.params.phoneRotZ : 0,
-        duration: 0.8, ease: "power2.out"
-      });
+      if (this.selectedPhoneModel === 'zflip') {
+        if (this.phoneMesh) this.phoneMesh.visible = false;
+        if (this.spenMesh) this.spenMesh.visible = false;
+        if (this.zflipMesh) {
+          this.zflipMesh.visible = true;
+          gsap.to(this.zflipMesh.position, { x: 0, y: 0, z: 0, duration: 0.8, ease: "power2.out" });
+        }
+      } else {
+        if (this.zflipMesh) this.zflipMesh.visible = false;
+        if (this.spenMesh) this.spenMesh.visible = false;
+        if (this.phoneMesh) {
+          this.phoneMesh.visible = true;
+          gsap.to(this.phoneMesh.position, { x: 0, y: 0, z: 0, duration: 0.8, ease: "power2.out" });
+          gsap.to(this.phoneMesh.rotation, {
+            x: this.params ? this.params.phoneRotX : 0,
+            y: this.params ? this.params.phoneRotY : 0,
+            z: this.params ? this.params.phoneRotZ : 0,
+            duration: 0.8, ease: "power2.out"
+          });
+        }
+      }
     } else if (mode === 'pen') {
-      this.phoneMesh.visible = false;
-      this.spenMesh.visible = true;
+      if (this.phoneMesh) this.phoneMesh.visible = false;
+      if (this.zflipMesh) this.zflipMesh.visible = false;
+      if (this.spenMesh) this.spenMesh.visible = true;
       
       const ps = this.params ? this.params.penScale : 0.8;
       this.spenMesh.scale.set(ps, ps, ps);
       
-      // Force mesh translation to 0 so it rotates in place (around local origin)
       gsap.to(this.spenMesh.position, { x: 0, y: 0, z: 0, duration: 0.8, ease: "power2.out" });
       gsap.to(this.spenMesh.rotation, { 
         x: this.params ? this.params.penRotX : 0, 

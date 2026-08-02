@@ -10,6 +10,8 @@ export default function SamsungHero() {
   const [loadProgress, setLoadProgress] = useState<number>(0);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [renderMode, setRenderMode] = useState<"phone" | "pen">("phone");
+  const [selectedPhone, setSelectedPhone] = useState<"s25" | "zflip">("s25");
+  const [isZFlipOpen, setIsZFlipOpen] = useState<boolean>(false);
   const [isPenActive, setIsPenActive] = useState<boolean>(false);
   const [activePaletteId, setActivePaletteId] = useState<string>("cyan-glow");
   const [brushSize, setBrushSize] = useState<number>(1.0);
@@ -60,13 +62,27 @@ export default function SamsungHero() {
     if (appRef.current) {
       appRef.current.setRenderMode(mode);
       if (mode === "pen") {
-        // Automatically activate pen tracking when S-Pen mode is selected
         setIsPenActive(true);
         appRef.current.togglePenActive(true);
       } else {
         setIsPenActive(false);
         appRef.current.togglePenActive(false);
       }
+    }
+  };
+
+  const handleSelectPhoneModel = (modelKey: "s25" | "zflip") => {
+    setSelectedPhone(modelKey);
+    if (appRef.current) {
+      appRef.current.setPhoneModel(modelKey);
+    }
+  };
+
+  const handleToggleZFlipFold = () => {
+    const nextOpen = !isZFlipOpen;
+    setIsZFlipOpen(nextOpen);
+    if (appRef.current) {
+      appRef.current.toggleZFlipFold(nextOpen);
     }
   };
 
@@ -85,6 +101,13 @@ export default function SamsungHero() {
     setBrushSize(newSize);
     if (appRef.current) appRef.current.setBrushSize(newSize);
   };
+
+  /* Dynamic Title based on selected model */
+  const displayTitle = renderMode === "pen" 
+    ? "S‑Pen Presentation" 
+    : selectedPhone === "zflip" 
+      ? "Galaxy Z Flip 6" 
+      : "Galaxy S25 Ultra";
 
   /* ─────────────────────────────────────────
      Visual Presentation
@@ -190,7 +213,7 @@ export default function SamsungHero() {
               {/* Typography — bottom-left */}
               <div
                 className="s-ui absolute z-[10] pointer-events-none"
-                style={{ bottom: "52px", left: "52px", right: "260px" }}
+                style={{ bottom: "52px", left: "52px", right: "300px" }}
               >
                 <div
                   style={{
@@ -217,7 +240,7 @@ export default function SamsungHero() {
                     margin: 0,
                   }}
                 >
-                  Galaxy S25 Ultra
+                  {displayTitle}
                 </h1>
 
                 <div
@@ -256,7 +279,7 @@ export default function SamsungHero() {
                 </div>
               </div>
 
-              {/* Mode & Pen controls — right side (z-[60] above nav overlays) */}
+              {/* Mode & Phone Model controls — right side */}
               <div
                 className="s-ui absolute z-[60] pointer-events-auto flex flex-col items-end"
                 style={{
@@ -266,7 +289,7 @@ export default function SamsungHero() {
                   gap: "24px",
                 }}
               >
-                {/* Mode toggle */}
+                {/* Main Mode toggle */}
                 <div className="flex flex-col items-end pointer-events-auto" style={{ gap: "2px" }}>
                   <button
                     onClick={() => handleRenderModeChange("phone")}
@@ -279,7 +302,7 @@ export default function SamsungHero() {
                       background: "none",
                       border: "none",
                       cursor: "pointer",
-                      padding: "10px 4px",
+                      padding: "8px 0",
                       textTransform: "uppercase",
                       lineHeight: 1,
                       transition: "color 0.3s ease",
@@ -307,7 +330,7 @@ export default function SamsungHero() {
                       background: "none",
                       border: "none",
                       cursor: "pointer",
-                      padding: "10px 4px",
+                      padding: "8px 0",
                       textTransform: "uppercase",
                       lineHeight: 1,
                       transition: "color 0.3s ease",
@@ -317,10 +340,87 @@ export default function SamsungHero() {
                   </button>
                 </div>
 
+                {/* Sub-options for Phone Selection (S25 Ultra vs Z Flip 6) */}
+                {renderMode === "phone" && (
+                  <div className="flex flex-col items-end pointer-events-auto" style={{ gap: "8px", marginTop: "4px" }}>
+                    <div style={{ color: "#3a3836", fontSize: "8px", letterSpacing: "0.28em", fontFamily: "system-ui", textTransform: "uppercase" }}>
+                      Model Choice
+                    </div>
+
+                    <button
+                      onClick={() => handleSelectPhoneModel("s25")}
+                      style={{
+                        color: selectedPhone === "s25" ? "#f2ede8" : "#5a5654",
+                        fontSize: "9px",
+                        letterSpacing: "0.25em",
+                        fontFamily: "system-ui",
+                        fontWeight: selectedPhone === "s25" ? 600 : 400,
+                        textTransform: "uppercase",
+                        background: selectedPhone === "s25" ? "rgba(255,255,255,0.08)" : "transparent",
+                        border: selectedPhone === "s25" ? "1px solid rgba(255,255,255,0.2)" : "1px solid rgba(255,255,255,0.05)",
+                        borderRadius: "3px",
+                        padding: "6px 10px",
+                        cursor: "pointer",
+                        transition: "all 0.3s ease",
+                        width: "115px",
+                        textAlign: "right",
+                      }}
+                    >
+                      S25 Ultra
+                    </button>
+
+                    <button
+                      onClick={() => handleSelectPhoneModel("zflip")}
+                      style={{
+                        color: selectedPhone === "zflip" ? "#f2ede8" : "#5a5654",
+                        fontSize: "9px",
+                        letterSpacing: "0.25em",
+                        fontFamily: "system-ui",
+                        fontWeight: selectedPhone === "zflip" ? 600 : 400,
+                        textTransform: "uppercase",
+                        background: selectedPhone === "zflip" ? "rgba(255,255,255,0.08)" : "transparent",
+                        border: selectedPhone === "zflip" ? "1px solid rgba(255,255,255,0.2)" : "1px solid rgba(255,255,255,0.05)",
+                        borderRadius: "3px",
+                        padding: "6px 10px",
+                        cursor: "pointer",
+                        transition: "all 0.3s ease",
+                        width: "115px",
+                        textAlign: "right",
+                      }}
+                    >
+                      Z Flip 6
+                    </button>
+
+                    {/* Interactive Fold / Unfold Action Hint for Z Flip 6 */}
+                    {selectedPhone === "zflip" && (
+                      <button
+                        onClick={handleToggleZFlipFold}
+                        style={{
+                          marginTop: "8px",
+                          color: "#38bdf8",
+                          fontSize: "9px",
+                          letterSpacing: "0.25em",
+                          fontFamily: "system-ui",
+                          fontWeight: 600,
+                          textTransform: "uppercase",
+                          background: "rgba(56,189,248,0.12)",
+                          border: "1px solid rgba(56,189,248,0.35)",
+                          borderRadius: "4px",
+                          padding: "8px 12px",
+                          cursor: "pointer",
+                          transition: "all 0.3s ease",
+                          boxShadow: "0 0 16px rgba(56,189,248,0.25)",
+                        }}
+                      >
+                        {isZFlipOpen ? "⟳ Fold Phone" : "⟲ Open Phone"}
+                      </button>
+                    )}
+                  </div>
+                )}
+
                 {/* S-Pen specific controls */}
                 {renderMode === "pen" && (
                   <div className="flex flex-col items-end pointer-events-auto" style={{ gap: "16px" }}>
-                    {/* Draw Toggle Button */}
                     <button
                       onClick={handleTogglePenActive}
                       style={{
@@ -342,7 +442,6 @@ export default function SamsungHero() {
                       {isPenActive ? "Drawing Active" : "Enable Draw"}
                     </button>
 
-                    {/* Color palette */}
                     <div
                       style={{
                         display: "flex",
@@ -435,9 +534,9 @@ export default function SamsungHero() {
           ───────────────────────────────────────── */}
           {isMobile && (
             <>
-              {/* Mode toggle — top center, z-[60] so it sits ABOVE top nav bar (z-50) */}
+              {/* Mode & Sub-Model Toggle — Top Center */}
               <div
-                className="s-ui absolute z-[60] pointer-events-auto top-16 left-0 right-0 flex justify-center"
+                className="s-ui absolute z-[60] pointer-events-auto top-16 left-0 right-0 flex flex-col items-center gap-2"
               >
                 <div
                   style={{
@@ -466,7 +565,7 @@ export default function SamsungHero() {
                         border: "none",
                         borderLeft: i > 0 ? "1px solid rgba(255,255,255,0.08)" : "none",
                         cursor: "pointer",
-                        padding: "12px 22px",
+                        padding: "10px 18px",
                         textTransform: "uppercase",
                         lineHeight: 1,
                         transition: "all 0.3s ease",
@@ -476,9 +575,62 @@ export default function SamsungHero() {
                     </button>
                   ))}
                 </div>
+
+                {/* Sub Phone Selector on Mobile */}
+                {renderMode === "phone" && (
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "6px",
+                      background: "rgba(12,12,14,0.75)",
+                      backdropFilter: "blur(12px)",
+                      border: "1px solid rgba(255,255,255,0.08)",
+                      borderRadius: "20px",
+                      padding: "3px 6px",
+                    }}
+                  >
+                    <button
+                      onClick={() => handleSelectPhoneModel("s25")}
+                      style={{
+                        color: selectedPhone === "s25" ? "#f2ede8" : "#5a5654",
+                        fontSize: "8px",
+                        letterSpacing: "0.2em",
+                        fontFamily: "system-ui",
+                        fontWeight: selectedPhone === "s25" ? 600 : 400,
+                        background: selectedPhone === "s25" ? "rgba(255,255,255,0.12)" : "transparent",
+                        border: "none",
+                        borderRadius: "14px",
+                        padding: "4px 10px",
+                        cursor: "pointer",
+                        textTransform: "uppercase",
+                      }}
+                    >
+                      S25 Ultra
+                    </button>
+                    <button
+                      onClick={() => handleSelectPhoneModel("zflip")}
+                      style={{
+                        color: selectedPhone === "zflip" ? "#f2ede8" : "#5a5654",
+                        fontSize: "8px",
+                        letterSpacing: "0.2em",
+                        fontFamily: "system-ui",
+                        fontWeight: selectedPhone === "zflip" ? 600 : 400,
+                        background: selectedPhone === "zflip" ? "rgba(255,255,255,0.12)" : "transparent",
+                        border: "none",
+                        borderRadius: "14px",
+                        padding: "4px 10px",
+                        cursor: "pointer",
+                        textTransform: "uppercase",
+                      }}
+                    >
+                      Z Flip 6
+                    </button>
+                  </div>
+                )}
               </div>
 
-              {/* Bottom bar: product info + draw controls */}
+              {/* Bottom bar: product info + draw/fold controls */}
               <div
                 className="s-ui absolute z-[60] pointer-events-auto bottom-0 left-0 right-0"
                 style={{
@@ -511,7 +663,7 @@ export default function SamsungHero() {
                       margin: "0 0 4px",
                     }}
                   >
-                    Galaxy S25 Ultra
+                    {displayTitle}
                   </h1>
                   <div
                     style={{
@@ -519,11 +671,37 @@ export default function SamsungHero() {
                       fontSize: "0.78rem",
                       fontFamily: "system-ui",
                       fontWeight: 300,
-                      marginBottom: renderMode === "pen" ? "14px" : "0",
+                      marginBottom: (renderMode === "pen" || selectedPhone === "zflip") ? "14px" : "0",
                     }}
                   >
                     Designed in Blender. Rendered in realtime.
                   </div>
+
+                  {/* Z Flip 6 fold action button on Mobile */}
+                  {renderMode === "phone" && selectedPhone === "zflip" && (
+                    <button
+                      onClick={handleToggleZFlipFold}
+                      style={{
+                        marginTop: "6px",
+                        color: "#38bdf8",
+                        fontSize: "9px",
+                        letterSpacing: "0.25em",
+                        fontFamily: "system-ui",
+                        fontWeight: 600,
+                        textTransform: "uppercase",
+                        background: "rgba(56,189,248,0.12)",
+                        border: "1px solid rgba(56,189,248,0.35)",
+                        borderRadius: "4px",
+                        padding: "10px 16px",
+                        cursor: "pointer",
+                        transition: "all 0.3s ease",
+                        boxShadow: "0 0 16px rgba(56,189,248,0.25)",
+                        width: "100%",
+                      }}
+                    >
+                      {isZFlipOpen ? "⟳ Fold Phone" : "⟲ Open Phone"}
+                    </button>
+                  )}
 
                   {/* S-Pen draw controls — only in pen mode */}
                   {renderMode === "pen" && (
