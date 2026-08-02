@@ -806,7 +806,6 @@ export class SamsungHeroApp {
       }
 
       // Update Z Flip 6 skeletal animation mixer
-      const delta = this.clock.getDelta();
       if (this.zflipMixer) {
         this.zflipMixer.update(delta);
       }
