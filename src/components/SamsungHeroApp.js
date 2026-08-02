@@ -57,6 +57,7 @@ export class SamsungHeroApp {
 
     // Active color palette
     this.activePalette = PEN_COLOR_PALETTES[0];
+    this.brushSize = 1.0;
 
     // 1. Core Three.js Scene Setup
     this.scene = new THREE.Scene();
@@ -774,8 +775,8 @@ export class SamsungHeroApp {
             const opacity = Math.pow(pt.age, 1.3);
             pt.mat.opacity = opacity;
 
-            // Soft scale tapering (from 0.08 down to 0.05) so neighboring points always overlap seamlessly
-            const scale = 0.05 + (pt.age * 0.035); 
+            // Soft scale tapering so neighboring points overlap seamlessly, modulated by brushSize
+            const scale = (0.05 + (pt.age * 0.035)) * (this.brushSize || 1.0); 
             pt.mesh.scale.setScalar(scale);
           }
         }
@@ -797,6 +798,13 @@ export class SamsungHeroApp {
       if (this.drawingCanvas) {
         this.drawingCanvas.setStrokeColor(found.primaryColor);
       }
+    }
+  }
+
+  setBrushSize(sizeMultiplier) {
+    this.brushSize = Math.max(0.2, Math.min(4.0, sizeMultiplier));
+    if (this.drawingCanvas) {
+      this.drawingCanvas.strokeWidth = Math.max(2, Math.round(12 * this.brushSize));
     }
   }
 

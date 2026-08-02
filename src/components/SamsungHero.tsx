@@ -12,6 +12,7 @@ export default function SamsungHero() {
   const [renderMode, setRenderMode] = useState<"phone" | "pen">("phone");
   const [isPenActive, setIsPenActive] = useState<boolean>(false);
   const [activePaletteId, setActivePaletteId] = useState<string>("cyan-glow");
+  const [brushSize, setBrushSize] = useState<number>(1.0);
   const [isMobile, setIsMobile] = useState<boolean>(false);
 
   /* Detect mobile on mount */
@@ -23,7 +24,7 @@ export default function SamsungHero() {
   }, []);
 
   /* ─────────────────────────────────────────
-     PRESERVED EXACTLY: all interaction logic
+     Three.js Engine Initialization & Sync
   ───────────────────────────────────────── */
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -58,7 +59,14 @@ export default function SamsungHero() {
     setRenderMode(mode);
     if (appRef.current) {
       appRef.current.setRenderMode(mode);
-      if (mode === "pen") appRef.current.togglePenActive(isPenActive);
+      if (mode === "pen") {
+        // Automatically activate pen tracking when S-Pen mode is selected
+        setIsPenActive(true);
+        appRef.current.togglePenActive(true);
+      } else {
+        setIsPenActive(false);
+        appRef.current.togglePenActive(false);
+      }
     }
   };
 
@@ -73,15 +81,20 @@ export default function SamsungHero() {
     if (appRef.current) appRef.current.setPenColorPalette(paletteId);
   };
 
+  const handleBrushSizeChange = (newSize: number) => {
+    setBrushSize(newSize);
+    if (appRef.current) appRef.current.setBrushSize(newSize);
+  };
+
   /* ─────────────────────────────────────────
-     Visual presentation
+     Visual Presentation
   ───────────────────────────────────────── */
   return (
     <div
       className="relative w-full h-[100dvh] overflow-hidden select-none"
       style={{ background: "#0c0c0e" }}
     >
-      {/* ── Studio atmosphere ── */}
+      {/* ── Studio Atmosphere ── */}
       <div className="absolute inset-0 pointer-events-none z-[1]">
         <div
           className="absolute inset-0"
@@ -105,11 +118,7 @@ export default function SamsungHero() {
         />
       </div>
 
-      {/* ── Three.js WebGL Canvas ──
-          KEY FIX: When pen is active (drawing), touch-action: none prevents page
-          scroll so touch strokes are captured. When not drawing, touch-pan-y allows
-          the user to scroll the page normally on mobile.
-      ── */}
+      {/* ── Three.js WebGL Canvas ── */}
       <canvas
         ref={canvasRef}
         className="absolute inset-0 w-full h-full z-[2] cursor-grab active:cursor-grabbing"
@@ -118,7 +127,7 @@ export default function SamsungHero() {
         }}
       />
 
-      {/* ── Loading experience ── */}
+      {/* ── Loading Experience ── */}
       {!isLoaded && (
         <div
           className="absolute inset-0 z-50 flex flex-col items-center justify-center"
@@ -175,15 +184,13 @@ export default function SamsungHero() {
         <>
           {/* ─────────────────────────────────────────
               DESKTOP LAYOUT (> 768px)
-              Typography: bottom-left
-              Controls: right side, vertically centered
           ───────────────────────────────────────── */}
           {!isMobile && (
             <>
               {/* Typography — bottom-left */}
               <div
                 className="s-ui absolute z-[10] pointer-events-none"
-                style={{ bottom: "52px", left: "52px", right: "220px" }}
+                style={{ bottom: "52px", left: "52px", right: "260px" }}
               >
                 <div
                   style={{
@@ -249,32 +256,33 @@ export default function SamsungHero() {
                 </div>
               </div>
 
-              {/* Mode controls — right side */}
+              {/* Mode & Pen controls — right side (z-[60] above nav overlays) */}
               <div
-                className="s-ui absolute z-[10] flex flex-col items-end"
+                className="s-ui absolute z-[60] pointer-events-auto flex flex-col items-end"
                 style={{
                   top: "50%",
                   right: "48px",
                   transform: "translateY(-50%)",
-                  gap: "28px",
+                  gap: "24px",
                 }}
               >
-                <div className="flex flex-col items-end" style={{ gap: "2px" }}>
+                {/* Mode toggle */}
+                <div className="flex flex-col items-end pointer-events-auto" style={{ gap: "2px" }}>
                   <button
                     onClick={() => handleRenderModeChange("phone")}
                     style={{
                       color: renderMode === "phone" ? "#d4cfc9" : "#3a3836",
-                      fontSize: "9px",
+                      fontSize: "10px",
                       letterSpacing: "0.32em",
                       fontFamily: "system-ui",
-                      fontWeight: 400,
+                      fontWeight: renderMode === "phone" ? 600 : 400,
                       background: "none",
                       border: "none",
                       cursor: "pointer",
-                      padding: "8px 0",
+                      padding: "10px 4px",
                       textTransform: "uppercase",
                       lineHeight: 1,
-                      transition: "color 0.4s ease",
+                      transition: "color 0.3s ease",
                     }}
                   >
                     Phone
@@ -292,25 +300,27 @@ export default function SamsungHero() {
                     onClick={() => handleRenderModeChange("pen")}
                     style={{
                       color: renderMode === "pen" ? "#d4cfc9" : "#3a3836",
-                      fontSize: "9px",
+                      fontSize: "10px",
                       letterSpacing: "0.32em",
                       fontFamily: "system-ui",
-                      fontWeight: 400,
+                      fontWeight: renderMode === "pen" ? 600 : 400,
                       background: "none",
                       border: "none",
                       cursor: "pointer",
-                      padding: "8px 0",
+                      padding: "10px 4px",
                       textTransform: "uppercase",
                       lineHeight: 1,
-                      transition: "color 0.4s ease",
+                      transition: "color 0.3s ease",
                     }}
                   >
                     S‑Pen
                   </button>
                 </div>
 
+                {/* S-Pen specific controls */}
                 {renderMode === "pen" && (
-                  <div className="flex flex-col items-end" style={{ gap: "16px" }}>
+                  <div className="flex flex-col items-end pointer-events-auto" style={{ gap: "16px" }}>
+                    {/* Draw Toggle Button */}
                     <button
                       onClick={handleTogglePenActive}
                       style={{
@@ -318,34 +328,35 @@ export default function SamsungHero() {
                         fontSize: "9px",
                         letterSpacing: "0.32em",
                         fontFamily: "system-ui",
-                        fontWeight: 400,
-                        background: "none",
-                        border: isPenActive ? "1px solid rgba(255,255,255,0.18)" : "1px solid transparent",
-                        borderRadius: "2px",
+                        fontWeight: 500,
+                        background: isPenActive ? "rgba(255,255,255,0.08)" : "transparent",
+                        border: isPenActive ? "1px solid rgba(255,255,255,0.25)" : "1px solid rgba(255,255,255,0.08)",
+                        borderRadius: "3px",
                         cursor: "pointer",
-                        padding: "6px 10px",
+                        padding: "8px 12px",
                         textTransform: "uppercase",
                         lineHeight: 1,
-                        transition: "all 0.4s ease",
+                        transition: "all 0.3s ease",
                       }}
                     >
-                      {isPenActive ? "Drawing" : "Draw"}
+                      {isPenActive ? "Drawing Active" : "Enable Draw"}
                     </button>
 
+                    {/* Color palette */}
                     <div
                       style={{
                         display: "flex",
                         flexDirection: "column",
                         alignItems: "flex-end",
                         gap: "8px",
-                        maxHeight: isPenActive ? "200px" : "0",
+                        maxHeight: isPenActive ? "300px" : "0",
                         opacity: isPenActive ? 1 : 0,
                         overflow: "hidden",
-                        transition: "max-height 0.5s ease, opacity 0.4s ease",
+                        transition: "max-height 0.4s ease, opacity 0.3s ease",
                       }}
                     >
                       <div style={{ color: "#3a3836", fontSize: "8px", letterSpacing: "0.28em", fontFamily: "system-ui", textTransform: "uppercase", marginBottom: "2px" }}>
-                        Ink
+                        Ink Color
                       </div>
                       {PEN_COLOR_PALETTES.map((pal) => (
                         <button
@@ -353,20 +364,43 @@ export default function SamsungHero() {
                           onClick={() => handleSelectPalette(pal.id)}
                           title={pal.name}
                           style={{
-                            width: "12px",
-                            height: "12px",
+                            width: "14px",
+                            height: "14px",
                             borderRadius: "50%",
-                            border: activePaletteId === pal.id ? "1px solid rgba(255,255,255,0.65)" : "1px solid rgba(255,255,255,0.12)",
+                            border: activePaletteId === pal.id ? "1px solid rgba(255,255,255,0.8)" : "1px solid rgba(255,255,255,0.15)",
                             cursor: "pointer",
                             background: pal.primaryColor,
-                            transition: "all 0.25s ease",
+                            transition: "all 0.2s ease",
                             padding: 0,
                             outline: "none",
-                            boxShadow: activePaletteId === pal.id ? "0 0 0 2px rgba(255,255,255,0.08)" : "none",
+                            boxShadow: activePaletteId === pal.id ? `0 0 8px ${pal.primaryColor}88` : "none",
                             display: "block",
                           }}
                         />
                       ))}
+
+                      {/* Brush Size Slider (Desktop) */}
+                      <div style={{ marginTop: "12px", display: "flex", flexDirection: "column", alignItems: "flex-end", gap: "6px" }}>
+                        <div style={{ color: "#3a3836", fontSize: "8px", letterSpacing: "0.28em", fontFamily: "system-ui", textTransform: "uppercase" }}>
+                          Brush Size ({brushSize.toFixed(1)}x)
+                        </div>
+                        <input
+                          type="range"
+                          min="0.3"
+                          max="3.0"
+                          step="0.1"
+                          value={brushSize}
+                          onChange={(e) => handleBrushSizeChange(parseFloat(e.target.value))}
+                          style={{
+                            width: "80px",
+                            height: "3px",
+                            accentColor: "#d4cfc9",
+                            cursor: "pointer",
+                            background: "rgba(255,255,255,0.1)",
+                            borderRadius: "2px",
+                          }}
+                        />
+                      </div>
                     </div>
                   </div>
                 )}
@@ -398,26 +432,24 @@ export default function SamsungHero() {
 
           {/* ─────────────────────────────────────────
               MOBILE LAYOUT (≤ 768px)
-              Model is centered in the canvas.
-              Controls sit at the top (mode) and bottom (info + draw).
           ───────────────────────────────────────── */}
           {isMobile && (
             <>
-              {/* Mode toggle — top center, compact */}
+              {/* Mode toggle — top center, z-[60] so it sits ABOVE top nav bar (z-50) */}
               <div
-                className="s-ui absolute z-[10] top-0 left-0 right-0 flex justify-center"
-                style={{ paddingTop: "env(safe-area-inset-top, 16px)", marginTop: "16px" }}
+                className="s-ui absolute z-[60] pointer-events-auto top-16 left-0 right-0 flex justify-center"
               >
                 <div
                   style={{
                     display: "flex",
                     alignItems: "center",
                     gap: "0",
-                    background: "rgba(12,12,14,0.7)",
-                    backdropFilter: "blur(12px)",
-                    border: "1px solid rgba(255,255,255,0.07)",
-                    borderRadius: "4px",
+                    background: "rgba(12,12,14,0.85)",
+                    backdropFilter: "blur(16px)",
+                    border: "1px solid rgba(255,255,255,0.12)",
+                    borderRadius: "6px",
                     overflow: "hidden",
+                    boxShadow: "0 8px 32px rgba(0,0,0,0.5)",
                   }}
                 >
                   {(["phone", "pen"] as const).map((m, i) => (
@@ -425,16 +457,16 @@ export default function SamsungHero() {
                       key={m}
                       onClick={() => handleRenderModeChange(m)}
                       style={{
-                        color: renderMode === m ? "#f2ede8" : "#3a3836",
-                        fontSize: "9px",
+                        color: renderMode === m ? "#f2ede8" : "#5a5654",
+                        fontSize: "10px",
                         letterSpacing: "0.28em",
                         fontFamily: "system-ui",
-                        fontWeight: 400,
-                        background: renderMode === m ? "rgba(255,255,255,0.06)" : "transparent",
+                        fontWeight: renderMode === m ? 600 : 400,
+                        background: renderMode === m ? "rgba(255,255,255,0.1)" : "transparent",
                         border: "none",
-                        borderLeft: i > 0 ? "1px solid rgba(255,255,255,0.07)" : "none",
+                        borderLeft: i > 0 ? "1px solid rgba(255,255,255,0.08)" : "none",
                         cursor: "pointer",
-                        padding: "10px 18px",
+                        padding: "12px 22px",
                         textTransform: "uppercase",
                         lineHeight: 1,
                         transition: "all 0.3s ease",
@@ -448,13 +480,13 @@ export default function SamsungHero() {
 
               {/* Bottom bar: product info + draw controls */}
               <div
-                className="s-ui absolute z-[10] bottom-0 left-0 right-0"
+                className="s-ui absolute z-[60] pointer-events-auto bottom-0 left-0 right-0"
                 style={{
                   paddingBottom: "env(safe-area-inset-bottom, 20px)",
-                  background: "linear-gradient(to top, rgba(12,12,14,0.95) 0%, rgba(12,12,14,0.6) 70%, transparent 100%)",
+                  background: "linear-gradient(to top, rgba(12,12,14,0.98) 0%, rgba(12,12,14,0.75) 75%, transparent 100%)",
                 }}
               >
-                <div style={{ padding: "16px 24px 28px" }}>
+                <div style={{ padding: "16px 24px 24px" }}>
                   {/* Product name */}
                   <div
                     style={{
@@ -463,7 +495,7 @@ export default function SamsungHero() {
                       letterSpacing: "0.35em",
                       fontFamily: "system-ui",
                       textTransform: "uppercase",
-                      marginBottom: "6px",
+                      marginBottom: "4px",
                     }}
                   >
                     Interactive Product Experience
@@ -473,7 +505,7 @@ export default function SamsungHero() {
                       fontFamily: "system-ui, -apple-system, sans-serif",
                       fontWeight: 300,
                       color: "#f2ede8",
-                      fontSize: "1.9rem",
+                      fontSize: "1.75rem",
                       lineHeight: 1.05,
                       letterSpacing: "-0.02em",
                       margin: "0 0 4px",
@@ -484,10 +516,10 @@ export default function SamsungHero() {
                   <div
                     style={{
                       color: "#6b6b6e",
-                      fontSize: "0.8rem",
+                      fontSize: "0.78rem",
                       fontFamily: "system-ui",
                       fontWeight: 300,
-                      marginBottom: renderMode === "pen" ? "16px" : "0",
+                      marginBottom: renderMode === "pen" ? "14px" : "0",
                     }}
                   >
                     Designed in Blender. Rendered in realtime.
@@ -498,67 +530,107 @@ export default function SamsungHero() {
                     <div
                       style={{
                         display: "flex",
-                        alignItems: "center",
-                        gap: "16px",
-                        flexWrap: "wrap",
-                        marginTop: "4px",
+                        flexDirection: "column",
+                        gap: "12px",
+                        marginTop: "8px",
                       }}
                     >
-                      <button
-                        onClick={handleTogglePenActive}
-                        style={{
-                          color: isPenActive ? "#f2ede8" : "#5a5654",
-                          fontSize: "9px",
-                          letterSpacing: "0.28em",
-                          fontFamily: "system-ui",
-                          fontWeight: 400,
-                          background: isPenActive ? "rgba(255,255,255,0.06)" : "transparent",
-                          border: isPenActive ? "1px solid rgba(255,255,255,0.18)" : "1px solid rgba(255,255,255,0.08)",
-                          borderRadius: "3px",
-                          cursor: "pointer",
-                          padding: "8px 14px",
-                          textTransform: "uppercase",
-                          lineHeight: 1,
-                          transition: "all 0.35s ease",
-                          whiteSpace: "nowrap",
-                        }}
-                      >
-                        {isPenActive ? "Drawing" : "Draw"}
-                      </button>
-
-                      {/* Color swatches — horizontal row on mobile */}
                       <div
                         style={{
                           display: "flex",
                           alignItems: "center",
-                          gap: "10px",
-                          maxWidth: isPenActive ? "240px" : "0",
-                          opacity: isPenActive ? 1 : 0,
-                          overflow: "hidden",
-                          transition: "max-width 0.5s ease, opacity 0.4s ease",
+                          gap: "14px",
+                          flexWrap: "wrap",
                         }}
                       >
-                        {PEN_COLOR_PALETTES.map((pal) => (
-                          <button
-                            key={pal.id}
-                            onClick={() => handleSelectPalette(pal.id)}
-                            title={pal.name}
+                        <button
+                          onClick={handleTogglePenActive}
+                          style={{
+                            color: isPenActive ? "#f2ede8" : "#5a5654",
+                            fontSize: "9px",
+                            letterSpacing: "0.28em",
+                            fontFamily: "system-ui",
+                            fontWeight: 500,
+                            background: isPenActive ? "rgba(255,255,255,0.12)" : "transparent",
+                            border: isPenActive ? "1px solid rgba(255,255,255,0.25)" : "1px solid rgba(255,255,255,0.1)",
+                            borderRadius: "4px",
+                            cursor: "pointer",
+                            padding: "10px 16px",
+                            textTransform: "uppercase",
+                            lineHeight: 1,
+                            transition: "all 0.3s ease",
+                            whiteSpace: "nowrap",
+                          }}
+                        >
+                          {isPenActive ? "Drawing Active" : "Enable Draw"}
+                        </button>
+
+                        {/* Color swatches */}
+                        <div
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "10px",
+                            maxWidth: isPenActive ? "260px" : "0",
+                            opacity: isPenActive ? 1 : 0,
+                            overflow: "hidden",
+                            transition: "max-width 0.4s ease, opacity 0.3s ease",
+                          }}
+                        >
+                          {PEN_COLOR_PALETTES.map((pal) => (
+                            <button
+                              key={pal.id}
+                              onClick={() => handleSelectPalette(pal.id)}
+                              title={pal.name}
+                              style={{
+                                width: "18px",
+                                height: "18px",
+                                borderRadius: "50%",
+                                border: activePaletteId === pal.id ? "2px solid rgba(255,255,255,0.9)" : "1px solid rgba(255,255,255,0.2)",
+                                cursor: "pointer",
+                                background: pal.primaryColor,
+                                transition: "all 0.2s ease",
+                                padding: 0,
+                                outline: "none",
+                                flexShrink: 0,
+                                boxShadow: activePaletteId === pal.id ? `0 0 8px ${pal.primaryColor}88` : "none",
+                              }}
+                            />
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Brush Size Slider (Mobile) */}
+                      {isPenActive && (
+                        <div
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "12px",
+                            paddingTop: "4px",
+                          }}
+                        >
+                          <span style={{ color: "#5a5654", fontSize: "8px", letterSpacing: "0.25em", fontFamily: "system-ui", textTransform: "uppercase", whiteSpace: "nowrap" }}>
+                            Brush ({brushSize.toFixed(1)}x)
+                          </span>
+                          <input
+                            type="range"
+                            min="0.3"
+                            max="3.0"
+                            step="0.1"
+                            value={brushSize}
+                            onChange={(e) => handleBrushSizeChange(parseFloat(e.target.value))}
                             style={{
-                              width: "14px",
-                              height: "14px",
-                              borderRadius: "50%",
-                              border: activePaletteId === pal.id ? "1px solid rgba(255,255,255,0.7)" : "1px solid rgba(255,255,255,0.15)",
+                              flex: 1,
+                              height: "4px",
+                              accentColor: "#d4cfc9",
                               cursor: "pointer",
-                              background: pal.primaryColor,
-                              transition: "all 0.2s ease",
-                              padding: 0,
-                              outline: "none",
-                              flexShrink: 0,
-                              boxShadow: activePaletteId === pal.id ? `0 0 6px ${pal.primaryColor}66` : "none",
+                              background: "rgba(255,255,255,0.12)",
+                              borderRadius: "2px",
                             }}
                           />
-                        ))}
-                      </div>
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>
