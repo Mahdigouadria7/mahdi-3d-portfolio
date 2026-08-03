@@ -31,10 +31,9 @@ export class Environment {
     this.renderer.shadowMap.enabled = true;
     this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
-    // Deep dark navy — phone pops with blue rim
-    const studioBgColor = new THREE.Color(0x050c1f);
-    this.renderer.setClearColor(studioBgColor, 1.0);
-    this.scene.background = studioBgColor;
+    // Transparent background so video background shows through
+    this.renderer.setClearColor(0x000000, 0);
+    this.scene.background = null;
   }
 
   /**

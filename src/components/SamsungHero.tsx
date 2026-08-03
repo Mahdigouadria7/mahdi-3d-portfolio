@@ -84,7 +84,7 @@ export default function SamsungHero() {
       gsap.to(canvasEl, { opacity: 0, duration: 0.35, ease: "power2.in" });
     }
     if (videoEl) {
-      gsap.to(videoEl, { opacity: 0.05, duration: 0.35, ease: "power2.in" });
+      gsap.to(videoEl, { opacity: 0.1, duration: 0.35, ease: "power2.in" });
     }
 
     // Phase 2: Execute state change, then fade both back in smoothly
@@ -94,7 +94,7 @@ export default function SamsungHero() {
         gsap.to(canvasEl, { opacity: 1, duration: 0.55, ease: "power2.out" });
       }
       if (videoEl) {
-        gsap.to(videoEl, { opacity: 0.55, duration: 0.55, ease: "power2.out" });
+        gsap.to(videoEl, { opacity: 0.75, duration: 0.55, ease: "power2.out" });
       }
     }, 360);
   };
@@ -172,7 +172,7 @@ export default function SamsungHero() {
         playsInline
         disablePictureInPicture
         className="absolute inset-0 w-full h-full object-cover z-[0] pointer-events-none"
-        style={{ opacity: 0.55 }}
+        style={{ opacity: 0.75 }}
       >
         <source src={`${BG_VIDEO_URL}.webm`} type="video/webm" />
         <source src={`${BG_VIDEO_URL}.mp4`} type="video/mp4" />
