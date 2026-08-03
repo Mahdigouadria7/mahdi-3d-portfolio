@@ -199,6 +199,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                             >
                                                 {t}
                                             </span>
+                                        ))}
                                     </div>
                                 </div>
                             </ScrollReveal>
