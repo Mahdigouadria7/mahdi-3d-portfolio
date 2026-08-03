@@ -98,7 +98,7 @@ export class SamsungHeroApp {
           this.isContinuousDrawing = !this.isContinuousDrawing;
         }
       } else {
-        if (e.button === 0) {
+        if (e.button === 0 || e.pointerType === 'touch') {
           this.isDragging = true;
           this.previousMousePosition.set(e.clientX, e.clientY);
         }
@@ -106,9 +106,10 @@ export class SamsungHeroApp {
     };
 
     this.onPointerUp = (e) => {
-      if (e.button === 0) {
-        this.isDragging = false;
-        this.isLeftMouseDown = false;
+      this.isDragging = false;
+      this.isLeftMouseDown = false;
+      if (this.canvas && !this.isPenTracking) {
+        this.canvas.style.touchAction = 'pan-y';
       }
     };
 
@@ -171,6 +172,11 @@ export class SamsungHeroApp {
         const deltaX = e.clientX - this.previousMousePosition.x;
         const deltaY = e.clientY - this.previousMousePosition.y;
         
+        // While user is actively dragging the 3D model, disable page scrolling
+        if (this.canvas && (Math.abs(deltaX) > 1 || Math.abs(deltaY) > 1)) {
+          this.canvas.style.touchAction = 'none';
+        }
+
         // Add momentum to spin velocity (like the Red Bull model)
         const sens = this.spenMesh && this.spenMesh.visible && !this.phoneMesh.visible ? (this.params ? this.params.penDragSens : 0.0015) : (this.params ? this.params.phoneDragSens : 0.0015);
         this.spinVelocity.x += deltaY * sens;

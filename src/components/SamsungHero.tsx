@@ -152,10 +152,7 @@ export default function SamsungHero() {
       : "Galaxy S25 Ultra";
 
   return (
-    <div 
-      className="relative w-full h-[100dvh] overflow-hidden select-none bg-[#0a0814]"
-      style={{ overscrollBehaviorY: "contain", touchAction: "none" }}
-    >
+    <div className="relative w-full h-[100dvh] overflow-hidden select-none bg-[#0a0814]">
       {/* ── Looping Background Video ── */}
       <video
         ref={videoRef}
@@ -196,7 +193,7 @@ export default function SamsungHero() {
         <canvas
           ref={canvasRef}
           className="absolute inset-0 w-full h-full cursor-grab active:cursor-grabbing"
-          style={{ touchAction: "none" }}
+          style={{ touchAction: isPenActive ? "none" : "pan-y" }}
         />
       </div>
 
