@@ -50,8 +50,8 @@ export default function SamsungHero() {
           setIsLoaded(true);
           gsap.fromTo(
             ".s-ui",
-            { opacity: 0, y: 8 },
-            { opacity: 1, y: 0, duration: 1.2, ease: "power3.out", stagger: 0.1 }
+            { opacity: 0, y: 12 },
+            { opacity: 1, y: 0, duration: 1.4, ease: "power3.out", stagger: 0.12 }
           );
         }, 300);
       }
@@ -155,7 +155,7 @@ export default function SamsungHero() {
       : "Galaxy S25 Ultra";
 
   return (
-    <div className="relative w-full h-[100dvh] overflow-hidden select-none bg-[#0c0c0e]">
+    <div className="relative w-full h-[100dvh] overflow-hidden select-none bg-[#0a0814]">
       {/* ── Looping Background Video ── */}
       <video
         ref={videoRef}
@@ -177,18 +177,18 @@ export default function SamsungHero() {
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse 80% 60% at 50% 45%, rgba(0,0,0,0.1) 0%, transparent 70%)",
+              "radial-gradient(ellipse 80% 60% at 50% 45%, rgba(120, 80, 255, 0.08) 0%, transparent 70%)",
           }}
         />
         <div
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse 110% 110% at 50% 50%, transparent 35%, rgba(0,0,0,0.92) 100%)",
+              "radial-gradient(ellipse 110% 110% at 50% 50%, transparent 30%, rgba(10, 8, 20, 0.94) 100%)",
           }}
         />
-        <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-[#0c0c0e]/95 to-transparent" />
-        <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-[#0c0c0e]/60 to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-[#0a0814]/95 to-transparent" />
+        <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-[#0a0814]/60 to-transparent" />
       </div>
 
       {/* ── Three.js WebGL Canvas ── */}
@@ -202,20 +202,20 @@ export default function SamsungHero() {
         />
       </div>
 
-      {/* ── Loading Experience ── */}
+      {/* ── Liquid Glass Loading Experience ── */}
       {!isLoaded && (
-        <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-[#0c0c0e]">
-          <div className="text-white text-xs tracking-[0.5em] uppercase font-sans mb-8">
-            Samsung
+        <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-[#0a0814]">
+          <div className="text-white/80 text-xs tracking-[0.5em] uppercase font-sans mb-8 font-light">
+            SAMSUNG
           </div>
-          <div className="relative w-44 h-[2px] bg-white/10 overflow-hidden rounded-full">
+          <div className="relative w-56 h-[3px] bg-white/10 overflow-hidden rounded-full p-[1px] border border-white/20 backdrop-blur-md">
             <div
-              className="absolute top-0 left-0 h-full bg-cyan-400 transition-all duration-300"
+              className="absolute top-0 left-0 h-full bg-gradient-to-r from-purple-400 via-cyan-400 to-white transition-all duration-300 rounded-full shadow-[0_0_12px_rgba(168,85,247,0.8)]"
               style={{ width: `${loadProgress}%` }}
             />
           </div>
-          <div className="text-white/50 text-[10px] tracking-[0.25em] font-mono mt-4 uppercase">
-            Loading 3D Models... {loadProgress}%
+          <div className="text-white/40 text-[9px] tracking-[0.3em] font-mono mt-4 uppercase">
+            Rendering Engine {loadProgress}%
           </div>
         </div>
       )}
@@ -228,21 +228,22 @@ export default function SamsungHero() {
           {!isMobile && (
             <>
               {/* Typography — bottom-left */}
-              <div className="s-ui absolute z-[10] pointer-events-none bottom-12 left-12 max-w-xl">
-                <div className="text-cyan-400 text-[10px] tracking-[0.35em] font-semibold uppercase mb-2">
-                  Interactive 3D Experience
+              <div className="s-ui absolute z-[10] pointer-events-none bottom-14 left-14 max-w-xl">
+                <div className="text-purple-300/80 text-[10px] tracking-[0.4em] font-mono font-medium uppercase mb-3 flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse shadow-[0_0_8px_#c084fc]" />
+                  Interactive Showcase
                 </div>
-                <h1 className="font-sans font-light text-white text-5xl md:text-6xl tracking-tight leading-none m-0 drop-shadow-md">
+                <h1 className="font-sans font-light text-white text-6xl tracking-tight leading-none m-0 drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)]">
                   {displayTitle}
                 </h1>
-                <p className="text-white/70 text-sm md:text-base font-light mt-3 tracking-wide drop-shadow">
-                  Designed in Blender. Rendered live with Three.js &amp; WebGL.
+                <p className="text-white/70 text-base font-light mt-3 tracking-wide drop-shadow max-w-md leading-relaxed">
+                  Designed in Blender. Rendered real-time in WebGL.
                 </p>
-                <div className="flex gap-3 mt-5">
+                <div className="flex gap-2.5 mt-6">
                   {["Three.js", "React", "GSAP", "WebGL"].map((t) => (
                     <span
                       key={t}
-                      className="text-white/60 text-[10px] tracking-[0.2em] font-mono uppercase bg-white/5 px-2.5 py-1 rounded-md border border-white/10"
+                      className="text-white/70 text-[9px] tracking-[0.25em] font-mono uppercase bg-white/[0.06] backdrop-blur-md px-3 py-1.5 rounded-full border border-white/15 shadow-[inset_0_1px_1px_rgba(255,255,255,0.2)]"
                     >
                       {t}
                     </span>
@@ -250,64 +251,74 @@ export default function SamsungHero() {
                 </div>
               </div>
 
-              {/* High-Contrast Interactive Control Panel — right side */}
-              <div className="s-ui absolute z-[60] pointer-events-auto top-1/2 right-10 -translate-y-1/2 flex flex-col items-end gap-5">
-                <div className="bg-black/75 backdrop-blur-2xl border border-white/20 p-5 rounded-2xl shadow-2xl flex flex-col items-end gap-5 w-64">
+              {/* Liquid Glass Interactive Control Panel — right side */}
+              <div className="s-ui absolute z-[60] pointer-events-auto top-1/2 right-12 -translate-y-1/2 flex flex-col items-end gap-5">
+                <div
+                  className="flex flex-col items-end gap-6 w-72 p-6 rounded-[28px]"
+                  style={{
+                    background: "rgba(18, 14, 32, 0.45)",
+                    backdropFilter: "blur(30px) saturate(180%)",
+                    WebkitBackdropFilter: "blur(30px) saturate(180%)",
+                    border: "1px solid rgba(255, 255, 255, 0.18)",
+                    boxShadow:
+                      "inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.4), inset 0 -1px 2px 0 rgba(0, 0, 0, 0.5), 0 24px 60px -12px rgba(0, 0, 0, 0.7), 0 0 35px 0 rgba(168, 85, 247, 0.12)",
+                  }}
+                >
                   {/* Mode Selector Tabs */}
                   <div className="w-full">
-                    <label className="text-white/50 text-[9px] tracking-[0.25em] font-semibold uppercase mb-2 block text-right">
-                      EXPERIENCE MODE
+                    <label className="text-purple-200/60 text-[9px] tracking-[0.3em] font-mono font-medium uppercase mb-2.5 block text-right">
+                      MODE SELECTOR
                     </label>
-                    <div className="grid grid-cols-2 bg-white/10 p-1 rounded-xl border border-white/10">
+                    <div className="grid grid-cols-2 p-1.5 rounded-2xl bg-black/30 border border-white/10 shadow-[inset_0_2px_4px_rgba(0,0,0,0.4)]">
                       <button
                         onClick={() => handleRenderModeChange("phone")}
-                        className={`py-2 text-xs font-semibold rounded-lg tracking-wider transition-all uppercase ${
+                        className={`py-2.5 text-[10px] font-mono tracking-[0.2em] font-semibold rounded-xl uppercase transition-all duration-300 ${
                           renderMode === "phone"
-                            ? "bg-white text-black shadow-md"
-                            : "text-white/70 hover:text-white"
+                            ? "bg-gradient-to-br from-white to-purple-100 text-[#0d091a] shadow-[0_4px_20px_rgba(255,255,255,0.3),inset_0_1px_1px_rgba(255,255,255,0.9)]"
+                            : "text-white/60 hover:text-white"
                         }`}
                       >
-                        📱 Phone
+                        PHONE
                       </button>
                       <button
                         onClick={() => handleRenderModeChange("pen")}
-                        className={`py-2 text-xs font-semibold rounded-lg tracking-wider transition-all uppercase ${
+                        className={`py-2.5 text-[10px] font-mono tracking-[0.2em] font-semibold rounded-xl uppercase transition-all duration-300 ${
                           renderMode === "pen"
-                            ? "bg-white text-black shadow-md"
-                            : "text-white/70 hover:text-white"
+                            ? "bg-gradient-to-br from-white to-purple-100 text-[#0d091a] shadow-[0_4px_20px_rgba(255,255,255,0.3),inset_0_1px_1px_rgba(255,255,255,0.9)]"
+                            : "text-white/60 hover:text-white"
                         }`}
                       >
-                        ✏️ S‑Pen
+                        S‑PEN
                       </button>
                     </div>
                   </div>
 
                   {/* Phone Model Selector */}
                   {renderMode === "phone" && (
-                    <div className="w-full flex flex-col items-end gap-2 pt-2 border-t border-white/10">
-                      <label className="text-white/50 text-[9px] tracking-[0.25em] font-semibold uppercase block text-right">
-                        CHOOSE MODEL
+                    <div className="w-full flex flex-col items-end gap-3 pt-3 border-t border-white/10">
+                      <label className="text-purple-200/60 text-[9px] tracking-[0.3em] font-mono font-medium uppercase block text-right">
+                        HARDWARE VARIANT
                       </label>
-                      <div className="grid grid-cols-2 gap-2 w-full">
+                      <div className="grid grid-cols-2 gap-2.5 w-full">
                         <button
                           onClick={() => handleSelectPhoneModel("s25")}
-                          className={`py-2 px-2 text-[11px] font-medium rounded-xl border tracking-wide uppercase transition-all ${
+                          className={`py-2.5 px-2 text-[10px] font-mono tracking-[0.15em] uppercase rounded-xl border transition-all duration-300 ${
                             selectedPhone === "s25"
-                              ? "bg-cyan-500/25 border-cyan-400 text-cyan-200 shadow-lg shadow-cyan-500/20 font-semibold"
-                              : "bg-white/5 border-white/10 text-white/70 hover:text-white hover:bg-white/10"
+                              ? "bg-purple-500/25 border-purple-300/60 text-white shadow-[0_4px_20px_rgba(168,85,247,0.3),inset_0_1px_1px_rgba(255,255,255,0.4)] font-semibold"
+                              : "bg-white/[0.04] border-white/10 text-white/60 hover:text-white hover:bg-white/[0.08]"
                           }`}
                         >
-                          S25 Ultra
+                          S25 ULTRA
                         </button>
                         <button
                           onClick={() => handleSelectPhoneModel("zflip")}
-                          className={`py-2 px-2 text-[11px] font-medium rounded-xl border tracking-wide uppercase transition-all ${
+                          className={`py-2.5 px-2 text-[10px] font-mono tracking-[0.15em] uppercase rounded-xl border transition-all duration-300 ${
                             selectedPhone === "zflip"
-                              ? "bg-cyan-500/25 border-cyan-400 text-cyan-200 shadow-lg shadow-cyan-500/20 font-semibold"
-                              : "bg-white/5 border-white/10 text-white/70 hover:text-white hover:bg-white/10"
+                              ? "bg-purple-500/25 border-purple-300/60 text-white shadow-[0_4px_20px_rgba(168,85,247,0.3),inset_0_1px_1px_rgba(255,255,255,0.4)] font-semibold"
+                              : "bg-white/[0.04] border-white/10 text-white/60 hover:text-white hover:bg-white/[0.08]"
                           }`}
                         >
-                          Z Flip 6
+                          Z FLIP 6
                         </button>
                       </div>
 
@@ -315,9 +326,14 @@ export default function SamsungHero() {
                       {selectedPhone === "zflip" && (
                         <button
                           onClick={handleToggleZFlipFold}
-                          className="w-full mt-2 py-2.5 px-4 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-semibold text-xs tracking-widest uppercase rounded-xl shadow-lg shadow-cyan-500/30 active:scale-95 transition-all flex items-center justify-center gap-2"
+                          className="w-full mt-2 py-3 px-4 text-white font-mono font-medium text-[10px] tracking-[0.25em] uppercase rounded-xl shadow-[0_8px_25px_rgba(168,85,247,0.35),inset_0_1px_1.5px_rgba(255,255,255,0.5)] active:scale-95 transition-all duration-300"
+                          style={{
+                            background:
+                              "linear-gradient(135deg, rgba(168, 85, 247, 0.35) 0%, rgba(56, 189, 248, 0.25) 100%)",
+                            border: "1px solid rgba(216, 180, 254, 0.5)",
+                          }}
                         >
-                          {isZFlipOpen ? "⟳ Fold Phone" : "⟲ Open Phone"}
+                          {isZFlipOpen ? "FOLD DEVICE" : "UNFOLD DEVICE"}
                         </button>
                       )}
                     </div>
@@ -325,41 +341,41 @@ export default function SamsungHero() {
 
                   {/* S-Pen Studio Controls */}
                   {renderMode === "pen" && (
-                    <div className="w-full flex flex-col items-end gap-3 pt-2 border-t border-white/10">
+                    <div className="w-full flex flex-col items-end gap-4 pt-3 border-t border-white/10">
                       {/* Enable/Disable Draw Toggle */}
                       <button
                         onClick={handleTogglePenActive}
-                        className={`w-full py-2.5 px-3 rounded-xl border text-xs font-semibold tracking-wider uppercase transition-all ${
+                        className={`w-full py-3 px-3 rounded-xl border text-[10px] font-mono tracking-[0.25em] uppercase transition-all duration-300 ${
                           isPenActive
-                            ? "bg-emerald-500/20 border-emerald-400 text-emerald-300 shadow-md shadow-emerald-500/20"
-                            : "bg-white/10 border-white/20 text-white hover:bg-white/20"
+                            ? "bg-emerald-500/20 border-emerald-400/60 text-emerald-200 shadow-[0_8px_20px_rgba(16,185,129,0.25),inset_0_1px_1px_rgba(255,255,255,0.4)]"
+                            : "bg-white/[0.06] border-white/15 text-white/80 hover:bg-white/[0.12]"
                         }`}
                       >
-                        {isPenActive ? "✍️ Drawing Active" : "✏️ Enable Draw"}
+                        {isPenActive ? "DRAWING ACTIVE" : "ENABLE DRAWING"}
                       </button>
 
                       {/* Ink Palette Swatches */}
                       {isPenActive && (
-                        <div className="w-full flex flex-col items-end gap-2 mt-1">
-                          <label className="text-white/50 text-[9px] tracking-[0.2em] font-semibold uppercase">
-                            INK COLOR
+                        <div className="w-full flex flex-col items-end gap-2.5 mt-1">
+                          <label className="text-purple-200/60 text-[9px] tracking-[0.3em] font-mono font-medium uppercase">
+                            INK SPECTRUM
                           </label>
-                          <div className="flex items-center gap-2.5">
+                          <div className="flex items-center gap-3">
                             {PEN_COLOR_PALETTES.map((pal) => (
                               <button
                                 key={pal.id}
                                 onClick={() => handleSelectPalette(pal.id)}
                                 title={pal.name}
-                                className={`w-5 h-5 rounded-full transition-all ${
+                                className={`w-5 h-5 rounded-full transition-all duration-300 ${
                                   activePaletteId === pal.id
-                                    ? "ring-2 ring-white scale-110 shadow-lg"
-                                    : "opacity-75 hover:opacity-100 hover:scale-105"
+                                    ? "ring-2 ring-white scale-125"
+                                    : "opacity-65 hover:opacity-100 hover:scale-110"
                                 }`}
                                 style={{
                                   backgroundColor: pal.primaryColor,
                                   boxShadow:
                                     activePaletteId === pal.id
-                                      ? `0 0 12px ${pal.primaryColor}`
+                                      ? `0 0 16px ${pal.primaryColor}, inset 0 1px 1px rgba(255,255,255,0.6)`
                                       : "none",
                                 }}
                               />
@@ -367,11 +383,11 @@ export default function SamsungHero() {
                           </div>
 
                           {/* Brush Size Slider */}
-                          <div className="w-full flex flex-col items-end gap-1.5 mt-2">
-                            <div className="flex justify-between w-full text-[10px] text-white/70 font-mono">
-                              <span>BRUSH SIZE</span>
-                              <span className="text-cyan-300 font-bold">
-                                {brushSize.toFixed(1)}x
+                          <div className="w-full flex flex-col items-end gap-2 mt-3">
+                            <div className="flex justify-between w-full text-[9px] text-white/70 font-mono tracking-[0.2em]">
+                              <span>STROKE SIZE</span>
+                              <span className="text-purple-300 font-bold">
+                                {brushSize.toFixed(1)}X
                               </span>
                             </div>
                             <input
@@ -383,7 +399,7 @@ export default function SamsungHero() {
                               onChange={(e) =>
                                 handleBrushSizeChange(parseFloat(e.target.value))
                               }
-                              className="w-full h-1.5 accent-cyan-400 bg-white/20 rounded-lg cursor-pointer"
+                              className="w-full h-1.5 accent-purple-400 bg-white/20 rounded-lg cursor-pointer"
                             />
                           </div>
                         </div>
@@ -392,10 +408,20 @@ export default function SamsungHero() {
                   )}
                 </div>
 
-                {/* Drag to rotate hint badge */}
+                {/* Micro Drag Indicator */}
                 {renderMode === "phone" && (
-                  <div className="bg-black/60 backdrop-blur-md border border-white/10 px-3.5 py-1.5 rounded-full text-white/70 text-[10px] tracking-widest font-mono uppercase flex items-center gap-2">
-                    <span>🖱️ Drag to rotate 3D model</span>
+                  <div
+                    className="px-4 py-2 rounded-full text-white/70 text-[9px] tracking-[0.3em] font-mono uppercase flex items-center gap-2.5"
+                    style={{
+                      background: "rgba(18, 14, 32, 0.45)",
+                      backdropFilter: "blur(20px)",
+                      WebkitBackdropFilter: "blur(20px)",
+                      border: "1px solid rgba(255, 255, 255, 0.15)",
+                      boxShadow: "inset 0 1px 1px rgba(255, 255, 255, 0.3)",
+                    }}
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping" />
+                    <span>DRAG TO ROTATE MODEL</span>
                   </div>
                 )}
               </div>
@@ -409,28 +435,37 @@ export default function SamsungHero() {
             <>
               {/* Top Mode & Model Selector Bar */}
               <div className="s-ui absolute z-[60] pointer-events-auto top-16 left-4 right-4 flex flex-col items-center gap-2">
-                <div className="bg-black/85 backdrop-blur-2xl border border-white/20 p-2 rounded-2xl shadow-2xl w-full flex flex-col gap-2">
+                <div
+                  className="p-3 rounded-[20px] w-full flex flex-col gap-2.5"
+                  style={{
+                    background: "rgba(18, 14, 32, 0.65)",
+                    backdropFilter: "blur(24px)",
+                    WebkitBackdropFilter: "blur(24px)",
+                    border: "1px solid rgba(255, 255, 255, 0.18)",
+                    boxShadow: "inset 0 1px 1px rgba(255,255,255,0.3), 0 20px 40px rgba(0,0,0,0.6)",
+                  }}
+                >
                   {/* Mode Tabs */}
-                  <div className="grid grid-cols-2 bg-white/10 p-1 rounded-xl">
+                  <div className="grid grid-cols-2 bg-black/40 p-1.5 rounded-xl border border-white/10">
                     <button
                       onClick={() => handleRenderModeChange("phone")}
-                      className={`py-2 text-xs font-bold rounded-lg uppercase tracking-wider transition-all ${
+                      className={`py-2.5 text-[10px] font-mono tracking-[0.2em] font-bold rounded-lg uppercase transition-all ${
                         renderMode === "phone"
-                          ? "bg-white text-black shadow-md"
-                          : "text-white/70"
+                          ? "bg-white text-[#0a0814] shadow-md"
+                          : "text-white/60"
                       }`}
                     >
-                      📱 Phone View
+                      PHONE VIEW
                     </button>
                     <button
                       onClick={() => handleRenderModeChange("pen")}
-                      className={`py-2 text-xs font-bold rounded-lg uppercase tracking-wider transition-all ${
+                      className={`py-2.5 text-[10px] font-mono tracking-[0.2em] font-bold rounded-lg uppercase transition-all ${
                         renderMode === "pen"
-                          ? "bg-white text-black shadow-md"
-                          : "text-white/70"
+                          ? "bg-white text-[#0a0814] shadow-md"
+                          : "text-white/60"
                       }`}
                     >
-                      ✏️ S‑Pen Studio
+                      S‑PEN STUDIO
                     </button>
                   </div>
 
@@ -439,23 +474,23 @@ export default function SamsungHero() {
                     <div className="grid grid-cols-2 gap-2">
                       <button
                         onClick={() => handleSelectPhoneModel("s25")}
-                        className={`py-2 text-xs font-semibold rounded-xl border uppercase tracking-wider transition-all ${
+                        className={`py-2 text-[10px] font-mono tracking-[0.15em] rounded-xl border uppercase transition-all ${
                           selectedPhone === "s25"
-                            ? "bg-cyan-500/30 border-cyan-400 text-cyan-200"
-                            : "bg-white/5 border-white/10 text-white/70"
+                            ? "bg-purple-500/30 border-purple-300 text-white font-bold"
+                            : "bg-white/5 border-white/10 text-white/60"
                         }`}
                       >
-                        S25 Ultra
+                        S25 ULTRA
                       </button>
                       <button
                         onClick={() => handleSelectPhoneModel("zflip")}
-                        className={`py-2 text-xs font-semibold rounded-xl border uppercase tracking-wider transition-all ${
+                        className={`py-2 text-[10px] font-mono tracking-[0.15em] rounded-xl border uppercase transition-all ${
                           selectedPhone === "zflip"
-                            ? "bg-cyan-500/30 border-cyan-400 text-cyan-200"
-                            : "bg-white/5 border-white/10 text-white/70"
+                            ? "bg-purple-500/30 border-purple-300 text-white font-bold"
+                            : "bg-white/5 border-white/10 text-white/60"
                         }`}
                       >
-                        Z Flip 6
+                        Z FLIP 6
                       </button>
                     </div>
                   )}
@@ -464,13 +499,13 @@ export default function SamsungHero() {
 
               {/* Bottom Drawer Bar (Product Info & Dynamic Controls) */}
               <div
-                className="s-ui absolute z-[60] pointer-events-auto bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/90 to-transparent p-5 pt-8"
+                className="s-ui absolute z-[60] pointer-events-auto bottom-0 left-0 right-0 bg-gradient-to-t from-[#0a0814] via-[#0a0814]/90 to-transparent p-5 pt-8"
                 style={{ paddingBottom: "env(safe-area-inset-bottom, 20px)" }}
               >
                 <div className="flex flex-col gap-3">
                   <div>
-                    <span className="text-cyan-400 text-[9px] tracking-[0.3em] font-semibold uppercase">
-                      Interactive 3D
+                    <span className="text-purple-300/80 text-[9px] tracking-[0.3em] font-mono font-medium uppercase">
+                      INTERACTIVE SHOWCASE
                     </span>
                     <h1 className="font-sans font-light text-white text-2xl tracking-tight">
                       {displayTitle}
@@ -481,9 +516,14 @@ export default function SamsungHero() {
                   {renderMode === "phone" && selectedPhone === "zflip" && (
                     <button
                       onClick={handleToggleZFlipFold}
-                      className="w-full py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold text-xs tracking-widest uppercase rounded-xl shadow-lg shadow-cyan-500/30 active:scale-95 transition-all"
+                      className="w-full py-3 text-white font-mono font-bold text-[10px] tracking-[0.25em] uppercase rounded-xl shadow-lg active:scale-95 transition-all"
+                      style={{
+                        background:
+                          "linear-gradient(135deg, rgba(168, 85, 247, 0.4) 0%, rgba(56, 189, 248, 0.3) 100%)",
+                        border: "1px solid rgba(216, 180, 254, 0.5)",
+                      }}
                     >
-                      {isZFlipOpen ? "⟳ Fold Phone" : "⟲ Open Phone"}
+                      {isZFlipOpen ? "FOLD DEVICE" : "UNFOLD DEVICE"}
                     </button>
                   )}
 
@@ -492,22 +532,29 @@ export default function SamsungHero() {
                     <div className="flex flex-col gap-3">
                       <button
                         onClick={handleTogglePenActive}
-                        className={`w-full py-2.5 rounded-xl border text-xs font-bold tracking-wider uppercase transition-all ${
+                        className={`w-full py-2.5 rounded-xl border text-[10px] font-mono tracking-[0.2em] font-bold uppercase transition-all ${
                           isPenActive
-                            ? "bg-emerald-500/25 border-emerald-400 text-emerald-300"
-                            : "bg-white/15 border-white/20 text-white"
+                            ? "bg-emerald-500/30 border-emerald-400 text-emerald-200"
+                            : "bg-white/10 border-white/20 text-white"
                         }`}
                       >
-                        {isPenActive ? "✍️ Drawing Active" : "✏️ Enable Drawing"}
+                        {isPenActive ? "DRAWING ACTIVE" : "ENABLE DRAWING"}
                       </button>
 
                       {isPenActive && (
-                        <div className="flex flex-col gap-3 bg-black/50 p-3 rounded-xl border border-white/10">
+                        <div
+                          className="flex flex-col gap-3 p-3.5 rounded-2xl border"
+                          style={{
+                            background: "rgba(18, 14, 32, 0.65)",
+                            backdropFilter: "blur(24px)",
+                            border: "1px solid rgba(255, 255, 255, 0.18)",
+                          }}
+                        >
                           <div className="flex items-center justify-between">
-                            <span className="text-white/60 text-[10px] font-mono">
-                              INK COLOR
+                            <span className="text-white/60 text-[9px] font-mono tracking-[0.2em]">
+                              INK SPECTRUM
                             </span>
-                            <div className="flex items-center gap-2">
+                            <div className="flex items-center gap-2.5">
                               {PEN_COLOR_PALETTES.map((pal) => (
                                 <button
                                   key={pal.id}
@@ -524,8 +571,8 @@ export default function SamsungHero() {
                           </div>
 
                           <div className="flex items-center gap-3">
-                            <span className="text-white/60 text-[10px] font-mono whitespace-nowrap">
-                              BRUSH ({brushSize.toFixed(1)}x)
+                            <span className="text-white/60 text-[9px] font-mono tracking-[0.2em] whitespace-nowrap">
+                              STROKE ({brushSize.toFixed(1)}X)
                             </span>
                             <input
                               type="range"
@@ -536,7 +583,7 @@ export default function SamsungHero() {
                               onChange={(e) =>
                                 handleBrushSizeChange(parseFloat(e.target.value))
                               }
-                              className="flex-1 h-1.5 accent-cyan-400 bg-white/20 rounded-lg"
+                              className="flex-1 h-1.5 accent-purple-400 bg-white/20 rounded-lg"
                             />
                           </div>
                         </div>

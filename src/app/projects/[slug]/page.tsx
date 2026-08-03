@@ -67,27 +67,32 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                 <DanaoBottleHero />
             ) : (
                 <AnimatedProjectHero project={project} index={projects.findIndex(p => p.slug === project.slug)} />
-            )}
-
-            {/* ── 2. Metadata Bar ── */}
+                      {/* ── 2. Metadata Bar ── */}
             {project.slug === 'samsung-s22-ultra-3d-hero' ? (
-                /* Samsung: studio-minimal metadata strip */
-                <div className="w-full relative z-40" style={{ background: '#0c0c0e' }}>
-                    <div style={{ height: '1px', background: 'rgba(255,255,255,0.07)' }} />
-                    <div className="max-w-[1280px] mx-auto px-14 py-7 flex flex-wrap gap-x-16 gap-y-5 items-start">
+                /* Samsung: Liquid Glassmorphic Metadata Container */
+                <div className="max-w-[1280px] mx-auto px-6 md:px-14 relative z-40 my-6">
+                    <div 
+                        className="w-full px-8 md:px-12 py-6 rounded-[24px] flex flex-wrap justify-between items-center gap-6"
+                        style={{
+                            background: "rgba(18, 14, 32, 0.45)",
+                            backdropFilter: "blur(30px) saturate(180%)",
+                            WebkitBackdropFilter: "blur(30px) saturate(180%)",
+                            border: "1px solid rgba(255, 255, 255, 0.18)",
+                            boxShadow: "inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.4), inset 0 -1px 2px 0 rgba(0, 0, 0, 0.5), 0 20px 50px -10px rgba(0, 0, 0, 0.6)"
+                        }}
+                    >
                         {[
                             { label: 'Client', value: project.client },
                             { label: 'Role', value: project.role },
                             { label: 'Year', value: project.timeline },
                             { label: 'Medium', value: 'CGI · 3D · WebGL' },
                         ].map((item) => (
-                            <div key={item.label}>
-                                <p style={{ color: '#3a3836', fontSize: '9px', letterSpacing: '0.3em', textTransform: 'uppercase', marginBottom: '5px', fontFamily: 'system-ui' }}>{item.label}</p>
-                                <p style={{ color: '#9a9490', fontSize: '13px', fontFamily: 'system-ui', letterSpacing: '0.01em', fontWeight: 400 }}>{item.value}</p>
+                            <div key={item.label} className="flex flex-col gap-1">
+                                <p className="text-purple-300/70 text-[9px] tracking-[0.3em] font-mono uppercase">{item.label}</p>
+                                <p className="text-white text-sm md:text-base font-light tracking-wide">{item.value}</p>
                             </div>
                         ))}
                     </div>
-                    <div style={{ height: '1px', background: 'rgba(255,255,255,0.07)' }} />
                 </div>
             ) : (
                 /* Default: warm dark bar */
@@ -157,45 +162,41 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                             {/* Statement content */}
                             <ScrollReveal direction="up" delay={0.15}>
                                 <div>
-                                    <div style={{ color: '#5a5654', fontSize: '9px', letterSpacing: '0.35em', textTransform: 'uppercase', marginBottom: '28px' }}>
+                                    <div className="text-purple-300/80 text-[10px] font-mono tracking-[0.35em] uppercase mb-7">
                                         Project Statement
                                     </div>
 
-                                    <p style={{ color: '#9a9490', fontSize: '1.1rem', lineHeight: 1.9, letterSpacing: '0.005em', maxWidth: '540px', marginBottom: '36px', fontWeight: 400 }}>
+                                    <p style={{ color: '#e4e4e7', fontSize: '1.1rem', lineHeight: 1.9, letterSpacing: '0.005em', maxWidth: '540px', marginBottom: '36px', fontWeight: 300 }}>
                                         {project.description}
                                     </p>
 
                                     {/* Challenge */}
-                                    <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '28px', marginBottom: '28px' }}>
-                                        <div style={{ color: '#3a3836', fontSize: '9px', letterSpacing: '0.3em', textTransform: 'uppercase', marginBottom: '10px' }}>Challenge</div>
-                                        <p style={{ color: '#6b6b6e', fontSize: '0.9375rem', lineHeight: 1.85, maxWidth: '500px' }}>{project.challenge}</p>
+                                    <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '28px', marginBottom: '28px' }}>
+                                        <div className="text-purple-300/70 text-[9px] font-mono tracking-[0.3em] uppercase mb-2">Challenge</div>
+                                        <p style={{ color: '#a1a1aa', fontSize: '0.9375rem', lineHeight: 1.85, maxWidth: '500px', fontWeight: 300 }}>{project.challenge}</p>
                                     </div>
 
                                     {/* Approach */}
-                                    <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '28px', marginBottom: '40px' }}>
-                                        <div style={{ color: '#3a3836', fontSize: '9px', letterSpacing: '0.3em', textTransform: 'uppercase', marginBottom: '10px' }}>Approach</div>
-                                        <p style={{ color: '#6b6b6e', fontSize: '0.9375rem', lineHeight: 1.85, maxWidth: '500px' }}>{project.solution}</p>
+                                    <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '28px', marginBottom: '40px' }}>
+                                        <div className="text-purple-300/70 text-[9px] font-mono tracking-[0.3em] uppercase mb-2">Approach</div>
+                                        <p style={{ color: '#a1a1aa', fontSize: '0.9375rem', lineHeight: 1.85, maxWidth: '500px', fontWeight: 300 }}>{project.solution}</p>
                                     </div>
 
                                     {/* Tech stack — hairline-separated */}
-                                    <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '24px', display: 'flex', flexWrap: 'wrap' }}>
+                                    <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '24px', display: 'flex', flexWrap: 'wrap' }}>
                                         {['Blender 3D', 'Geometry Nodes', 'After Effects', 'DaVinci Resolve', 'Three.js'].map((t, i, arr) => (
                                             <span
                                                 key={t}
+                                                className="text-white/70 text-[9px] font-mono tracking-[0.22em] uppercase"
                                                 style={{
-                                                    color: '#3a3836',
-                                                    fontSize: '9px',
-                                                    letterSpacing: '0.22em',
-                                                    textTransform: 'uppercase',
                                                     paddingRight: i < arr.length - 1 ? '18px' : '0',
                                                     marginRight: i < arr.length - 1 ? '18px' : '0',
-                                                    borderRight: i < arr.length - 1 ? '1px solid rgba(255,255,255,0.07)' : 'none',
+                                                    borderRight: i < arr.length - 1 ? '1px solid rgba(255,255,255,0.1)' : 'none',
                                                     lineHeight: 2.2,
                                                 }}
                                             >
                                                 {t}
                                             </span>
-                                        ))}
                                     </div>
                                 </div>
                             </ScrollReveal>
