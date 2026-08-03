@@ -11,6 +11,7 @@ export default function SamsungHero() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const appRef = useRef<SamsungHeroApp | null>(null);
   const canvasWrapRef = useRef<HTMLDivElement | null>(null);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
   const [loadProgress, setLoadProgress] = useState<number>(0);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [renderMode, setRenderMode] = useState<"phone" | "pen">("phone");
@@ -27,6 +28,13 @@ export default function SamsungHero() {
     check();
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
+  }, []);
+
+  /* Ensure background video is always playing continuously */
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.play().catch(() => {});
+    }
   }, []);
 
   /* ─────────────────────────────────────────
@@ -61,19 +69,34 @@ export default function SamsungHero() {
     };
   }, []);
 
-  /** Fade canvas out → run action → fade canvas back in */
+  /** Fade video background & 3D canvas out → change model/mode → fade back in */
   const withModelFade = (action: () => void) => {
-    const el = canvasWrapRef.current;
-    if (!el) { action(); return; }
-    gsap.to(el, {
-      opacity: 0,
-      duration: 0.35,
-      ease: "power2.in",
-      onComplete: () => {
-        action();
-        gsap.to(el, { opacity: 1, duration: 0.55, ease: "power2.out", delay: 0.05 });
-      },
-    });
+    const canvasEl = canvasWrapRef.current;
+    const videoEl = videoRef.current;
+
+    if (!canvasEl && !videoEl) {
+      action();
+      return;
+    }
+
+    // Phase 1: Fade both video & 3D canvas out
+    if (canvasEl) {
+      gsap.to(canvasEl, { opacity: 0, duration: 0.35, ease: "power2.in" });
+    }
+    if (videoEl) {
+      gsap.to(videoEl, { opacity: 0.05, duration: 0.35, ease: "power2.in" });
+    }
+
+    // Phase 2: Execute state change, then fade both back in smoothly
+    setTimeout(() => {
+      action();
+      if (canvasEl) {
+        gsap.to(canvasEl, { opacity: 1, duration: 0.55, ease: "power2.out" });
+      }
+      if (videoEl) {
+        gsap.to(videoEl, { opacity: 0.55, duration: 0.55, ease: "power2.out" });
+      }
+    }, 360);
   };
 
   const handleRenderModeChange = (mode: "phone" | "pen") => {
@@ -142,6 +165,7 @@ export default function SamsungHero() {
     >
       {/* ── Looping Background Video ── */}
       <video
+        ref={videoRef}
         autoPlay
         loop
         muted
