@@ -67,7 +67,9 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                 <DanaoBottleHero />
             ) : (
                 <AnimatedProjectHero project={project} index={projects.findIndex(p => p.slug === project.slug)} />
-                      {/* ── 2. Metadata Bar ── */}
+            )}
+
+            {/* ── 2. Metadata Bar ── */}
             {project.slug === 'samsung-s22-ultra-3d-hero' ? (
                 /* Samsung: Liquid Glassmorphic Metadata Container */
                 <div className="max-w-[1280px] mx-auto px-6 md:px-14 relative z-40 my-6">
