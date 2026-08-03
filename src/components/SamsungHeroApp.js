@@ -58,7 +58,7 @@ export class SamsungHeroApp {
 
     // Active color palette
     this.activePalette = PEN_COLOR_PALETTES[0];
-    this.brushSize = 1.0;
+    this.brushSize = 0.4;
 
     // 1. Core Three.js Scene Setup
     this.scene = new THREE.Scene();
@@ -220,6 +220,7 @@ export class SamsungHeroApp {
 
     // Initialize Drawing and Raycasting subsystems
     this.drawingCanvas = new DrawingCanvas(this.scene, 1024, 2048);
+    this.setBrushSize(0.4);
     this.raycasterManager = new RaycasterManager(this.camera, this.canvas, this.scene);
     this.isHoveringScreen = false;
     this.lastHitPoint = null;

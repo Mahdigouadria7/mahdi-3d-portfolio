@@ -19,7 +19,7 @@ export default function SamsungHero() {
   const [isZFlipOpen, setIsZFlipOpen] = useState<boolean>(false);
   const [isPenActive, setIsPenActive] = useState<boolean>(false);
   const [activePaletteId, setActivePaletteId] = useState<string>("cyan-glow");
-  const [brushSize, setBrushSize] = useState<number>(1.0);
+  const [brushSize, setBrushSize] = useState<number>(0.4);
   const [isMobile, setIsMobile] = useState<boolean>(false);
 
   /* Detect mobile on mount */
