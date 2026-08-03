@@ -21,6 +21,7 @@ export default function SamsungHero() {
   const [activePaletteId, setActivePaletteId] = useState<string>("cyan-glow");
   const [brushSize, setBrushSize] = useState<number>(0.4);
   const [isMobile, setIsMobile] = useState<boolean>(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
 
   /* Detect mobile on mount */
   useEffect(() => {
@@ -430,67 +431,113 @@ export default function SamsungHero() {
           ───────────────────────────────────────── */}
           {isMobile && (
             <>
-              {/* Top Mode & Model Selector Bar */}
-              <div className="s-ui absolute z-[60] pointer-events-auto top-20 left-4 right-4 max-w-[350px] mx-auto flex flex-col items-center gap-2">
-                <div
-                  className="p-2.5 rounded-[24px] w-full flex flex-col gap-2"
+              {/* Top Collapsible Control Menu Pill Bar */}
+              <div className="s-ui absolute z-[60] pointer-events-auto top-16 left-4 right-4 max-w-[340px] mx-auto flex flex-col items-center">
+                {/* Collapsed Pill Button */}
+                <button
+                  onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                  className="w-full py-2.5 px-5 rounded-full flex items-center justify-between text-white font-mono text-[10px] tracking-[0.25em] uppercase transition-all duration-300 shadow-xl"
                   style={{
-                    background: "rgba(18, 14, 32, 0.55)",
+                    background: "rgba(18, 14, 32, 0.75)",
                     backdropFilter: "blur(24px)",
                     WebkitBackdropFilter: "blur(24px)",
-                    border: "1.5px solid rgba(255, 255, 255, 0.18)",
-                    boxShadow: "inset 0 1px 1px rgba(255,255,255,0.4), 0 20px 40px rgba(0,0,0,0.6)",
+                    border: "1.5px solid rgba(255, 255, 255, 0.2)",
+                    boxShadow: "inset 0 1px 1px rgba(255,255,255,0.4), 0 12px 30px rgba(0,0,0,0.6)",
                   }}
                 >
-                  {/* Mode Tabs */}
-                  <div className="grid grid-cols-2 bg-black/40 p-1 rounded-xl border border-white/10">
-                    <button
-                      onClick={() => handleRenderModeChange("phone")}
-                      className={`py-2 text-[10px] font-mono tracking-[0.2em] font-bold rounded-lg uppercase transition-all ${
-                        renderMode === "phone"
-                          ? "bg-white text-[#0a0814] shadow-md"
-                          : "text-white/60"
-                      }`}
-                    >
-                      PHONE VIEW
-                    </button>
-                    <button
-                      onClick={() => handleRenderModeChange("pen")}
-                      className={`py-2 text-[10px] font-mono tracking-[0.2em] font-bold rounded-lg uppercase transition-all ${
-                        renderMode === "pen"
-                          ? "bg-white text-[#0a0814] shadow-md"
-                          : "text-white/60"
-                      }`}
-                    >
-                      S‑PEN STUDIO
-                    </button>
-                  </div>
+                  <span className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+                    {renderMode === "pen"
+                      ? "S‑PEN STUDIO"
+                      : selectedPhone === "zflip"
+                      ? "Z FLIP 6"
+                      : "S25 ULTRA"}
+                  </span>
+                  <span className={`transition-transform duration-300 text-cyan-300 font-bold ${isMobileMenuOpen ? "rotate-180" : "rotate-0"}`}>
+                    ▼
+                  </span>
+                </button>
 
-                  {/* Sub Model Selector */}
-                  {renderMode === "phone" && (
-                    <div className="grid grid-cols-2 gap-1.5">
+                {/* Sliding Accordion List Content */}
+                <div
+                  className={`w-full overflow-hidden transition-all duration-400 ease-out flex flex-col gap-2 mt-2 ${
+                    isMobileMenuOpen
+                      ? "max-h-64 opacity-100 pointer-events-auto"
+                      : "max-h-0 opacity-0 pointer-events-none"
+                  }`}
+                >
+                  <div
+                    className="p-3 rounded-[24px] w-full flex flex-col gap-2.5"
+                    style={{
+                      background: "rgba(18, 14, 32, 0.85)",
+                      backdropFilter: "blur(30px)",
+                      WebkitBackdropFilter: "blur(30px)",
+                      border: "1.5px solid rgba(56, 189, 248, 0.45)",
+                      boxShadow: "inset 0 0 20px rgba(56,189,248,0.25), 0 20px 40px rgba(0,0,0,0.8)",
+                    }}
+                  >
+                    {/* Mode Tabs */}
+                    <div className="grid grid-cols-2 bg-black/50 p-1 rounded-xl border border-white/10">
                       <button
-                        onClick={() => handleSelectPhoneModel("s25")}
-                        className={`py-1.5 text-[9px] font-mono tracking-[0.15em] rounded-lg border uppercase transition-all ${
-                          selectedPhone === "s25"
-                            ? "bg-purple-500/30 border-purple-300 text-white font-bold"
-                            : "bg-white/5 border-white/10 text-white/60"
+                        onClick={() => {
+                          handleRenderModeChange("phone");
+                          setIsMobileMenuOpen(false);
+                        }}
+                        className={`py-2 text-[10px] font-mono tracking-[0.2em] font-bold rounded-lg uppercase transition-all ${
+                          renderMode === "phone"
+                            ? "bg-white text-[#0a0814] shadow-md"
+                            : "text-white/60"
                         }`}
                       >
-                        S25 ULTRA
+                        PHONE VIEW
                       </button>
                       <button
-                        onClick={() => handleSelectPhoneModel("zflip")}
-                        className={`py-1.5 text-[9px] font-mono tracking-[0.15em] rounded-lg border uppercase transition-all ${
-                          selectedPhone === "zflip"
-                            ? "bg-purple-500/30 border-purple-300 text-white font-bold"
-                            : "bg-white/5 border-white/10 text-white/60"
+                        onClick={() => {
+                          handleRenderModeChange("pen");
+                          setIsMobileMenuOpen(false);
+                        }}
+                        className={`py-2 text-[10px] font-mono tracking-[0.2em] font-bold rounded-lg uppercase transition-all ${
+                          renderMode === "pen"
+                            ? "bg-white text-[#0a0814] shadow-md"
+                            : "text-white/60"
                         }`}
                       >
-                        Z FLIP 6
+                        S‑PEN STUDIO
                       </button>
                     </div>
-                  )}
+
+                    {/* Sub Model Selector */}
+                    {renderMode === "phone" && (
+                      <div className="grid grid-cols-2 gap-1.5">
+                        <button
+                          onClick={() => {
+                            handleSelectPhoneModel("s25");
+                            setIsMobileMenuOpen(false);
+                          }}
+                          className={`py-2 text-[9px] font-mono tracking-[0.15em] rounded-lg border uppercase transition-all ${
+                            selectedPhone === "s25"
+                              ? "bg-purple-500/30 border-purple-300 text-white font-bold"
+                              : "bg-white/5 border-white/10 text-white/60"
+                          }`}
+                        >
+                          S25 ULTRA
+                        </button>
+                        <button
+                          onClick={() => {
+                            handleSelectPhoneModel("zflip");
+                            setIsMobileMenuOpen(false);
+                          }}
+                          className={`py-2 text-[9px] font-mono tracking-[0.15em] rounded-lg border uppercase transition-all ${
+                            selectedPhone === "zflip"
+                              ? "bg-purple-500/30 border-purple-300 text-white font-bold"
+                              : "bg-white/5 border-white/10 text-white/60"
+                          }`}
+                        >
+                          Z FLIP 6
+                        </button>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
 
