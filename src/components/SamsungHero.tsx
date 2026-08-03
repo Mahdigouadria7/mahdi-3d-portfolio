@@ -4,9 +4,13 @@ import { useEffect, useRef, useState } from "react";
 import { SamsungHeroApp, PEN_COLOR_PALETTES } from "./SamsungHeroApp";
 import gsap from "gsap";
 
+const BG_VIDEO_URL =
+  "https://res.cloudinary.com/zu63qo7h/video/upload/f_auto,q_auto/v1785715380/portfolio/samsung/videos/samsung_hero_bg";
+
 export default function SamsungHero() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const appRef = useRef<SamsungHeroApp | null>(null);
+  const canvasWrapRef = useRef<HTMLDivElement | null>(null);
   const [loadProgress, setLoadProgress] = useState<number>(0);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [renderMode, setRenderMode] = useState<"phone" | "pen">("phone");
@@ -57,25 +61,44 @@ export default function SamsungHero() {
     };
   }, []);
 
+  /** Fade canvas out → run action → fade canvas back in */
+  const withModelFade = (action: () => void) => {
+    const el = canvasWrapRef.current;
+    if (!el) { action(); return; }
+    gsap.to(el, {
+      opacity: 0,
+      duration: 0.35,
+      ease: "power2.in",
+      onComplete: () => {
+        action();
+        gsap.to(el, { opacity: 1, duration: 0.55, ease: "power2.out", delay: 0.05 });
+      },
+    });
+  };
+
   const handleRenderModeChange = (mode: "phone" | "pen") => {
-    setRenderMode(mode);
-    if (appRef.current) {
-      appRef.current.setRenderMode(mode);
-      if (mode === "pen") {
-        setIsPenActive(true);
-        appRef.current.togglePenActive(true);
-      } else {
-        setIsPenActive(false);
-        appRef.current.togglePenActive(false);
+    withModelFade(() => {
+      setRenderMode(mode);
+      if (appRef.current) {
+        appRef.current.setRenderMode(mode);
+        if (mode === "pen") {
+          setIsPenActive(true);
+          appRef.current.togglePenActive(true);
+        } else {
+          setIsPenActive(false);
+          appRef.current.togglePenActive(false);
+        }
       }
-    }
+    });
   };
 
   const handleSelectPhoneModel = (modelKey: "s25" | "zflip") => {
-    setSelectedPhone(modelKey);
-    if (appRef.current) {
-      appRef.current.setPhoneModel(modelKey);
-    }
+    withModelFade(() => {
+      setSelectedPhone(modelKey);
+      if (appRef.current) {
+        appRef.current.setPhoneModel(modelKey);
+      }
+    });
   };
 
   const handleToggleZFlipFold = () => {
@@ -117,38 +140,63 @@ export default function SamsungHero() {
       className="relative w-full h-[100dvh] overflow-hidden select-none"
       style={{ background: "#0c0c0e" }}
     >
-      {/* ── Studio Atmosphere ── */}
+      {/* ── Looping Background Video ── */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        disablePictureInPicture
+        className="absolute inset-0 w-full h-full object-cover z-[0] pointer-events-none"
+        style={{ opacity: 0.55 }}
+      >
+        <source src={`${BG_VIDEO_URL}.webm`} type="video/webm" />
+        <source src={`${BG_VIDEO_URL}.mp4`} type="video/mp4" />
+      </video>
+
+      {/* ── Studio Atmosphere (sits above video to frame the light) ── */}
       <div className="absolute inset-0 pointer-events-none z-[1]">
         <div
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse 65% 50% at 50% 45%, rgba(30,26,22,0.5) 0%, transparent 65%)",
+              "radial-gradient(ellipse 80% 60% at 50% 45%, rgba(0,0,0,0.15) 0%, transparent 70%)",
           }}
         />
         <div
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse 110% 110% at 50% 50%, transparent 38%, rgba(0,0,0,0.88) 100%)",
+              "radial-gradient(ellipse 110% 110% at 50% 50%, transparent 30%, rgba(0,0,0,0.92) 100%)",
           }}
         />
         <div
-          className="absolute bottom-0 left-0 right-0 h-64"
+          className="absolute bottom-0 left-0 right-0 h-72"
           style={{
-            background: "linear-gradient(to top, rgba(12,12,14,0.97) 0%, transparent 100%)",
+            background: "linear-gradient(to top, rgba(12,12,14,0.99) 0%, transparent 100%)",
+          }}
+        />
+        <div
+          className="absolute top-0 left-0 right-0 h-40"
+          style={{
+            background: "linear-gradient(to bottom, rgba(12,12,14,0.7) 0%, transparent 100%)",
           }}
         />
       </div>
 
-      {/* ── Three.js WebGL Canvas ── */}
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0 w-full h-full z-[2] cursor-grab active:cursor-grabbing"
-        style={{
-          touchAction: isPenActive ? "none" : "pan-y",
-        }}
-      />
+      {/* ── Three.js WebGL Canvas (fades on model switch) ── */}
+      <div
+        ref={canvasWrapRef}
+        className="absolute inset-0 w-full h-full z-[2]"
+      >
+        <canvas
+          ref={canvasRef}
+          className="absolute inset-0 w-full h-full cursor-grab active:cursor-grabbing"
+          style={{
+            touchAction: isPenActive ? "none" : "pan-y",
+          }}
+        />
+      </div>
 
       {/* ── Loading Experience ── */}
       {!isLoaded && (
