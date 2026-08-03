@@ -886,12 +886,13 @@ export class SamsungHeroApp {
     }
     
     // In all modes, we'll animate modelGroup to serve as the pivot
+    const isMobile = window.innerWidth <= 768;
     const pX = this.params ? (mode === 'phone' ? this.params.phonePosX : this.params.penPosX) : 0;
-    const pY = this.params ? (mode === 'phone' ? this.params.phonePosY : this.params.penPosY) : 0;
+    const pY = isMobile ? -0.45 : (this.params ? (mode === 'phone' ? this.params.phonePosY : this.params.penPosY) : 0);
     const pZ = this.params ? (mode === 'phone' ? this.params.phonePosZ : this.params.penPosZ) : 0;
 
     gsap.to(this.modelGroup.position, { 
-      x: this.phoneHomeX + pX, 
+      x: (isMobile ? 0 : this.phoneHomeX + pX), 
       y: pY,
       z: pZ,
       duration: 0.8, ease: "power2.out" 
@@ -994,7 +995,9 @@ export class SamsungHeroApp {
     // Move model group to correct home position for new viewport
     if (this.modelGroup) {
       const pX = this.params ? (this.renderMode === 'phone' ? this.params.phonePosX : this.params.penPosX) : 0;
-      this.modelGroup.position.x = this.phoneHomeX + pX;
+      const pY = isMobile ? -0.45 : (this.params ? (this.renderMode === 'phone' ? this.params.phonePosY : this.params.penPosY) : 0);
+      this.modelGroup.position.x = (isMobile ? 0 : this.phoneHomeX + pX);
+      this.modelGroup.position.y = pY;
     }
 
     // Dynamic reframing on resize
